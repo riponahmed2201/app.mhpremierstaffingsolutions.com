@@ -1,11 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+    
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("loginData");
+
+        navigate("/");
+    };
+
     return (
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             {/* <!-- Navbar Brand--> */}
-            <Link className="navbar-brand ps-3" to="/admin">Start Bootstrap</Link>
+            <Link className="navbar-brand ps-3" to="/admin">MH ADMIN</Link>
             {/* <!-- Sidebar Toggle--> */}
             <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
             {/* <!-- Navbar Search--> */}
@@ -23,7 +33,7 @@ function Navbar() {
                         <li><Link className="dropdown-item" to="#!">Settings</Link></li>
                         <li><Link className="dropdown-item" to="#!">Activity Log</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="#!">Logout</Link></li>
+                        <li><button onClick={handleLogout} className="dropdown-item">Logout</button></li>
                     </ul>
                 </li>
             </ul>
