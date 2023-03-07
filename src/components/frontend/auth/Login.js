@@ -21,7 +21,7 @@ function Login() {
             password: yup.string().min(6, "Password must have at least 6 characters").required(),
         }),
         onSubmit: async (values, resetForm) => {
-            const res = await axios.post("http://localhost:8000/api/v1/users/login", values);
+            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`, values);
 
             if (res.data.statusCode === 200) {
 
@@ -70,7 +70,7 @@ function Login() {
 
                     <br />
                     <div className='mb-3 mt-3 text-end'>
-                        <p>New Here? <Link to="/register">Create an Account</Link></p>
+                        <p>New Here? <Link to="/client-register">Create an Account</Link></p>
                     </div>
                 </form>
             </div>

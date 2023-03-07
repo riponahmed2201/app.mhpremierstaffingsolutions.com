@@ -1,104 +1,198 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import * as yup from "yup";
-import { Link, useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
+import React, { useState, useEffect, useCallback } from 'react';
+import { responseNotification } from '../../../utils/notifcation';
+import { addHandler, fetchHandler } from '../../../api/skill';
+import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
 
 function Skill() {
 
-  const [skill, setSkill] = useState([]);
+  //get skills
+  const [skills, setSkills] = useState([]);
 
-  const accessToken = localStorage.getItem("accessToken");
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  const [form] = Form.useForm();
+  const [open, setOpen] = useState(false);
+  const { Option } = Select;
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const onFinish = (values) => {
+
+    const name = values?.name;
+    const active = values?.active === "YES" ? true : false;
+
+    const addSkillFields = { name, active };
+
+    if (name) {
+      setLoading(true);
+      addHandler(addSkillFields)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 201) {
+            setError(undefined);
+            setLoading(false);
+            responseNotification("Skill created successfully!", "success");
+            fetchSkills();
+            onClose();
+            form.resetFields();
+          } else if (res?.statusCode === 400) {
+            setError(res?.errors?.[0].msg);
+            setLoading(false);
+          } else if (res?.statusCode === 500) {
+            setError(res?.message);
+            setLoading(false);
+          }
+        });
+    }
+  };
+
+  const fetchSkills = useCallback(async () => {
+    setLoading(true);
+    await fetchHandler().then((res) => {
+      if (res?.status === 200) {
+        console.log("Skill Data :", res?.data);
+        setSkills(res?.data?.skills);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`http://44.204.212.181:8000/api/v1/skills`, { headers: { Authorization: `Bearer ${accessToken}` } });
-      setSkill(response?.data?.skills);
-    };
-
-    fetchData();
+    fetchSkills();
   }, []);
 
   return (
-    <div className='container-fluid px-4'>
-      <h1 className='mt-3'>Skill</h1>
-      <div className='card'>
-        <div className='card-header'>
-          <div className='row'>
-            <div className='col-md-6'>
-              <h5>Skill List</h5>
-            </div>
-            <div className='col-md-6'>
-              <button className='float-end btn btn-primary' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Skill</button>
-            </div>
-          </div>
-        </div>
-        <div className='card-body'>
-          <table className="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                skill?.map((data, index) => (
-                  <tr key={index}>
-                    <th>{index + 1}</th>
-                    <td>{data?.name}</td>
-                    <td>{data?.slug}</td>
-                    <td>{data?.active === true ? <span class="badge text-bg-success">YES</span> : <span class="badge text-bg-danger">NO</span>}</td>
-                    <td>
-                      <a title='Edit Skill' className='btn btn-info'>Edit</a>
-                    </td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
+    <div className="container-fluid px-4">
+      <div className='row mt-4'>
+        <div className='d-flex justify-content-between'>
+          <h3 className='mb-4 title'>Skill List</h3>
+          <Button type="primary" className='ml-5' onClick={showDrawer}>
+            Add skill
+          </Button>
         </div>
       </div>
+      <div className='card sd'>
+        {loading ? <div className='loader-bg text-center my-2 '> <Spin tip="Loading..." size="large" /> </div> : <table className="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              skills?.map((data, index) => (
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>{data?.name}</td>
+                  <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
+                  <td>
+                    <a title='Edit Skill' className='btn btn-info'>Edit</a>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>}
 
-      {/* modal here */}
-      <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Create Skill</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="name" name="name" className="form-label">Name</label>
-                  <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                  {/* <div className="form-text text-danger">Please enter skill name</div> */}
+        <Drawer title="Add new skill" width={520} closable={false} onClose={onClose} open={open}>
+          <div className="drawer-toggle-wrapper">
+            <div className="drawer-toggle-inner-wrapper">
+              <Form
+                className="ant-form ant-form-vertical"
+                layout="vertical"
+                onFinish={onFinish}
+              >
+                <div className="col-lg-12">
+                  <div className="single-field">
+                    <Form.Item
+                      label="Skill name"
+                      name="name"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter skill name',
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Enter skill name" className="ant-input ant-input-lg" />
+                    </Form.Item>
+                  </div>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="active" className="form-label">Active</label>
-                  <select name='active' className='form-select'>
-                    <option value="">Please select status</option>
-                    <option value="YES">YES</option>
-                    <option value="NO">NO</option>
-                  </select>
-                  {/* <div className="form-text text-danger">Please enter active status</div> */}
-                </div>
-                {/* <button type="submit" className="btn btn-primary">Submit</button> */}
-              </form>
 
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-info" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Submit</button>
+                <div className="col-lg-12">
+                  <div className="single-field1">
+                    <Form.Item
+                      label="Active"
+                      name="active"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: "status is required",
+                        },
+                      ]}
+                    >
+                      <Select
+                        showSearch={true}
+                        placeholder="Please Select Active Yes or No"
+                        optionFilterProp="children"
+                      >
+                        <Option value="YES">YES</Option>
+                        <Option value="NO">NO</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                </div>
+
+                {getError ? (
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="error-message">
+                        <p className="error-text-color">{getError}</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : undefined}
+
+                <div className="col-lg-12">
+                  <Form.Item>
+                    <button
+                      disabled={loading}
+                      className="btn btn-primary"
+                      type="submit"
+                    >
+                      {!loading && "Save"}
+                      {loading && (
+                        <span
+                          className="indicator-progress"
+                          style={{ display: "block" }}
+                        >
+                          Please wait...{" "}
+                          <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      )}
+                    </button>
+                  </Form.Item>
+                </div>
+              </Form>
             </div>
           </div>
-        </div>
+        </Drawer>
       </div>
-
     </div>
   )
 }

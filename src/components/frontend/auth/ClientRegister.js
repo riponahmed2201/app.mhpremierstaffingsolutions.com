@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 // import Navbar from '../../../layouts/frontend/Navbar'
 
-function Register() {
+function ClientRegister() {
 
     const [referPerson, setReferPerson] = useState([]);
 
@@ -173,4 +173,4 @@ function Register() {
     )
 }
 
-export default Register
+export default ClientRegister

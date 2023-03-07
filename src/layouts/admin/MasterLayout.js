@@ -18,8 +18,8 @@ function MasterLayout() {
                 <div id="layoutSidenav_nav">
                     <Sidebar />
                 </div>
-                <div id="layoutSidenav_content">
-                    <main>
+                <div id="layoutSidenav_content" style={{background: '#f7f7fc'}}>
+                    <main >
                         <Outlet />
                     </main>
                     <Footer />
