@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useFormik } from 'formik';
 
-// import Navbar from '../../../layouts/frontend/Navbar'
-
 function ClientRegister() {
 
     const [referPerson, setReferPerson] = useState([]);
@@ -32,48 +30,58 @@ function ClientRegister() {
             password: yup.string().min(6, "Password must have at least 6 characters").required(),
         }),
         onSubmit: async (values, resetForm) => {
-            const res = await axios.post("http://44.204.212.181:8000/api/v1/users/client-register", values);
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/client-register`, values);
 
-            if (res?.data?.statusCode === 201) {
-                console.log("response: ", res?.data?.statusCode);
-                // resetForm({ values: "" });
-                navigate('/login')
-            } else {
-                navigate('/register')
+                if (res?.data?.statusCode === 201) {
+                    console.log("response: ", res?.data?.statusCode);
+                    // resetForm({ values: "" });
+                    navigate('/login')
+                } else {
+                    navigate('/register')
+                }
+            } catch (error) {
+
             }
         },
     });
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://44.204.212.181:8000/api/v1/users/list?isReferPerson=YES`);
-            setReferPerson(response?.data?.users);
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/list?isReferPerson=YES`);
+                setReferPerson(response?.data?.users);
+            } catch (error) {
+
+            }
         };
 
         fetchData();
     }, []);
 
     return (
-        <div>
-            {/* <Navbar /> */}
-            <div className='row'>
-                <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc", minHeight: "100vh" }}>
-                    <div style={{ padding: "20px 30px" }}>
-                        <br />
-                        <br />
-                        <br />
-                        <h2 className='class="mt-40 text-center mb-25'>Welcome to MH</h2>
-                        <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
-                            <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
-                        </div>
+        <div className='row'>
+            <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc", minHeight: "100vh" }}>
+                <div style={{ padding: "20px 30px" }}>
+                    <br />
+                    <br />
+                    <h2 className='class="mt-40 text-center mb-25'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h2>
+                    <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
+                        <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
                 </div>
-                <div className='col-md-6 col-sm-12' style={{ background: "#ffffff" }}>
-                    <div className='bg-white p-4'>
+            </div>
+            <div className='col-md-6 col-sm-12' style={{ background: "#ffffff" }}>
+                <div className='bg-white'>
+                    <div className="container-fluid">
+                        <nav className="navbar navbar-expand-lg navbar-light">
+                            <Link className="navbar-brand" to="/client-register">Client Register</Link>
+                            <Link className="navbar-brand" to="/employee-register">Employee Register</Link>
+                        </nav>
                         <br />
-                        <br />
-                        <br />
-                        <h2 className='text-left mb-4'>Create New Account</h2>
+
+                        <h4 className='text-left mb-4'>Client Register Here</h4>
+
                         <form onSubmit={formik.handleSubmit}>
                             <div className='col-12'>
                                 <div className='row'>

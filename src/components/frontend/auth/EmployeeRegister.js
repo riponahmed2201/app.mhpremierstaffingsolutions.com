@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { useFormik } from 'formik';
+import { Form, Select, Input, Spin } from 'antd';
 
-// import Navbar from '../../../layouts/frontend/Navbar'
+const { Option } = Select;
 
 function EmployeeRegister() {
 
@@ -13,55 +12,9 @@ function EmployeeRegister() {
 
     const navigate = useNavigate();
 
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            positionId: '',
-            gender: '',
-            dateOfBirth: '',
-            email: '',
-            phoneNumber: '',
-            countryName: '',
-            presentAddress: '',
-            permanentAddress: '',
-            languages: '',
-            higherEducation: '',
-            licensesNo: '',
-            emmergencyContact: '',
-            skills: '',
-            sourceFrom: '',
-            employeeExperience: ''
-        },
-        validationSchema: yup.object({
-            name: yup.string().required(),
-            positionId: yup.string().required(),
-            gender: yup.string().required(),
-            dateOfBirth: yup.string().required(),
-            email: yup.string().email().required(),
-            phoneNumber: yup.string().required(),
-            countryName: yup.string().required(),
-            presentAddress: yup.string().required(),
-            permanentAddress: yup.string().required(),
-            languages: yup.string().required(),
-            higherEducation: yup.string().required(),
-            licensesNo: yup.string().required(),
-            emmergencyContact: yup.string().required(),
-            skills: yup.string().required(),
-            sourceFrom: yup.string().required(),
-            employeeExperience: yup.string().required(),
-        }),
-        onSubmit: async (values, resetForm) => {
-            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, values);
-
-            if (res?.data?.statusCode === 201) {
-                // console.log("response: ", res?.data?.statusCode);
-                resetForm({ values: "" });
-                navigate('/login')
-            } else {
-                navigate('/employee-register')
-            }
-        },
-    });
+    const onFinish = (values) => {
+        console.log("values : ", values);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -84,172 +37,281 @@ function EmployeeRegister() {
 
 
     return (
-        <div>
-            {/* <Navbar /> */}
-            <div className='row'>
-                <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc", minHeight: "100vh" }}>
-                    <div style={{ padding: "20px 30px" }}>
-                        <br />
-                        <br />
-                        <h2 className='class="mt-40 text-center mb-25'>Welcome to MH</h2>
-                        <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
-                            <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
-                        </div>
+        <div className='row'>
+            <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc" }}>
+                <div style={{ padding: "20px 30px" }}>
+                    <br />
+                    <br />
+                    <h2 className='class="mt-40 text-center mb-25'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h2>
+                    <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
+                        <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
                 </div>
-                <div className='col-md-6 col-sm-12' style={{ background: "#ffffff" }}>
-                    <div className='bg-white p-4'>
+            </div>
+            <div className='col-md-6 col-sm-12' style={{ background: "#ffffff" }}>
+                <div className='bg-white'>
+                    <div className="container-fluid">
+                        <nav className="navbar navbar-expand-lg navbar-light">
+                            <Link className="navbar-brand" to="/client-register">Client Register</Link>
+                            <Link className="navbar-brand" to="/employee-register">Employee Register</Link>
+                        </nav>
                         <br />
-                        <br />
-                        <h2 className='text-left mb-4'>Create New Account</h2>
-                        <form onSubmit={formik.handleSubmit}>
+
+                        <h4 className='text-left mb-4'>Employee Register Here</h4>
+
+                        <Form
+                            className="ant-form ant-form-vertical"
+                            layout="vertical"
+                            onFinish={onFinish}
+                        >
                             <div className='col-12'>
                                 <div className='row'>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="name"> <span className='text-danger'>*</span> Name</label>
-                                        <input type="text" className='form-control mt-2'
-                                            placeholder="Enter your name"
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Name"
                                             name="name"
-                                            onChange={formik.handleChange} value={formik.values.name} />
-                                        {formik.touched.name && formik.errors.name &&
-                                            <span style={{ color: 'red' }}>{formik.errors.name}</span>}
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter name',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter name" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="email"><span className='text-danger'>*</span>Email</label>
-                                        <input type="text" onChange={formik.handleChange} name='email' value={formik.values.email}
-                                            className='form-control mt-2' placeholder="Enter your email" id="email" />
-                                        {formik.touched.email && formik.errors.email &&
-                                            <span style={{ color: 'red' }}>{formik.errors.email}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Email"
+                                            name="email"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter email',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter email" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="phoneNumber"><span className='text-danger'>*</span>Phone number</label>
-                                        <input type="text" className='form-control mt-2' name='phoneNumber' placeholder="Enter your phone number"
-                                            onChange={formik.handleChange} value={formik.values.phoneNumber} />
-                                        {formik.touched.phoneNumber && formik.errors.phoneNumber &&
-                                            <span style={{ color: 'red' }}>{formik.errors.phoneNumber}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Phone number"
+                                            name="phoneNumber"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter phone number',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter phone number" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="gender"><span className='text-danger'>*</span>Gender</label>
-                                        <select name='gender'
-                                            onChange={formik.handleChange} value={formik.values.gender} className="form-select mt-2">
-                                            <option value="">Please select</option>
-                                            <option value="MALE">MALE</option>
-                                            <option value="FEMALE">FEMALE</option>
-                                        </select>
-                                        {formik.touched.gender && formik.errors.gender &&
-                                            <span style={{ color: 'red' }}>{formik.errors.gender}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Gender"
+                                            name="gender"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter gender',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Gender"
+                                                optionFilterProp="children"
+                                            >
+                                                <Option value="MALE">MALE</Option>
+                                                <Option value="FEMALE">FEMALE</Option>
+                                            </Select>
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="dateOfBirth"><span className='text-danger'>*</span>Date of birth</label>
-                                        <input type="text" className='form-control mt-2' name='dateOfBirth' placeholder="Enter your date of birth"
-                                            onChange={formik.handleChange} value={formik.values.dateOfBirth} />
-                                        {formik.touched.dateOfBirth && formik.errors.dateOfBirth &&
-                                            <span style={{ color: 'red' }}>{formik.errors.dateOfBirth}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Date Of Birth"
+                                            name="dateOfBirth"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter date of birth',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter date of birth" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="presentAddress"><span className='text-danger'>*</span>Present address</label>
-                                        <input type="text" className='form-control mt-2' name='presentAddress' placeholder="Enter your present address"
-                                            onChange={formik.handleChange} value={formik.values.presentAddress} />
-                                        {formik.touched.presentAddress && formik.errors.presentAddress &&
-                                            <span style={{ color: 'red' }}>{formik.errors.presentAddress}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Present Address"
+                                            name="presentAddress"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter present address',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter present address" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="permanentAddress"><span className='text-danger'>*</span>Permanent address</label>
-                                        <input type="text" className='form-control mt-2' name='permanentAddress' placeholder="Enter your permanent address"
-                                            onChange={formik.handleChange} value={formik.values.permanentAddress} />
-                                        {formik.touched.permanentAddress && formik.errors.permanentAddress &&
-                                            <span style={{ color: 'red' }}>{formik.errors.permanentAddress}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Permanent Address"
+                                            name="permanentAddress"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter your permanent address',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter your permanent address" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="countryName"><span className='text-danger'>*</span>Country name</label>
-                                        <select name='countryName'
-                                            onChange={formik.handleChange} value={formik.values.countryName} className="form-select mt-2">
-                                            <option value="">Please select</option>
-                                            <option value="BANGLADESH">BANGLADESH</option>
-                                            <option value="INDIA">INDIA</option>
-                                        </select>
-                                        {formik.touched.countryName && formik.errors.countryName &&
-                                            <span style={{ color: 'red' }}>{formik.errors.countryName}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Country Name"
+                                            name="countryName"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter country name',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Gender"
+                                                optionFilterProp="children"
+                                            >
+                                                <Option value="BANGLADESH">BANGLADESH</Option>
+                                                <Option value="INDIA">INDIA</Option>
+                                            </Select>
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="languages"><span className='text-danger'>*</span>languages</label>
-                                        <select name='languages'
-                                            onChange={formik.handleChange} value={formik.values.languages} className="form-select mt-2">
-                                            <option value="">Please select</option>
-                                            <option value="ENGLISH">ENGLISH</option>
-                                            <option value="BANGLA">BANGLA</option>
-                                        </select>
-                                        {formik.touched.languages && formik.errors.languages &&
-                                            <span style={{ color: 'red' }}>{formik.errors.languages}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Higher Education"
+                                            name="higherEducation"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter higher education',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter higher education" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="higherEducation"><span className='text-danger'>*</span>Higher education</label>
-                                        <input type="text" className='form-control mt-2' name='higherEducation'
-                                            onChange={formik.handleChange} value={formik.values.higherEducation}
-                                            placeholder="Enter your higher education" />
-                                        {formik.touched.higherEducation && formik.errors.higherEducation &&
-                                            <span style={{ color: 'red' }}>{formik.errors.higherEducation}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Licenses No"
+                                            name="licensesNo"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter licenses no',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter licenses no" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="licensesNo"><span className='text-danger'>*</span>Licenses no</label>
-                                        <input type="text" className='form-control mt-2' name='licensesNo'
-                                            onChange={formik.handleChange} value={formik.values.licensesNo}
-                                            placeholder="Enter your licenses no" />
-                                        {formik.touched.licensesNo && formik.errors.licensesNo &&
-                                            <span style={{ color: 'red' }}>{formik.errors.licensesNo}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Emmergency Contact"
+                                            name="emmergencyContact"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter emmergency contact',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter emmergency contact" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="emmergencyContact"><span className='text-danger'>*</span>Emmergency contact</label>
-                                        <input type="text" className='form-control mt-2' name='emmergencyContact'
-                                            onChange={formik.handleChange} value={formik.values.emmergencyContact}
-                                            placeholder="Enter your emmergency contact" />
-                                        {formik.touched.emmergencyContact && formik.errors.emmergencyContact &&
-                                            <span style={{ color: 'red' }}>{formik.errors.emmergencyContact}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Employee Experience"
+                                            name="employeeExperience"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter employee experience',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter employee experience" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="employeeExperience"><span className='text-danger'>*</span>Experience</label>
-                                        <input type="text" className='form-control mt-2' name='employeeExperience'
-                                            onChange={formik.handleChange} value={formik.values.employeeExperience}
-                                            placeholder="Enter your emmergency contact" />
-                                        {formik.touched.employeeExperience && formik.errors.employeeExperience &&
-                                            <span style={{ color: 'red' }}>{formik.errors.employeeExperience}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Skills"
+                                            name="skills"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter skills',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Skill"
+                                                optionFilterProp="children"
+                                            >
+                                                {skill?.map((skillName, index) => (
+                                                    <Option key={index} value={skillName?._id}>{skillName?.name}</Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="languages"><span className='text-white'>*</span>Skill</label>
-                                        <select name='languages'
-                                            onChange={formik.handleChange} value={formik.values.languages} className="form-select mt-2">
-                                            <option value="">Please select</option>
-                                            {skill?.map((skillName, index) => (
-                                                <option key={index} value={skillName?._id}>{skillName?.name}</option>
-                                            ))}
-                                        </select>
-                                        {formik.touched.languages && formik.errors.languages &&
-                                            <span style={{ color: 'red' }}>{formik.errors.languages}</span>}
-                                    </div>
-
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="sourceFrom"><span className='text-danger'>*</span>Where do you find us?</label>
-                                        <input type="text"
-                                            onChange={formik.handleChange} value={formik.values.sourceFrom}
-                                            className='form-control mt-2'
-                                            name='sourceFrom'
-                                            placeholder="Enter source from" id="sourceFrom" />
-                                        {formik.touched.sourceFrom && formik.errors.sourceFrom &&
-                                            <span style={{ color: 'red' }}>{formik.errors.sourceFrom}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Source name"
+                                            name="sourceFrom"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter source name',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter source name" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
                                 </div>
@@ -258,7 +320,7 @@ function EmployeeRegister() {
                             <div className="col-12">
                                 <button type="submit" className="btn" style={{ background: '#C6A34F', color: 'white' }}>Register</button>
                             </div>
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </div>
