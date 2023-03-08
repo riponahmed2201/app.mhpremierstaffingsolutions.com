@@ -24,11 +24,11 @@ function EmployeeRegister() {
             countryName: '',
             presentAddress: '',
             permanentAddress: '',
-            language: '',
+            languages: '',
             higherEducation: '',
             licensesNo: '',
             emmergencyContact: '',
-            skillId: '',
+            skills: '',
             sourceFrom: '',
             employeeExperience: ''
         },
@@ -42,11 +42,11 @@ function EmployeeRegister() {
             countryName: yup.string().required(),
             presentAddress: yup.string().required(),
             permanentAddress: yup.string().required(),
-            language: yup.string().required(),
+            languages: yup.string().required(),
             higherEducation: yup.string().required(),
             licensesNo: yup.string().required(),
             emmergencyContact: yup.string().required(),
-            skillId: yup.string().required(),
+            skills: yup.string().required(),
             sourceFrom: yup.string().required(),
             employeeExperience: yup.string().required(),
         }),
@@ -181,15 +181,15 @@ function EmployeeRegister() {
                                     </div>
 
                                     <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="language"><span className='text-danger'>*</span>Language</label>
-                                        <select name='language'
-                                            onChange={formik.handleChange} value={formik.values.language} className="form-select mt-2">
+                                        <label htmlFor="languages"><span className='text-danger'>*</span>languages</label>
+                                        <select name='languages'
+                                            onChange={formik.handleChange} value={formik.values.languages} className="form-select mt-2">
                                             <option value="">Please select</option>
                                             <option value="ENGLISH">ENGLISH</option>
                                             <option value="BANGLA">BANGLA</option>
                                         </select>
-                                        {formik.touched.language && formik.errors.language &&
-                                            <span style={{ color: 'red' }}>{formik.errors.language}</span>}
+                                        {formik.touched.languages && formik.errors.languages &&
+                                            <span style={{ color: 'red' }}>{formik.errors.languages}</span>}
                                     </div>
 
                                     <div className="col-md-6 form-group mb-3">
@@ -229,16 +229,16 @@ function EmployeeRegister() {
                                     </div>
 
                                     <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="skillId"><span className='text-white'>*</span>Skill</label>
-                                        <select name='skillId'
-                                            onChange={formik.handleChange} value={formik.values.skillId} className="form-select mt-2">
+                                        <label htmlFor="languages"><span className='text-white'>*</span>Skill</label>
+                                        <select name='languages'
+                                            onChange={formik.handleChange} value={formik.values.languages} className="form-select mt-2">
                                             <option value="">Please select</option>
                                             {skill?.map((skillName, index) => (
                                                 <option key={index} value={skillName?._id}>{skillName?.name}</option>
                                             ))}
                                         </select>
-                                        {formik.touched.skillId && formik.errors.skillId &&
-                                            <span style={{ color: 'red' }}>{formik.errors.skillId}</span>}
+                                        {formik.touched.languages && formik.errors.languages &&
+                                            <span style={{ color: 'red' }}>{formik.errors.languages}</span>}
                                     </div>
 
                                     <div className="col-md-6 form-group mb-3">

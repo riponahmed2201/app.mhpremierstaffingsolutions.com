@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import PrivateRoute from './routes/PrivateRoute';
+
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
 import Profile from './components/admin/Profile';
@@ -25,11 +27,13 @@ function App() {
 
           {/* admin routes here */}
           <Route path="/admin" element={<MasterLayout />} >
-            <Route index path='dashboard' element={<Dashboard />} />
-            <Route path='profile' element={<Profile />} />
-            <Route path='position' element={<Position />} />
-            <Route path='skill' element={<Skill />} />
-            <Route path='source' element={<Source />} />
+
+            <Route index path='dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path='profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path='position' element={<PrivateRoute><Position /></PrivateRoute>} />
+            <Route path='skill' element={<PrivateRoute><Skill /></PrivateRoute>} />
+            <Route path='source' element={<PrivateRoute><Source /></PrivateRoute>} />
+
           </Route>
         </Routes>
       </Router>

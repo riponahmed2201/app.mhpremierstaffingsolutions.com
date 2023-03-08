@@ -91,11 +91,6 @@ function Login() {
                         </div>
                     ) : undefined}
 
-                    {/* <button
-                        disabled={loading}
-                        className='border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5'
-                        style={{ background: "#C6A34F" }} type="submit">Login</button> */}
-
                     <button
                         disabled={loading}
                         className='border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5'

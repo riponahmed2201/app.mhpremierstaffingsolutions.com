@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
+import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
+
 import { responseNotification } from '../../../utils/notifcation';
 import { addHandler, fetchHandler } from '../../../api/skill';
-import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
 
 function Skill() {
 
