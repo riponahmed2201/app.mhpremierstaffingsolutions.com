@@ -57,7 +57,6 @@ function Skill() {
     setLoading(true);
     await fetchHandler().then((res) => {
       if (res?.status === 200) {
-        console.log("Skill Data :", res?.data);
         setSkills(res?.data?.skills);
       } else {
         setLoading(false);
@@ -99,7 +98,7 @@ function Skill() {
                   <td>{data?.name}</td>
                   <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
                   <td>
-                    <a title='Edit Skill' className='btn btn-info'>Edit</a>
+                    <a title='Edit Skill' className='btn btn-info btn-sm'>Edit</a>
                   </td>
                 </tr>
               ))

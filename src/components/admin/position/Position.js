@@ -105,7 +105,7 @@ function Position() {
                   <td>{data?.slug}</td>
                   <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
                   <td>
-                    <a title='Edit Position' className='btn btn-info'>Edit</a>
+                    <a title='Edit Position' className='btn btn-info btn-sm'>Edit</a>
                   </td>
                 </tr>
               ))
