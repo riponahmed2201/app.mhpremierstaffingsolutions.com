@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { Form, Select, Input, Spin } from 'antd';
+import { Form, Select, Input, DatePicker, Space } from 'antd';
+import { addHandler } from '../../../api/employee';
+import { responseNotification } from '../../../utils/notifcation';
 
 const { Option } = Select;
 
@@ -9,11 +11,39 @@ function EmployeeRegister() {
 
     const [referPerson, setReferPerson] = useState([]);
     const [skill, setSkill] = useState([]);
+    const [position, setPosition] = useState([]);
+    const [sourceFrom, setSourceFrom] = useState([]);
+
+    const [loading, setLoading] = useState(false);
+    const [getError, setError] = useState();
 
     const navigate = useNavigate();
 
+    const onChange = (date, dateString) => {
+        console.log(date, dateString);
+    };
+
+    const [form] = Form.useForm();
+
     const onFinish = (values) => {
-        console.log("values : ", values);
+
+        setLoading(true);
+        addHandler(values)
+            .then((res) => res.json())
+            .then((res) => {
+                if (res?.statusCode === 201) {
+                    setError(undefined);
+                    setLoading(false);
+                    responseNotification("Employee registered successfully!", "success");
+                    form.resetFields();
+                } else if (res?.statusCode === 400) {
+                    setError(res?.errors?.[0].msg);
+                    setLoading(false);
+                } else if (res?.statusCode === 500) {
+                    setError(res?.message);
+                    setLoading(false);
+                }
+            });
     };
 
     useEffect(() => {
@@ -28,11 +58,29 @@ function EmployeeRegister() {
 
     useEffect(() => {
         const fetchSkillData = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/skills`);
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/skills//list-for-dropdown`);
             setSkill(response?.data?.skills);
         };
 
         fetchSkillData();
+    }, []);
+
+    useEffect(() => {
+        const fetchPositionData = async () => {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/positions/list-for-dropdown`);
+            setPosition(response?.data?.positions);
+        };
+
+        fetchPositionData();
+    }, []);
+
+    useEffect(() => {
+        const fetchSourceFromData = async () => {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/sources/list-for-dropdown`);
+            setSourceFrom(response?.data?.sources);
+        };
+
+        fetchSourceFromData();
     }, []);
 
 
@@ -52,8 +100,18 @@ function EmployeeRegister() {
                 <div className='bg-white'>
                     <div className="container-fluid">
                         <nav className="navbar navbar-expand-lg navbar-light">
-                            <Link className="navbar-brand" to="/client-register">Client Register</Link>
-                            <Link className="navbar-brand" to="/employee-register">Employee Register</Link>
+
+                            <div className="collapse navbar-collapse" id="navbarNav">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item active">
+                                        <Link className="nav-link" to="/client-register">Client Register</Link>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/employee-register">Employee Register</Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </nav>
                         <br />
 
@@ -117,6 +175,31 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
+                                            label="Position"
+                                            name="positionId"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter position',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select position"
+                                                optionFilterProp="children"
+                                            >
+                                                {position?.map((item, index) => (
+                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                                ))}
+
+                                            </Select>
+                                        </Form.Item>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <Form.Item
                                             label="Gender"
                                             name="gender"
                                             hasFeedback
@@ -142,7 +225,6 @@ function EmployeeRegister() {
                                         <Form.Item
                                             label="Date Of Birth"
                                             name="dateOfBirth"
-                                            hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
@@ -150,7 +232,13 @@ function EmployeeRegister() {
                                                 },
                                             ]}
                                         >
-                                            <Input placeholder="Enter date of birth" className="ant-input ant-input-lg" />
+                                            <Space direction="vertical" style={{
+                                                width: '100%',
+                                            }}>
+                                                <DatePicker style={{
+                                                    width: '100%',
+                                                }} onChange={onChange} />
+                                            </Space>
                                         </Form.Item>
                                     </div>
 
@@ -200,7 +288,7 @@ function EmployeeRegister() {
                                         >
                                             <Select
                                                 showSearch={true}
-                                                placeholder="Please Select Gender"
+                                                placeholder="Please Select Country Name"
                                                 optionFilterProp="children"
                                             >
                                                 <Option value="BANGLADESH">BANGLADESH</Option>
@@ -310,15 +398,72 @@ function EmployeeRegister() {
                                                 },
                                             ]}
                                         >
-                                            <Input placeholder="Enter source name" className="ant-input ant-input-lg" />
+
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Source"
+                                                optionFilterProp="children"
+                                            >
+
+                                                {sourceFrom?.map((item, index) => (
+                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                                ))}
+
+                                            </Select>
+                                        </Form.Item>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Refer Person name"
+                                            name="referPersonId"
+                                            hasFeedback
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Refer Person"
+                                                optionFilterProp="children"
+                                            >
+                                                {referPerson?.map((refer, index) => (
+                                                    <Option key={index} value={refer?._id}>{refer?.name}</Option>
+                                                ))}
+                                            </Select>
                                         </Form.Item>
                                     </div>
 
                                 </div>
                             </div>
-                            <br />
-                            <div className="col-12">
-                                <button type="submit" className="btn" style={{ background: '#C6A34F', color: 'white' }}>Register</button>
+
+                            {getError ? (
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <div className="error-message">
+                                            <p className="error-text-color">{getError}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : undefined}
+
+                            <div className="col-md-6">
+                                <Form.Item>
+                                    <button
+                                        disabled={loading}
+                                        className="btn"
+                                        style={{ background: '#C6A34F', color: 'white' }}
+                                        type="submit"
+                                    >
+                                        {!loading && "Register"}
+                                        {loading && (
+                                            <span
+                                                className="indicator-progress"
+                                                style={{ display: "block" }}
+                                            >
+                                                Please wait...{" "}
+                                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        )}
+                                    </button>
+                                </Form.Item>
                             </div>
                         </Form>
                     </div>

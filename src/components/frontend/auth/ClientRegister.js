@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 function ClientRegister() {
 
     const [referPerson, setReferPerson] = useState([]);
+    const [sourceFrom, setSourceFrom] = useState([]);
 
     const navigate = useNavigate();
 
@@ -59,6 +60,16 @@ function ClientRegister() {
         fetchData();
     }, []);
 
+
+    useEffect(() => {
+        const fetchSourceFromData = async () => {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/sources/list-for-dropdown`);
+            setSourceFrom(response?.data?.sources);
+        };
+
+        fetchSourceFromData();
+    }, []);
+
     return (
         <div className='row'>
             <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc", minHeight: "100vh" }}>
@@ -75,8 +86,17 @@ function ClientRegister() {
                 <div className='bg-white'>
                     <div className="container-fluid">
                         <nav className="navbar navbar-expand-lg navbar-light">
-                            <Link className="navbar-brand" to="/client-register">Client Register</Link>
-                            <Link className="navbar-brand" to="/employee-register">Employee Register</Link>
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item active">
+                                        <Link className="nav-link" to="/client-register">Client Register</Link>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/employee-register">Employee Register</Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </nav>
                         <br />
 
@@ -111,11 +131,16 @@ function ClientRegister() {
 
                                     <div className="col-md-6 form-group mb-3">
                                         <label htmlFor="sourceFrom"><span className='text-danger'>*</span>Where do you find us?</label>
-                                        <input type="text"
-                                            onChange={formik.handleChange} value={formik.values.sourceFrom}
-                                            className='form-control mt-2'
-                                            name='sourceFrom'
-                                            placeholder="Enter source from" id="sourceFrom" />
+                                        <select name='sourceFrom'
+                                            onChange={formik.handleChange} value={formik.values.sourceFrom} className="form-select mt-2">
+                                            <option value="">Please select</option>
+
+                                            {sourceFrom?.map((item, index) => (
+                                                <option key={index} value={item?._id}>{item?.name}</option>
+                                            ))}
+
+                                        </select>
+
 
                                         {formik.touched.sourceFrom && formik.errors.sourceFrom &&
                                             <span style={{ color: 'red' }}>{formik.errors.sourceFrom}</span>}
