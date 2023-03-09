@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Form, Select, Input, DatePicker, Space } from 'antd';
+
+import moment from "moment";
+
 import { addHandler } from '../../../api/employee';
 import { responseNotification } from '../../../utils/notifcation';
 
@@ -19,31 +22,54 @@ function EmployeeRegister() {
 
     const navigate = useNavigate();
 
-    const onChange = (date, dateString) => {
-        console.log(date, dateString);
-    };
-
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
 
-        setLoading(true);
-        addHandler(values)
-            .then((res) => res.json())
-            .then((res) => {
-                if (res?.statusCode === 201) {
-                    setError(undefined);
-                    setLoading(false);
-                    responseNotification("Employee registered successfully!", "success");
-                    form.resetFields();
-                } else if (res?.statusCode === 400) {
-                    setError(res?.errors?.[0].msg);
-                    setLoading(false);
-                } else if (res?.statusCode === 500) {
-                    setError(res?.message);
-                    setLoading(false);
-                }
-            });
+        const receivedEmployeeFields = {
+            name: values?.name,
+            email: values?.email,
+            phoneNumber: values?.phoneNumber,
+            countryName: values?.countryName,
+            dateOfBirth: "2023-09-03",
+            emmergencyContact: values?.emmergencyContact,
+            gender: values?.gender,
+            higherEducation: values?.higherEducation,
+            languages: values?.languages,
+            licensesNo: values?.licensesNo,
+            permanentAddress: values?.permanentAddress,
+            positionId: values?.positionId,
+            presentAddress: values?.presentAddress,
+            referPersonId: values?.referPersonId,
+            skills: values?.skills,
+            sourceId: values?.sourceId,
+            employeeExperience: Number(values?.employeeExperience)
+
+            // values.dateOfBirth
+        };
+
+        try {
+            setLoading(true);
+            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, receivedEmployeeFields);
+            // const res = await axios.post(`http://localhost:8000/api/v1/users/employee-register`, receivedEmployeeFields);
+            console.log("res: ", res);
+            if (res?.data?.statusCode === 201) {
+                setError(undefined);
+                setLoading(false);
+                responseNotification("Employee registered successfully!", "success");
+                form.resetFields();
+            } else if (res?.data?.statusCode === 400) {
+                setError(res?.data?.errors?.[0].msg);
+                setLoading(false);
+            } else if (res?.data?.statusCode === 500) {
+                setError(res?.message);
+                setLoading(false);
+            }
+
+        } catch (error) {
+            setError(error?.response?.data?.errors?.[0].msg);
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -225,19 +251,28 @@ function EmployeeRegister() {
                                         <Form.Item
                                             label="Date Of Birth"
                                             name="dateOfBirth"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter date of birth',
-                                                },
-                                            ]}
+                                        // rules={[
+                                        //     {
+                                        //         required: true,
+                                        //         message: 'Please enter date of birth',
+                                        //     },
+                                        // ]}
                                         >
                                             <Space direction="vertical" style={{
                                                 width: '100%',
                                             }}>
-                                                <DatePicker style={{
-                                                    width: '100%',
-                                                }} onChange={onChange} />
+
+                                                <DatePicker
+                                                    style={{ width: '100%' }}
+                                                    disabledDate={(current) => {
+                                                        let customDate = moment().format("YYYY-MM-DD");
+                                                        return (
+                                                            current &&
+                                                            current < moment(customDate, "YYYY-MM-DD")
+                                                        );
+                                                    }}
+                                                />
+
                                             </Space>
                                         </Form.Item>
                                     </div>
@@ -363,6 +398,34 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
+                                            label="Languages"
+                                            name="languages"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter languages',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                mode="multiple"
+                                                showSearch={true}
+                                                placeholder="Please Select languages"
+                                                optionFilterProp="children"
+                                            >
+
+                                                <Option value="ENGLISH">ENGLISH</Option>
+                                                <Option value="BANGLA">BANGLA</Option>
+                                                <Option value="HINDI">HINDI</Option>
+
+                                            </Select>
+                                        </Form.Item>
+
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <Form.Item
                                             label="Skills"
                                             name="skills"
                                             hasFeedback
@@ -374,6 +437,7 @@ function EmployeeRegister() {
                                             ]}
                                         >
                                             <Select
+                                                mode="multiple"
                                                 showSearch={true}
                                                 placeholder="Please Select Skill"
                                                 optionFilterProp="children"
@@ -389,7 +453,7 @@ function EmployeeRegister() {
                                     <div className="col-md-6">
                                         <Form.Item
                                             label="Source name"
-                                            name="sourceFrom"
+                                            name="sourceId"
                                             hasFeedback
                                             rules={[
                                                 {
@@ -438,7 +502,7 @@ function EmployeeRegister() {
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="error-message">
-                                            <p className="error-text-color">{getError}</p>
+                                            <p className="text-danger">{getError}</p>
                                         </div>
                                     </div>
                                 </div>

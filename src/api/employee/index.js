@@ -14,10 +14,11 @@ export const fetchHandler = async () => {
 };
 
 // add api call
-export const addHandler = async (receivedPositionFields) => {
+export const addHandler = async (receivedEmployeeFields) => {
+    console.log("Test Data: ", receivedEmployeeFields);
     const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, {
         method: "POST",
-        body: JSON.stringify(receivedPositionFields),
+        body: JSON.stringify(receivedEmployeeFields),
     });
     return res;
 };
