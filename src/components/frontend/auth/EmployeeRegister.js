@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Form, Select, Input, DatePicker, Space } from 'antd';
 
 import { responseNotification } from '../../../utils/notifcation';
+import { fetchSkillListForDropdownHandler } from '../../../api/skill';
+import { fetchPositionListForDropdownHandler } from '../../../api/position';
+import { fetchSourceListForDropdownHandler } from '../../../api/source';
+import { fetchReferPersonListForDropdownHandler } from '../../../api/employee';
+import { staticLanguageName } from '../../../utils/static/languageList';
+import CountryWiseValidationRules from '../../../utils/static/countryList';
 
 const { Option } = Select;
 
@@ -18,8 +24,6 @@ function EmployeeRegister() {
     const [getError, setError] = useState();
 
     const navigate = useNavigate();
-
-    const [form] = Form.useForm();
 
     const onFinish = async (values) => {
 
@@ -50,13 +54,12 @@ function EmployeeRegister() {
             setLoading(true);
 
             const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, receivedEmployeeFields);
-            console.log("res: ", res);
-            
+
             if (res?.data?.statusCode === 201) {
                 setError(undefined);
                 setLoading(false);
                 responseNotification("Employee registered successfully!", "success");
-                form.resetFields();
+                // form.resetFields();
 
                 localStorage.setItem("accessToken", res?.data?.token);
 
@@ -76,43 +79,40 @@ function EmployeeRegister() {
         }
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/list?isReferPerson=YES`);
-            setReferPerson(response?.data?.users);
-        };
-
-        fetchData();
+    //Fetch refer person list for dropdown
+    const fetchReferPersonData = useCallback(async () => {
+        await fetchReferPersonListForDropdownHandler().then((res) => {
+            setReferPerson(res?.data?.users);
+        });
     }, []);
 
+    //Fetch skill list for dropdown
+    const fetchSkillData = useCallback(async () => {
+        await fetchSkillListForDropdownHandler().then((res) => {
+            setSkill(res?.data?.skills);
+        });
+    }, []);
+
+    //Fetch position list for dropdown
+    const fetchPositionData = useCallback(async () => {
+        await fetchPositionListForDropdownHandler().then((res) => {
+            setPosition(res?.data?.positions);
+        });
+    }, []);
+
+    //Fetch source list for dropdown
+    const fetchSourceFromData = useCallback(async () => {
+        await fetchSourceListForDropdownHandler().then((res) => {
+            setSourceFrom(res?.data?.sources);
+        });
+    }, []);
 
     useEffect(() => {
-        const fetchSkillData = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/skills//list-for-dropdown`);
-            setSkill(response?.data?.skills);
-        };
-
         fetchSkillData();
-    }, []);
-
-    useEffect(() => {
-        const fetchPositionData = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/positions/list-for-dropdown`);
-            setPosition(response?.data?.positions);
-        };
-
         fetchPositionData();
-    }, []);
-
-    useEffect(() => {
-        const fetchSourceFromData = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/sources/list-for-dropdown`);
-            setSourceFrom(response?.data?.sources);
-        };
-
         fetchSourceFromData();
+        fetchReferPersonData();
     }, []);
-
 
     return (
         <div className='row'>
@@ -323,8 +323,10 @@ function EmployeeRegister() {
                                                 placeholder="Please Select Country Name"
                                                 optionFilterProp="children"
                                             >
-                                                <Option value="BANGLADESH">BANGLADESH</Option>
-                                                <Option value="INDIA">INDIA</Option>
+                                                {CountryWiseValidationRules?.map((item, index) => (
+                                                    <Option key={index} value={item?.name}>{item?.name}</Option>
+                                                ))}
+
                                             </Select>
                                         </Form.Item>
                                     </div>
@@ -411,10 +413,9 @@ function EmployeeRegister() {
                                                 placeholder="Please Select languages"
                                                 optionFilterProp="children"
                                             >
-
-                                                <Option value="ENGLISH">ENGLISH</Option>
-                                                <Option value="BANGLA">BANGLA</Option>
-                                                <Option value="HINDI">HINDI</Option>
+                                                {staticLanguageName?.map((item, index) => (
+                                                    <Option key={index} value={item?.name}>{item?.name}</Option>
+                                                ))}
 
                                             </Select>
                                         </Form.Item>
@@ -449,20 +450,20 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
-                                            label="Source name"
+                                            label="How You Know About Us?"
                                             name="sourceId"
                                             hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please enter source name',
+                                                    message: 'Please enter how you know about us',
                                                 },
                                             ]}
                                         >
 
                                             <Select
                                                 showSearch={true}
-                                                placeholder="Please Select Source"
+                                                placeholder="Please Select"
                                                 optionFilterProp="children"
                                             >
 

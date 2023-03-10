@@ -10,7 +10,6 @@ import { imageUploadHandler } from '../../../api/employee/profileUpdateImage';
 
 function ProfileUpdate() {
 
-  const [cv, setCV] = useState([]);
   const [profilePicture, setProfilePicture] = useState([]);
   const [summaryPdf, setSummaryPdf] = useState([]);
   const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
@@ -46,17 +45,17 @@ function ProfileUpdate() {
       setLoading(true);
 
       const file = new FormData();
+
       file.append("cv", summaryPdf?.[0].originFileObj);
       file.append("profilePicture", profilePicture?.[0].originFileObj);
-      file.append("id", "640b0b4f1daedb1b0c821802");
+      file.append("id", "640b36410050565b7316bbc5");
 
       await imageUploadHandler(file)
         .then((res) => res.json())
         .then((res) => {
-          console.log("Response: ", res);
           if (res.statusCode === 200) {
             responseNotification("Profile updated successfully", "success");
-            setCV([]);
+
             setSummaryPdf([]);
             setProfilePicture([]);
 

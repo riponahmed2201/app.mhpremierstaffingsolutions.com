@@ -13,6 +13,18 @@ export const fetchHandler = async () => {
     return res;
 };
 
+//fetch list for dropdown
+export const fetchSkillListForDropdownHandler = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/skills/list-for-dropdown`,
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+        }
+    );
+    return res;
+};
+
 // add api call
 export const addHandler = async (receivedPositionFields) => {
     const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/skills/create`, {
