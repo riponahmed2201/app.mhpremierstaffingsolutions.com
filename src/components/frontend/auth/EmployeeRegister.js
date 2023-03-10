@@ -3,9 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Form, Select, Input, DatePicker, Space } from 'antd';
 
-import moment from "moment";
-
-import { addHandler } from '../../../api/employee';
 import { responseNotification } from '../../../utils/notifcation';
 
 const { Option } = Select;
@@ -49,15 +46,22 @@ function EmployeeRegister() {
         };
 
         try {
+
             setLoading(true);
+
             const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, receivedEmployeeFields);
-            // const res = await axios.post(`http://localhost:8000/api/v1/users/employee-register`, receivedEmployeeFields);
             console.log("res: ", res);
+            
             if (res?.data?.statusCode === 201) {
                 setError(undefined);
                 setLoading(false);
                 responseNotification("Employee registered successfully!", "success");
                 form.resetFields();
+
+                localStorage.setItem("accessToken", res?.data?.token);
+
+                navigate('/employee-profile-update');
+
             } else if (res?.data?.statusCode === 400) {
                 setError(res?.data?.errors?.[0].msg);
                 setLoading(false);
@@ -251,12 +255,12 @@ function EmployeeRegister() {
                                         <Form.Item
                                             label="Date Of Birth"
                                             name="dateOfBirth"
-                                        // rules={[
-                                        //     {
-                                        //         required: true,
-                                        //         message: 'Please enter date of birth',
-                                        //     },
-                                        // ]}
+                                            rules={[
+                                                {
+                                                    // required: true,
+                                                    message: 'Please enter date of birth',
+                                                },
+                                            ]}
                                         >
                                             <Space direction="vertical" style={{
                                                 width: '100%',
@@ -264,13 +268,6 @@ function EmployeeRegister() {
 
                                                 <DatePicker
                                                     style={{ width: '100%' }}
-                                                    disabledDate={(current) => {
-                                                        let customDate = moment().format("YYYY-MM-DD");
-                                                        return (
-                                                            current &&
-                                                            current < moment(customDate, "YYYY-MM-DD")
-                                                        );
-                                                    }}
                                                 />
 
                                             </Space>

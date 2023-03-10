@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
         <Navbar />
-        Home Page
+      <div className='text-center mt-5'> Comming soon....!</div>
     </div>
   )
 }
