@@ -1,5 +1,6 @@
 import axios from "axios";
 import { token } from "../../utils/authentication";
+import { getPage } from "../../utils/getPage";
 
 // fetch api call
 export const fetchHandler = async () => {
@@ -31,5 +32,37 @@ export const addHandler = async (receivedEmployeeFields) => {
         method: "POST",
         body: JSON.stringify(receivedEmployeeFields),
     });
+    return res;
+};
+
+//HR fetch api call
+export const fetchEmployeeListHandler = async (limit, getName, getStatus, locationsearch) => {
+
+    const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
+
+    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
+        (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=EMPLOYEE`),
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+        }
+    );
+    return res;
+};
+
+//HR fetch api call
+export const fetchClientListHandler = async (limit, getName, getStatus, locationsearch) => {
+
+    const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
+
+    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
+        (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=CLIENT`),
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+        }
+    );
     return res;
 };

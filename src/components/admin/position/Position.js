@@ -2,19 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
 import { addHandler, fetchHandler } from '../../../api/position';
 import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
+import _ from "lodash";
+import Loader from '../../loadar/Loader';
 
+const { Option } = Select;
 function Position() {
 
   //get positions
   const [positions, setPositions] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [getError, setError] = useState();
+  const params = new URLSearchParams(window.location.search);
+  const [open, setOpen] = useState(false);
+  let serialNumber = Number(params.get("page"));
 
   const [form] = Form.useForm();
-  const [open, setOpen] = useState(false);
-  const { Option } = Select;
-
   const showDrawer = () => {
     setOpen(true);
   };
@@ -86,7 +88,7 @@ function Position() {
         </div>
       </div>
       <div className='card sd'>
-        {loading ? <div className='loader-bg text-center my-2 '> <Spin tip="Loading..." size="large" /> </div> : <table className="table table-bordered table-hover">
+        <table className="table table-bordered table-hover">
           <thead>
             <tr>
               <th>#</th>
@@ -97,21 +99,31 @@ function Position() {
             </tr>
           </thead>
           <tbody>
-            {
-              positions?.map((data, index) => (
+            {loading ? (
+              <tr>
+                <td>
+                  <Loader />
+                </td>
+              </tr>
+            ) : positions.length ? (
+              _.map(positions, (item, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
-                  <td>{data?.name}</td>
-                  <td>{data?.slug}</td>
-                  <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
+                  <td>{item?.name}</td>
+                  <td>{item?.slug}</td>
+                  <td>{item?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
                   <td>
                     <a title='Edit Position' className='btn btn-info btn-sm'>Edit</a>
                   </td>
                 </tr>
-              ))
-            }
+              )))
+              : (
+                <tr>
+                  <td colSpan={5} className='text-center text-danger'>No Data Found!</td>
+                </tr>
+              )}
           </tbody>
-        </table>}
+        </table>
 
         <Drawer title="Add new position" width={520} closable={false} onClose={onClose} open={open}>
           <div className="drawer-toggle-wrapper">

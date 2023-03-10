@@ -16,6 +16,10 @@ import EmployeeRegister from './components/frontend/auth/EmployeeRegister';
 import ProfileUpdate from './components/frontend/profile/ProfileUpdate';
 import CertificateUpdate from './components/frontend/profile/CertificateUpdate';
 import EmployeeRegisterWelcome from './components/frontend/profile/EmployeeRegisterWelcome';
+import EmployeeList from './components/admin/employee/EmployeeList';
+import ClientList from './components/admin/client/ClientList';
+import EmployeeDetails from './components/admin/employee/EmployeeDetails';
+import ClientDetails from './components/admin/client/ClientDetails';
 
 function App() {
   return (
@@ -39,6 +43,10 @@ function App() {
             <Route path='position' element={<PrivateRoute><Position /></PrivateRoute>} />
             <Route path='skill' element={<PrivateRoute><Skill /></PrivateRoute>} />
             <Route path='source' element={<PrivateRoute><Source /></PrivateRoute>} />
+            <Route path='employee-list' element={<PrivateRoute><EmployeeList /></PrivateRoute>} />
+            <Route path='employee-details' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
+            <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
+            <Route path='client-details' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
 
           </Route>
         </Routes>
