@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Select, Switch } from 'antd';
+import { Input, Select, Space, Switch, Table } from 'antd';
 import _ from "lodash";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
@@ -8,9 +8,38 @@ import { fetchEmployeeListHandler } from '../../../api/employee';
 import Loader from '../../loadar/Loader';
 import { statusOptions } from '../../../common/statusOptions';
 import { token } from '../../../utils/authentication';
-import PaginationList from '../../../common/paginationList';
 
-const { Option } = Select;
+
+const { Search } = Input;
+
+const columns = [
+    {
+        title: '#',
+        dataIndex: 'key',
+    },
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        sorter: (a, b) => a.name.length - b.name.length,
+    },
+    {
+        title: 'Email',
+        dataIndex: 'email',
+    },
+    {
+        title: 'Phone Number',
+        dataIndex: 'phoneNumber',
+    },
+    {
+        title: 'Active',
+        dataIndex: 'active',
+        sorter: (a, b) => a.active.length - b.active.length,
+    },
+    {
+        title: 'Action',
+        dataIndex: 'action',
+    },
+];
 
 function EmployeeList() {
 
@@ -29,7 +58,7 @@ function EmployeeList() {
         await fetchEmployeeListHandler(limit, getName, getStatus, loc?.search).then((res) => {
             if (res?.status === 200) {
                 setLoading(false);
-                setEmployee(res?.data)
+                setEmployee(res?.data?.users)
             } else {
                 setLoading(false);
             }
@@ -39,6 +68,31 @@ function EmployeeList() {
         fetchEmployee();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchEmployee, getPage(loc.search)]);
+
+    //search
+    const handleSearchkeywordOnChange = (value) => {
+        setName(value);
+    };
+
+    const data1 = [];
+    _.map(getEmployee, (item, index) => {
+        data1.push({
+            key: index + 1,
+            name: item.name,
+            email: item.email,
+            phoneNumber: item.phoneNumber,
+            active: item.active ? 'YES' : 'NO',
+            action: (
+                <>
+                    <div className='btn-group'>
+                        <Link to={`/admin/employee-details/${item._id}`} className='btn btn-primary btn-sm'>
+                            Edit
+                        </Link>
+                    </div>
+                </>
+            ),
+        });
+    });
 
     const handleChangeStatus = (value) => {
         setStatus(value);
@@ -84,75 +138,33 @@ function EmployeeList() {
             </div>
 
             <div className='card'>
-                <table className="table table-row-bordered table-hover">
-                    <thead>
-                        <tr className="fw-bolder text-muted">
-                            <th>#</th>
-                            <th className="min-w-150px">Name</th>
-                            <th className="min-w-150px">Email</th>
-                            <th className="min-w-150px">Phone Number</th>
-                            <th className="min-w-140px">Active</th>
-                            <th className="min-w-140px text-center">Status</th>
-                            <th className="min-w-100px text-end">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            <tr>
-                                <td>
-                                    <Loader />
-                                </td>
-                            </tr>
-                        ) : getEmployee?.users?.length ? (
-                            _.map(getEmployee?.users, (item, index) => (
-                                <tr key={item?._id}>
-                                    <td>
-                                        {getEmployee?.count *
-                                            (typeof serialNumber === "number"
-                                                ? serialNumber >= 1
-                                                    ? serialNumber - 1
-                                                    : 0
-                                                : 0) +
-                                            index +
-                                            1}
-                                    </td>
-                                    <td>{item?.name}</td>
-                                    <td>{item?.email}</td>
-                                    <td>{item?.phoneNumber}</td>
-                                    <td>{item?.active === true ? "YES" : "NO"}</td>
-                                    <td className='text-center'>
-                                        <Switch
-                                            size="small"
-                                            defaultChecked={item?.active === true}
-                                            onChange={(e) => {
-                                                onTrimsStatusChange(item?._id, e);
-                                            }}
-                                        />
-                                    </td>
-                                    <td className="text-end">
-                                        <Link
-                                            className="btn btn-sm btn-info"
-                                            to='/admin/employee-details'
-                                        >
-                                            View
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td>Employee not found</td>
-                            </tr>
-                        )}
-                    </tbody>
 
-                    <PaginationList
-                        {...getEmployee?.users}
-                        limit={limit}
-                        page={getPage(loc.search)}
-                    />
-
-                </table>
+                <div className='d-flex flex-row-reverse'>
+                    <div className='m-2'>
+                        <Space direction="vertical">
+                            <Search
+                                placeholder="Enter employee name"
+                                enterButton="Search"
+                                size="large"
+                                style={{
+                                    fontSize: 16,
+                                    color: '#c6a34f',
+                                }}
+                                onSearch={handleSearchkeywordOnChange}
+                            />
+                        </Space>
+                    </div>
+                </div>
+                <br />
+                {loading ? (
+                    <tr>
+                        <td>
+                            <Loader />
+                        </td>
+                    </tr>
+                ) : (
+                    <div className='m-2'> <Table columns={columns} dataSource={data1} /></div>)
+                }
             </div>
         </div>
     )

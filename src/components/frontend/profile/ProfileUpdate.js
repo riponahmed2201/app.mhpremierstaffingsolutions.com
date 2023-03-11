@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Upload, Button } from 'antd';
 import ImgCrop from "antd-img-crop";
 import { UploadOutlined } from '@ant-design/icons';
@@ -18,6 +18,8 @@ function ProfileUpdate() {
   const [getError, setError] = useState();
 
   const navigate = useNavigate();
+
+  const { id } = useParams()
 
   const onProfileChange = ({ fileList: newFileList }) => {
     setProfilePicture(newFileList);
@@ -48,7 +50,7 @@ function ProfileUpdate() {
 
       file.append("cv", summaryPdf?.[0].originFileObj);
       file.append("profilePicture", profilePicture?.[0].originFileObj);
-      file.append("id", "640b36410050565b7316bbc5");
+      file.append("id", id);
 
       await imageUploadHandler(file)
         .then((res) => res.json())
@@ -59,7 +61,7 @@ function ProfileUpdate() {
             setSummaryPdf([]);
             setProfilePicture([]);
 
-            navigate('/employee-certificate-update');
+            navigate(`/employee-certificate-update/${id}`);
 
             // window.location.reload();
           } else if (res?.statusCode === 400) {
@@ -95,7 +97,7 @@ function ProfileUpdate() {
           <br />
           <h2 className='class="mt-40 text-center mb-25'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h2>
           <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
-            <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
+            <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='/logo.png' alt='img' />
           </div>
         </div>
       </div>

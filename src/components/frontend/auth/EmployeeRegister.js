@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Form, Select, Input, DatePicker, Space } from 'antd';
+import moment from "moment";
 
 import { responseNotification } from '../../../utils/notifcation';
 import { fetchSkillListForDropdownHandler } from '../../../api/skill';
@@ -20,19 +21,25 @@ function EmployeeRegister() {
     const [position, setPosition] = useState([]);
     const [sourceFrom, setSourceFrom] = useState([]);
 
+    const [getDateOfBirth, setDateOfBirth] = useState(undefined);
+
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
+
+    const [form] = Form.useForm();
 
     const navigate = useNavigate();
 
     const onFinish = async (values) => {
+
+        const dateOfBirthFromOnchanage = getDateOfBirth ? moment(getDateOfBirth).format("YYYY-MM-DD").valueOf() : undefined;
 
         const receivedEmployeeFields = {
             name: values?.name,
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             countryName: values?.countryName,
-            dateOfBirth: "2023-09-03",
+            dateOfBirth: dateOfBirthFromOnchanage,
             emmergencyContact: values?.emmergencyContact,
             gender: values?.gender,
             higherEducation: values?.higherEducation,
@@ -61,9 +68,7 @@ function EmployeeRegister() {
                 responseNotification("Employee registered successfully!", "success");
                 // form.resetFields();
 
-                localStorage.setItem("accessToken", res?.data?.token);
-
-                navigate('/employee-profile-update');
+                navigate(`/employee-profile-update/${res?.data?.details._id}`);
 
             } else if (res?.data?.statusCode === 400) {
                 setError(res?.data?.errors?.[0].msg);
@@ -151,6 +156,7 @@ function EmployeeRegister() {
                             className="ant-form ant-form-vertical"
                             layout="vertical"
                             onFinish={onFinish}
+                            form={form}
                         >
                             <div className='col-12'>
                                 <div className='row'>
@@ -268,6 +274,15 @@ function EmployeeRegister() {
 
                                                 <DatePicker
                                                     style={{ width: '100%' }}
+                                                    id="dateOfBirth"
+                                                    placeholder="Date of Birth"
+                                                    onChange={(value) => {
+                                                        setDateOfBirth(
+                                                            moment(value)
+                                                                .format("YYYY-MM-DD")
+                                                                .valueOf()
+                                                        );
+                                                    }}
                                                 />
 
                                             </Space>

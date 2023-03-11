@@ -31,8 +31,8 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
-          <Route path='/employee-profile-update' element={<ProfileUpdate />} />
-          <Route path='/employee-certificate-update' element={<CertificateUpdate />} />
+          <Route path='/employee-profile-update/:id' element={<ProfileUpdate />} />
+          <Route path='/employee-certificate-update/:id' element={<CertificateUpdate />} />
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 
           {/* admin routes here */}
@@ -44,9 +44,9 @@ function App() {
             <Route path='skill' element={<PrivateRoute><Skill /></PrivateRoute>} />
             <Route path='source' element={<PrivateRoute><Source /></PrivateRoute>} />
             <Route path='employee-list' element={<PrivateRoute><EmployeeList /></PrivateRoute>} />
-            <Route path='employee-details' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
+            <Route path='employee-details/:id' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
-            <Route path='client-details' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
+            <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
 
           </Route>
         </Routes>

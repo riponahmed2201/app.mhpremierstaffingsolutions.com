@@ -7,9 +7,6 @@ export const imageUploadHandler = async (receivedBlogFields) => {
         `${process.env.REACT_APP_API_BASE_URL}/users/profile-picture/upload`,
         {
             method: "PUT",
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
             body: receivedBlogFields,
         }
     );
@@ -22,9 +19,6 @@ export const certificateUploadHandler = async (receivedBlogFields) => {
         `${process.env.REACT_APP_API_BASE_URL}/users/certificate/upload`,
         {
             method: "PUT",
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
             body: receivedBlogFields,
         }
     );

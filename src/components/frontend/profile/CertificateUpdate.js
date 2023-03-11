@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Upload, Button, Input } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
@@ -16,6 +16,8 @@ function ProfileUpdate() {
 
     const navigate = useNavigate();
 
+    const { id } = useParams()
+
     const onFinish = async (values) => {
 
         if (true) {
@@ -24,7 +26,7 @@ function ProfileUpdate() {
             const file = new FormData();
             file.append("certificateName", values?.certificateName);
             file.append("attachment", summaryPdf?.[0].originFileObj);
-            file.append("id", "640b36410050565b7316bbc5");
+            file.append("id", id);
 
             await certificateUploadHandler(file)
                 .then((res) => res.json())
@@ -69,7 +71,7 @@ function ProfileUpdate() {
                     <br />
                     <h2 className='class="mt-40 text-center mb-25'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h2>
                     <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
-                        <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
+                        <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='/logo.png' alt='img' />
                     </div>
                 </div>
             </div>
