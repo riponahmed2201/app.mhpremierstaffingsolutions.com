@@ -30,6 +30,16 @@ function EmployeeDetails() {
                 }
             );
 
+            console.log("res?.data?.details: ", res?.data?.details);
+            form.setFieldsValue({
+                bankName: res?.data?.details.bankName,
+                accountNumber: res?.data?.details.accountNumber,
+                routingNumber: res?.data?.details.routingNumber,
+                dressSize: res?.data?.details.dressSize,
+                additionalOne: res?.data?.details.additionalOne,
+                additionalTwo: res?.data?.details.additionalTwo
+            });
+
             setSingleEmployeeDetails(res?.data?.details);
 
         } catch (error) {
@@ -42,24 +52,24 @@ function EmployeeDetails() {
         fetchSingleEmployeeData();
     }, [id]);
 
-
     const onFinish = async (values) => {
-        
+
         const receivedEmployeeFields = {
             id: id,
             bankName: values?.bankName,
             accountNumber: values?.accountNumber,
             routingNumber: values?.routingNumber,
-            dressSize: values?.dressSize,
-            additionalOne: values?.additionalOne,
-            additionalTwo: values?.additionalTwo,
         };
+
+        if (values?.dressSize) receivedEmployeeFields.dressSize = values?.dressSize;
+        if (values?.additionalOne) receivedEmployeeFields.additionalOne = values?.additionalOne;
+        if (values?.additionalTwo) receivedEmployeeFields.additionalTwo = values?.additionalTwo;
 
         try {
 
             setLoading(true);
 
-            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank`, receivedEmployeeFields);
+            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields);
 
             if (res?.data?.statusCode === 200) {
                 setError(undefined);
@@ -160,6 +170,7 @@ function EmployeeDetails() {
                                             label="Bank Name"
                                             name="bankName"
                                             hasFeedback
+                                            initialValue={getSingleEmployeeDetails?.name}
                                             rules={[
                                                 {
                                                     required: true,
@@ -209,7 +220,6 @@ function EmployeeDetails() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter dress size',
                                                 },
                                             ]}
@@ -225,7 +235,6 @@ function EmployeeDetails() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter additional one',
                                                 },
                                             ]}
@@ -241,7 +250,6 @@ function EmployeeDetails() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter additional two',
                                                 },
                                             ]}

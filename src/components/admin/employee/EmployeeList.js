@@ -36,6 +36,10 @@ const columns = [
         sorter: (a, b) => a.active.length - b.active.length,
     },
     {
+        title: 'Status',
+        dataIndex: 'status',
+    },
+    {
         title: 'Action',
         dataIndex: 'action',
     },
@@ -82,6 +86,17 @@ function EmployeeList() {
             email: item.email,
             phoneNumber: item.phoneNumber,
             active: item.active ? 'YES' : 'NO',
+            status: (
+                <>
+                    <Switch
+                        size="small"
+                        defaultChecked={item?.active === true}
+                        onChange={(e) => {
+                            onEmployeeStatusChange(item?._id, e);
+                        }}
+                    />
+                </>
+            ),
             action: (
                 <>
                     <div className='btn-group'>
@@ -98,7 +113,7 @@ function EmployeeList() {
         setStatus(value);
     };
 
-    const onTrimsStatusChange = useCallback(async (value, e) => {
+    const onEmployeeStatusChange = useCallback(async (value, e) => {
         const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
         const status = e === true ? true : false;
         const id = value;

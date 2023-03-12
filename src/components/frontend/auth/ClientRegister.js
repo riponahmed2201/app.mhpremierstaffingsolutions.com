@@ -196,7 +196,7 @@ function ClientRegister() {
                                 <button type="submit" className="btn" style={{ background: '#C6A34F', color: 'white' }}>Register</button>
                             </div>
                             <div className='mb-3 mt-3 text-left'>
-                                <p> Already have an account? <Link to="/">Sign in now</Link></p>
+                                <p> Already have an account? <Link to="/login">Sign in now</Link></p>
                             </div>
                         </form>
                     </div>

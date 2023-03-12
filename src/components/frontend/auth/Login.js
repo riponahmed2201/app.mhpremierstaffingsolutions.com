@@ -37,7 +37,7 @@ function Login() {
                     setError(undefined);
                     setLoading(false);
 
-                    navigate('/admin');
+                    navigate('/admin/dashboard');
 
                 } else if (res?.data?.statusCode === 400) {
                     setError(res?.message);
