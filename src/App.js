@@ -27,7 +27,7 @@ function App() {
       <Router>
         <Routes>
 
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/' element={<Login />} />
           
           <Route path='/login' element={<Login />} />
           <Route path='/client-register' element={<ClientRegister />} />
