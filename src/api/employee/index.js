@@ -26,6 +26,18 @@ export const fetchReferPersonListForDropdownHandler = async () => {
     return res;
 };
 
+// fetch api call
+export const fetchUserListForDropdownHandler = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/list`,
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+        }
+    );
+    return res;
+};
+
 // add api call
 export const addHandler = async (receivedEmployeeFields) => {
     const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, {

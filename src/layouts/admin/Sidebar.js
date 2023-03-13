@@ -35,6 +35,10 @@ function Sidebar() {
                         <div className="sb-nav-link-icon"><i className="fas fa-table" /></div>
                         Client List
                     </NavLink>
+                    <NavLink className="nav-link" to="/admin/user-permission">
+                        <div className="sb-nav-link-icon"><i className="fas fa-table" /></div>
+                        User Permission
+                    </NavLink>
                     <div className="sb-sidenav-menu-heading">Interface</div>
                     <NavLink className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div className="sb-nav-link-icon"><i className="fas fa-columns" /></div>

@@ -20,6 +20,7 @@ import EmployeeList from './components/admin/employee/EmployeeList';
 import ClientList from './components/admin/client/ClientList';
 import EmployeeDetails from './components/admin/employee/EmployeeDetails';
 import ClientDetails from './components/admin/client/ClientDetails';
+import UserPermission from './components/admin/permission/UserPermission';
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
             <Route path='employee-details/:id' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
+
+            {/* user permission route here */}
+            <Route path='user-permission' element={<PrivateRoute><UserPermission /></PrivateRoute>} />
 
           </Route>
         </Routes>

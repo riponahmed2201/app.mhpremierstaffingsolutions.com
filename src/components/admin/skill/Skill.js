@@ -5,6 +5,8 @@ import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
 import { responseNotification } from '../../../utils/notifcation';
 import { addHandler, fetchHandler } from '../../../api/skill';
 
+const { Option } = Select;
+
 function Skill() {
 
   //get skills
@@ -15,7 +17,6 @@ function Skill() {
 
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
-  const { Option } = Select;
 
   const showDrawer = () => {
     setOpen(true);

@@ -30,7 +30,6 @@ function EmployeeDetails() {
                 }
             );
 
-            console.log("res?.data?.details: ", res?.data?.details);
             form.setFieldsValue({
                 bankName: res?.data?.details.bankName,
                 accountNumber: res?.data?.details.accountNumber,
