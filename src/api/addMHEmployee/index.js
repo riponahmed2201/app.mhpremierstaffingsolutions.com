@@ -15,7 +15,7 @@ export const fetchHandler = async () => {
 
 // add api call
 export const addHandler = async (receivedPositionFields) => {
-    const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/permission-create`, {
+    const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/add-mh-employee`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

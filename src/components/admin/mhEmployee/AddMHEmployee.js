@@ -1,52 +1,47 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Form, Select, Checkbox, Divider, Input } from 'antd'
+import React, { useState } from 'react'
+import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
 import { addHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
 
 const { Option } = Select;
-const CheckboxGroup = Checkbox.Group;
-const plainOptions = ['Position', 'Skill', 'Source', 'Employee List', 'Client List', 'User Permission'];
-const defaultCheckedList = ['Apple', 'Orange'];
 
 function AddMHEmployee() {
 
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
+    const [getPermission, setPermission] = useState([]);
 
     const [form] = Form.useForm();
 
-    const [checkedList, setCheckedList] = useState(defaultCheckedList);
-    const [indeterminate, setIndeterminate] = useState(true);
-    const [checkAll, setCheckAll] = useState(false);
-
-    const onChange = (list) => {
-        setCheckedList(list);
-        setIndeterminate(!!list.length && list.length < plainOptions.length);
-        setCheckAll(list.length === plainOptions.length);
-    };
-
-    const onCheckAllChange = (e) => {
-        setCheckedList(e.target.checked ? plainOptions : []);
-        setIndeterminate(false);
-        setCheckAll(e.target.checked);
+    const onChange = (checkedValues) => {
+        console.log('checked = ', checkedValues);
+        setPermission(checkedValues);
     };
 
     const onFinish = (values) => {
 
-        const name = values?.name;
         const active = values?.active === "YES" ? true : false;
+        const permissionValue = getPermission;
 
-        const addSkillFields = { name, active };
+        const addMhEmployeeReceivedFields = {
+            name: values?.name,
+            email: values?.email,
+            phoneNumber: values?.phoneNumber,
+            password: values?.password,
+            roleType: values?.roleType,
+            active: active,
+            permissions: permissionValue
+        };
 
-        if (name) {
+        if (addMhEmployeeReceivedFields) {
             setLoading(true);
-            addHandler(addSkillFields)
+            addHandler(addMhEmployeeReceivedFields)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res?.statusCode === 201) {
                         setError(undefined);
                         setLoading(false);
-                        responseNotification("MH emplyee created successfully!", "success");
+                        responseNotification("MH employee created successfully!", "success");
                         // form.resetFields();
                     } else if (res?.statusCode === 400) {
                         setError(res?.errors?.[0].msg);
@@ -195,21 +190,49 @@ function AddMHEmployee() {
 
                                     <div className="col-md-12">
                                         <Form.Item
-                                            label="Menu List"
+                                            label="Menu Permission List"
                                             name="active"
                                             hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: "Menu list is required",
+                                                    message: "Menu permission is required",
                                                 },
                                             ]}
                                         >
-                                            <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                                                All Permission
-                                            </Checkbox>
-                                            <Divider />
-                                            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+                                            <Checkbox.Group
+                                                style={{
+                                                    width: '100%',
+                                                }}
+                                                onChange={onChange}
+                                            >
+                                                <Row>
+                                                    <Col>
+                                                        <Checkbox value="POSITION">Position</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="SKILL">Skill</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="SOURCE">Source</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="CLIENT_EMPLOYEE">Client Employee List</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="MH_EMPLOYEE_LIST">MH Employee List</Checkbox>
+                                                    </Col>
+                                                    <Col>
+                                                        <Checkbox value="ADD_MH_EMPLOYEE">Add MH Employee</Checkbox>
+                                                    </Col>
+                                                </Row>
+                                            </Checkbox.Group>
 
                                         </Form.Item>
                                     </div>
