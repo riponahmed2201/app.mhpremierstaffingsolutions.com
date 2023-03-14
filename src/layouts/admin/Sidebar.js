@@ -35,9 +35,9 @@ function Sidebar() {
                         <div className="sb-nav-link-icon"><i className="fas fa-table" /></div>
                         Client List
                     </NavLink>
-                    <NavLink className="nav-link" to="/admin/user-permission">
+                    <NavLink className="nav-link" to="/admin/add-mh-employee">
                         <div className="sb-nav-link-icon"><i className="fas fa-table" /></div>
-                        User Permission
+                        Add MH Employee
                     </NavLink>
                     <div className="sb-sidenav-menu-heading">Interface</div>
                     <NavLink className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

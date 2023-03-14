@@ -20,7 +20,7 @@ import EmployeeList from './components/admin/employee/EmployeeList';
 import ClientList from './components/admin/client/ClientList';
 import EmployeeDetails from './components/admin/employee/EmployeeDetails';
 import ClientDetails from './components/admin/client/ClientDetails';
-import UserPermission from './components/admin/permission/UserPermission';
+import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         <Routes>
 
           <Route exact path='/' element={<Login />} />
-          
+
           <Route path='/login' element={<Login />} />
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
@@ -50,8 +50,8 @@ function App() {
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
 
-            {/* user permission route here */}
-            <Route path='user-permission' element={<PrivateRoute><UserPermission /></PrivateRoute>} />
+            {/* mh employee register from admin route here */}
+            <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
 
           </Route>
         </Routes>
