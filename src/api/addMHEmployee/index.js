@@ -2,8 +2,8 @@ import axios from "axios";
 import { token } from "../../utils/authentication";
 
 // fetch api call
-export const fetchHandler = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/permission`,
+export const fetchMhEmployeeListHandler = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/mh-employee-list`,
         {
             headers: {
                 Authorization: `Bearer ${token()}`,
@@ -15,7 +15,7 @@ export const fetchHandler = async () => {
 
 // add api call
 export const addHandler = async (receivedPositionFields) => {
-    const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/add-mh-employee`, {
+    const res = fetch(`${process.env.REACT_APP_API_BASE_URL}/users/mh-employee-register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
