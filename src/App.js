@@ -6,7 +6,6 @@ import PrivateRoute from './routes/PrivateRoute';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
 import Profile from './components/admin/Profile';
-import Home from './components/frontend/Home';
 import Login from './components/frontend/auth/Login';
 import ClientRegister from './components/frontend/auth/ClientRegister';
 import Position from './components/admin/position/Position';
@@ -21,6 +20,12 @@ import ClientList from './components/admin/client/ClientList';
 import EmployeeDetails from './components/admin/employee/EmployeeDetails';
 import ClientDetails from './components/admin/client/ClientDetails';
 import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
+
+//For client
+import ClientEmployeeList from './components/client/employee/EmployeeList';
+import ClientDashboard from './components/client/Dashboard';
+import ClientProfile from './components/client/Profile';
+import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
 
 function App() {
   return (
@@ -52,8 +57,17 @@ function App() {
 
             {/* mh employee register from admin route here */}
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
+            <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
 
           </Route>
+
+          {/* for client routes */}
+          <Route path="/client" element={<MasterLayout />} >
+            <Route path='employee-list' element={<PrivateRoute><ClientEmployeeList /></PrivateRoute>} />
+            <Route index path='dashboard' element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
+            <Route path='profile' element={<PrivateRoute><ClientProfile /></PrivateRoute>} />
+          </Route>
+
         </Routes>
       </Router>
     </div>

@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
 import { addHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 
 function AddMHEmployee() {
+
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
@@ -14,7 +17,6 @@ function AddMHEmployee() {
     const [form] = Form.useForm();
 
     const onChange = (checkedValues) => {
-        console.log('checked = ', checkedValues);
         setPermission(checkedValues);
     };
 
@@ -28,7 +30,7 @@ function AddMHEmployee() {
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             password: values?.password,
-            roleType: values?.roleType,
+            role: values?.role,
             active: active,
             permissions: permissionValue
         };
@@ -42,6 +44,8 @@ function AddMHEmployee() {
                         setError(undefined);
                         setLoading(false);
                         responseNotification("MH employee created successfully!", "success");
+
+                        navigate("/admin/mh-employee-list");
                         // form.resetFields();
                     } else if (res?.statusCode === 400) {
                         setError(res?.errors?.[0].msg);
@@ -140,25 +144,23 @@ function AddMHEmployee() {
 
                                     <div className="col-md-4">
                                         <Form.Item
-                                            label="Role Type"
-                                            name="roleType"
+                                            label="Role Name"
+                                            name="role"
                                             hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: "Role type is required",
+                                                    message: "Role name is required",
                                                 },
                                             ]}
                                         >
                                             <Select
                                                 showSearch={true}
-                                                placeholder="Please select role type"
+                                                placeholder="Please select role name"
                                                 optionFilterProp="children"
                                             >
-                                                <Option value="EMPLOYEE">EMPLOYEE</Option>
                                                 <Option value="ADMIN">ADMIN</Option>
                                                 <Option value="HR">HR</Option>
-                                                <Option value="CLIENT">CLIENT</Option>
                                                 <Option value="MARKETING">MARKETING</Option>
                                             </Select>
                                         </Form.Item>
@@ -217,10 +219,10 @@ function AddMHEmployee() {
                                                         <Checkbox value="SOURCE">Source</Checkbox>
                                                     </Col>
                                                     <Col>
-                                                        <Checkbox value="CLIENT_EMPLOYEE">Client Employee List</Checkbox>
+                                                        <Checkbox value="CLIENT_LIST">Client List</Checkbox>
                                                     </Col>
                                                     <Col>
-                                                        <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
+                                                        <Checkbox value="CLIENT_EMPLOYEE_LIST">Client Employee List</Checkbox>
                                                     </Col>
                                                     <Col>
                                                         <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
