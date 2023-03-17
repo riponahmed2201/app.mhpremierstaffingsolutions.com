@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { addHandler, fetchHandler } from '../../../api/position';
-import { Button, Drawer, Form, Select, Input, Spin } from 'antd';
+import { addHandler, fetchHandler, updatePositionHandler } from '../../../api/position';
+import { Button, Drawer, Form, Select, Input } from 'antd';
 import _ from "lodash";
+import axios from "axios";
 import Loader from '../../loadar/Loader';
+import { token } from '../../../utils/authentication';
 
 const { Option } = Select;
 function Position() {
@@ -12,17 +14,28 @@ function Position() {
   const [positions, setPositions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [getError, setError] = useState();
-  const params = new URLSearchParams(window.location.search);
   const [open, setOpen] = useState(false);
-  let serialNumber = Number(params.get("page"));
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [positionId, setPositionId] = useState();
 
   const [form] = Form.useForm();
+  const [formEdit] = Form.useForm();
+
   const showDrawer = () => {
     setOpen(true);
   };
 
   const onClose = () => {
     setOpen(false);
+  };
+
+  const showEditDrawer = (id) => {
+    setPositionId(id);
+    setIsEditModalOpen(true);
+  };
+
+  const onCloseEdit = () => {
+    setIsEditModalOpen(false);
   };
 
   const onFinish = (values) => {
@@ -56,6 +69,39 @@ function Position() {
     }
   };
 
+  // Edit Position Data
+  const onFinishEdit = (values) => {
+
+    const id = positionId;
+    const name = values?.name;
+    const active = values?.active === "YES" ? true : false;
+
+    const receivedPrintingFields = { id, name, active };
+
+    if (id) {
+      setLoading(true);
+      updatePositionHandler(receivedPrintingFields)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 200) {
+            setError(undefined);
+            setLoading(false);
+            responseNotification("Position updated successfully!", "success");
+            // refetchPositions();
+            fetchPositions();
+            onCloseEdit();
+            form.resetFields();
+          } else if (res?.statusCode === 400) {
+            setError(res?.errors?.[0].msg);
+            setLoading(false);
+          } else if (res?.statusCode === 500) {
+            setError(res?.message);
+            setLoading(false);
+          }
+        });
+    }
+  };
+
   const fetchPositions = useCallback(async () => {
     setLoading(true);
     await fetchHandler().then((res) => {
@@ -72,6 +118,32 @@ function Position() {
   useEffect(() => {
     fetchPositions();
   }, []);
+
+  const fetchSinglePosition = async () => {
+    try {
+
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/positions/${positionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token()}`,
+          },
+        }
+      );
+
+      formEdit.setFieldsValue({
+        name: res?.data?.details?.name,
+        active: res?.data?.details?.active === true ? "YES" : "NO"
+      });
+
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+
+  useEffect(() => {
+    fetchSinglePosition();
+  }, [positionId]);
+
 
   return (
     <div className="container-fluid px-4">
@@ -113,7 +185,10 @@ function Position() {
                   <td>{item?.slug}</td>
                   <td>{item?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
                   <td>
-                    <a title='Edit Position' className='btn btn-info btn-sm'>Edit</a>
+                    <Button type="primary" className='ml-5'
+                      onClick={() => showEditDrawer(item?._id)}>
+                      Edit
+                    </Button>
                   </td>
                 </tr>
               )))
@@ -125,6 +200,7 @@ function Position() {
           </tbody>
         </table>
 
+        {/* Add Drawer  */}
         <Drawer title="Add new position" width={520} closable={false} onClose={onClose} open={open}>
           <div className="drawer-toggle-wrapper">
             <div className="drawer-toggle-inner-wrapper">
@@ -132,6 +208,103 @@ function Position() {
                 className="ant-form ant-form-vertical"
                 layout="vertical"
                 onFinish={onFinish}
+                form={form}
+              >
+                <div className="col-lg-12">
+                  <div className="single-field">
+                    <Form.Item
+                      label="Position name"
+                      name="name"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter position name',
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Enter position name" className="ant-input ant-input-lg" />
+                    </Form.Item>
+                  </div>
+                </div>
+
+                <div className="col-lg-12">
+                  <div className="single-field1">
+                    <Form.Item
+                      label="Active"
+                      name="active"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: "status is required",
+                        },
+                      ]}
+                    >
+                      <Select
+                        showSearch={true}
+                        placeholder="Please Select Active Yes or No"
+                        optionFilterProp="children"
+                      >
+                        <Option value="YES">YES</Option>
+                        <Option value="NO">NO</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                </div>
+
+                {getError ? (
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="error-message">
+                        <p className="error-text-color">{getError}</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : undefined}
+
+                <div className="col-lg-12">
+                  <Form.Item>
+                    <button
+                      disabled={loading}
+                      className="btn btn-primary"
+                      type="submit"
+                    >
+                      {!loading && "Save"}
+                      {loading && (
+                        <span
+                          className="indicator-progress"
+                          style={{ display: "block" }}
+                        >
+                          Please wait...{" "}
+                          <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      )}
+                    </button>
+                  </Form.Item>
+                </div>
+              </Form>
+            </div>
+          </div>
+        </Drawer>
+
+        {/* Edit Drawer  */}
+        <Drawer
+          title="Edit position"
+          width={520}
+          closable={false}
+          onClose={onCloseEdit}
+          open={isEditModalOpen}
+        >
+
+          <div className="drawer-toggle-wrapper">
+            <div className="drawer-toggle-inner-wrapper">
+              <Form
+                className="ant-form ant-form-vertical"
+                layout="vertical"
+                onFinish={onFinishEdit}
+                form={formEdit}
+                initialValues={{ remember: true }}
               >
                 <div className="col-lg-12">
                   <div className="single-field">
