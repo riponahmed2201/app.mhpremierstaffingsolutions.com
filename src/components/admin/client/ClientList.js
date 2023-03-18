@@ -1,15 +1,51 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Select, Switch } from 'antd';
+import { Input, Space, Switch, Table } from 'antd';
 import _ from "lodash";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
 import { fetchClientListHandler } from '../../../api/employee';
 import Loader from '../../loadar/Loader';
-import { statusOptions } from '../../../common/statusOptions';
 import { token } from '../../../utils/authentication';
 
-const { Option } = Select;
+const { Search } = Input;
+
+const columns = [
+    {
+        title: '#',
+        dataIndex: 'key',
+    },
+    {
+        title: 'Restaurant Name',
+        dataIndex: 'restaurantName',
+        sorter: (a, b) => a.restaurantName.length - b.restaurantName.length,
+    },
+    {
+        title: 'Email',
+        dataIndex: 'email',
+    },
+    {
+        title: 'Phone Number',
+        dataIndex: 'phoneNumber',
+    },
+    {
+        title: 'Restaurant Address',
+        dataIndex: 'restaurantAddress',
+    },
+    {
+        title: 'Active',
+        dataIndex: 'active',
+        sorter: (a, b) => a.active.length - b.active.length,
+    },
+    {
+        title: 'Status',
+        dataIndex: 'status',
+    },
+    {
+        title: 'Action',
+        dataIndex: 'action',
+    },
+];
 
 function ClientList() {
 
@@ -28,7 +64,7 @@ function ClientList() {
         await fetchClientListHandler(limit, getName, getStatus, loc?.search).then((res) => {
             if (res?.status === 200) {
                 setLoading(false);
-                setClient(res?.data)
+                setClient(res?.data?.users);
             } else {
                 setLoading(false);
             }
@@ -43,7 +79,44 @@ function ClientList() {
         setStatus(value);
     };
 
-    const onTrimsStatusChange = useCallback(async (value, e) => {
+    //search
+    const handleSearchkeywordOnChange = (value) => {
+        setName(value);
+    };
+
+    const data1 = [];
+    _.map(getClient, (item, index) => {
+        data1.push({
+            key: index + 1,
+            restaurantName: item.restaurantName,
+            email: item.email,
+            phoneNumber: item.phoneNumber,
+            restaurantAddress: item.restaurantAddress,
+            active: item.active ? 'YES' : 'NO',
+            status: (
+                <>
+                    <Switch
+                        size="small"
+                        defaultChecked={item?.active === true}
+                        onChange={(e) => {
+                            onClientStatusChange(item?._id, e);
+                        }}
+                    />
+                </>
+            ),
+            action: (
+                <>
+                    <div className='btn-group'>
+                        <Link to={`/admin/client-details/${item._id}`} className='btn btn-primary btn-sm'>
+                            View
+                        </Link>
+                    </div>
+                </>
+            ),
+        });
+    });
+
+    const onClientStatusChange = useCallback(async (value, e) => {
         const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
         const status = e === true ? true : false;
         const id = value;
@@ -78,76 +151,37 @@ function ClientList() {
         <div className="container-fluid px-4">
             <div className='row mt-4'>
                 <div className='d-flex justify-content-between'>
-                    <h3 className='mb-4 title'>Employee List</h3>
+                    <h3 className='mb-4 title'>Client List</h3>
                 </div>
             </div>
-
             <div className='card'>
-                <table className="table table-row-bordered table-hover">
-                    <thead>
-                        <tr className="fw-bolder text-muted">
-                            <th>#</th>
-                            <th className="min-w-150px">Restaurant Name</th>
-                            <th className="min-w-150px">Email</th>
-                            <th className="min-w-150px">Phone Number</th>
-                            <th className="min-w-150px">Restaurant Address</th>
-                            <th className="min-w-140px">Active</th>
-                            <th className="min-w-140px text-center">Status</th>
-                            <th className="min-w-100px text-end">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            <tr>
-                                <td>
-                                    <Loader />
-                                </td>
-                            </tr>
-                        ) : getClient?.users?.length ? (
-                            _.map(getClient?.users, (item, index) => (
-                                <tr key={item?._id}>
-                                    <td>
-                                        {" "}
-                                        {getClient?.count *
-                                            (typeof serialNumber === "number"
-                                                ? serialNumber >= 1
-                                                    ? serialNumber - 1
-                                                    : 0
-                                                : 0) +
-                                            index +
-                                            1}
-                                    </td>
-                                    <td>{item?.restaurantName}</td>
-                                    <td>{item?.email}</td>
-                                    <td>{item?.phoneNumber}</td>
-                                    <td>{item?.restaurantAddress}</td>
-                                    <td>{item?.active === true ? "YES" : "NO"}</td>
-                                    <td className='text-center'>
-                                        <Switch
-                                            size="small"
-                                            defaultChecked={item?.active === true}
-                                            onChange={(e) => {
-                                                onTrimsStatusChange(item?._id, e);
-                                            }}
-                                        />
-                                    </td>
-                                    <td className="text-end">
-                                        <Link
-                                            className="btn btn-sm btn-info"
-                                            to='/admin/client-details'
-                                        >
-                                            View
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td>Employee not found</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+
+                <div className='d-flex flex-row-reverse'>
+                    <div className='m-2'>
+                        <Space direction="vertical">
+                            <Search
+                                placeholder="Enter client name"
+                                enterButton="Search"
+                                size="large"
+                                style={{
+                                    fontSize: 16,
+                                    color: '#c6a34f',
+                                }}
+                                onSearch={handleSearchkeywordOnChange}
+                            />
+                        </Space>
+                    </div>
+                </div>
+                <br />
+                {loading ? (
+                    <tr>
+                        <td>
+                            <Loader />
+                        </td>
+                    </tr>
+                ) : (
+                    <div className='m-2'> <Table columns={columns} dataSource={data1} /></div>)
+                }
             </div>
         </div>
     )

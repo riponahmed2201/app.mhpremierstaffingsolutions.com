@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
   return (
@@ -10,36 +11,48 @@ function Dashboard() {
       <div className="row">
         <div className="col-xl-3 col-md-6">
           <div className="card bg-primary text-white mb-4">
-            <div className="card-body">Primary Card</div>
+            <div className="card-body d-flex align-items-center justify-content-between">
+              <strong>Total Position</strong>
+              <strong>18</strong>
+            </div>
             <div className="card-footer d-flex align-items-center justify-content-between">
-              <a className="small text-white stretched-link" href="#">View Details</a>
+              <Link className="small text-white stretched-link" to="/admin/position">View Details</Link>
               <div className="small text-white"><i className="fas fa-angle-right" /></div>
             </div>
           </div>
         </div>
         <div className="col-xl-3 col-md-6">
           <div className="card bg-warning text-white mb-4">
-            <div className="card-body">Warning Card</div>
+            <div className="card-body d-flex align-items-center justify-content-between">
+              <strong>Total Client</strong>
+              <strong>10</strong>
+            </div>
             <div className="card-footer d-flex align-items-center justify-content-between">
-              <a className="small text-white stretched-link" href="#">View Details</a>
+              <Link className="small text-white stretched-link" to="/admin/client-list">View Details</Link>
               <div className="small text-white"><i className="fas fa-angle-right" /></div>
             </div>
           </div>
         </div>
         <div className="col-xl-3 col-md-6">
           <div className="card bg-success text-white mb-4">
-            <div className="card-body">Success Card</div>
+            <div className="card-body d-flex align-items-center justify-content-between">
+              <strong>Total MH Employee</strong>
+              <strong>5</strong>
+            </div>
             <div className="card-footer d-flex align-items-center justify-content-between">
-              <a className="small text-white stretched-link" href="#">View Details</a>
+              <Link className="small text-white stretched-link" to="/admin/mh-employee-list">View Details</Link>
               <div className="small text-white"><i className="fas fa-angle-right" /></div>
             </div>
           </div>
         </div>
         <div className="col-xl-3 col-md-6">
           <div className="card bg-danger text-white mb-4">
-            <div className="card-body">Danger Card</div>
+            <div className="card-body d-flex align-items-center justify-content-between">
+              <strong>Total Employee</strong>
+              <strong>10</strong>
+            </div>
             <div className="card-footer d-flex align-items-center justify-content-between">
-              <a className="small text-white stretched-link" href="#">View Details</a>
+              <Link className="small text-white stretched-link" to="/admin/employee-list">View Details</Link>
               <div className="small text-white"><i className="fas fa-angle-right" /></div>
             </div>
           </div>

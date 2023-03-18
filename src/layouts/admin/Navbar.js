@@ -30,8 +30,7 @@ function Navbar() {
                 <li className="nav-item dropdown">
                     <Link to='#' className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></Link>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><Link className="dropdown-item" to="#!">Settings</Link></li>
-                        <li><Link className="dropdown-item" to="#!">Activity Log</Link></li>
+                        <li><Link className="dropdown-item" to="/admin/profile">Profile</Link></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><button onClick={handleLogout} className="dropdown-item">Logout</button></li>
                     </ul>
