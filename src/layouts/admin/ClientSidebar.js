@@ -21,10 +21,6 @@ function ClientSidebar() {
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt" /></div>
                         Dashboard
                     </NavLink>
-                    <NavLink className="nav-link" to="/client/profile">
-                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt" /></div>
-                        Profile
-                    </NavLink>
                     <NavLink className="nav-link" to="/client/employee-list">
                         <div className="sb-nav-link-icon"><i className="fas fa-table" /></div>
                         Employee List

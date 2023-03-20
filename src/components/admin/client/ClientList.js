@@ -33,6 +33,10 @@ const columns = [
         dataIndex: 'restaurantAddress',
     },
     {
+        title: 'Discount(%)',
+        dataIndex: 'clientDiscount',
+    },
+    {
         title: 'Active',
         dataIndex: 'active',
         sorter: (a, b) => a.active.length - b.active.length,
@@ -54,9 +58,7 @@ function ClientList() {
     const [getClient, setClient] = useState([]);
     const [loading, setLoading] = useState(false);
     const [getName, setName] = useState(undefined);
-    const params = new URLSearchParams(window.location.search);
     const [getStatus, setStatus] = useState(undefined);
-    let serialNumber = Number(params.get("page"));
 
     const fetchClient = useCallback(async () => {
         setLoading(true);
@@ -92,6 +94,7 @@ function ClientList() {
             email: item.email,
             phoneNumber: item.phoneNumber,
             restaurantAddress: item.restaurantAddress,
+            clientDiscount: item.clientDiscount,
             active: item.active ? 'YES' : 'NO',
             status: (
                 <>
@@ -108,7 +111,7 @@ function ClientList() {
                 <>
                     <div className='btn-group'>
                         <Link to={`/admin/client-details/${item._id}`} className='btn btn-primary btn-sm'>
-                            View
+                            Edit
                         </Link>
                     </div>
                 </>
