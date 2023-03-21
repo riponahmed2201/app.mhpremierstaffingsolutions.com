@@ -88,16 +88,23 @@ function ClientDetails() {
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Restaurant Name</th>
+                            <td>{getSingleClientDetails?.restaurantName}</td>
+                            <th>Restaurant Address</th>
+                            <td>{getSingleClientDetails?.restaurantAddress}</td>
+                            <th>Email</th>
+                            <td>{getSingleClientDetails?.email}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>{getSingleClientDetails?.phoneNumber}</td>
+                            <th>Client ID Number</th>
+                            <td>{getSingleClientDetails?.userIdNumber}</td>
+                            <th>Source Name</th>
+                            <td>{getSingleClientDetails?.sourceName}</td>
                         </tr>
                     </thead>
-                    <tbody>
-
-                    </tbody>
                 </table>
             </div>
 

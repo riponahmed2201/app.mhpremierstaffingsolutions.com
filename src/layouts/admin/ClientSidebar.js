@@ -33,7 +33,7 @@ function ClientSidebar() {
             </div>
             <div className="sb-sidenav-footer">
                 <div className="small">Logged in as:</div>
-                Super Admin
+                {jwt_decode?.name}
             </div>
         </nav>
 
