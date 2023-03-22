@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Input, Select, Space, Switch, Table } from 'antd';
+import { Input, Space, Switch, Table } from 'antd';
 import _ from "lodash";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
@@ -52,8 +52,6 @@ function EmployeeList() {
     const [getEmployee, setEmployee] = useState([]);
     const [loading, setLoading] = useState(false);
     const [getName, setName] = useState(undefined);
-    const params = new URLSearchParams(window.location.search);
-    let serialNumber = Number(params.get("page"));
     const [getStatus, setStatus] = useState(undefined);
 
     const fetchEmployee = useCallback(async () => {

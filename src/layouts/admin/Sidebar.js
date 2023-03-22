@@ -16,11 +16,6 @@ function Sidebar() {
                         Dashboard
                     </NavLink>
 
-                    <NavLink className="nav-link" to="/admin/profile">
-                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt" /></div>
-                        Profile
-                    </NavLink>
-
                     {
                         jwt_decode?.menuPermission?.position &&
                         <NavLink className="nav-link" to="/admin/position">

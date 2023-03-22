@@ -222,9 +222,6 @@ function AddMHEmployee() {
                                                         <Checkbox value="CLIENT_LIST">Client List</Checkbox>
                                                     </Col>
                                                     <Col>
-                                                        <Checkbox value="CLIENT_EMPLOYEE_LIST">Client Employee List</Checkbox>
-                                                    </Col>
-                                                    <Col>
                                                         <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
                                                     </Col>
                                                     <Col>

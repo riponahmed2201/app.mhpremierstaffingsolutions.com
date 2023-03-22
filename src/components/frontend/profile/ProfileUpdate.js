@@ -91,11 +91,11 @@ function ProfileUpdate() {
 
   return (
     <div className='row'>
-      <div className='col-md-6 col-sm-12' style={{ background: "#f7f7fc", minHeight: '100vh' }}>
-        <div style={{ padding: "20px 30px" }}>
+      <div className='col-md-6 col-sm-12' style={{ background: "#000000", minHeight: '100vh' }}>
+        <div style={{ padding: "20px 30px", marginTop: '190px' }}>
           <br />
           <br />
-          <h2 className='class="mt-40 text-center mb-25'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h2>
+          <h4 className='class="mt-40 text-center mb-25 text-white'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
           <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
             <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='/logo.png' alt='img' />
           </div>
@@ -132,6 +132,7 @@ function ProfileUpdate() {
 
                   <div className="col-md-6">
                     <Form.Item name="profilePicture" label="Profile Picture">
+                      <p style={{ color:'gray' }}>Image must passport size with white backgound</p>
                       <ImgCrop rotate aspect={2 / 1}>
                         <Upload
                           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
