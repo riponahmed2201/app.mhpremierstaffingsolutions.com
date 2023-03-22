@@ -56,7 +56,11 @@ function ClientDetails() {
 
             setLoading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-client-discount`, receivedClientFields);
+            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-client-discount`, receivedClientFields, {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+            });
 
             if (res?.data?.statusCode === 200) {
                 setError(undefined);

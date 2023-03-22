@@ -2,7 +2,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Form, Select, Input, DatePicker, Space } from 'antd';
 
@@ -22,8 +21,6 @@ const { Option } = Select;
 
 function EmployeeDetails() {
 
-    const navigate = useNavigate();
-
     const { id } = useParams();
 
     const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
@@ -36,6 +33,7 @@ function EmployeeDetails() {
     const [getDateOfBirth, setDateOfBirth] = useState(undefined);
 
     const [form] = Form.useForm();
+    const [formEdit] = Form.useForm();
 
     //Fetch refer person list for dropdown
     const fetchSingleEmployeeData = useCallback(async () => {
@@ -50,9 +48,8 @@ function EmployeeDetails() {
                 }
             );
 
-            form.setFieldsValue({
-
-                //Employee Basic Information
+            //Employee Basic Information
+            formEdit.setFieldsValue({
                 name: res?.data?.details.name,
                 email: res?.data?.details.email,
                 phoneNumber: res?.data?.details.phoneNumber,
@@ -70,8 +67,10 @@ function EmployeeDetails() {
                 skills: res?.data?.details.skills,
                 sourceId: res?.data?.details.sourceId,
                 referPersonId: res?.data?.details.referPersonId,
+            });
 
-                //bank information
+            //bank information
+            form.setFieldsValue({
                 bankName: res?.data?.details.bankName,
                 accountNumber: res?.data?.details.accountNumber,
                 routingNumber: res?.data?.details.routingNumber,
@@ -168,8 +167,9 @@ function EmployeeDetails() {
     const onFinishBasicInfoUpdate = async (values) => {
 
         const dateOfBirthFromOnchanage = getDateOfBirth ? moment(getDateOfBirth).format("YYYY-MM-DD").valueOf() : undefined;
-
+        console.log("values: ", values);
         const receivedEmployeeFields = {
+            id: id,
             name: values?.name,
             email: values?.email,
             phoneNumber: values?.phoneNumber,
@@ -191,11 +191,12 @@ function EmployeeDetails() {
             // values.dateOfBirth
         };
 
+        console.log("receivedEmployeeFields: ", receivedEmployeeFields);
         try {
 
             setLoading(true);
 
-            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields);
+            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields);
 
             if (res?.data?.statusCode === 200) {
                 setError(undefined);
@@ -274,7 +275,7 @@ function EmployeeDetails() {
                         className="ant-form ant-form-vertical"
                         layout="vertical"
                         onFinish={onFinishBasicInfoUpdate}
-                        form={form}
+                        form={formEdit}
                     >
                         <div className='col-12'>
                             <div className='row'>
