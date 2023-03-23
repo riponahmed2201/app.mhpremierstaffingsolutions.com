@@ -29,6 +29,8 @@ function EmployeeDetails() {
     const [position, setPosition] = useState([]);
     const [sourceFrom, setSourceFrom] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [bankUpdateLoading, setBankUpdateLoading] = useState(false);
+    const [basicInfoUpdateloading, setBasicInfoUpdateloading] = useState(false);
     const [getError, setError] = useState();
     const [getDateOfBirth, setDateOfBirth] = useState(undefined);
 
@@ -106,26 +108,30 @@ function EmployeeDetails() {
 
         try {
 
-            setLoading(true);
+            setBankUpdateLoading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields);
+            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields, {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+            });
 
             if (res?.data?.statusCode === 200) {
                 setError(undefined);
-                setLoading(false);
+                setBankUpdateLoading(false);
                 responseNotification("Employee bank updated successfully!", "success");
 
             } else if (res?.data?.statusCode === 400) {
                 setError(res?.data?.errors?.[0].msg);
-                setLoading(false);
+                setBankUpdateLoading(false);
             } else if (res?.data?.statusCode === 500) {
                 setError(res?.message);
-                setLoading(false);
+                setBankUpdateLoading(false);
             }
 
         } catch (error) {
             setError(error?.response?.data?.errors?.[0].msg);
-            setLoading(false);
+            setBankUpdateLoading(false);
         }
     };
 
@@ -167,7 +173,7 @@ function EmployeeDetails() {
     const onFinishBasicInfoUpdate = async (values) => {
 
         const dateOfBirthFromOnchanage = getDateOfBirth ? moment(getDateOfBirth).format("YYYY-MM-DD").valueOf() : undefined;
-        console.log("values: ", values);
+        // console.log("values: ", values);
         const receivedEmployeeFields = {
             id: id,
             name: values?.name,
@@ -191,30 +197,34 @@ function EmployeeDetails() {
             // values.dateOfBirth
         };
 
-        console.log("receivedEmployeeFields: ", receivedEmployeeFields);
+        // console.log("receivedEmployeeFields: ", receivedEmployeeFields);
         try {
 
-            setLoading(true);
+            setBasicInfoUpdateloading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields);
+            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields, {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+            });
 
             if (res?.data?.statusCode === 200) {
                 setError(undefined);
-                setLoading(false);
+                setBasicInfoUpdateloading(false);
                 responseNotification("Employee information updated successfully!", "success");
                 // form.resetFields();
 
             } else if (res?.data?.statusCode === 400) {
                 setError(res?.data?.errors?.[0].msg);
-                setLoading(false);
+                setBasicInfoUpdateloading(false);
             } else if (res?.data?.statusCode === 500) {
                 setError(res?.message);
-                setLoading(false);
+                setBasicInfoUpdateloading(false);
             }
 
         } catch (error) {
             setError(error?.response?.data?.errors?.[0].msg);
-            setLoading(false);
+            setBasicInfoUpdateloading(false);
         }
     };
 
@@ -643,13 +653,13 @@ function EmployeeDetails() {
                         <div className="col-md-4">
                             <Form.Item>
                                 <button
-                                    disabled={loading}
+                                    disabled={basicInfoUpdateloading}
                                     className="btn"
                                     style={{ background: '#C6A34F', color: 'white' }}
                                     type="submit"
                                 >
-                                    {!loading && "Update"}
-                                    {loading && (
+                                    {!basicInfoUpdateloading && "Update"}
+                                    {basicInfoUpdateloading && (
                                         <span
                                             className="indicator-progress"
                                             style={{ display: "block" }}
@@ -788,13 +798,13 @@ function EmployeeDetails() {
                             <div className="col-md-6">
                                 <Form.Item>
                                     <button
-                                        disabled={loading}
+                                        disabled={bankUpdateLoading}
                                         className="btn"
                                         style={{ background: '#C6A34F', color: 'white' }}
                                         type="submit"
                                     >
-                                        {!loading && "Update Bank"}
-                                        {loading && (
+                                        {!bankUpdateLoading && "Update Bank"}
+                                        {bankUpdateLoading && (
                                             <span
                                                 className="indicator-progress"
                                                 style={{ display: "block" }}
