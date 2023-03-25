@@ -39,22 +39,21 @@ function EmployeeRegister() {
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             countryName: values?.countryName,
-            dateOfBirth: dateOfBirthFromOnchanage,
-            emmergencyContact: values?.emmergencyContact,
-            gender: values?.gender,
-            higherEducation: values?.higherEducation,
             languages: values?.languages,
-            licensesNo: values?.licensesNo,
-            permanentAddress: values?.permanentAddress,
             positionId: values?.positionId,
-            presentAddress: values?.presentAddress,
-            referPersonId: values?.referPersonId,
-            skills: values?.skills,
-            sourceId: values?.sourceId,
-            employeeExperience: Number(values?.employeeExperience)
-
-            // values.dateOfBirth
         };
+
+        if (values?.gender) receivedEmployeeFields.gender = values?.gender;
+        if (values?.sourceId) receivedEmployeeFields.sourceId = values?.sourceId;
+        if (values?.employeeExperience) receivedEmployeeFields.employeeExperience = values?.employeeExperience;
+        if (values?.referPersonId) receivedEmployeeFields.referPersonId = values?.referPersonId;
+        if (values?.presentAddress) receivedEmployeeFields.presentAddress = values?.presentAddress;
+        if (values?.permanentAddress) receivedEmployeeFields.permanentAddress = values?.permanentAddress;
+        if (values?.licensesNo) receivedEmployeeFields.licensesNo = values?.licensesNo;
+        if (values?.higherEducation) receivedEmployeeFields.higherEducation = values?.higherEducation;
+        if (values?.emmergencyContact) receivedEmployeeFields.emmergencyContact = values?.emmergencyContact;
+        if (values?.dateOfBirth) receivedEmployeeFields.dateOfBirth = dateOfBirthFromOnchanage;
+        if (values?.countryName) receivedEmployeeFields.countryName = values?.countryName;
 
         try {
 
@@ -241,7 +240,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter gender',
                                                 },
                                             ]}
@@ -263,7 +261,6 @@ function EmployeeRegister() {
                                             name="dateOfBirth"
                                             rules={[
                                                 {
-                                                    // required: true,
                                                     message: 'Please enter date of birth',
                                                 },
                                             ]}
@@ -296,7 +293,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter present address',
                                                 },
                                             ]}
@@ -312,7 +308,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter your permanent address',
                                                 },
                                             ]}
@@ -328,7 +323,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter country name',
                                                 },
                                             ]}
@@ -353,7 +347,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter higher education',
                                                 },
                                             ]}
@@ -369,7 +362,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter licenses no',
                                                 },
                                             ]}
@@ -385,7 +377,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter emmergency contact',
                                                 },
                                             ]}
@@ -401,7 +392,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter employee experience',
                                                 },
                                             ]}
@@ -444,7 +434,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter skills',
                                                 },
                                             ]}
@@ -470,7 +459,6 @@ function EmployeeRegister() {
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    required: true,
                                                     message: 'Please enter how you know about us',
                                                 },
                                             ]}
