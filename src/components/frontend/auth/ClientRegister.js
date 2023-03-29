@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from "yup";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useFormik } from 'formik';
+
+import './Register.css';
 
 function ClientRegister() {
 
@@ -88,12 +90,12 @@ function ClientRegister() {
                         <nav className="navbar navbar-expand-lg navbar-light">
                         <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item active">
-                                        <Link className="nav-link" to="/client-register">Client Register</Link>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
                                     </li>
 
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="/employee-register">Employee Register</Link>
+                                        <NavLink className="nav-link" to="/employee-register">Employee Register</NavLink>
                                     </li>
                                 </ul>
                             </div>

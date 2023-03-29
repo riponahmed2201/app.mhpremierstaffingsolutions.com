@@ -47,6 +47,18 @@ export const addHandler = async (receivedEmployeeFields) => {
     return res;
 };
 
+//employee register api call
+export const employeeRegisterHandler = async (receivedBlogFields) => {
+    const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/users/employee-register`,
+        {
+            method: "POST",
+            body: receivedBlogFields,
+        }
+    );
+    return res;
+};
+
 //HR fetch api call
 export const fetchEmployeeListHandler = async (limit, getName, getStatus, locationsearch) => {
 
