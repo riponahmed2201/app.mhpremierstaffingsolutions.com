@@ -1,27 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { Form, Select, Input, DatePicker, Space } from 'antd';
-import moment from "moment";
+import { Form, Select, Input, Upload, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 import { responseNotification } from '../../../utils/notifcation';
-import { fetchSkillListForDropdownHandler } from '../../../api/skill';
 import { fetchPositionListForDropdownHandler } from '../../../api/position';
-import { fetchSourceListForDropdownHandler } from '../../../api/source';
-import { fetchReferPersonListForDropdownHandler } from '../../../api/employee';
-import { staticLanguageName } from '../../../utils/static/languageList';
 import CountryWiseValidationRules from '../../../utils/static/countryList';
 
 const { Option } = Select;
 
 function EmployeeRegister() {
 
-    const [referPerson, setReferPerson] = useState([]);
-    const [skill, setSkill] = useState([]);
     const [position, setPosition] = useState([]);
-    const [sourceFrom, setSourceFrom] = useState([]);
 
-    const [getDateOfBirth, setDateOfBirth] = useState(undefined);
+    const [summaryPdf, setSummaryPdf] = useState([]);
+    const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
 
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
@@ -32,70 +26,52 @@ function EmployeeRegister() {
 
     const onFinish = async (values) => {
 
-        const dateOfBirthFromOnchanage = getDateOfBirth ? moment(getDateOfBirth).format("YYYY-MM-DD").valueOf() : undefined;
+        if (true) {
+            try {
 
-        const receivedEmployeeFields = {
-            name: values?.name,
-            email: values?.email,
-            phoneNumber: values?.phoneNumber,
-            countryName: values?.countryName,
-            languages: values?.languages,
-            positionId: values?.positionId,
-        };
+                setLoading(true);
 
-        if (values?.gender) receivedEmployeeFields.gender = values?.gender;
-        if (values?.sourceId) receivedEmployeeFields.sourceId = values?.sourceId;
-        if (values?.employeeExperience) receivedEmployeeFields.employeeExperience = values?.employeeExperience;
-        if (values?.referPersonId) receivedEmployeeFields.referPersonId = values?.referPersonId;
-        if (values?.presentAddress) receivedEmployeeFields.presentAddress = values?.presentAddress;
-        if (values?.permanentAddress) receivedEmployeeFields.permanentAddress = values?.permanentAddress;
-        if (values?.licensesNo) receivedEmployeeFields.licensesNo = values?.licensesNo;
-        if (values?.higherEducation) receivedEmployeeFields.higherEducation = values?.higherEducation;
-        if (values?.emmergencyContact) receivedEmployeeFields.emmergencyContact = values?.emmergencyContact;
-        if (values?.dateOfBirth) receivedEmployeeFields.dateOfBirth = dateOfBirthFromOnchanage;
-        if (values?.countryName) receivedEmployeeFields.countryName = values?.countryName;
+                const file = new FormData();
 
-        try {
+                file.append("firstName", values?.firstName);
+                file.append("lastName", values?.lastName);
+                file.append("email", values?.email);
+                file.append("phoneNumber", values?.phoneNumber);
+                file.append("countryName", values?.countryName);
+                file.append("positionId", values?.positionId);
+                file.append("cv", summaryPdf?.[0].originFileObj);
+                console.log("file: ", file);
+                const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, file);
 
-            setLoading(true);
+                if (res?.data?.statusCode === 201) {
+                    setError(undefined);
+                    setLoading(false);
+                    responseNotification("Employee registered successfully!", "success");
+                    // form.resetFields();
+                    setSummaryPdf([]);
+                    navigate(`/`);
 
-            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, receivedEmployeeFields);
+                } else if (res?.data?.statusCode === 400) {
 
-            if (res?.data?.statusCode === 201) {
-                setError(undefined);
-                setLoading(false);
-                responseNotification("Employee registered successfully!", "success");
-                // form.resetFields();
+                    responseNotification(
+                        "Bad request please upload valid file or check you internet",
+                        "warning"
+                    );
+                    setError(res?.data?.errors?.[0].msg);
+                    setLoading(false);
 
-                navigate(`/employee-profile-update/${res?.data?.details._id}`);
 
-            } else if (res?.data?.statusCode === 400) {
-                setError(res?.data?.errors?.[0].msg);
-                setLoading(false);
-            } else if (res?.data?.statusCode === 500) {
-                setError(res?.message);
+                } else if (res?.data?.statusCode === 500) {
+                    setError(res?.message);
+                    setLoading(false);
+                }
+
+            } catch (error) {
+                setError(error?.response?.data?.errors?.[0].msg);
                 setLoading(false);
             }
-
-        } catch (error) {
-            setError(error?.response?.data?.errors?.[0].msg);
-            setLoading(false);
         }
     };
-
-    //Fetch refer person list for dropdown
-    const fetchReferPersonData = useCallback(async () => {
-        await fetchReferPersonListForDropdownHandler().then((res) => {
-            setReferPerson(res?.data?.users);
-        });
-    }, []);
-
-    //Fetch skill list for dropdown
-    const fetchSkillData = useCallback(async () => {
-        await fetchSkillListForDropdownHandler().then((res) => {
-            setSkill(res?.data?.skills);
-        });
-    }, []);
 
     //Fetch position list for dropdown
     const fetchPositionData = useCallback(async () => {
@@ -104,23 +80,19 @@ function EmployeeRegister() {
         });
     }, []);
 
-    //Fetch source list for dropdown
-    const fetchSourceFromData = useCallback(async () => {
-        await fetchSourceListForDropdownHandler().then((res) => {
-            setSourceFrom(res?.data?.sources);
-        });
+    useEffect(() => {
+        fetchPositionData();
     }, []);
 
-    useEffect(() => {
-        fetchSkillData();
-        fetchPositionData();
-        fetchSourceFromData();
-        fetchReferPersonData();
-    }, []);
+    //CV onchange
+    const summaryPdfChange = ({ fileList: newFileList }) => {
+        setSummaryPdf(newFileList);
+        setSummaryPdfFileShow(newFileList[0]?.originFileObj?.name);
+    };
 
     return (
         <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#000000" }}>
+            <div className='col-md-6 col-sm-12' style={{ background: "#000000", height: '100vh' }}>
                 <div style={{ padding: "20px 30px", marginTop: '190px' }}>
                     <br />
                     <br />
@@ -138,11 +110,11 @@ function EmployeeRegister() {
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
                                     <li className="nav-item active">
-                                        <Link className="nav-link" to="/client-register">Client Register</Link>
+                                        <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
                                     </li>
 
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="/employee-register">Employee Register</Link>
+                                        <NavLink className="nav-link" to="/employee-register">Employee Register</NavLink>
                                     </li>
                                 </ul>
                             </div>
@@ -162,17 +134,33 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
-                                            label="Name"
-                                            name="name"
+                                            label="First Name"
+                                            name="firstName"
                                             hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please enter name',
+                                                    message: 'Please enter first name',
                                                 },
                                             ]}
                                         >
-                                            <Input placeholder="Enter name" className="ant-input ant-input-lg" />
+                                            <Input placeholder="Enter fisrt name" className="ant-input ant-input-lg" />
+                                        </Form.Item>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Last Name"
+                                            name="lastName"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter last name',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter fisrt name" className="ant-input ant-input-lg" />
                                         </Form.Item>
                                     </div>
 
@@ -210,19 +198,19 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
-                                            label="Position"
+                                            label="Job Type"
                                             name="positionId"
                                             hasFeedback
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please enter position',
+                                                    message: 'Please enter job type',
                                                 },
                                             ]}
                                         >
                                             <Select
                                                 showSearch={true}
-                                                placeholder="Please Select position"
+                                                placeholder="Please Select job type"
                                                 optionFilterProp="children"
                                             >
                                                 {position?.map((item, index) => (
@@ -235,101 +223,19 @@ function EmployeeRegister() {
 
                                     <div className="col-md-6">
                                         <Form.Item
-                                            label="Gender"
-                                            name="gender"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter gender',
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                showSearch={true}
-                                                placeholder="Please Select Gender"
-                                                optionFilterProp="children"
-                                            >
-                                                <Option value="MALE">MALE</Option>
-                                                <Option value="FEMALE">FEMALE</Option>
-                                            </Select>
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Date Of Birth"
-                                            name="dateOfBirth"
-                                            rules={[
-                                                {
-                                                    message: 'Please enter date of birth',
-                                                },
-                                            ]}
-                                        >
-                                            <Space direction="vertical" style={{
-                                                width: '100%',
-                                            }}>
-
-                                                <DatePicker
-                                                    style={{ width: '100%' }}
-                                                    id="dateOfBirth"
-                                                    placeholder="Date of Birth"
-                                                    onChange={(value) => {
-                                                        setDateOfBirth(
-                                                            moment(value)
-                                                                .format("YYYY-MM-DD")
-                                                                .valueOf()
-                                                        );
-                                                    }}
-                                                />
-
-                                            </Space>
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Present Address"
-                                            name="presentAddress"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter present address',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter present address" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Permanent Address"
-                                            name="permanentAddress"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter your permanent address',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter your permanent address" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Country Name"
+                                            label="Your Location"
                                             name="countryName"
                                             hasFeedback
                                             rules={[
                                                 {
-                                                    message: 'Please enter country name',
+                                                    required: true,
+                                                    message: 'Please enter your location',
                                                 },
                                             ]}
                                         >
                                             <Select
                                                 showSearch={true}
-                                                placeholder="Please Select Country Name"
+                                                placeholder="Please Select Location"
                                                 optionFilterProp="children"
                                             >
                                                 {CountryWiseValidationRules?.map((item, index) => (
@@ -341,158 +247,30 @@ function EmployeeRegister() {
                                     </div>
 
                                     <div className="col-md-6">
-                                        <Form.Item
-                                            label="Higher Education"
-                                            name="higherEducation"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter higher education',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter higher education" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Licenses No"
-                                            name="licensesNo"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter licenses no',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter licenses no" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Emmergency Contact"
-                                            name="emmergencyContact"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter emmergency contact',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter emmergency contact" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Employee Experience"
-                                            name="employeeExperience"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter employee experience',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter employee experience" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Languages"
-                                            name="languages"
-                                            hasFeedback
+                                        <Form.Item name="summaryPdf"
+                                            className="p-1 m-0"
+                                            label="Curriculam Vitea (CV)"
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please enter languages',
+                                                    message: 'Please enter country name',
                                                 },
                                             ]}
                                         >
-                                            <Select
-                                                mode="multiple"
-                                                showSearch={true}
-                                                placeholder="Please Select languages"
-                                                optionFilterProp="children"
+                                            <Upload
+                                                listType="picture"
+                                                defaultFileList={[...summaryPdf]}
+                                                fileList={summaryPdf}
+                                                onChange={summaryPdfChange}
+                                                maxCount={1}
+                                                accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
                                             >
-                                                {staticLanguageName?.map((item, index) => (
-                                                    <Option key={index} value={item?.name}>{item?.name}</Option>
-                                                ))}
+                                                <Button icon={<UploadOutlined />}>
+                                                    {" "}
+                                                    {!summaryPdfFileShow ? "Upload" : "Uploaded"}{" "}
+                                                </Button>
+                                            </Upload>
 
-                                            </Select>
-                                        </Form.Item>
-
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Skills"
-                                            name="skills"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter skills',
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                mode="multiple"
-                                                showSearch={true}
-                                                placeholder="Please Select Skill"
-                                                optionFilterProp="children"
-                                            >
-                                                {skill?.map((skillName, index) => (
-                                                    <Option key={index} value={skillName?._id}>{skillName?.name}</Option>
-                                                ))}
-                                            </Select>
-                                        </Form.Item>
-
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="How You Know About Us?"
-                                            name="sourceId"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter how you know about us',
-                                                },
-                                            ]}
-                                        >
-
-                                            <Select
-                                                showSearch={true}
-                                                placeholder="Please Select"
-                                                optionFilterProp="children"
-                                            >
-
-                                                {sourceFrom?.map((item, index) => (
-                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
-                                                ))}
-
-                                            </Select>
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Refer Person name"
-                                            name="referPersonId"
-                                            hasFeedback
-                                        >
-                                            <Select
-                                                showSearch={true}
-                                                placeholder="Please Select Refer Person"
-                                                optionFilterProp="children"
-                                            >
-                                                {referPerson?.map((refer, index) => (
-                                                    <Option key={index} value={refer?._id}>{refer?.name}</Option>
-                                                ))}
-                                            </Select>
                                         </Form.Item>
                                     </div>
 
@@ -509,6 +287,7 @@ function EmployeeRegister() {
                                 </div>
                             ) : undefined}
 
+                            <br />
                             <div className="col-md-6">
                                 <Form.Item>
                                     <button
