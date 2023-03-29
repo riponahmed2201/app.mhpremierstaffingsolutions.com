@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Form, Select, Input, Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 import { responseNotification } from '../../../utils/notifcation';
 import { fetchPositionListForDropdownHandler } from '../../../api/position';
 import CountryWiseValidationRules from '../../../utils/static/countryList';
+import { employeeRegisterHandler } from '../../../api/employee';
+
+import './Register.css';
 
 const { Option } = Select;
 
@@ -27,49 +29,46 @@ function EmployeeRegister() {
     const onFinish = async (values) => {
 
         if (true) {
-            try {
 
-                setLoading(true);
+            setLoading(true);
 
-                const file = new FormData();
+            const file = new FormData();
+            file.append("firstName", values?.firstName);
+            file.append("lastName", values?.lastName);
+            file.append("email", values?.email);
+            file.append("phoneNumber", values?.phoneNumber);
+            file.append("countryName", values?.countryName);
+            file.append("positionId", values?.positionId);
+            file.append("cv", summaryPdf?.[0].originFileObj);
 
-                file.append("firstName", values?.firstName);
-                file.append("lastName", values?.lastName);
-                file.append("email", values?.email);
-                file.append("phoneNumber", values?.phoneNumber);
-                file.append("countryName", values?.countryName);
-                file.append("positionId", values?.positionId);
-                file.append("cv", summaryPdf?.[0].originFileObj);
-                console.log("file: ", file);
-                const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/employee-register`, file);
+            await employeeRegisterHandler(file)
+                .then((res) => res.json())
+                .then((res) => {
+                    if (res.statusCode === 201) {
+                        responseNotification("Employee registered successfully!", "success");
+                        // form.resetFields();
+                        setSummaryPdf([]);
 
-                if (res?.data?.statusCode === 201) {
-                    setError(undefined);
+                        navigate('/employee-welcome');
+
+                        // window.location.reload();
+                    } else if (res?.statusCode === 400) {
+                        // responseNotification(
+                        //     "Bad request please upload valid file or check you internet",
+                        //     "warning"
+                        // );
+                        console.log("response: ", res);
+                        setError(res?.message);
+                        setLoading(false);
+                    } else {
+                        setLoading(false);
+                        setError(res?.message);
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
                     setLoading(false);
-                    responseNotification("Employee registered successfully!", "success");
-                    // form.resetFields();
-                    setSummaryPdf([]);
-                    navigate(`/`);
-
-                } else if (res?.data?.statusCode === 400) {
-
-                    responseNotification(
-                        "Bad request please upload valid file or check you internet",
-                        "warning"
-                    );
-                    setError(res?.data?.errors?.[0].msg);
-                    setLoading(false);
-
-
-                } else if (res?.data?.statusCode === 500) {
-                    setError(res?.message);
-                    setLoading(false);
-                }
-
-            } catch (error) {
-                setError(error?.response?.data?.errors?.[0].msg);
-                setLoading(false);
-            }
+                });
         }
     };
 
@@ -109,7 +108,7 @@ function EmployeeRegister() {
 
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item active">
+                                    <li className="nav-item">
                                         <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
                                     </li>
 
@@ -277,6 +276,7 @@ function EmployeeRegister() {
                                 </div>
                             </div>
 
+                            <br />
                             {getError ? (
                                 <div className="row">
                                     <div className="col-lg-12">
