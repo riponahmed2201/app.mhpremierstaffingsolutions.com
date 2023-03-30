@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from "yup";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Form, Select, Input } from 'antd';
 import axios from "axios";
 import { useFormik } from 'formik';
 
 import './Register.css';
+import { clientRegisterHandler } from '../../../api/client';
+import { responseNotification } from '../../../utils/notifcation';
+
+const { Option } = Select;
 
 function ClientRegister() {
 
     const [referPerson, setReferPerson] = useState([]);
     const [sourceFrom, setSourceFrom] = useState([]);
+
+    const [loading, setLoading] = useState(false);
+    const [getError, setError] = useState();
+
+    const [form] = Form.useForm();
 
     const navigate = useNavigate();
 
@@ -72,13 +82,56 @@ function ClientRegister() {
         fetchSourceFromData();
     }, []);
 
+    const onFinish = async (values) => {
+
+        const receivedClientRegisterFields = {
+            restaurantName: values?.restaurantName,
+            restaurantAddress: values?.restaurantAddress,
+            sourceId: values?.sourceId,
+            referPersonId: values?.referPersonId,
+            phoneNumber: values?.phoneNumber,
+            email: values?.email,
+            password: values?.password,
+            lat: '123.23122242',
+            long: '4545.354545',
+        };
+
+        if (receivedClientRegisterFields) {
+
+            setLoading(true);
+
+            await clientRegisterHandler(receivedClientRegisterFields)
+                .then((res) => res.json())
+                .then((res) => {
+                    if (res.statusCode === 201) {
+                        responseNotification("Client registered successfully!", "success");
+                        form.resetFields();
+
+                        navigate('/login')
+
+                        // window.location.reload();
+                    } else if (res?.statusCode === 400) {
+                        setError(res?.message);
+                        setLoading(false);
+                    } else {
+                        setLoading(false);
+                        setError(res?.message);
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setLoading(false);
+                });
+        }
+    };
+
     return (
         <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#000000", minHeight: "100vh" }}>
+            <div className='col-md-6 col-sm-12' style={{ background: "#343a40", minHeight: "100vh" }}>
                 <div style={{ padding: "20px 30px", marginTop: '190px' }} >
                     <br />
                     <br />
-                    <h4 className='class="mt-40 text-center mb-25 text-white'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
+                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#c6a34f" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
                     <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
                         <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
@@ -88,7 +141,7 @@ function ClientRegister() {
                 <div className='bg-white'>
                     <div className="container-fluid">
                         <nav className="navbar navbar-expand-lg navbar-light">
-                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
@@ -102,106 +155,185 @@ function ClientRegister() {
                         </nav>
                         <br />
 
-                        <h4 className='text-left mb-4'>Client Register Here</h4>
-
-                        <form onSubmit={formik.handleSubmit}>
+                        <h5 className='text-left mb-4'>Client Register Here</h5>
+                        <Form
+                            className="ant-form ant-form-vertical"
+                            layout="vertical"
+                            onFinish={onFinish}
+                            form={form}
+                        >
                             <div className='col-12'>
                                 <div className='row'>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="restaurantName"> <span className='text-danger'>*</span> Restaurant name</label>
-                                        <input type="text" className='form-control mt-2'
-                                            placeholder="Enter your restaurant name"
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Restaurant Name"
                                             name="restaurantName"
-                                            onChange={formik.handleChange} value={formik.values.restaurantName} />
-
-                                        {formik.touched.restaurantName && formik.errors.restaurantName &&
-                                            <span style={{ color: 'red' }}>{formik.errors.restaurantName}</span>}
-
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter restaurant name',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter restaurant name" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="restaurantAddress"><span className='text-danger'>*</span>Restaurant address</label>
-                                        <input type="text" className='form-control mt-2' name='restaurantAddress'
-                                            onChange={formik.handleChange} value={formik.values.restaurantAddress}
-                                            placeholder="Enter your restaurant address" />
-
-                                        {formik.touched.restaurantAddress && formik.errors.restaurantAddress &&
-                                            <span style={{ color: 'red' }}>{formik.errors.restaurantAddress}</span>}
-
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Restaurant Address"
+                                            name="restaurantAddress"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter restaurant address',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter restaurant address" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="sourceFrom"><span className='text-danger'>*</span>Where do you find us?</label>
-                                        <select name='sourceFrom'
-                                            onChange={formik.handleChange} value={formik.values.sourceFrom} className="form-select mt-2">
-                                            <option value="">Please select</option>
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Where do you find us?"
+                                            name="sourceId"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter where do you find us?',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select"
+                                                optionFilterProp="children"
+                                            >
+                                                {sourceFrom?.map((item, index) => (
+                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                                ))}
 
-                                            {sourceFrom?.map((item, index) => (
-                                                <option key={index} value={item?._id}>{item?.name}</option>
-                                            ))}
-
-                                        </select>
-
-
-                                        {formik.touched.sourceFrom && formik.errors.sourceFrom &&
-                                            <span style={{ color: 'red' }}>{formik.errors.sourceFrom}</span>}
-
+                                            </Select>
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="referPersonName"><span className='text-white'>*</span>Refer from</label>
-                                        <select name='referPersonId'
-                                            onChange={formik.handleChange} value={formik.values.referPersonId} className="form-select mt-2">
-                                            <option value="">Please select</option>
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Refer Person Name"
+                                            name="referPersonId"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    message: 'Please enter refer person name',
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select"
+                                                optionFilterProp="children"
+                                            >
+                                                {referPerson?.map((item, index) => (
+                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                                ))}
 
-                                            {referPerson?.map((refer, index) => (
-                                                <option key={index} value={refer?._id}>{refer?.name}</option>
-                                            ))}
-
-                                        </select>
-
-                                        {formik.touched.referPersonId && formik.errors.referPersonId &&
-                                            <span style={{ color: 'red' }}>{formik.errors.referPersonId}</span>}
+                                            </Select>
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="email"><span className='text-danger'>*</span>Email</label>
-                                        <input type="text" onChange={formik.handleChange} name='email' value={formik.values.email}
-                                            className='form-control mt-2' placeholder="Enter your email" id="email" />
-
-                                        {formik.touched.email && formik.errors.email &&
-                                            <span style={{ color: 'red' }}>{formik.errors.email}</span>}
-
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Email"
+                                            name="email"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter email',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter email" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="phoneNumber"><span className='text-danger'>*</span>Phone number</label>
-                                        <input type="text" className='form-control mt-2' name='phoneNumber' placeholder="Enter your phone number"
-                                            onChange={formik.handleChange} value={formik.values.phoneNumber} />
-
-                                        {formik.touched.phoneNumber && formik.errors.phoneNumber &&
-                                            <span style={{ color: 'red' }}>{formik.errors.phoneNumber}</span>}
-
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Phone number"
+                                            name="phoneNumber"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter phone number',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter phone number" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
 
-                                    <div className="col-md-6 form-group mb-3">
-                                        <label htmlFor="password"><span className='text-danger'>*</span>Password</label>
-                                        <input type="password" className='form-control mt-2' name='password' placeholder="Enter your password"
-                                            onChange={formik.handleChange} value={formik.values.password} />
-                                        {formik.touched.password && formik.errors.password && <span style={{ color: 'red' }}>{formik.errors.password}</span>}
+                                    <div className="col-md-6">
+                                        <Form.Item
+                                            label="Password"
+                                            name="password"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Please enter password',
+                                                },
+                                            ]}
+                                        >
+                                            <Input placeholder="Enter password" className="ant-input ant-input-lg" />
+                                        </Form.Item>
                                     </div>
                                 </div>
                             </div>
+
                             <br />
-                            <div className="col-12">
-                                <button type="submit" className="btn" style={{ background: '#C6A34F', color: 'white' }}>Register</button>
+                            {getError ? (
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <div className="error-message">
+                                            <p className="text-danger">{getError}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : undefined}
+
+                            <div className="col-md-6">
+                                <Form.Item>
+                                    <button
+                                        disabled={loading}
+                                        className="btn"
+                                        style={{ background: '#C6A34F', color: 'white' }}
+                                        type="submit"
+                                    >
+                                        {!loading && "Register"}
+                                        {loading && (
+                                            <span
+                                                className="indicator-progress"
+                                                style={{ display: "block" }}
+                                            >
+                                                Please wait...{" "}
+                                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        )}
+                                    </button>
+                                </Form.Item>
                             </div>
-                            <div className='mb-3 mt-3 text-left'>
-                                <p> Already have an account? <Link to="/login">Sign in now</Link></p>
-                            </div>
-                        </form>
+                        </Form>
+                        <div className='mb-3 mt-3 text-left'>
+                            <p> Already have an account? <Link to="/login">Sign in now</Link></p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

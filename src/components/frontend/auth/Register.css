@@ -1,5 +1,10 @@
-.active {
-    background-color: #c6a34f;
-    color: white;
+/* .nav-link.active {
+    color: #c6a34f;
+    font-weight: bold;
+} */
+
+.navbar-light .navbar-nav .show>.nav-link,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #c6a34f;
     font-weight: bold;
 }
