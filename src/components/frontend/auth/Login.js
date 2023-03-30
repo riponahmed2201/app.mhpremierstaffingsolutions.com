@@ -78,7 +78,7 @@ function Login() {
                         </div>
                     </div>
                     <div className='mb-3 mt-3 text-end'>
-                        <Link to="forgot-password">Forgot Password?</Link>
+                        <Link to="/forgot-password">Forgot Password?</Link>
                     </div>
 
                     {getError ? (
@@ -103,7 +103,7 @@ function Login() {
                                 className="indicator-progress"
                                 style={{ display: "block" }}
                             >
-                                Please wait...{" "}
+                                Please wait...
                                 <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
                         )}

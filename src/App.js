@@ -11,8 +11,8 @@ import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
 import EmployeeRegister from './components/frontend/auth/EmployeeRegister';
-import ProfileUpdate from './components/frontend/profile/ProfileUpdate';
-import CertificateUpdate from './components/frontend/profile/CertificateUpdate';
+// import ProfileUpdate from './components/frontend/profile/ProfileUpdate';
+// import CertificateUpdate from './components/frontend/profile/CertificateUpdate';
 import EmployeeRegisterWelcome from './components/frontend/profile/EmployeeRegisterWelcome';
 import EmployeeList from './components/admin/employee/EmployeeList';
 import ClientList from './components/admin/client/ClientList';
@@ -24,6 +24,7 @@ import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
 import ClientEmployeeList from './components/client/employee/EmployeeList';
 import ClientDashboard from './components/client/Dashboard';
 import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
+import Places from './components/frontend/map/Places';
 
 function App() {
   return (
@@ -36,9 +37,12 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
-          <Route path='/employee-profile-update/:id' element={<ProfileUpdate />} />
-          <Route path='/employee-certificate-update/:id' element={<CertificateUpdate />} />
+          {/* <Route path='/employee-profile-update/:id' element={<ProfileUpdate />} />
+          <Route path='/employee-certificate-update/:id' element={<CertificateUpdate />} /> */}
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
+
+          {/* Google Map */}
+          <Route path='/google-map-view' element={<Places />} />
 
           {/* admin routes here */}
           <Route path="/admin" element={<MasterLayout />} >
