@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Form, Select, Input, Upload, Button } from 'antd';
+import ImgCrop from "antd-img-crop";
 import { UploadOutlined } from '@ant-design/icons';
 
 import { responseNotification } from '../../../utils/notifcation';
 import { fetchPositionListForDropdownHandler } from '../../../api/position';
 import CountryWiseValidationRules from '../../../utils/static/countryList';
 import { employeeRegisterHandler } from '../../../api/employee';
+import defaultImage from '../../../assets/images/default.png';
 
 import './Register.css';
 
@@ -16,6 +18,7 @@ function EmployeeRegister() {
 
     const [position, setPosition] = useState([]);
 
+    const [profilePicture, setProfilePicture] = useState([]);
     const [summaryPdf, setSummaryPdf] = useState([]);
     const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
 
@@ -26,8 +29,28 @@ function EmployeeRegister() {
 
     const navigate = useNavigate();
 
-    const onFinish = async (values) => {
+    const onProfileChange = ({ fileList: newFileList }) => {
+        setProfilePicture(newFileList);
+    };
 
+    // image preview
+    const onPreview = async (file) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow?.document.write(image.outerHTML);
+    };
+
+    const onFinish = async (values) => {
+        console.log("values: ", values);
         if (true) {
 
             setLoading(true);
@@ -39,7 +62,9 @@ function EmployeeRegister() {
             file.append("phoneNumber", values?.phoneNumber);
             file.append("countryName", values?.countryName);
             file.append("positionId", values?.positionId);
-            file.append("cv", summaryPdf?.[0].originFileObj);
+
+            if (summaryPdf?.[0].originFileObj) file.append("cv", summaryPdf?.[0].originFileObj);
+            if (profilePicture?.[0].originFileObj) file.append("profilePicture", profilePicture?.[0].originFileObj);
 
             await employeeRegisterHandler(file)
                 .then((res) => res.json())
@@ -57,7 +82,6 @@ function EmployeeRegister() {
                         //     "Bad request please upload valid file or check you internet",
                         //     "warning"
                         // );
-                        console.log("response: ", res);
                         setError(res?.message);
                         setLoading(false);
                     } else {
@@ -91,11 +115,11 @@ function EmployeeRegister() {
 
     return (
         <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#000000", height: '100vh' }}>
+            <div className='col-md-6 col-sm-12' style={{ background: "#343a40", height: '100vh' }}>
                 <div style={{ padding: "20px 30px", marginTop: '190px' }}>
                     <br />
                     <br />
-                    <h4 className='class="mt-40 text-center mb-25 text-white'>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
+                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#c6a34f" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
                     <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
                         <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
@@ -246,16 +270,24 @@ function EmployeeRegister() {
                                     </div>
 
                                     <div className="col-md-6">
-                                        <Form.Item name="summaryPdf"
-                                            className="p-1 m-0"
-                                            label="Curriculam Vitea (CV)"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter country name',
-                                                },
-                                            ]}
-                                        >
+                                        <Form.Item name="profilePicture" label="Profile Picture">
+                                            <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
+                                            <ImgCrop rotate aspect={2 / 1}>
+                                                <Upload
+                                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                    listType="picture-card"
+                                                    fileList={profilePicture}
+                                                    onChange={onProfileChange}
+                                                    onPreview={onPreview}
+                                                >
+                                                    {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
+                                                </Upload>
+                                            </ImgCrop>
+                                        </Form.Item>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <Form.Item name="summaryPdf" className="p-1 m-0" label="Curriculam Vitea (CV)">
                                             <Upload
                                                 listType="picture"
                                                 defaultFileList={[...summaryPdf]}
@@ -287,7 +319,6 @@ function EmployeeRegister() {
                                 </div>
                             ) : undefined}
 
-                            <br />
                             <div className="col-md-6">
                                 <Form.Item>
                                     <button
