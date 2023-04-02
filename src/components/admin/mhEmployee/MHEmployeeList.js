@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
 import { Input, Space, Switch, Table } from 'antd';
 import _ from "lodash";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
 import Loader from '../../loadar/Loader';
 import { token } from '../../../utils/authentication';
@@ -40,7 +40,11 @@ const columns = [
     {
         title: 'Status',
         dataIndex: 'status',
-    }
+    },
+    {
+        title: 'Action',
+        dataIndex: 'action',
+    },
 ];
 
 function MHEmployeeList() {
@@ -93,7 +97,16 @@ function MHEmployeeList() {
                         }}
                     />
                 </>
-            )
+            ),
+            action: (
+                <>
+                    <div className='btn-group'>
+                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-primary btn-sm'>
+                            Edit
+                        </Link>
+                    </div>
+                </>
+            ),
         });
     });
 

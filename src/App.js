@@ -25,6 +25,7 @@ import ClientEmployeeList from './components/client/employee/EmployeeList';
 import ClientDashboard from './components/client/Dashboard';
 import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
 import Places from './components/frontend/map/Places';
+import ViewCertificate from './components/admin/employee/ViewCertificate';
 
 function App() {
   return (
@@ -53,12 +54,14 @@ function App() {
             <Route path='source' element={<PrivateRoute><Source /></PrivateRoute>} />
             <Route path='employee-list' element={<PrivateRoute><EmployeeList /></PrivateRoute>} />
             <Route path='employee-details/:id' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
+            <Route path='view-certificate/:id' element={<PrivateRoute><ViewCertificate /></PrivateRoute>} />
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
 
             {/* mh employee register from admin route here */}
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
             <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
+            <Route path='edit-mh-employee/:id' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
 
           </Route>
 

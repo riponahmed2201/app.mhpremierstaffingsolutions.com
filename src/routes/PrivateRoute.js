@@ -1,11 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-import React from 'react'
-
 function PrivateRoute({ children }) {
+
+    const navigate = useNavigate();
+
     const auth = useAuth();
-    return auth ? children : <Navigate to="/" />;
+    return auth ? children : navigate("/");
 }
 
 export default PrivateRoute;

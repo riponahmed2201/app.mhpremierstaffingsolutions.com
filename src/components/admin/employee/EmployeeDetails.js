@@ -1,9 +1,11 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import axios from "axios";
-import { Form, Select, Input, DatePicker, Space } from 'antd';
+import { Form, Select, Input, DatePicker, Space, Upload, Button } from 'antd';
+import ImgCrop from "antd-img-crop";
+import { UploadOutlined } from '@ant-design/icons';
 
 import moment from "moment";
 import _ from "lodash";
@@ -16,6 +18,7 @@ import { fetchPositionListForDropdownHandler } from '../../../api/position';
 import { fetchSourceListForDropdownHandler } from '../../../api/source';
 import { staticLanguageName } from '../../../utils/static/languageList';
 import CountryWiseValidationRules from '../../../utils/static/countryList';
+import defaultImage from '../../../assets/images/default.png';
 
 const { Option } = Select;
 
@@ -33,9 +36,32 @@ function EmployeeDetails() {
     const [basicInfoUpdateloading, setBasicInfoUpdateloading] = useState(false);
     const [getError, setError] = useState();
     const [getDateOfBirth, setDateOfBirth] = useState(undefined);
+    const [profilePicture, setProfilePicture] = useState([]);
+    const [summaryPdf, setSummaryPdf] = useState([]);
+    const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
 
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
+
+    const onProfileChange = ({ fileList: newFileList }) => {
+        setProfilePicture(newFileList);
+    };
+
+    // image preview
+    const onPreview = async (file) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow?.document.write(image.outerHTML);
+    };
 
     //Fetch refer person list for dropdown
     const fetchSingleEmployeeData = useCallback(async () => {
@@ -228,6 +254,12 @@ function EmployeeDetails() {
         }
     };
 
+    //CV onchange
+    const summaryPdfChange = ({ fileList: newFileList }) => {
+        setSummaryPdf(newFileList);
+        setSummaryPdfFileShow(newFileList[0]?.originFileObj?.name);
+    };
+
     return (
         <div className="container-fluid px-4">
             <div className='row mt-4'>
@@ -235,49 +267,14 @@ function EmployeeDetails() {
                     <h3 className='mb-4 title'>Employee Information</h3>
                 </div>
             </div>
-
             <div className='card'>
                 <div className='card-header'>
-                    Employee Profile Info
-                </div>
-                <div className='card-body'>
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td style={{ width: '200px' }}> <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + getSingleEmployeeDetails?.profilePicture} /> </td>
-                                <td> <a target='_blank' href={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + getSingleEmployeeDetails?.cv}>Curriculum Vitae (CV)</a> </td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <br />
-
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Certificate Name</th>
-                                <th>Certificate File</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {_.map(getSingleEmployeeDetails?.certificates, (item, index) => (
-                                <tr key={index}>
-                                    <td>{item?.certificateName}</td>
-                                    <td>
-                                        <img style={{ width: '100px', height: '100px' }} src={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + item?.attachment} />
-                                    </td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br />
-            <div className='card'>
-
-                <div className='card-header'>
-                    Update Employee Information
+                    <div className='d-flex justify-content-between'>
+                        <h5>Edit Employee Information</h5>
+                        <Link to={`/admin/view-certificate/${id}`} className='btn btn-primary btn-sm'>
+                            View Certificate
+                        </Link>
+                    </div>
                 </div>
 
                 <div className='card-body'>
@@ -634,6 +631,42 @@ function EmployeeDetails() {
                                                 <Option key={index} value={refer?._id}>{refer?.name}</Option>
                                             ))}
                                         </Select>
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <Form.Item name="profilePicture" label="Profile Picture">
+                                        <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
+                                        <ImgCrop rotate aspect={2 / 1}>
+                                            <Upload
+                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                listType="picture-card"
+                                                fileList={profilePicture}
+                                                onChange={onProfileChange}
+                                                onPreview={onPreview}
+                                            >
+                                                {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
+                                            </Upload>
+                                        </ImgCrop>
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <Form.Item name="summaryPdf" className="p-1 m-0" label="Curriculam Vitea (CV)">
+                                        <Upload
+                                            listType="picture"
+                                            defaultFileList={[...summaryPdf]}
+                                            fileList={summaryPdf}
+                                            onChange={summaryPdfChange}
+                                            maxCount={1}
+                                            accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
+                                        >
+                                            <Button icon={<UploadOutlined />}>
+                                                {" "}
+                                                {!summaryPdfFileShow ? "Upload" : "Uploaded"}{" "}
+                                            </Button>
+                                        </Upload>
+
                                     </Form.Item>
                                 </div>
 
