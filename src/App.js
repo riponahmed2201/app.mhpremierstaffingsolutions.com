@@ -35,7 +35,6 @@ function App() {
         <Routes>
 
           <Route exact path='/' element={<Login />} />
-
           <Route path='/login' element={<Login />} />
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />

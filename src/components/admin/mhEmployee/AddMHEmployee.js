@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
+import { Form, Select, Input } from 'antd'
 import { addHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
 import { useNavigate } from 'react-router-dom';
@@ -13,19 +13,13 @@ function AddMHEmployee() {
 
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
-    const [getPermission, setPermission] = useState([]);
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const [form] = Form.useForm();
 
-    const onChange = (checkedValues) => {
-        setPermission(checkedValues);
-    };
-
     const onFinish = (values) => {
 
         const active = values?.active === "YES" ? true : false;
-        const permissionValue = getPermission;
 
         const addMhEmployeeReceivedFields = {
             name: values?.name,

@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Input, Space, Switch, Table } from 'antd';
+import { Input, Switch, Table, Select } from 'antd';
 import _ from "lodash";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
 import { fetchEmployeeListHandler } from '../../../api/employee';
 import Loader from '../../loadar/Loader';
-import { statusOptions } from '../../../common/statusOptions';
 import { token } from '../../../utils/authentication';
 
 
 const { Search } = Input;
+const { Option } = Select;
 
 const columns = [
     {
@@ -66,14 +66,15 @@ function EmployeeList() {
             }
         });
     }, [limit, loc?.search, getName, getStatus]);
+
     useEffect(() => {
         fetchEmployee();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchEmployee, getPage(loc.search)]);
 
     //search
-    const handleSearchkeywordOnChange = (value) => {
-        setName(value);
+    const handleSearchkeywordOnChange = (e) => {
+        setName(e?.target?.value);
     };
 
     const data1 = [];
@@ -151,24 +152,22 @@ function EmployeeList() {
             </div>
 
             <div className='card'>
+                <div className="card-header d-flex justify-content-between">
+                    <Search
+                        placeholder="Search"
+                        allowClear
+                        size="large"
+                        onChange={handleSearchkeywordOnChange}
+                        style={{
+                            width: 304
+                        }}
+                    />
 
-                <div className='d-flex flex-row-reverse'>
-                    <div className='m-2'>
-                        <Space direction="vertical">
-                            <Search
-                                placeholder="Enter employee name"
-                                enterButton="Search"
-                                size="large"
-                                style={{
-                                    fontSize: 16,
-                                    color: '#c6a34f',
-                                }}
-                                onSearch={handleSearchkeywordOnChange}
-                            />
-                        </Space>
-                    </div>
+                    <Select size="large" allowClear placeholder="Active" onChange={handleChangeStatus}>
+                        <Option value="YES">YES</Option>
+                        <Option value="NO">NO</Option>
+                    </Select>
                 </div>
-                <br />
                 {loading ? (
                     <tr>
                         <td>

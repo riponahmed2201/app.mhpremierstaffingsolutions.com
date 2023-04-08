@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
+import { Form, Select, Input } from 'antd'
 import { updateMhEmployeeHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -93,8 +93,6 @@ function EditMHEmployee() {
                 });
         }
     };
-
-    const plainOptions = ['Apple', 'Pear', 'Orange'];
 
     return (
         <div className="container-fluid px-4">

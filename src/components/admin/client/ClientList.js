@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Input, Space, Switch, Table } from 'antd';
+import { Input, Select, Switch, Table } from 'antd';
 import _ from "lodash";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
@@ -9,6 +9,7 @@ import Loader from '../../loadar/Loader';
 import { token } from '../../../utils/authentication';
 
 const { Search } = Input;
+const { Option } = Select;
 
 const columns = [
     {
@@ -82,8 +83,8 @@ function ClientList() {
     };
 
     //search
-    const handleSearchkeywordOnChange = (value) => {
-        setName(value);
+    const handleSearchkeywordOnChange = (e) => {
+        setName(e?.target?.value);
     };
 
     const data1 = [];
@@ -158,24 +159,22 @@ function ClientList() {
                 </div>
             </div>
             <div className='card'>
+                <div className="card-header d-flex justify-content-between">
+                    <Search
+                        placeholder="Search"
+                        allowClear
+                        size="large"
+                        onChange={handleSearchkeywordOnChange}
+                        style={{
+                            width: 304
+                        }}
+                    />
 
-                <div className='d-flex flex-row-reverse'>
-                    <div className='m-2'>
-                        <Space direction="vertical">
-                            <Search
-                                placeholder="Enter client name"
-                                enterButton="Search"
-                                size="large"
-                                style={{
-                                    fontSize: 16,
-                                    color: '#c6a34f',
-                                }}
-                                onSearch={handleSearchkeywordOnChange}
-                            />
-                        </Space>
-                    </div>
+                    <Select size="large" allowClear placeholder="Active" onChange={handleChangeStatus}>
+                        <Option value="YES">YES</Option>
+                        <Option value="NO">NO</Option>
+                    </Select>
                 </div>
-                <br />
                 {loading ? (
                     <tr>
                         <td>

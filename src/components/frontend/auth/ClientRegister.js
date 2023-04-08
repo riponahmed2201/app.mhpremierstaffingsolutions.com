@@ -127,11 +127,11 @@ function ClientRegister() {
 
     return (
         <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#343a40", minHeight: "100vh" }}>
+            <div className='col-md-6 col-sm-12' style={{ background: "#f6f1e5", minHeight: "100vh" }}>
                 <div style={{ padding: "20px 30px", marginTop: '190px' }} >
                     <br />
                     <br />
-                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#c6a34f" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
+                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#111111" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
                     <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
                         <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
