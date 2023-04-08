@@ -63,7 +63,7 @@ function ViewCertificate() {
             action: (
                 <>
                     <Button type="primary" danger
-                        onClick={() => removeCertificateInfo(item?._id)}>
+                        onClick={() => removeCertificateInfo(item?.certificateId)}>
                         Delete
                     </Button>
                 </>
@@ -118,6 +118,9 @@ function ViewCertificate() {
                     if (res.statusCode === 200) {
                         responseNotification("Certificate added successfully", "success");
                         setSummaryPdf([]);
+                        onClose();
+                        setLoading(false);
+                        window.location.reload();
                     } else if (res?.statusCode === 400) {
                         responseNotification(
                             "Bad request please upload valid file or check you internet",
@@ -144,19 +147,20 @@ function ViewCertificate() {
     };
 
     //delete certificate info here 
-    const removeCertificateInfo = useCallback(async (value, e) => {
+    const removeCertificateInfo = useCallback(async (certificateId) => {
 
         const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
-        const id = value;
+        const receivedCertificateDeleteFields = { id, certificateId };
 
         if (true) {
-            await fetch(`${unicodeUri}/users/employee-cerficate-remove/${id}`, {
+            await fetch(`${unicodeUri}/users/certificate/remove`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token()}`,
                     "Content-Type": "application/json",
-                }
+                },
+                body: JSON.stringify(receivedCertificateDeleteFields),
             })
                 .then((res) => res.json())
                 .then((res) => {

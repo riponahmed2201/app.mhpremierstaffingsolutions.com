@@ -19,6 +19,7 @@ import ClientList from './components/admin/client/ClientList';
 import EmployeeDetails from './components/admin/employee/EmployeeDetails';
 import ClientDetails from './components/admin/client/ClientDetails';
 import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
+import EditMHEmployee from './components/admin/mhEmployee/EditMHEmployee';
 
 //For client
 import ClientEmployeeList from './components/client/employee/EmployeeList';
@@ -61,7 +62,7 @@ function App() {
             {/* mh employee register from admin route here */}
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
             <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
-            <Route path='edit-mh-employee/:id' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
+            <Route path='edit-mh-employee/:id' element={<PrivateRoute><EditMHEmployee /></PrivateRoute>} />
 
           </Route>
 

@@ -1,52 +1,88 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
-import { addHandler, updateMhEmployeeHandler } from '../../../api/addMHEmployee';
+import { updateMhEmployeeHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { token } from '../../../utils/authentication';
+import { staticMenuPermission } from '../../../utils/static/menuPermission';
 
 const { Option } = Select;
 
 function EditMHEmployee() {
 
+    const { id } = useParams();
+
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
-    const [getPermission, setPermission] = useState([]);
+    const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
 
     const [form] = Form.useForm();
 
-    const onChange = (checkedValues) => {
-        setPermission(checkedValues);
-    };
+    //Fetch single mh employee info
+    const fetchSingleEmployeeData = useCallback(async () => {
+
+        try {
+
+            const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                }
+            );
+
+            //Employee Basic Information
+            form.setFieldsValue({
+                name: res?.data?.details.name,
+                email: res?.data?.details.email,
+                phoneNumber: res?.data?.details.phoneNumber,
+                role: res?.data?.details.role,
+                active: res?.data?.details?.active === true ? "YES" : "NO",
+                permissions: res?.data?.details?.menuPermission
+            });
+
+            setSingleEmployeeDetails(res?.data?.details);
+
+        } catch (error) {
+
+        }
+
+    }, []);
+
+    useEffect(() => {
+        fetchSingleEmployeeData();
+    }, [id]);
 
     const onFinish = (values) => {
 
         const active = values?.active === "YES" ? true : false;
-        const permissionValue = getPermission;
 
-        const addMhEmployeeReceivedFields = {
+        const updateMhEmployeeReceivedFields = {
+            id: id,
             name: values?.name,
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             password: values?.password,
             role: values?.role,
             active: active,
-            permissions: permissionValue
+            permissions: values?.permissions
         };
 
-        if (addMhEmployeeReceivedFields) {
+        if (updateMhEmployeeReceivedFields) {
             setLoading(true);
-            addHandler(addMhEmployeeReceivedFields)
+            updateMhEmployeeHandler(updateMhEmployeeReceivedFields)
                 .then((res) => res.json())
                 .then((res) => {
                     if (res?.statusCode === 201) {
                         setError(undefined);
                         setLoading(false);
-                        responseNotification("MH employee created successfully!", "success");
+                        responseNotification("MH employee updated successfully!", "success");
 
                         navigate("/admin/mh-employee-list");
-                        // form.resetFields();
+                        form.resetFields();
                     } else if (res?.statusCode === 400) {
                         setError(res?.errors?.[0].msg);
                         setLoading(false);
@@ -58,16 +94,18 @@ function EditMHEmployee() {
         }
     };
 
+    const plainOptions = ['Apple', 'Pear', 'Orange'];
+
     return (
         <div className="container-fluid px-4">
             <div className='row mt-4'>
                 <div className='d-flex justify-content-between'>
-                    <h3 className='mb-4 title'>Add MH Employee</h3>
+                    <h3 className='mb-4 title'>Edit MH Employee</h3>
                 </div>
             </div>
 
             <div className='card'>
-                <div className='card-header'>Add MH Employee</div>
+                <div className='card-header'>Edit MH Employee</div>
                 <div className='card-body'>
                     <div className='m-2'>
                         <Form
@@ -128,22 +166,6 @@ function EditMHEmployee() {
 
                                     <div className="col-md-4">
                                         <Form.Item
-                                            label="Password"
-                                            name="password"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter password',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter password" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-4">
-                                        <Form.Item
                                             label="Role Name"
                                             name="role"
                                             hasFeedback
@@ -193,7 +215,7 @@ function EditMHEmployee() {
                                     <div className="col-md-12">
                                         <Form.Item
                                             label="Menu Permission List"
-                                            name="active"
+                                            name="permissions"
                                             hasFeedback
                                             rules={[
                                                 {
@@ -202,37 +224,19 @@ function EditMHEmployee() {
                                                 },
                                             ]}
                                         >
-                                            <Checkbox.Group
-                                                style={{
-                                                    width: '100%',
-                                                }}
-                                                onChange={onChange}
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Permission"
+                                                optionFilterProp="children"
+                                                mode="multiple"
+                                                allowClear
                                             >
-                                                <Row>
-                                                    <Col>
-                                                        <Checkbox value="POSITION">Position</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="SKILL">Skill</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="SOURCE">Source</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="CLIENT_LIST">Client List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="MH_EMPLOYEE_LIST">MH Employee List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="ADD_MH_EMPLOYEE">Add MH Employee</Checkbox>
-                                                    </Col>
-                                                </Row>
-                                            </Checkbox.Group>
 
+                                                {staticMenuPermission?.map((item, index) => (
+                                                    <Option key={index} value={item?.name}>{item?.name}</Option>
+                                                ))}
+
+                                            </Select>
                                         </Form.Item>
                                     </div>
 
@@ -240,7 +244,7 @@ function EditMHEmployee() {
                                         <div className="row">
                                             <div className="col-lg-12">
                                                 <div className="error-message">
-                                                    <p className="error-text-color">{getError}</p>
+                                                    <p className="error-text-color text-danger">{getError}</p>
                                                 </div>
                                             </div>
                                         </div>

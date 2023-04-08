@@ -3,6 +3,7 @@ import { Form, Select, Checkbox, Col, Row, Input } from 'antd'
 import { addHandler } from '../../../api/addMHEmployee';
 import { responseNotification } from '../../../utils/notifcation';
 import { useNavigate } from 'react-router-dom';
+import { staticMenuPermission } from '../../../utils/static/menuPermission';
 
 const { Option } = Select;
 
@@ -13,6 +14,7 @@ function AddMHEmployee() {
     const [loading, setLoading] = useState(false);
     const [getError, setError] = useState();
     const [getPermission, setPermission] = useState([]);
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const [form] = Form.useForm();
 
@@ -32,7 +34,7 @@ function AddMHEmployee() {
             password: values?.password,
             role: values?.role,
             active: active,
-            permissions: permissionValue
+            permissions: values?.permission
         };
 
         if (addMhEmployeeReceivedFields) {
@@ -138,7 +140,14 @@ function AddMHEmployee() {
                                                 },
                                             ]}
                                         >
-                                            <Input placeholder="Enter password" className="ant-input ant-input-lg" />
+                                            <Input.Password
+                                                placeholder="Enter password"
+                                                className="ant-input ant-input-lg"
+                                                visibilityToggle={{
+                                                    visible: passwordVisible,
+                                                    onVisibleChange: setPasswordVisible,
+                                                }}
+                                            />
                                         </Form.Item>
                                     </div>
 
@@ -193,7 +202,7 @@ function AddMHEmployee() {
                                     <div className="col-md-12">
                                         <Form.Item
                                             label="Menu Permission List"
-                                            name="active"
+                                            name="permission"
                                             hasFeedback
                                             rules={[
                                                 {
@@ -202,37 +211,19 @@ function AddMHEmployee() {
                                                 },
                                             ]}
                                         >
-                                            <Checkbox.Group
-                                                style={{
-                                                    width: '100%',
-                                                }}
-                                                onChange={onChange}
-                                            >
-                                                <Row>
-                                                    <Col>
-                                                        <Checkbox value="POSITION">Position</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="SKILL">Skill</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="SOURCE">Source</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="CLIENT_LIST">Client List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="EMPLOYEE_LIST">Employee List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="MH_EMPLOYEE_LIST">MH Employee List</Checkbox>
-                                                    </Col>
-                                                    <Col>
-                                                        <Checkbox value="ADD_MH_EMPLOYEE">Add MH Employee</Checkbox>
-                                                    </Col>
-                                                </Row>
-                                            </Checkbox.Group>
 
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please Select Permission"
+                                                optionFilterProp="children"
+                                                mode="multiple"
+                                                allowClear
+                                            >
+                                                {staticMenuPermission?.map((item, index) => (
+                                                    <Option key={index} value={item?.name}>{item?.name}</Option>
+                                                ))}
+
+                                            </Select>
                                         </Form.Item>
                                     </div>
 
@@ -240,7 +231,7 @@ function AddMHEmployee() {
                                         <div className="row">
                                             <div className="col-lg-12">
                                                 <div className="error-message">
-                                                    <p className="error-text-color">{getError}</p>
+                                                    <p className="error-text-color text-danger">{getError}</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -149,7 +149,7 @@ function MHEmployeeList() {
         <div className="container-fluid px-4">
             <div className='row mt-4'>
                 <div className='d-flex justify-content-between'>
-                    <h3 className='mb-4 title'>Employee List</h3>
+                    <h3 className='mb-4 title'>MH Employee List</h3>
                 </div>
             </div>
 

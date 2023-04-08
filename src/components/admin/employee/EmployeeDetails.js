@@ -538,6 +538,22 @@ function EmployeeDetails() {
 
                                 <div className="col-md-4">
                                     <Form.Item
+                                        label="Per hour rate($ or £)"
+                                        name="hourlyRate"
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter per hour rate',
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="Enter per hour rate" className="ant-input ant-input-lg" />
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item
                                         label="Languages"
                                         name="languages"
                                         hasFeedback

@@ -8,12 +8,8 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 import { Outlet } from 'react-router-dom';
-import { jwtTokenDecode } from '../../utils/jwtDecode';
-import ClientSidebar from './ClientSidebar';
 
 function MasterLayout() {
-
-    const jwt_decode = jwtTokenDecode();
 
     return (
         <div className='sb-nav-fixed'>
@@ -21,7 +17,7 @@ function MasterLayout() {
 
             <div id="layoutSidenav">
                 <div id="layoutSidenav_nav">
-                    {!jwt_decode.client ? <Sidebar /> : <ClientSidebar />}
+                    <Sidebar />
                 </div>
                 <div id="layoutSidenav_content" style={{ background: '#f7f7fc' }}>
                     <main >

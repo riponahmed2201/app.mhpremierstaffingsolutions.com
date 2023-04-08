@@ -27,14 +27,14 @@ export const addHandler = async (receivedPositionFields) => {
 };
 
 //update api call
-export const updateMhEmployeeHandler = async (receivedPrintingFields) => {
-    let res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/users/mh-employee/update`, {
+export const updateMhEmployeeHandler = async (receivedMhEmployeeFields) => {
+    let res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/users/mh-employee-update`, {
         method: "PUT",
         headers: {
             Authorization: `Bearer ${token()}`,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(receivedPrintingFields),
+        body: JSON.stringify(receivedMhEmployeeFields),
     });
     return res;
 };
