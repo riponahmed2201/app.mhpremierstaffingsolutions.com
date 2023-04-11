@@ -78,7 +78,8 @@ function EmployeeDetails() {
 
             //Employee Basic Information
             formEdit.setFieldsValue({
-                name: res?.data?.details.name,
+                firstName: res?.data?.details.firstName,
+                lastName: res?.data?.details.lastName,
                 email: res?.data?.details.email,
                 phoneNumber: res?.data?.details.phoneNumber,
                 positionId: res?.data?.details.positionId,
@@ -202,7 +203,8 @@ function EmployeeDetails() {
         // console.log("values: ", values);
         const receivedEmployeeFields = {
             id: id,
-            name: values?.name,
+            firstName: values?.firstName,
+            lastName: values?.lastName,
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             countryName: values?.countryName,
@@ -289,17 +291,33 @@ function EmployeeDetails() {
 
                                 <div className="col-md-4">
                                     <Form.Item
-                                        label="Name"
-                                        name="name"
+                                        label="First Name"
+                                        name="firstName"
                                         hasFeedback
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Please enter name',
+                                                message: 'Please enter first name',
                                             },
                                         ]}
                                     >
-                                        <Input placeholder="Enter name" className="ant-input ant-input-lg" />
+                                        <Input placeholder="Enter first name" className="ant-input ant-input-lg" />
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item
+                                        label="Last Name"
+                                        name="lastName"
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter last name',
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="Enter last name" className="ant-input ant-input-lg" />
                                     </Form.Item>
                                 </div>
 

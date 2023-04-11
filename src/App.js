@@ -5,7 +5,7 @@ import PrivateRoute from './routes/PrivateRoute';
 
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
-import Login from './components/frontend/auth/Login';
+import AdminLogin from './components/frontend/auth/AdminLogin';
 import ClientRegister from './components/frontend/auth/ClientRegister';
 import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
@@ -27,6 +27,8 @@ import ClientDashboard from './components/client/Dashboard';
 import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
 import Places from './components/frontend/map/Places';
 import ViewCertificate from './components/admin/employee/ViewCertificate';
+import Login from './components/frontend/login/Login';
+import Home from './components/frontend/Home/Home';
 
 function App() {
   return (
@@ -34,10 +36,14 @@ function App() {
       <Router>
         <Routes>
 
-          <Route exact path='/' element={<Login />} />
+          <Route exact path='/' element={<Home />} />
+          <Route path='/admin-login' element={<AdminLogin />} />
+
           <Route path='/login' element={<Login />} />
+
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
+          
           {/* <Route path='/employee-profile-update/:id' element={<ProfileUpdate />} />
           <Route path='/employee-certificate-update/:id' element={<CertificateUpdate />} /> */}
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />

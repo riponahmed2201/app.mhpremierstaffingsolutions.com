@@ -49,7 +49,7 @@ function ClientRegister() {
                 if (res?.data?.statusCode === 201) {
                     console.log("response: ", res?.data?.statusCode);
                     // resetForm({ values: "" });
-                    navigate('/login')
+                    navigate('/admin-login')
                 } else {
                     navigate('/register')
                 }
@@ -107,7 +107,7 @@ function ClientRegister() {
                         responseNotification("Client registered successfully!", "success");
                         form.resetFields();
 
-                        navigate('/login')
+                        navigate('/admin-login')
 
                         // window.location.reload();
                     } else if (res?.statusCode === 400) {
@@ -126,217 +126,179 @@ function ClientRegister() {
     };
 
     return (
-        <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#f6f1e5", minHeight: "100vh" }}>
-                <div style={{ padding: "20px 30px", marginTop: '190px' }} >
-                    <br />
-                    <br />
-                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#111111" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
-                    <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
-                        <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
+        <Form
+            className="ant-form ant-form-vertical"
+            layout="vertical"
+            onFinish={onFinish}
+            form={form}
+        >
+            <div className='col-12'>
+                <div className='row'>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Restaurant Name"
+                            name="restaurantName"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter restaurant name',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Enter restaurant name" className="ant-input ant-input-lg" />
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Restaurant Address"
+                            name="restaurantAddress"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter restaurant address',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Enter restaurant address" className="ant-input ant-input-lg" />
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Where do you find us?"
+                            name="sourceId"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter where do you find us?',
+                                },
+                            ]}
+                        >
+                            <Select
+                                showSearch={true}
+                                placeholder="Please Select"
+                                optionFilterProp="children"
+                            >
+                                {sourceFrom?.map((item, index) => (
+                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                ))}
+
+                            </Select>
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Refer Person Name"
+                            name="referPersonId"
+                            hasFeedback
+                            rules={[
+                                {
+                                    message: 'Please enter refer person name',
+                                },
+                            ]}
+                        >
+                            <Select
+                                showSearch={true}
+                                placeholder="Please Select"
+                                optionFilterProp="children"
+                            >
+                                {referPerson?.map((item, index) => (
+                                    <Option key={index} value={item?._id}>{item?.name}</Option>
+                                ))}
+
+                            </Select>
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter email',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Enter email" className="ant-input ant-input-lg" />
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Phone number"
+                            name="phoneNumber"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter phone number',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Enter phone number" className="ant-input ant-input-lg" />
+                        </Form.Item>
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter password',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Enter password" className="ant-input ant-input-lg" />
+                        </Form.Item>
                     </div>
                 </div>
             </div>
-            <div className='col-md-6 col-sm-12' style={{ background: "#ffffff" }}>
-                <div className='bg-white'>
-                    <div className="container-fluid">
-                        <nav className="navbar navbar-expand-lg navbar-light">
-                            <div className="collapse navbar-collapse" id="navbarNav">
-                                <ul className="navbar-nav">
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
-                                    </li>
 
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link" to="/employee-register">Employee Register</NavLink>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <br />
-
-                        <h5 className='text-left mb-4'>Client Register Here</h5>
-                        <Form
-                            className="ant-form ant-form-vertical"
-                            layout="vertical"
-                            onFinish={onFinish}
-                            form={form}
-                        >
-                            <div className='col-12'>
-                                <div className='row'>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Restaurant Name"
-                                            name="restaurantName"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter restaurant name',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter restaurant name" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Restaurant Address"
-                                            name="restaurantAddress"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter restaurant address',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter restaurant address" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Where do you find us?"
-                                            name="sourceId"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter where do you find us?',
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                showSearch={true}
-                                                placeholder="Please Select"
-                                                optionFilterProp="children"
-                                            >
-                                                {sourceFrom?.map((item, index) => (
-                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
-                                                ))}
-
-                                            </Select>
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Refer Person Name"
-                                            name="referPersonId"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    message: 'Please enter refer person name',
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                showSearch={true}
-                                                placeholder="Please Select"
-                                                optionFilterProp="children"
-                                            >
-                                                {referPerson?.map((item, index) => (
-                                                    <Option key={index} value={item?._id}>{item?.name}</Option>
-                                                ))}
-
-                                            </Select>
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Email"
-                                            name="email"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter email',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter email" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Phone number"
-                                            name="phoneNumber"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter phone number',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter phone number" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <Form.Item
-                                            label="Password"
-                                            name="password"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: 'Please enter password',
-                                                },
-                                            ]}
-                                        >
-                                            <Input placeholder="Enter password" className="ant-input ant-input-lg" />
-                                        </Form.Item>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br />
-                            {getError ? (
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="error-message">
-                                            <p className="text-danger">{getError}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : undefined}
-
-                            <div className="col-md-6">
-                                <Form.Item>
-                                    <button
-                                        disabled={loading}
-                                        className="btn"
-                                        style={{ background: '#C6A34F', color: 'white' }}
-                                        type="submit"
-                                    >
-                                        {!loading && "Register"}
-                                        {loading && (
-                                            <span
-                                                className="indicator-progress"
-                                                style={{ display: "block" }}
-                                            >
-                                                Please wait...{" "}
-                                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                            </span>
-                                        )}
-                                    </button>
-                                </Form.Item>
-                            </div>
-                        </Form>
-                        <div className='mb-3 mt-3 text-left'>
-                            <p> Already have an account? <Link to="/login">Sign in now</Link></p>
+            <br />
+            {getError ? (
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="error-message">
+                            <p className="text-danger">{getError}</p>
                         </div>
                     </div>
-
                 </div>
+            ) : undefined}
+
+            <div className="col-md-6">
+                <Form.Item>
+                    <button
+                        disabled={loading}
+                        className="btn"
+                        style={{ background: '#C6A34F', color: 'white' }}
+                        type="submit"
+                    >
+                        {!loading && "Register"}
+                        {loading && (
+                            <span
+                                className="indicator-progress"
+                                style={{ display: "block" }}
+                            >
+                                Please wait...{" "}
+                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        )}
+                    </button>
+                </Form.Item>
             </div>
-        </div>
+        </Form>
     )
 }
 

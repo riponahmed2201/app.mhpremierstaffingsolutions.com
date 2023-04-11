@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 
 // import Navbar from '../../../layouts/frontend/Navbar';
 
-function Login() {
+function AdminLogin() {
 
     const navigate = useNavigate();
 
@@ -119,4 +119,4 @@ function Login() {
     )
 }
 
-export default Login
+export default AdminLogin
