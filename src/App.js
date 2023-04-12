@@ -11,8 +11,6 @@ import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
 import EmployeeRegister from './components/frontend/auth/EmployeeRegister';
-// import ProfileUpdate from './components/frontend/profile/ProfileUpdate';
-// import CertificateUpdate from './components/frontend/profile/CertificateUpdate';
 import EmployeeRegisterWelcome from './components/frontend/profile/EmployeeRegisterWelcome';
 import EmployeeList from './components/admin/employee/EmployeeList';
 import ClientList from './components/admin/client/ClientList';
@@ -29,6 +27,10 @@ import Places from './components/frontend/map/Places';
 import ViewCertificate from './components/admin/employee/ViewCertificate';
 import Login from './components/frontend/login/Login';
 import Home from './components/frontend/Home/Home';
+import ClientMasterLayout from './layouts/frontend/ClientMasterLayout';
+import About from './components/frontend/about/About';
+import Customer from './components/frontend/customer/Customer';
+import Career from './components/frontend/career/Career';
 
 function App() {
   return (
@@ -36,16 +38,17 @@ function App() {
       <Router>
         <Routes>
 
-          <Route exact path='/' element={<Home />} />
+          <Route path="/" element={<ClientMasterLayout />} >
+            <Route index path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/customer' element={<Customer />} />
+            <Route path='/career' element={<Career />} />
+          </Route>
+
           <Route path='/admin-login' element={<AdminLogin />} />
-
           <Route path='/login' element={<Login />} />
-
           <Route path='/client-register' element={<ClientRegister />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
-          
-          {/* <Route path='/employee-profile-update/:id' element={<ProfileUpdate />} />
-          <Route path='/employee-certificate-update/:id' element={<CertificateUpdate />} /> */}
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 
           {/* Google Map */}
@@ -73,8 +76,8 @@ function App() {
 
           {/* for client routes */}
           <Route path="/client" element={<MasterLayout />} >
-            <Route path='employee-list' element={<PrivateRoute><ClientEmployeeList /></PrivateRoute>} />
             <Route index path='dashboard' element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
+            <Route path='employee-list' element={<PrivateRoute><ClientEmployeeList /></PrivateRoute>} />
           </Route>
 
         </Routes>

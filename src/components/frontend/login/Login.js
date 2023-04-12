@@ -43,6 +43,7 @@ function Login() {
                     if (res.statusCode === 200) {
                         responseNotification(res?.message, "success");
                         form.resetFields();
+                        
                         localStorage.setItem("accessToken", res?.token);
 
                         navigate('/admin/dashboard');
