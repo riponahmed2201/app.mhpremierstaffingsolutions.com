@@ -6,7 +6,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
 import AdminLogin from './components/frontend/auth/AdminLogin';
-import ClientRegister from './components/frontend/auth/ClientRegister';
+import ClientRegister from './components/frontend/register/ClientRegister';
 import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
@@ -38,18 +38,18 @@ function App() {
       <Router>
         <Routes>
 
+          <Route path='/admin-login' element={<AdminLogin />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/client-register' element={<ClientRegister />} />
+          <Route path='/employee-register' element={<EmployeeRegister />} />
+          <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
+
           <Route path="/" element={<ClientMasterLayout />} >
             <Route index path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/career' element={<Career />} />
           </Route>
-
-          <Route path='/admin-login' element={<AdminLogin />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/client-register' element={<ClientRegister />} />
-          <Route path='/employee-register' element={<EmployeeRegister />} />
-          <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 
           {/* Google Map */}
           <Route path='/google-map-view' element={<Places />} />

@@ -10,8 +10,6 @@ import CountryWiseValidationRules from '../../../utils/static/countryList';
 import { employeeRegisterHandler } from '../../../api/employee';
 import defaultImage from '../../../assets/images/default.png';
 
-import './Register.css';
-
 const { Option } = Select;
 
 function EmployeeRegister() {

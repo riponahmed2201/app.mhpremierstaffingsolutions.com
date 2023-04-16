@@ -1,0 +1,341 @@
+/* // X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+@media (min-width: 320px) and (max-width: 374.98px) {
+    .left_part {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 10px;
+    }
+
+    .button_wrapper {
+        margin-left: 15px;
+    }
+
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+
+    .custom_for_320 {
+        padding: 0px;
+    }
+
+    .eclips_wrapper1 {
+        display: none;
+    }
+
+    .custom_client_button,
+    .custom_employee_button {
+        padding: 5px;
+        width: 80px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .card_looking_container {
+        padding: 30px 10px;
+    }
+
+    .how_youKnow_text {
+        margin-top: 12px;
+    }
+
+    .register_button {
+        margin-top: 10px;
+        height: 40px;
+        width: 178px;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 11px;
+    }
+
+    .employee_tab_button {
+        width: 130px;
+    }
+
+    .client_tab_button {
+        width: 130px;
+    }
+
+    .employee_register_button {
+        padding-top: 14px;
+        margin-top: 10px;
+        margin-bottom: 19px;
+        width: auto;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 575.98px) {
+    .left_part {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px;
+    }
+
+    .button_wrapper {
+        margin-left: 35px;
+    }
+
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+
+    .eclips_wrapper1 {
+        display: none;
+    }
+
+    .how_youKnow_text {
+        margin-top: 12px;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 11px;
+    }
+
+    .eclipse_wrapper2 {
+        display: none;
+    }
+
+    .employee_tab_button {
+        width: 130px;
+    }
+
+    .client_tab_button {
+        width: 130px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 819.98px) {
+    .right_part {
+        margin: auto;
+        /* background-color: #fff; */
+    }
+
+    .left_part {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 15px;
+    }
+
+    .button_wrapper {
+        margin-left: 30px;
+    }
+
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+
+    .eclips_wrapper1 {
+        display: none;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 20px;
+    }
+
+    .register_button {
+        margin-top: 5px;
+    }
+
+    .how_youKnow_text {
+        margin-top: 10px;
+    }
+
+    .eclipse_wrapper2 {
+        display: none;
+    }
+
+    .eclipse_wrapper2 img {
+        bottom: -55%;
+    }
+
+    .employee_tab_button {
+        width: 130px;
+    }
+
+    .client_tab_button {
+        width: 130px;
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1023.98px) {
+    .eclipse_wrapper2 img {
+        bottom: -0%;
+    }
+
+    .logo_wrapper {
+        padding-top: 149px;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 133px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1198.98px) {
+    .right_part {
+        padding-top: 20px;
+    }
+
+    .mh_premier_wrapping p {
+        line-height: 28px;
+    }
+
+    .how_youKnow_text {
+        margin-top: 11px;
+    }
+
+    .card_looking_container {
+        padding: 10px 10px;
+    }
+
+    .eclips_wrapper1 img {
+        transform: rotate(10deg);
+    }
+
+    .eclips_wrapper1 {
+        display: none;
+    }
+
+    .register_button {
+        margin-top: 15px;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 12px;
+    }
+
+    .eclipse_wrapper2 {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1339.98px) {
+    .left_part {
+        padding-top: 20px;
+    }
+
+    .logo_wrapper {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    .eclipse_wrapper2 img {
+        bottom: -6%;
+    }
+
+    .register_button {
+        margin-top: 15px;
+    }
+
+    .empUploadImg {
+        width: 58%;
+        margin-left: 35px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1598.98px) {
+    .eclips_wrapper1 img {
+        width: 14%;
+        left: 42%;
+    }
+
+    .eclipse_wrapper2 img {
+        bottom: -0%;
+    }
+
+    .button_wrapper {
+        margin-top: 82px;
+    }
+
+    .logo_wrapper {
+        padding-top: 70px;
+    }
+
+    .left_part {
+        padding: 20px 10px;
+    }
+
+    .right_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .register_button {
+        margin-top: 12px;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 43px;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1798.98px) {
+    .eclips_wrapper1 img {
+        width: 19%;
+        left: 42%;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 35px;
+    }
+
+    .card_looking_container {
+        margin-top: 18px;
+    }
+}
+
+@media (min-width: 1800px) and (max-width: 2098.98px) {
+    .logo_wrapper {
+        padding-top: 92px;
+    }
+
+    .right_part {
+        margin: auto;
+    }
+
+    .eclips_wrapper1 img {
+        left: 41%;
+        width: 18%;
+    }
+
+    .eclipse_wrapper2 img {
+        z-index: 1;
+        width: 8%;
+    }
+
+    .clientButtonWrapper {
+        margin-top: 184px;
+    }
+
+    .left_part {
+        padding: 20px 10px;
+    }
+
+    .button_wrapper {
+        margin-top: 83px;
+    }
+}
