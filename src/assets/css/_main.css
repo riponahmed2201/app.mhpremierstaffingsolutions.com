@@ -4,3 +4,5 @@
 @import url('./components/register/_media.css');
 @import url('./components/home/_style.css');
 @import url('./components/home/_media.css');
+@import url('./components/dashboard/_media.css');
+@import url('./components/dashboard/_index.css');

@@ -5,7 +5,7 @@ font-family: "Poppins", sans-serif; */
     background-color: #fafafa;
 }
 
-.header_container {
+.Index_header_container {
     padding: 0px;
 }
 
@@ -36,7 +36,8 @@ font-family: "Poppins", sans-serif; */
 }
 
 /* Banner Start */
-.banner {
+.Indexbanner {
+    background-color: #FFFFFF;
     padding: 100px 0px;
 }
 
@@ -46,7 +47,6 @@ font-family: "Poppins", sans-serif; */
 }
 
 .perticle1 {
-    z-index: -2;
     width: 20%;
     position: absolute;
     top: 12.6%;
@@ -54,9 +54,7 @@ font-family: "Poppins", sans-serif; */
 }
 
 .perticle2 {
-    z-index: -1;
     position: absolute;
-    /* bottom: -12.6%; */
     top: 54%;
     left: 0%;
     width: 20%;

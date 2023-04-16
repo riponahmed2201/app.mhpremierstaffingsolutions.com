@@ -5,20 +5,18 @@ import Services from "./Services";
 import Position from "./Position";
 import FindJobs from "./FindJobs";
 import DownloadApp from "./DownloadApp";
+import Testimonial from "./Testimonial";
 import Contact from "./Contact";
 
 function Home() {
   return (
     <div>
       <Banner />
-
-      {/* Start Our services */}
       <Services />
       <Position />
-      {/* End Our services */}
-
       <FindJobs />
       <DownloadApp />
+      <Testimonial />
       <Contact />
     </div>
   );

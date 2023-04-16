@@ -21,7 +21,7 @@ import EditMHEmployee from './components/admin/mhEmployee/EditMHEmployee';
 
 //For client
 import ClientEmployeeList from './components/client/employee/EmployeeList';
-import ClientDashboard from './components/client/Dashboard';
+import ClientDashboard from './components/frontend/dashboard/ClientDashboard';
 import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
 import Places from './components/frontend/map/Places';
 import ViewCertificate from './components/admin/employee/ViewCertificate';
@@ -44,12 +44,15 @@ function App() {
           <Route path='/employee-register' element={<EmployeeRegister />} />
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 
+          <Route index path='/client-dashboard' element={<ClientDashboard />} />
+
           <Route path="/" element={<ClientMasterLayout />} >
             <Route index path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/career' element={<Career />} />
           </Route>
+
 
           {/* Google Map */}
           <Route path='/google-map-view' element={<Places />} />
@@ -75,8 +78,7 @@ function App() {
           </Route>
 
           {/* for client routes */}
-          <Route path="/client" element={<MasterLayout />} >
-            <Route index path='dashboard' element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
+          <Route path="/client" element={<ClientMasterLayout />} >
             <Route path='employee-list' element={<PrivateRoute><ClientEmployeeList /></PrivateRoute>} />
           </Route>
 
