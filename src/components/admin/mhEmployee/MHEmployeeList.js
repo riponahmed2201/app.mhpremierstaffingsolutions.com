@@ -102,7 +102,7 @@ function MHEmployeeList() {
             action: (
                 <>
                     <div className='btn-group'>
-                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-primary btn-sm'>
+                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-sm'  style={{ background: '#C6A34F', color: 'white' }}>
                             Edit
                         </Link>
                     </div>

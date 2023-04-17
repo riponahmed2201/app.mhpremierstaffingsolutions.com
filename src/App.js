@@ -31,6 +31,7 @@ import ClientMasterLayout from './layouts/frontend/ClientMasterLayout';
 import About from './components/frontend/about/About';
 import Customer from './components/frontend/customer/Customer';
 import Career from './components/frontend/career/Career';
+import DashboardLayout from './layouts/frontend/dashboard/DashboardLayout';
 
 function App() {
   return (
@@ -44,7 +45,9 @@ function App() {
           <Route path='/employee-register' element={<EmployeeRegister />} />
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 
-          <Route index path='/client-dashboard' element={<ClientDashboard />} />
+          <Route path="/" element={<DashboardLayout />} >
+            <Route index path='client-dashboard' element={<ClientDashboard />} />
+          </Route>
 
           <Route path="/" element={<ClientMasterLayout />} >
             <Route index path='/' element={<Home />} />

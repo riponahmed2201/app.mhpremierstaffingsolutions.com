@@ -795,7 +795,7 @@
         position: absolute;
         right: 15.5%;
 
-        bottom: -443%;
+        bottom: -20% !important;
     }
 
     .place_image {
@@ -856,13 +856,13 @@
 
     .contactUsFormContainer {
         right: 21%;
-        bottom: -498%;
+        bottom: -20%;
     }
 }
 
 @media (min-width: 1340px) and (max-width: 1399.98px) {
     .contactUsFormContainer {
-        bottom: -418%;
+        bottom: -75px;
     }
 
     .placeImgWrapper img {
@@ -924,7 +924,7 @@
 
     .contactUsFormContainer {
         right: 26%;
-        bottom: -487%;
+        bottom: -20%;
     }
 
     .placeImgWrapper img {
@@ -963,7 +963,7 @@
 
     .contactUsFormContainer {
         right: 26.5%;
-        bottom: -421%;
+        bottom: -20%;
     }
 
     .downloadPerticle {
@@ -971,7 +971,12 @@
     }
 }
 
-@media (min-width: 1600px) and (max-width: 1798.98px) {}
+@media (min-width: 1600px) and (max-width: 1798.98px) {
+    .contactUsFormContainer {
+        right: 28.5%;
+        bottom: -20%;
+    }
+}
 
 @media (min-width: 1800px) and (max-width: 2098.98px) {
     .Indexbanner {
@@ -1040,8 +1045,8 @@
     }
 
     .contactUsFormContainer {
-        right: 32%;
-        bottom: -302%;
+        right: 31%;
+        bottom: -20%;
         padding: 40px;
         border-radius: 10px;
         width: 700px;

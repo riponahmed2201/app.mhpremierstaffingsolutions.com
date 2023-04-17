@@ -9,6 +9,7 @@ import { fetchEmployeeListHandler } from '../../../api/employee';
 import Loader from '../../loadar/Loader';
 import { token } from '../../../utils/authentication';
 import { donwloadCSV } from '../../../utils/static/donwloadCSV.js';
+import axios from 'axios';
 
 
 
@@ -104,7 +105,7 @@ function EmployeeList() {
             action: (
                 <>
                     <div className='btn-group'>
-                        <Link to={`/admin/employee-details/${item._id}`} className='btn btn-primary btn-sm'>
+                        <Link to={`/admin/employee-details/${item._id}`} style={{ background: '#C6A34F', color: 'white' }} className='btn btn-sm'>
                             Edit
                         </Link>
                     </div>
@@ -148,13 +149,36 @@ function EmployeeList() {
         [fetchEmployee]
     );
 
-    const data = getEmployee?.map((item) => {
-        return {
-            Name: "Ripon Mia",
-            Email: "riponmia@gmail.com",
-            PhoneNumber: "01746693552",
-        };
-    });
+    const handleExportData = async () => {
+
+        try {
+
+            console.log("getFilterFromDate: ", getFilterFromDate);
+            console.log("getFilterToDate: ", getFilterToDate);
+            // &fromDate=${getFilterFromDate}&toDate=${getFilterToDate}
+            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=EMPLOYEE`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                }
+            );
+
+            const data = responseData?.data?.users?.map((item) => {
+                return {
+                    FirstName: item?.firstName,
+                    LastName: item?.lastName,
+                    Email: item?.email,
+                    PhoneNumber: item?.phoneNumber,
+                };
+            });
+
+            donwloadCSV(data, "Employee List");
+
+        } catch (error) {
+
+        }
+    };
 
     return (
         <div className="container-fluid px-4">
@@ -218,10 +242,9 @@ function EmployeeList() {
                             </div>
                             <div className='col-2'>
                                 <button
-                                    onClick={() => {
-                                        donwloadCSV(data, "Employee List");
-                                    }}
-                                    className="btn btn-primary float-end"
+                                    style={{ background: '#C6A34F', color: 'white' }}
+                                    onClick={handleExportData}
+                                    className="btn float-end"
                                 >
                                     Export
                                 </button>

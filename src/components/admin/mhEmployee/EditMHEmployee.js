@@ -252,7 +252,8 @@ function EditMHEmployee() {
                                         <Form.Item>
                                             <button
                                                 disabled={loading}
-                                                className="btn btn-primary"
+                                                className="btn"
+                                                style={{ background: '#C6A34F', color: 'white' }}
                                                 type="submit"
                                             >
                                                 {!loading && "Save"}

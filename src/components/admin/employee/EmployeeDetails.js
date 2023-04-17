@@ -273,7 +273,7 @@ function EmployeeDetails() {
                 <div className='card-header'>
                     <div className='d-flex justify-content-between'>
                         <h5>Edit Employee Information</h5>
-                        <Link to={`/admin/view-certificate/${id}`} className='btn btn-primary btn-sm'>
+                        <Link to={`/admin/view-certificate/${id}`} style={{ background: '#C6A34F', color: 'white' }} className='btn btn-sm'>
                             View Certificate
                         </Link>
                     </div>
@@ -407,7 +407,7 @@ function EmployeeDetails() {
                                         name="dateOfBirth"
                                         rules={[
                                             {
-                                                // required: true,
+                                                required: true,
                                                 message: 'Please enter date of birth',
                                             },
                                         ]}
@@ -668,25 +668,37 @@ function EmployeeDetails() {
                                     </Form.Item>
                                 </div>
 
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <Form.Item name="profilePicture" label="Profile Picture">
-                                        <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
-                                        <ImgCrop rotate aspect={2 / 1}>
-                                            <Upload
-                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                                listType="picture-card"
-                                                fileList={profilePicture}
-                                                onChange={onProfileChange}
-                                                onPreview={onPreview}
-                                            >
-                                                {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
-                                            </Upload>
-                                        </ImgCrop>
+                                        <div>
+                                            <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
+                                            <ImgCrop rotate aspect={2 / 1}>
+                                                <Upload
+                                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                    listType="picture-card"
+                                                    fileList={profilePicture}
+                                                    onChange={onProfileChange}
+                                                    onPreview={onPreview}
+                                                >
+                                                    {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
+                                                </Upload>
+                                            </ImgCrop>
+                                        </div>
                                     </Form.Item>
                                 </div>
 
-                                <div className="col-md-6">
-                                    <Form.Item name="summaryPdf" className="p-1 m-0" label="Curriculam Vitea (CV)">
+                                <div className="col-md-4">
+                                    <Form.Item
+                                        name="summaryPdf"
+                                        className="p-1 m-0"
+                                        label="Curriculam Vitea (CV)"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter curriculam vitea (CV)',
+                                            },
+                                        ]}
+                                    >
                                         <Upload
                                             listType="picture"
                                             defaultFileList={[...summaryPdf]}

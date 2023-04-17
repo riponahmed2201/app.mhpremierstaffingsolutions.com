@@ -244,23 +244,60 @@ function Login() {
                                         <div className="card-body card-body_custom">
                                             <h5 className="card-title-custom text-center">Welcome back!</h5>
                                             <div className="form_wrapper">
-                                                <form>
+                                                <Form
+                                                    className="ant-form ant-form-vertical"
+                                                    layout="vertical"
+                                                    onFinish={onFinish}
+                                                    form={form}
+                                                >
+
                                                     <div className="mb-3">
-                                                        <label htmlFor="exampleInputEmail1" className="form-label user_name_label">User Name/ID</label>
-                                                        <div className="contact_logo_img">
-                                                            <img src="assets/frontend/images/login_page_images/Profile.png" className="img-fluid " alt="iamge" />
-                                                        </div>
-                                                        <input placeholder="Razinul Karim" type="email" className="form-control form-control-custom" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                                        <Form.Item
+                                                            name="email"
+                                                            hasFeedback
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                    message: 'Please enter your email',
+                                                                },
+                                                            ]}
+                                                        >
+
+                                                            <div>
+                                                                <label htmlFor="exampleInputEmail1" className="form-label user_name_label">User Name/ID</label>
+                                                                <div className="contact_logo_img">
+                                                                    <img src="assets/frontend/images/login_page_images/Profile.png" className="img-fluid " alt="iamge" />
+                                                                </div>
+                                                                <input placeholder="Razinul Karim" type="email" className="form-control form-control-custom" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                                            </div>
+                                                        </Form.Item>
                                                     </div>
+
                                                     <div className="mb-3">
-                                                        <div className="password_logo_img">
-                                                            <img src="assets/frontend/images/login_page_images/Icon.png" className="img-fluid password_logo" alt="iamge" />
-                                                        </div>
-                                                        <input placeholder="Password" type="password" className="form-control form-control-custom" id="exampleInputPassword1" />
-                                                        <div className="password_icon_wrapper">
-                                                            <img src="assets/frontend/images/login_page_images/Vector.png" className="img-fluid" alt="iamge" />
-                                                        </div>
+                                                        <Form.Item
+                                                            name="password"
+                                                            hasFeedback
+                                                            rules={[
+                                                                {
+                                                                    required: true,
+                                                                    message: 'Please enter your password',
+                                                                },
+                                                            ]}
+                                                        >
+
+                                                            <div>
+                                                                <div className="password_logo_img">
+                                                                    <img src="assets/frontend/images/login_page_images/Icon.png" className="img-fluid password_logo" alt="iamge" />
+                                                                </div>
+                                                                <input placeholder="Password" type="password" className="form-control form-control-custom" id="exampleInputPassword1" />
+                                                                <div className="password_icon_wrapper">
+                                                                    <img src="assets/frontend/images/login_page_images/Vector.png" className="img-fluid" alt="iamge" />
+                                                                </div>
+                                                            </div>
+
+                                                        </Form.Item>
                                                     </div>
+
                                                     <div className="mb-3 form-check">
                                                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                         <div className="save_forget_pass_wrapper d-flex justify-content-between">
@@ -268,15 +305,46 @@ function Login() {
                                                             <label className="form-check-label " htmlFor="exampleCheck1"><a className="forget_password_custom" href>Forget Password</a></label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn login_button">Login</button>
-                                                </form>
+
+                                                    {getError ? (
+                                                        <div className="row">
+                                                            <div className="col-lg-12">
+                                                                <div className="error-message">
+                                                                    <p className="text-danger">{getError}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ) : undefined}
+
+                                                    {/* <button type="submit" className="btn login_button">Login</button> */}
+
+                                                    <Form.Item >
+                                                        <button
+                                                            disabled={loading}
+                                                            className='btn login_button'
+                                                            type="submit"
+                                                        >
+                                                            {!loading && "Login"}
+                                                            {loading && (
+                                                                <span
+                                                                    className="indicator-progress"
+                                                                    style={{ display: "block" }}
+                                                                >
+                                                                    Please wait...
+                                                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    </Form.Item>
+                                                </Form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* Register Section start*/}
                                 <div className="accountandregisterwrapper text-center">
-                                    <span className="donthaveaccounttext">Don’t have an account?</span><a href="registrationForm.html">Register</a>
+                                    <span className="donthaveaccounttext">Don’t have an account?</span>
+                                    <Link to="/client-register">Register</Link>
                                 </div>
                                 {/* Register Section end*/}
                                 {/* Form part end */}

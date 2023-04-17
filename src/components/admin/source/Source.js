@@ -151,7 +151,7 @@ function Source() {
       <div className='row mt-4'>
         <div className='d-flex justify-content-between'>
           <h3 className='mb-4 title'>Source List</h3>
-          <Button type="primary" className='ml-5' onClick={showDrawer}>
+          <Button type="primary" style={{ background: '#C6A34F', color: 'white' }} className='ml-5' onClick={showDrawer}>
             Add Source
           </Button>
         </div>
@@ -174,7 +174,7 @@ function Source() {
                   <td>{data?.name}</td>
                   <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
                   <td>
-                    <Button type="primary" className='ml-5'
+                    <Button type="primary" style={{ background: '#C6A34F', color: 'white' }} className='ml-5'
                       onClick={() => showEditDrawer(data?._id)}>
                       Edit
                     </Button>
@@ -250,7 +250,8 @@ function Source() {
                   <Form.Item>
                     <button
                       disabled={loading}
-                      className="btn btn-primary"
+                      className="btn"
+                      style={{ background: '#C6A34F', color: 'white' }}
                       type="submit"
                     >
                       {!loading && "Save"}
