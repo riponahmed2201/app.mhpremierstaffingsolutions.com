@@ -39,6 +39,7 @@ function EmployeeDetails() {
     const [profilePicture, setProfilePicture] = useState([]);
     const [summaryPdf, setSummaryPdf] = useState([]);
     const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
+    const [getEditDateOfBirth, setEditDateOfBirth] = useState(undefined);
 
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
@@ -76,6 +77,8 @@ function EmployeeDetails() {
                 }
             );
 
+            setEditDateOfBirth(res?.data?.details.dateOfBirth);
+
             //Employee Basic Information
             formEdit.setFieldsValue({
                 firstName: res?.data?.details.firstName,
@@ -84,7 +87,7 @@ function EmployeeDetails() {
                 phoneNumber: res?.data?.details.phoneNumber,
                 positionId: res?.data?.details.positionId,
                 gender: res?.data?.details.gender,
-                dateOfBirth: res?.data?.details.dateOfBirth,
+                // dateOfBirth: moment(res?.data?.details.dateOfBirth).format("YYYY-MM-DD"),
                 presentAddress: res?.data?.details.presentAddress,
                 permanentAddress: res?.data?.details.permanentAddress,
                 countryName: res?.data?.details.countryName,
@@ -96,6 +99,7 @@ function EmployeeDetails() {
                 skills: res?.data?.details.skills,
                 sourceId: res?.data?.details.sourceId,
                 referPersonId: res?.data?.details.referPersonId,
+                hourlyRate: res?.data?.details.hourlyRate,
             });
 
             //bank information
@@ -135,25 +139,27 @@ function EmployeeDetails() {
 
         try {
 
-            setBankUpdateLoading(true);
+            if (id && receivedEmployeeFields) {
+                setBankUpdateLoading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields, {
-                headers: {
-                    Authorization: `Bearer ${token()}`,
-                },
-            });
+                const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields, {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                });
 
-            if (res?.data?.statusCode === 200) {
-                setError(undefined);
-                setBankUpdateLoading(false);
-                responseNotification("Employee bank updated successfully!", "success");
+                if (res?.data?.statusCode === 200) {
+                    setError(undefined);
+                    setBankUpdateLoading(false);
+                    responseNotification("Employee bank updated successfully!", "success");
 
-            } else if (res?.data?.statusCode === 400) {
-                setError(res?.data?.errors?.[0].msg);
-                setBankUpdateLoading(false);
-            } else if (res?.data?.statusCode === 500) {
-                setError(res?.message);
-                setBankUpdateLoading(false);
+                } else if (res?.data?.statusCode === 400) {
+                    setError(res?.data?.errors?.[0].msg);
+                    setBankUpdateLoading(false);
+                } else if (res?.data?.statusCode === 500) {
+                    setError(res?.message);
+                    setBankUpdateLoading(false);
+                }
             }
 
         } catch (error) {
@@ -220,34 +226,35 @@ function EmployeeDetails() {
             referPersonId: values?.referPersonId,
             skills: values?.skills,
             sourceId: values?.sourceId,
-            employeeExperience: Number(values?.employeeExperience)
+            hourlyRate: values?.hourlyRate,
+            employeeExperience: values?.employeeExperience
 
             // values.dateOfBirth
         };
 
-        // console.log("receivedEmployeeFields: ", receivedEmployeeFields);
         try {
 
             setBasicInfoUpdateloading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields, {
-                headers: {
-                    Authorization: `Bearer ${token()}`,
-                },
-            });
+            if (id && receivedEmployeeFields) {
+                const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields, {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                });
 
-            if (res?.data?.statusCode === 200) {
-                setError(undefined);
-                setBasicInfoUpdateloading(false);
-                responseNotification("Employee information updated successfully!", "success");
-                // form.resetFields();
+                if (res?.data?.statusCode === 200) {
+                    setError(undefined);
+                    setBasicInfoUpdateloading(false);
+                    responseNotification("Employee information updated successfully!", "success");
 
-            } else if (res?.data?.statusCode === 400) {
-                setError(res?.data?.errors?.[0].msg);
-                setBasicInfoUpdateloading(false);
-            } else if (res?.data?.statusCode === 500) {
-                setError(res?.message);
-                setBasicInfoUpdateloading(false);
+                } else if (res?.data?.statusCode === 400) {
+                    setError(res?.data?.errors?.[0].msg);
+                    setBasicInfoUpdateloading(false);
+                } else if (res?.data?.statusCode === 500) {
+                    setError(res?.message);
+                    setBasicInfoUpdateloading(false);
+                }
             }
 
         } catch (error) {
@@ -418,8 +425,10 @@ function EmployeeDetails() {
 
                                             <DatePicker
                                                 style={{ width: '100%' }}
-                                                id="dateOfBirth"
                                                 placeholder="Date of Birth"
+                                                defaultValue={
+                                                    (getEditDateOfBirth && moment(getEditDateOfBirth, 'YYYY-MM-DD')) || ''
+                                                }
                                                 onChange={(value) => {
                                                     setDateOfBirth(
                                                         moment(value)

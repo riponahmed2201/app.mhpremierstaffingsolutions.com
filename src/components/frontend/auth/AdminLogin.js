@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import jwt_decode from "jwt-decode";
 
 import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
@@ -33,11 +34,24 @@ function AdminLogin() {
                     localStorage.setItem("accessToken", res?.data?.token);
                     localStorage.setItem("loginData", JSON.stringify(res?.data));
 
-                    // resetForm({ values: "" });
-                    setError(undefined);
-                    setLoading(false);
+                    const jwtDecode = jwt_decode(res?.data?.token);
 
-                    navigate('/admin/dashboard');
+                    if (jwtDecode && (jwtDecode.admin || jwtDecode.hr || jwtDecode.isMhEmployee)) {
+                        setError(undefined);
+                        setLoading(false);
+                        navigate('/admin/dashboard');
+
+                    } else if (jwtDecode && jwtDecode.client) {
+                        setError(undefined);
+                        setLoading(false);
+                        navigate('/client-dashboard');
+                    } else {
+                        setError(undefined);
+                        setLoading(false);
+                        navigate('/login');
+                    }
+
+                    // resetForm({ values: "" });
 
                 } else if (res?.data?.statusCode === 400) {
                     setError(res?.message);

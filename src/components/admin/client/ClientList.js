@@ -117,7 +117,7 @@ function ClientList() {
             action: (
                 <>
                     <div className='btn-group'>
-                        <Link to={`/admin/client-details/${item._id}`} className='btn btn-primary btn-sm'>
+                        <Link to={`/admin/client-details/${item._id}`} style={{ background: '#C6A34F', color: 'white' }} className='btn btn-sm'>
                             Edit
                         </Link>
                     </div>
@@ -157,20 +157,10 @@ function ClientList() {
         [fetchClient]
     );
 
-    const data = getClient?.map((item) => {
-        return {
-            Name: "Ripon Mia",
-            Email: "riponmia@gmail.com",
-            PhoneNumber: "01746693552",
-        };
-    });
-
     const handleExportData = async () => {
 
         try {
 
-            console.log("getFilterFromDate: ", getFilterFromDate);
-            console.log("getFilterToDate: ", getFilterToDate);
             // &fromDate=${getFilterFromDate}&toDate=${getFilterToDate}
             const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=CLIENT`,
                 {
@@ -182,10 +172,12 @@ function ClientList() {
 
             const data = responseData?.data?.users?.map((item) => {
                 return {
-                    FirstName: item?.firstName,
-                    LastName: item?.lastName,
+                    RestaurantName: item?.restaurantName,
+                    RestaurantAddress: item?.restaurantAddress,
                     Email: item?.email,
                     PhoneNumber: item?.phoneNumber,
+                    ClientIDNumber: item?.userIdNumber,
+                    Discount: item?.clientDiscount
                 };
             });
 

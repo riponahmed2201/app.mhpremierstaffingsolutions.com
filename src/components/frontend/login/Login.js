@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 import { Form } from 'antd';
 import { responseNotification } from '../../../utils/notifcation';
@@ -34,8 +35,18 @@ function Login() {
 
                         localStorage.setItem("accessToken", res?.token);
 
-                        navigate('/admin/dashboard');
-                        setLoading(false);
+                        const jwtDecode = jwt_decode(res?.token);
+                   
+                        if (jwtDecode && (jwtDecode.admin || jwtDecode.hr || jwtDecode.isMhEmployee)) {
+                            navigate('/admin/dashboard');
+                            setLoading(false);
+                        } else if (jwtDecode && jwtDecode.client) {
+                            navigate('/client-dashboard');
+                            setLoading(false);
+                        } else {
+                            navigate('/login');
+                            setLoading(false);
+                        }
 
                     } else if (res?.statusCode === 400) {
                         setError(res?.message);
@@ -262,13 +273,12 @@ function Login() {
                                                                 },
                                                             ]}
                                                         >
-
                                                             <div>
-                                                                <label htmlFor="exampleInputEmail1" className="form-label user_name_label">User Name/ID</label>
+                                                                {/* <label htmlFor="exampleInputEmail1" className="form-label user_name_label">User Name/ID</label> */}
                                                                 <div className="contact_logo_img">
                                                                     <img src="assets/frontend/images/login_page_images/Profile.png" className="img-fluid " alt="iamge" />
                                                                 </div>
-                                                                <input placeholder="Razinul Karim" type="email" className="form-control form-control-custom" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                                                <input placeholder="Enter email" type="email" className="form-control form-control-custom" id="exampleInputEmail1" aria-describedby="emailHelp" />
                                                             </div>
                                                         </Form.Item>
                                                     </div>
@@ -289,7 +299,7 @@ function Login() {
                                                                 <div className="password_logo_img">
                                                                     <img src="assets/frontend/images/login_page_images/Icon.png" className="img-fluid password_logo" alt="iamge" />
                                                                 </div>
-                                                                <input placeholder="Password" type="password" className="form-control form-control-custom" id="exampleInputPassword1" />
+                                                                <input placeholder="Enter password" type="password" className="form-control form-control-custom" id="exampleInputPassword1" />
                                                                 <div className="password_icon_wrapper">
                                                                     <img src="assets/frontend/images/login_page_images/Vector.png" className="img-fluid" alt="iamge" />
                                                                 </div>

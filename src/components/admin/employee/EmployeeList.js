@@ -170,6 +170,18 @@ function EmployeeList() {
                     LastName: item?.lastName,
                     Email: item?.email,
                     PhoneNumber: item?.phoneNumber,
+                    Position: item?.positionName,
+                    Gender: item?.gender,
+                    DateOfBirth: item?.dateOfBirth,
+                    PresentAddress: item?.presentAddress,
+                    PermanentAddress: item?.permanentAddress,
+                    CountryName: item?.countryName,
+                    HigherEducation: item?.higherEducation,
+                    LicensesNo: item?.licensesNo,
+                    EmmergencyContact: item?.emmergencyContact,
+                    EmployeeExperience: item?.employeeExperience,
+                    PerHourRate: item?.hourlyRate,
+                    Languages: item?.languages,
                 };
             });
 
