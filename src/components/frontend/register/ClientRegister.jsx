@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Form, Select, Input } from "antd";
 import axios from "axios";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 import { clientRegisterHandler } from "../../../api/client";
 import { responseNotification } from "../../../utils/notifcation";
+import CountryWiseValidationRules from "../../../utils/static/countryList";
 
 const { Option } = Select;
 
@@ -44,46 +47,48 @@ function ClientRegister() {
     fetchSourceFromData();
   }, []);
 
-  const onFinish = async (values) => {
-    const receivedClientRegisterFields = {
-      restaurantName: values?.restaurantName,
-      restaurantAddress: values?.restaurantAddress,
-      sourceId: values?.sourceId,
-      referPersonId: values?.referPersonId,
-      phoneNumber: values?.phoneNumber,
-      email: values?.email,
-      password: values?.password,
+  const formik = useFormik({
+    initialValues: {
+      resturauntName: "",
+      restaurantAddress: "",
+      sourceFrom: "",
+      referPersonId: "",
+      phoneNumber: "",
+      email: "",
+      password: "",
       lat: "123.23122242",
       long: "4545.354545",
-    };
+    },
+    validationSchema: yup.object({
+      resturauntName: yup.string().required(),
+      restaurantAddress: yup.string().required(),
+      sourceFrom: yup.string().required(),
+      referPersonId: yup.string().required(),
+      phoneNumber: yup.string().required(),
+      email: yup.string().email().required(),
+      password: yup
+        .string()
+        .min(6, "Password must have at least 6 characters")
+        .required(),
+    }),
+    onSubmit: async (values, resetForm) => {
+      console.log("values: ", values);
+      try {
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/users/client-register`,
+          values
+        );
 
-    if (receivedClientRegisterFields) {
-      setLoading(true);
-
-      await clientRegisterHandler(receivedClientRegisterFields)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.statusCode === 201) {
-            responseNotification("Client registered successfully!", "success");
-            form.resetFields();
-
-            navigate("/admin-login");
-
-            // window.location.reload();
-          } else if (res?.statusCode === 400) {
-            setError(res?.message);
-            setLoading(false);
-          } else {
-            setLoading(false);
-            setError(res?.message);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoading(false);
-        });
-    }
-  };
+        if (res?.data?.statusCode === 201) {
+          console.log("response: ", res?.data?.statusCode);
+          resetForm({ values: "" });
+          navigate("/login");
+        } else {
+          navigate("/client-register");
+        }
+      } catch (error) {}
+    },
+  });
 
   return (
     <section className="total_wrapper">
@@ -177,213 +182,286 @@ function ClientRegister() {
             <div className="formWrappper">
               <div className="tab-content" id="myTabContent">
                 {/* Clients Form */}
-                <div
-                  className="tab-pane fade show active"
-                  id="home"
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                >
-                  <div className="container card_looking_container">
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="resturauntNameWrapper">
-                          <label
-                            htmlFor="exampleInputEmail1"
-                            className="form-label restaurantNameText"
-                          >
-                            Resturaunt Name
-                          </label>
-                        </div>
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Vector.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Name"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Email.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Email Address"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label
-                          htmlFor="exampleInputEmail1"
-                          className="hidden_input form-label restaurantNameText"
-                        >
-                          Resturaunt Name
-                        </label>
-                        {/* This is an hidden label for  empty space */}
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Subtract.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Resturaunt Address"
-                          type="text"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/phone.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Phone Number"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid hidden_input"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/ip.png"
-                            alt="image"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Password"
-                          type="password"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Confirm Password"
-                          type="password"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                    </div>
-                    {/* Please Provide Text */}
-                    <div className="row">
-                      <div className="col-lg-12 please_provide_wrapper text-center">
-                        <p className="pleaseProvideText">
-                          Please provide the following info too
-                        </p>
-                        <img
-                          className="img-fluid pleaseProvideImage"
-                          src="assets/frontend/images/registrationFormImages/clientFormPictures/rectangle.png"
-                          alt="image"
-                        />
-                      </div>
-                    </div>
-                    {/* Please Provide Text End */}
-                    {/* About Us form */}
-                    <div className="container dropdownContainer">
+
+                <form onSubmit={formik.handleSubmit}>
+                  <div
+                    className="tab-pane fade show active"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="home-tab"
+                  >
+                    <div className="container card_looking_container">
                       <div className="row">
                         <div className="col-lg-6">
-                          <p className="how_youKnow_text">
-                            How You Know About Us
-                          </p>
-                          <div className="dropdownbuttonwrapper">
-                            <div className="dropdown">
-                              <div className="inputLogoWrapper">
-                                <img
-                                  className="img-fluid"
-                                  src="assets/frontend/images/registrationFormImages/clientFormPictures/selectFrom.png"
-                                  alt="image"
-                                />
-                              </div>
-                              <select
-                                className="form-select custom_select"
-                                aria-label="Select country"
-                              >
-                                <option selected disabled>
-                                  Select from here
-                                </option>
-                                <option value="Afghanistan">Afghanistan</option>
-                                <option value="Brazil">Brazil</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Denmark">Denmark</option>
-                                <option value="Egypt">Egypt</option>
-                                <option value="Finland">Finland</option>
-                                <option value="Greece">Greece</option>
-                                <option value="Hungary">Hungary</option>
-                                <option value="India">India</option>
-                                <option value="Japan">Japan</option>
-                              </select>
-                            </div>
+                          <div className="resturauntNameWrapper">
+                            <label
+                              htmlFor="exampleInputEmail1"
+                              className="form-label restaurantNameText"
+                            >
+                              Resturaunt Name
+                            </label>
                           </div>
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/Vector.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            onChange={formik.handleChange}
+                            placeholder="Enter resturaunt name"
+                            type="text"
+                            value={formik.values.resturauntName}
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="resturauntName"
+                            name="resturauntName"
+                          />
+                          {formik.touched.resturauntName &&
+                            formik.errors.resturauntName && (
+                              <span style={{ color: "red" }}>
+                                {formik.errors.resturauntName}
+                              </span>
+                            )}
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/Email.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            onChange={formik.handleChange}
+                            id="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            type="email"
+                            value={formik.values.email}
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                          />
+                          {formik.touched.email && formik.errors.email && (
+                            <span style={{ color: "red" }}>
+                              {formik.errors.email}
+                            </span>
+                          )}
                         </div>
                         <div className="col-lg-6">
-                          <p className="how_youKnow_text">Refer</p>
-                          <div className="referFieldWrapper">
-                            <div className="inputLogoWrapper">
-                              <img
-                                className="img-fluid"
-                                src="assets/frontend/images/registrationFormImages/clientFormPictures/EnterHere.png"
-                                alt="image"
-                              />
-                            </div>
-                            <input
-                              placeholder="Enter Here"
-                              type="password"
-                              className="form-control custom_client_input_for_registration_page mb-3"
-                              id="exampleInputEmail1"
-                              aria-describedby="emailHelp"
+                          <label
+                            htmlFor="exampleInputEmail1"
+                            className="hidden_input form-label restaurantNameText"
+                          >
+                            Resturaunt Address
+                          </label>
+                          {/* This is an hidden label for  empty space */}
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/Subtract.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            onChange={formik.handleChange}
+                            id="resturauntAddress"
+                            name="resturauntAddress"
+                            value={formik.values.restaurantAddress}
+                            placeholder="Enter resturaunt address"
+                            type="text"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                          />
+                          {formik.touched.restaurantAddress &&
+                            formik.errors.restaurantAddress && (
+                              <span style={{ color: "red" }}>
+                                {formik.errors.restaurantAddress}
+                              </span>
+                            )}
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/phone.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            onChange={formik.handleChange}
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            placeholder="Phone Number"
+                            value={formik.values.phoneNumber}
+                            type="text"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                          />
+                          {formik.touched.phoneNumber &&
+                            formik.errors.phoneNumber && (
+                              <span style={{ color: "red" }}>
+                                {formik.errors.phoneNumber}
+                              </span>
+                            )}
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid hidden_input"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/ip.png"
+                              alt="image"
                             />
                           </div>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            onChange={formik.handleChange}
+                            id="password"
+                            name="password"
+                            value={formik.values.password}
+                            placeholder="Password"
+                            type="password"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                          />
+                          {formik.touched.password &&
+                            formik.errors.password && (
+                              <span style={{ color: "red" }}>
+                                {formik.errors.password}
+                              </span>
+                            )}
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Confirm Password"
+                            type="password"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                        </div>
+                      </div>
+                      {/* Please Provide Text */}
+                      <div className="row">
+                        <div className="col-lg-12 please_provide_wrapper text-center">
+                          <p className="pleaseProvideText">
+                            Please provide the following info too
+                          </p>
+                          <img
+                            className="img-fluid pleaseProvideImage"
+                            src="assets/frontend/images/registrationFormImages/clientFormPictures/rectangle.png"
+                            alt="image"
+                          />
+                        </div>
+                      </div>
+                      {/* Please Provide Text End */}
+                      {/* About Us form */}
+                      <div className="container dropdownContainer">
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <p className="how_youKnow_text">
+                              How You Know About Us
+                            </p>
+                            <div className="dropdownbuttonwrapper">
+                              <div className="dropdown">
+                                <div className="inputLogoWrapper">
+                                  <img
+                                    className="img-fluid"
+                                    src="assets/frontend/images/registrationFormImages/clientFormPictures/selectFrom.png"
+                                    alt="image"
+                                  />
+                                </div>
+                                <select
+                                  className="form-select custom_select"
+                                  aria-label="Select country"
+                                >
+                                  <option selected disabled>
+                                    Select from here
+                                  </option>
+
+                                  {CountryWiseValidationRules?.map(
+                                    (item, index) => (
+                                      <option key={index} value={item?.name}>
+                                        {item?.name}
+                                      </option>
+                                    )
+                                  )}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <p className="how_youKnow_text">Refer</p>
+                            <div className="dropdownbuttonwrapper">
+                              <div className="dropdown">
+                                <div className="inputLogoWrapper">
+                                  <img
+                                    className="img-fluid"
+                                    src="assets/frontend/images/registrationFormImages/clientFormPictures/EnterHere.png"
+                                    alt="image"
+                                  />
+                                </div>
+                                <select
+                                  className="form-select custom_select"
+                                  aria-label="Select country"
+                                >
+                                  <option selected disabled>
+                                    Select from here
+                                  </option>
+
+                                  {referPerson?.map((item, index) => (
+                                    <option key={index} value={item?._id}>
+                                      {item?.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* About Us form End */}
+
+                      {getError ? (
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <div className="error-message">
+                              <p className="text-danger">{getError}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : undefined}
+
+                      {/* Register Button */}
+                      <div className="registerButton text-center">
+                        <button
+                          disabled={loading}
+                          className="btn register_button"
+                          type="submit"
+                        >
+                          {!loading && "Register"}
+                          {loading && (
+                            <span
+                              className="indicator-progress"
+                              style={{ display: "block" }}
+                            >
+                              Please wait...
+                              <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                          )}
+                        </button>
+                      </div>
+                      {/* Register Button End */}
                     </div>
-                    {/* About Us form End */}
-                    {/* Register Button */}
-                    <div className="registerButton text-center">
-                      <button type="submit" className="btn register_button">
-                        Register
-                      </button>
-                    </div>
-                    {/* Register Button End */}
                   </div>
-                </div>
+                </form>
                 {/* Employee form */}
                 <div
                   className="tab-pane fade"

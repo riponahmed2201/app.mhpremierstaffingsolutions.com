@@ -1,0 +1,729 @@
+@media (min-width: 320px) and (max-width: 374.98px) {
+    .SelectedEmployee {
+        padding: 17px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        top: 13px;
+        right: 17px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        top: 13px;
+        left: 17px;
+    }
+
+    .selectEmpReviewCol {
+        padding: 0px 10px !important;
+    }
+
+    .SlctProrateIcon {
+        margin-top: -3px;
+        margin-right: 0px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: -3px;
+        margin-left: -17px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 9px;
+        margin-top: 9px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 8px;
+        margin-bottom: 0px;
+        height: 49px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 575.98px) {
+    .SelectedEmployee {
+        padding: 17px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        top: 23px;
+        right: 28px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        top: 23px;
+        left: 28px;
+    }
+
+    .selectEmpReviewCol {
+        padding: 0px 10px !important;
+    }
+
+    .SlctProrateIcon {
+        margin-top: -3px;
+        margin-right: 0px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: -3px;
+        margin-left: -17px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 9px;
+        margin-top: 9px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 8px;
+        margin-bottom: 0px;
+        height: 49px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 818.98px) {
+    .SelectedEmployee {
+        padding: 25px 0px;
+    }
+
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectEmpLocationBar {
+        padding: 11px 20px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 25px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        top: 22px;
+        left: 25px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        margin-bottom: 3px;
+
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 14px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 12.7px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1023.98px) {
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectEmpLocationBar {
+        padding: 11px 20px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 25px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        top: 22px;
+        left: 25px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 15px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 12.7px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1198.98px) {
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 25px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        top: 22px;
+        left: 25px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 15px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 22.7px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1339.98px) {
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 98px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        position: absolute;
+        top: 29px;
+        left: 92px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 15px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 16px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 1340px) and (max-width: 1399.98px) {
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 98px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        position: absolute;
+        top: 29px;
+        left: 92px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 15px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 16px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1535.98px) {
+    .SelectedEmployee {
+        padding: 28px 0px;
+    }
+
+    .selectedEmploImgBackBtn img {
+        right: 123px;
+    }
+
+    .selectedEmployeeBookmarkImg img {
+        position: absolute;
+        top: 29px;
+        left: 122px;
+    }
+
+    .slctProfileNameTitle {
+        font-size: 19px;
+    }
+
+    .sctProfileAge {
+        font-size: 15px;
+    }
+
+    .slctProfileRateName {
+        font-size: 14px;
+    }
+
+    .slctprofilePerHourPrice {
+        font-size: 14px;
+    }
+
+    .SlctProrateIcon {
+        margin-right: 0px;
+    }
+
+    .slctProfileExpName,
+    .selectEmpLicense {
+        font-size: 14px;
+    }
+
+    .slctProfileExpValue,
+    .selectEmpLicenseValue {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHours {
+        font-size: 14px;
+    }
+
+    .selectEmployeeTotalHoursValue {
+        font-size: 15px;
+    }
+
+    .selectEmpReviewspan {
+        font-size: 14px;
+    }
+
+    .selectEmpReviewspanValue {
+        font-size: 14px;
+    }
+
+    .slcEmpProfilLicenseRow {
+        margin-top: 3px;
+    }
+
+    .selectEmployeeCardBookNowButton button {
+        margin-top: 12px;
+        height: 50px;
+    }
+
+    .selectEmpLocationBar p {
+        font-size: 17px;
+    }
+
+    .selectEmpLocationBar span {
+        font-size: 15px;
+    }
+
+    .selectEmpLocationBar {
+        margin-bottom: 32.5px;
+    }
+
+    .selectEmpLicenseLogo {
+        margin-left: -5px;
+    }
+}
+
+@media (min-width: 1536px) and (max-width: 1598.98px) {
+    .SelectedEmployee {
+        padding: 40px 0px;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1798.98px) {}
+
+@media (min-width: 1800px) and (max-width: 2098.98px) {}

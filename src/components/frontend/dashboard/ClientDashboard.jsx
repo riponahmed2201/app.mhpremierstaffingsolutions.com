@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { token } from "../../../utils/authentication";
 import axios from "axios";
+import _ from "lodash";
 import { jwtTokenDecode } from "../../../utils/jwtDecode";
+import { Link } from "react-router-dom";
+import Loader from "../../loadar/Loader";
+import defaultImage from "../../../assets/images/default.png";
 
 function ClientDashboard() {
-
   const jwtDecode = jwtTokenDecode();
 
   const [getEmployee, setEmployee] = useState([]);
@@ -95,7 +98,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/eclipsegreen.png"
                           className="img-fluid"
-                          alt
+                          alt="image"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -124,7 +127,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/EllipseRed.png"
                           className="img-fluid"
-                          alt
+                          alt="image"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -156,7 +159,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard 1/dashboard.png"
                         className="img-fluid"
-                        alt
+                        alt="image"
                       />
                     </div>
                     <div className="dashP">
@@ -165,21 +168,26 @@ function ClientDashboard() {
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
-                  <div
-                    className="card-body custom_dashboard_right_side_cards dashboardMyemloyeeCardHeightFix text-center"
-                    style={{ backgroundColor: "#f6f1e5" }}
+                  <Link
+                    className="text-decoration-none text-black"
+                    to="/client-myemployee"
                   >
-                    <div className="employeeImg">
-                      <img
-                        src="assets/frontend/images/Dashboardimages/dashboard 1/employe.png"
-                        className="img-fluid"
-                        alt
-                      />
+                    <div
+                      className="card-body custom_dashboard_right_side_cards dashboardMyemloyeeCardHeightFix text-center"
+                      style={{ backgroundColor: "#f6f1e5" }}
+                    >
+                      <div className="employeeImg">
+                        <img
+                          src="assets/frontend/images/Dashboardimages/dashboard 1/employe.png"
+                          className="img-fluid"
+                          alt="image"
+                        />
+                      </div>
+                      <div className="employeeP">
+                        <p>My Employees</p>
+                      </div>
                     </div>
-                    <div className="employeeP">
-                      <p>My Employees</p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
                   <div
@@ -190,7 +198,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard 1/image 2.png"
                         className="img-fluid"
-                        alt
+                        alt="image"
                       />
                     </div>
                     <div className="invoiceP">
@@ -207,7 +215,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard 1/helpSupport.png"
                         className="img-fluid"
-                        alt
+                        alt="image"
                       />
                     </div>
                     <div className="helpP">
@@ -233,7 +241,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard2/search.png"
                         className="img-fluid"
-                        alt
+                        alt="image"
                       />
                       <span>MH</span>
                       <span>Employees</span>
@@ -241,343 +249,146 @@ function ClientDashboard() {
                   </div>
                   <div className="col-lg-6 col-md-6">
                     <div className="MHEmployeeText text-end">
-                      <span>1200</span>
+                      <span className="mr-2">{getEmployee?.total}</span>
                       <span>employees are showing</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="card-group">
-                  
-                  <div className="card DashboardEmployeeCard">
-                    <img
-                      src="assets/frontend/images/Dashboardimages/dashboard2/card profiles/Rectangle 40236.png"
-                      className="Dashboard2-card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body Dashboard2CardbodyPaddingFixfor768">
-                      <h5 className="card-title Dashboard2CardTItle">
-                        Mr Alquraish Sharkar
-                      </h5>
-                      <div className="row">
-                        <div className="col-lg-5">
-                          <div className="DashboardratingimgWraper">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2Card_rating">4.5</span>
-                            <span className="Dashboard2Card_count">(123)</span>
-                          </div>
-                        </div>
-                        <div className="col-lg-7">
-                          <div className="DashboardexperienceWrapperimg">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2ExpSpan">Exp: </span>
-                            <span className="Dashboardcard2Years">5 Years</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2chefwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span>Chef</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2TotalHourwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="dashboard2totalhourspan">
-                            Total Hours :
-                          </span>
-                          <span className="dashboard2totalhoursspent">
-                            2456 H
-                          </span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2Rate">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="Dashboard2Rate">Rate</span>
-                          <span className="Dashboard2Perhour">500$/hour</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="Dashboard2BookNowButton">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                            alt
-                          />
-                          <button>Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                 
-                  <div className="card DashboardEmployeeCard">
-                    <img
-                      src="assets/frontend/images/Dashboardimages/dashboard2/card profiles/7.png"
-                      className="Dashboard2-card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body Dashboard2CardbodyPaddingFixfor768">
-                      <h5 className="card-title Dashboard2CardTItle">
-                        Jonathon Alex Bend
-                      </h5>
-                      <div className="row">
-                        <div className="col-lg-5">
-                          <div className="DashboardratingimgWraper">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2Card_rating">4.5</span>
-                            <span className="Dashboard2Card_count">(123)</span>
-                          </div>
-                        </div>
-                        <div className="col-lg-7">
-                          <div className="DashboardexperienceWrapperimg">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2ExpSpan">Exp: </span>
-                            <span className="Dashboardcard2Years">5 Years</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2chefwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/Manager.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span>Manager</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2TotalHourwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="dashboard2totalhourspan">
-                            Total Hours :
-                          </span>
-                          <span className="dashboard2totalhoursspent">
-                            2456 H
-                          </span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2Rate">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="Dashboard2Rate">Rate</span>
-                          <span className="Dashboard2Perhour">500$/hour</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="Dashboard2BookNowButton">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                            alt
-                          />
-                          <button>Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                 
-                  <div className="card DashboardEmployeeCard">
-                    <img
-                      src="assets/frontend/images/Dashboardimages/dashboard2/card profiles/Rectangle 40236 (1).png"
-                      className="Dashboard2-card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body Dashboard2CardbodyPaddingFixfor768">
-                      <h5 className="card-title Dashboard2CardTItle">
-                        Christopher Nolan
-                      </h5>
-                      <div className="row">
-                        <div className="col-lg-5">
-                          <div className="DashboardratingimgWraper">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2Card_rating">4.5</span>
-                            <span className="Dashboard2Card_count">(123)</span>
-                          </div>
-                        </div>
-                        <div className="col-lg-7">
-                          <div className="DashboardexperienceWrapperimg">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2ExpSpan">Exp: </span>
-                            <span className="Dashboardcard2Years">5 Years</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2chefwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span>Chef</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2TotalHourwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="dashboard2totalhourspan">
-                            Total Hours :
-                          </span>
-                          <span className="dashboard2totalhoursspent">
-                            2456 H
-                          </span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2Rate">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="Dashboard2Rate">Rate</span>
-                          <span className="Dashboard2Perhour">500$/hour</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="Dashboard2BookNowButton">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                            alt
-                          />
-                          <button>Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                 
-                  <div className="card DashboardEmployeeCard">
-                    <img
-                      src="assets/frontend/images/Dashboardimages/dashboard2/card profiles/Rectangle 40236 (2).png"
-                      className="Dashboard2-card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body Dashboard2CardbodyPaddingFixfor768">
-                      <h5 className="card-title Dashboard2CardTItle">
-                        Anada Aniana
-                      </h5>
-                      <div className="row">
-                        <div className="col-lg-5">
-                          <div className="DashboardratingimgWraper">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2Card_rating">4.5</span>
-                            <span className="Dashboard2Card_count">(123)</span>
-                          </div>
-                        </div>
-                        <div className="col-lg-7">
-                          <div className="DashboardexperienceWrapperimg">
-                            <img
-                              src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
-                              className="img-fluid"
-                              alt
-                            />
-                            <span className="Dashboard2ExpSpan">Exp: </span>
-                            <span className="Dashboardcard2Years">5 Years</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2chefwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/Security.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span>Security</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2TotalHourwrapper">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="dashboard2totalhourspan">
-                            Total Hours :
-                          </span>
-                          <span className="dashboard2totalhoursspent">
-                            2456 H
-                          </span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="dashboard2Rate">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
-                            className="img-fluid"
-                            alt
-                          />
-                          <span className="Dashboard2Rate">Rate</span>
-                          <span className="Dashboard2Perhour">500$/hour</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="Dashboard2BookNowButton">
-                          <img
-                            src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                            alt
-                          />
-                          <button>Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="card-group">
+                    {loading ? (
+                      <div>
+                        <Loader />
+                      </div>
+                    ) : getEmployee?.users?.length ? (
+                      _.map(getEmployee?.users, (item, index) => (
+                        <div
+                          key={index}
+                          className="col-lg-3 col-md-6 Dashboard2CardbottomMarginFixForSmallScreens mb-3"
+                        >
+                          <Link
+                            className="text-decoration-none"
+                            to={`/employee-view-details/${item?._id}`}
+                          >
+                            <div className="card DashboardEmployeeCard">
+                              <img
+                                style={{
+                                  width: "215px",
+                                  height: "149px",
+                                  objectFit: "cover",
+                                }}
+                                src={
+                                  item?.profilePicture
+                                    ? process.env.REACT_APP_ASSETs_BASE_URL +
+                                      "/" +
+                                      item?.profilePicture
+                                    : defaultImage
+                                }
+                                className="Dashboard2-card-img-top"
+                                alt="image"
+                              />
+                              <div className="card-body Dashboard2CardbodyPaddingFixfor768">
+                                <h5 className="card-title Dashboard2CardTItle">
+                                  {item?.name}
+                                </h5>
+                                <div className="row">
+                                  <div className="col-lg-5 col-md-4">
+                                    <div className="DashboardratingimgWraper">
+                                      <img
+                                        src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
+                                        className="img-fluid"
+                                        alt="image"
+                                      />
+                                      <span className="Dashboard2Card_rating">
+                                        4.5
+                                      </span>
+                                      <span className="Dashboard2Card_count">
+                                        (123)
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-7 col-md-8">
+                                    <div className="DashboardexperienceWrapperimg">
+                                      <img
+                                        src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
+                                        className="img-fluid"
+                                        alt="image"
+                                      />
+                                      <span className="Dashboard2ExpSpan">
+                                        Exp:
+                                      </span>
+                                      <span className="Dashboardcard2Years">
+                                        {item?.employeeExperience
+                                          ? item?.employeeExperience
+                                          : 0}
+                                        Y
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="dashboard2chefwrapper">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
+                                      className="img-fluid"
+                                      alt="image"
+                                    />
+                                    <span>{item?.positionName}</span>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="dashboard2TotalHourwrapper">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
+                                      className="img-fluid"
+                                      alt="image"
+                                    />
+                                    <span className="dashboard2totalhourspan">
+                                      Total Hours :
+                                    </span>
+                                    <span className="dashboard2totalhoursspent">
+                                      2456 H
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="dashboard2Rate">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
+                                      className="img-fluid"
+                                      alt="image"
+                                    />
+                                    <span className="Dashboard2Rate">
+                                      Rate:
+                                    </span>
+                                    <span className="Dashboard2Perhour">
+                                      {item?.hourlyRate}$/hour
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="Dashboard2BookNowButton">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
+                                      alt="image"
+                                    />
+                                    <button>Book Now</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center text-danger">
+                        No Data Found!
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -610,8 +421,8 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard2/filterChef.png"
                         className="img-fluid"
-                        alt
-                      />{" "}
+                        alt="image"
+                      />
                       Chef
                     </button>
                     <ul
@@ -735,7 +546,7 @@ function ClientDashboard() {
                   </div>
                 </div>
                 <div className="row">
-                  <a href>
+                  <a href="#">
                     <button className="filterApply">Apply</button>
                   </a>
                 </div>
