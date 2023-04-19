@@ -2,14 +2,14 @@ import React from "react";
 
 function Banner() {
   return (
-    <section className="banner">
+    <section className="Indexbanner">
       <div className="container">
         <div className="row">
           <div className="col-lg-6 col-sm-12 Home_page_left_part">
             <img
               src="assets/frontend/images/indexImages/PERTICLE1 (2).png"
               className="img-fluid perticle1"
-              alt="image"
+              alt
             />
             <div className="h1Wrapper">
               <h2>PREMIER STAFFING SOLUTIONS</h2>
@@ -25,7 +25,7 @@ function Banner() {
               <button type="button" className="btn bannerButtonWrapper1">
                 Hire a worker
               </button>
-              <button style={{ marginLeft: '5px' }} type="button" className="btn bannerButtonWrapper2">
+              <button type="button" className="btn bannerButtonWrapper2">
                 Drop your CV, if Job Needed
               </button>
             </div>
@@ -34,13 +34,13 @@ function Banner() {
             <img
               src="assets/frontend/images/indexImages/PERTICLE2.png"
               className="img-fluid perticle2"
-              alt="image"
+              alt
             />
             <div className="bannerImageWrapper">
               <img
                 src="assets/frontend/images/indexImages/Group 117293.png"
                 className="img-fluid"
-                alt="image"
+                alt
               />
             </div>
           </div>

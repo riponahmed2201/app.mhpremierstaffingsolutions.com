@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <section className="header sticky-top">
-      <div className="container header_container">
+      <div className="container Index_header_container">
         <div className="row">
           <div className="col-lg-12">
             <nav className="navbar navbar-expand-lg navbar-light">
