@@ -6,7 +6,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
 import AdminLogin from './components/frontend/auth/AdminLogin';
-import ClientRegister from './components/frontend/register/ClientRegister';
+import Register from './components/frontend/register/Register';
 import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
@@ -46,7 +46,7 @@ function App() {
 
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/client-register' element={<ClientRegister />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
           <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
 

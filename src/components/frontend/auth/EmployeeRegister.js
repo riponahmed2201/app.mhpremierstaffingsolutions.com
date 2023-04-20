@@ -131,7 +131,7 @@ function EmployeeRegister() {
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
+                                        <NavLink className="nav-link" to="/register">Client Register</NavLink>
                                     </li>
 
                                     <li className="nav-item">

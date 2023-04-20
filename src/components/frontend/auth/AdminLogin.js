@@ -125,7 +125,7 @@ function AdminLogin() {
 
                     <br />
                     <div className='mb-3 mt-3 text-end'>
-                        <p>New Here? <Link to="/client-register">Create an Account</Link></p>
+                        <p>New Here? <Link to="/register">Create an Account</Link></p>
                     </div>
                 </form>
             </div>
