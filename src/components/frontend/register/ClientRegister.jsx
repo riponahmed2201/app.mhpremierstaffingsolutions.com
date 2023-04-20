@@ -463,206 +463,208 @@ function ClientRegister() {
                   </div>
                 </form>
                 {/* Employee form */}
-                <div
-                  className="tab-pane fade"
-                  id="profile"
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                >
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="uploadImageWrapper d-flex justify-content-center align-items-center">
+                <Form>
+                  <div
+                    className="tab-pane fade"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                  >
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <div className="uploadImageWrapper d-flex justify-content-center align-items-center">
+                            <form
+                              action="#"
+                              method="post"
+                              encType="multipart/form-data"
+                            >
+                              {/* Clickable Image */}
+                              <label htmlFor="file-upload">
+                                <img
+                                  src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadeImage.png"
+                                  alt="image"
+                                  className="img-thumbnail img-fluid customImageThumbnail empUploadImg"
+                                  style={{ cursor: "pointer" }}
+                                />
+                              </label>
+                              {/* Input for file upload */}
+                              <input
+                                id="file-upload"
+                                type="file"
+                                name="file"
+                                style={{ display: "none" }}
+                              />
+                              {/* Submit Button */}
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="resturauntNameWrapper">
+                            <label
+                              htmlFor="exampleInputEmail1"
+                              className="form-label restaurantNameText"
+                            >
+                              First Name
+                            </label>
+                          </div>
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/employeeFormPictures/Icon.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Razinul Karim"
+                            type="email"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/clientFormPictures/Email.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Email Address"
+                            type="email"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                          <div className="dropdownbuttonwrapper">
+                            <div className="dropdown">
+                              <div className="inputLogoWrapper">
+                                <img
+                                  className="img-fluid"
+                                  src="assets/frontend/images/registrationFormImages/employeeFormPictures/jobtype.png"
+                                  alt="image"
+                                />
+                              </div>
+                              <button
+                                className="text-start btn btn-custom-dropdown dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton2"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                Job Type
+                              </button>
+                              <ul
+                                className="dropdown-menu dropdown-menu-dark"
+                                aria-labelledby="dropdownMenuButton2"
+                              >
+                                <li>
+                                  <a className="dropdown-item active" href="#">
+                                    Action
+                                  </a>
+                                </li>
+                                <li>
+                                  <a className="dropdown-item" href="#">
+                                    Another action
+                                  </a>
+                                </li>
+                                <li>
+                                  <a className="dropdown-item" href="#">
+                                    Something else here
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/employeeFormPictures/icon2.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Last Name"
+                            type="email"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/employeeFormPictures/mobile.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Phone Number"
+                            type="email"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                          <div className="inputLogoWrapper">
+                            <img
+                              className="img-fluid"
+                              src="assets/frontend/images/registrationFormImages/employeeFormPictures/Subtract.png"
+                              alt="image"
+                            />
+                          </div>
+                          <input
+                            placeholder="Present Address"
+                            type="email"
+                            className="form-control custom_client_input_for_registration_page mb-3"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-12 d-flex justify-content-center align-items-center">
                           <form
                             action="#"
                             method="post"
                             encType="multipart/form-data"
                           >
-                            {/* Clickable Image */}
-                            <label htmlFor="file-upload">
+                            {/* Logo Upload Button */}
+                            <label className="logo-upload-btn">
                               <img
-                                src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadeImage.png"
-                                alt="image"
-                                className="img-thumbnail img-fluid customImageThumbnail empUploadImg"
-                                style={{ cursor: "pointer" }}
+                                className="img-fluid cv_button"
+                                src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadPDF.png"
+                                alt="Upload PDF"
+                              />
+                              <input
+                                type="file"
+                                name="file"
+                                accept=".pdf"
+                                className="btn-file"
                               />
                             </label>
-                            {/* Input for file upload */}
-                            <input
-                              id="file-upload"
-                              type="file"
-                              name="file"
-                              style={{ display: "none" }}
-                            />
-                            {/* Submit Button */}
                           </form>
                         </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="resturauntNameWrapper">
-                          <label
-                            htmlFor="exampleInputEmail1"
-                            className="form-label restaurantNameText"
-                          >
-                            First Name
-                          </label>
-                        </div>
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/employeeFormPictures/Icon.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Razinul Karim"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Email.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Email Address"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="dropdownbuttonwrapper">
-                          <div className="dropdown">
-                            <div className="inputLogoWrapper">
-                              <img
-                                className="img-fluid"
-                                src="assets/frontend/images/registrationFormImages/employeeFormPictures/jobtype.png"
-                                alt="image"
-                              />
-                            </div>
-                            <button
-                              className="text-start btn btn-custom-dropdown dropdown-toggle"
-                              type="button"
-                              id="dropdownMenuButton2"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
+                      <div className="row">
+                        <div className="col-lg-12">
+                          {/* Register Button */}
+                          <div className="registerButton text-center">
+                            <a
+                              className="btn employee_register_button"
+                              href="login.html"
                             >
-                              Job Type
-                            </button>
-                            <ul
-                              className="dropdown-menu dropdown-menu-dark"
-                              aria-labelledby="dropdownMenuButton2"
-                            >
-                              <li>
-                                <a className="dropdown-item active" href="#">
-                                  Action
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Something else here
-                                </a>
-                              </li>
-                            </ul>
+                              Register
+                            </a>
                           </div>
+                          {/* Register Button End */}
                         </div>
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/employeeFormPictures/icon2.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Last Name"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/employeeFormPictures/mobile.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Phone Number"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/employeeFormPictures/Subtract.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Present Address"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-12 d-flex justify-content-center align-items-center">
-                        <form
-                          action="#"
-                          method="post"
-                          encType="multipart/form-data"
-                        >
-                          {/* Logo Upload Button */}
-                          <label className="logo-upload-btn">
-                            <img
-                              className="img-fluid cv_button"
-                              src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadPDF.png"
-                              alt="Upload PDF"
-                            />
-                            <input
-                              type="file"
-                              name="file"
-                              accept=".pdf"
-                              className="btn-file"
-                            />
-                          </label>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-12">
-                        {/* Register Button */}
-                        <div className="registerButton text-center">
-                          <a
-                            className="btn employee_register_button"
-                            href="login.html"
-                          >
-                            Register
-                          </a>
-                        </div>
-                        {/* Register Button End */}
                       </div>
                     </div>
                   </div>
-                </div>
+                </Form>
               </div>
             </div>
             {/* Have an account Section start*/}

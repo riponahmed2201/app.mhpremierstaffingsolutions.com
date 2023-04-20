@@ -222,8 +222,8 @@ function Login() {
                     <div className="col-lg-6 col-md-6 Login_Page_left_part">
                         <div className="col-lg-12">
                             <div className="button_wrapper">
-                                <a href="#">
-                                    <img src="assets/frontend/images/login_page_images/Group 685.png" className="img-fluid" alt="iamge" /></a>
+                                <Link to="/">
+                                    <img src="assets/frontend/images/login_page_images/Group 685.png" className="img-fluid" alt="iamge" /></Link>
                             </div>
                         </div>
                         <div className="row left_part_wrapper">

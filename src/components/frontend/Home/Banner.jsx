@@ -25,7 +25,7 @@ function Banner() {
               <button type="button" className="btn bannerButtonWrapper1">
                 Hire a worker
               </button>
-              <button type="button" className="btn bannerButtonWrapper2">
+              <button type="button" style={{ marginLeft:'5px' }} className="btn bannerButtonWrapper2">
                 Drop your CV, if Job Needed
               </button>
             </div>

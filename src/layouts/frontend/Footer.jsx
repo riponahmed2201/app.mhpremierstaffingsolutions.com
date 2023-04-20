@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -9,13 +10,13 @@ function Footer() {
             <div className="leftPartLinks">
               <ul>
                 <li>
-                  <a href>Home</a>
-                  <a href>Customers</a>
-                  <a href>Career</a>
-                  <a href>About Us</a>
-                  <a href>Services</a>
-                  <a href>Meet The Team</a>
-                  <a href>Faq</a>
+                  <Link to="/">Home</Link>
+                  <Link to="/customer">Customers</Link>
+                  <Link to="/career">Career</Link>
+                  <Link to="/about">About Us</Link>
+                  <Link to="/payroll-services">Services</Link>
+                  <Link to="/">Meet The Team</Link>
+                  <Link to="/">Faq</Link>
                 </li>
               </ul>
             </div>
@@ -30,7 +31,7 @@ function Footer() {
                   <img
                     src="assets/frontend/images/indexImages/place.png"
                     alt="image"
-                  />{" "}
+                  />
                   48 Warwick St Regent Street W1B 5AW London
                 </h6>
               </div>
@@ -39,7 +40,7 @@ function Footer() {
                 <a href>
                   <img
                     className="img-fluid"
-                    src="images/indexImages/socialMedia/Group 116168.png"
+                    src="assets/frontend/images/indexImages/socialMedia/Group 116168.png"
                     alt="image"
                   />
                 </a>

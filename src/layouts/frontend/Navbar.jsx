@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -32,31 +32,37 @@ function Navbar() {
               >
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       className="navbar_custom_hover nav-link"
                       aria-current="page"
                       to="/"
                     >
                       Home
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="navbar_custom_hover nav-link" to="/about">
+                    <NavLink
+                      className="navbar_custom_hover nav-link"
+                      to="/about"
+                    >
                       About Us
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       className="nav-link navbar_custom_hover"
                       to="/customer"
                     >
                       Customers
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link navbar_custom_hover" to="/career">
+                    <NavLink
+                      className="nav-link navbar_custom_hover"
+                      to="/career"
+                    >
                       Career
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item dropdown">
                     <a
@@ -74,22 +80,28 @@ function Navbar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <li>
-                        <a className="dropdown-item" href="#">
-                          Action
-                        </a>
+                        <Link
+                          className="dropdown-item"
+                          to="/payroll-services"
+                        >
+                          PAYROLL
+                        </Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
-                          Another action
-                        </a>
+                        <Link
+                          className="dropdown-item"
+                          to="/recruiting-services"
+                        >
+                          RECRUITING
+                        </Link>
                       </li>
                       <li>
-                        <hr className="dropdown-divider" />
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Something else here
-                        </a>
+                        <Link
+                          className="dropdown-item"
+                          to="/strategy-consultancy-services"
+                        >
+                          STRATEGY CONSULTANCY
+                        </Link>
                       </li>
                     </ul>
                   </li>

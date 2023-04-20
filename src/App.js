@@ -34,6 +34,9 @@ import Career from './components/frontend/career/Career';
 import DashboardLayout from './layouts/frontend/dashboard/DashboardLayout';
 import MyEmployee from './components/frontend/client/MyEmployee';
 import EmployeeViewDetails from './components/frontend/dashboard/EmployeeViewDetails';
+import Payroll from './components/frontend/services/Payroll';
+import Recruiting from './components/frontend/services/Recruiting';
+import StrategyConsultancy from './components/frontend/services/StrategyConsultancy';
 
 function App() {
   return (
@@ -58,6 +61,9 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/career' element={<Career />} />
+            <Route path='/payroll-services' element={<Payroll />} />
+            <Route path='/recruiting-services' element={<Recruiting />} />
+            <Route path='/strategy-consultancy-services' element={<StrategyConsultancy />} />
           </Route>
 
 
