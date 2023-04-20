@@ -1,0 +1,195 @@
+/*font-family: 'Poppins', sans-serif;
+font-family: 'Montserrat', sans-serif;
+F6F1E5
+*/
+.Login_Page_left_part {
+    overflow: hidden;
+    min-height: 100vh;
+    background-color: #f6f1e5;
+    padding-top: 70px;
+}
+.button_wrapper {
+    margin-left: 50px;
+}
+
+.logo_wrapper {
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+.logo_wrapper img {
+    width: 230.32px;
+    /* height: 235.75px; */
+}
+.premier_stuffing_wrapper h1 {
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 60px;
+}
+.mh_premier_wrapping {
+    line-height: 48px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.mh_premier_wrapping p {
+    padding-left: 65px;
+    padding-right: 65px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+.left_part_custom_row {
+    position: relative;
+}
+
+.Login_page_right_part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #fafafa;
+}
+/* .right_part_wrapper {
+
+} */
+
+.first_eclips_img img {
+    z-index: 1;
+    position: absolute;
+    left: -235px;
+    top: -84px;
+}
+.card-body_custom {
+    padding: 30px 57px;
+}
+.user_name_label {
+    padding: 0px 10px;
+    margin-bottom: 0px;
+    background-color: #ffffff;
+    color: #c6a34f;
+    position: absolute;
+    left: 75px;
+    top: 98px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15.61px;
+}
+.form_part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid red; */
+}
+.form-check-input:focus {
+    border-color: #c6a34f !important;
+}
+.form-check-input:active {
+    border-color: #c6a34f !important;
+}
+
+.custom_card {
+    border-radius: 20px;
+}
+.card-title-custom {
+    padding: 20px 0px;
+    margin: 0px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34.98px;
+}
+.contact_logo_img {
+    position: relative;
+}
+
+.contact_logo_img img {
+    position: absolute;
+    left: 41px;
+    top: 15px;
+}
+
+.form-control-custom {
+    border-radius: 11px;
+    border: 1px solid #c6a34f;
+    height: 50px;
+    padding-left: 71px;
+    padding-right: 60px;
+}
+.form-control-custom :focus {
+    color: #7b7b7b !important;
+    border-color: #c6a34f !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25) !important;
+}
+.save_forget_pass_wrapper {
+    margin: 38px 0px;
+}
+.password_logo_img {
+    position: relative;
+}
+.password_logo_img img {
+    position: absolute;
+    left: 37px;
+    top: 13px;
+}
+.password_icon_wrapper {
+    position: relative;
+}
+.password_icon_wrapper img {
+    position: absolute;
+    right: 14px;
+    bottom: 17px;
+}
+.check_me_out_custom {
+    padding-left: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+}
+.forget_password_custom {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    border-radius: 19px;
+    color: #c6a34f !important;
+}
+
+.login_button {
+    width: 100%;
+    height: 65px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    border-radius: 12px;
+    background-color: #c6a34f;
+    color: white;
+}
+.accountandregisterwrapper {
+    margin: 20px 0px;
+}
+
+.accountandregisterwrapper span {
+    margin-right: 2.5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+.accountandregisterwrapper a {
+    margin-left: 2.5px;
+    color: #ddbd68;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.last_eclips_img_wrapper img {
+    position: absolute;
+    right: -20px;
+    bottom: -97px;
+}

@@ -90,3 +90,27 @@ export const fetchClientListHandler = async (limit, getName, getStatus, location
     );
     return res;
 };
+
+//Certificate upload api call
+export const certificateUploadHandler = async (receivedCertificateFields) => {
+    const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/users/certificate/upload`,
+        {
+            method: "PUT",
+            body: receivedCertificateFields,
+        }
+    );
+    return res;
+};
+
+//Removed certificate upload api call
+export const removedCertificateHandler = async (receivedCertificateFields) => {
+    const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/users/certificate/upload`,
+        {
+            method: "PUT",
+            body: receivedCertificateFields,
+        }
+    );
+    return res;
+};

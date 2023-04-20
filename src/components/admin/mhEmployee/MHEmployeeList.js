@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Input, Space, Switch, Table } from 'antd';
+import { Input, Select, Switch, Table } from 'antd';
 import _ from "lodash";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
 import Loader from '../../loadar/Loader';
 import { token } from '../../../utils/authentication';
 import { fetchMhEmployeeListHandler } from '../../../api/addMHEmployee';
 
 const { Search } = Input;
+const { Option } = Select;
 
 const columns = [
     {
@@ -40,7 +41,11 @@ const columns = [
     {
         title: 'Status',
         dataIndex: 'status',
-    }
+    },
+    {
+        title: 'Action',
+        dataIndex: 'action',
+    },
 ];
 
 function MHEmployeeList() {
@@ -93,7 +98,16 @@ function MHEmployeeList() {
                         }}
                     />
                 </>
-            )
+            ),
+            action: (
+                <>
+                    <div className='btn-group'>
+                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-sm'  style={{ background: '#C6A34F', color: 'white' }}>
+                            Edit
+                        </Link>
+                    </div>
+                </>
+            ),
         });
     });
 
@@ -136,29 +150,26 @@ function MHEmployeeList() {
         <div className="container-fluid px-4">
             <div className='row mt-4'>
                 <div className='d-flex justify-content-between'>
-                    <h3 className='mb-4 title'>Employee List</h3>
+                    <h3 className='mb-4 title'>MH Employee List</h3>
                 </div>
             </div>
-
             <div className='card'>
+                <div className="card-header d-flex justify-content-between">
+                    <Search
+                        placeholder="Search"
+                        allowClear
+                        size="large"
+                        onChange={handleSearchkeywordOnChange}
+                        style={{
+                            width: 304
+                        }}
+                    />
 
-                <div className='d-flex flex-row-reverse'>
-                    <div className='m-2'>
-                        <Space direction="vertical">
-                            <Search
-                                placeholder="Enter employee name"
-                                enterButton="Search"
-                                size="large"
-                                style={{
-                                    fontSize: 16,
-                                    color: '#c6a34f',
-                                }}
-                                onSearch={handleSearchkeywordOnChange}
-                            />
-                        </Space>
-                    </div>
+                    <Select size="large" allowClear placeholder="Active" onChange={handleChangeStatus}>
+                        <Option value="YES">YES</Option>
+                        <Option value="NO">NO</Option>
+                    </Select>
                 </div>
-                <br />
                 {loading ? (
                     <tr>
                         <td>

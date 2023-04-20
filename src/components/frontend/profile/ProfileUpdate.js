@@ -109,7 +109,7 @@ function ProfileUpdate() {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                   <li className="nav-item active">
-                    <Link className="nav-link" to="/client-register">Client Register</Link>
+                    <Link className="nav-link" to="/register">Client Register</Link>
                   </li>
 
                   <li className="nav-item">

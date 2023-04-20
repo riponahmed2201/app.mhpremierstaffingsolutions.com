@@ -1,0 +1,870 @@
+/* /* // X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+@media (min-width: 320px) and (max-width: 374.98px) {
+    .dashboard1 {
+        padding: 15px 0px;
+    }
+
+    .DashboardNavban {
+        justify-content: center !important;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        text-align: center;
+        padding: 10px 14px;
+    }
+
+    .DashboardFootersocialMediaIcons {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .DashboardfooterFinal {
+        margin-top: 40px;
+        padding: 15px 15px;
+    }
+
+    .DashboardFootermiddlePart h5 {
+        margin-bottom: 25px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .footerTextWrpper span {
+        font-size: 10px;
+    }
+
+    .Dashboardfooter {
+        z-index: -1;
+        padding: 30px 6px 30px 6px;
+        background-color: #111111;
+    }
+
+    .Dashboard_navbar_custom {
+        flex-direction: row;
+    }
+
+    .active_and_pending_column {
+        margin: 10px 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .activeEmployeeCard {
+        text-align: center;
+        margin: 0px 10px;
+        padding: 10px 10px;
+        margin: 0px !important;
+    }
+
+    .pendingInvoicesClass {
+        text-align: center;
+        padding: 10px 10px;
+        margin: 0px 10px;
+    }
+
+    .custom_dashboard_right_side_cards {
+        padding: 10px;
+        margin: 10px 8px;
+    }
+
+    .bookmarkImageWrapper {
+        align-items: start !important;
+    }
+
+    .bookmarkImageWrapper img {
+        padding: 0px 0px 12px 3px;
+    }
+
+    .bookNowButton {
+        width: 100%;
+    }
+
+    .experienceLogo {
+        margin-left: 3px;
+    }
+
+    .custom_card_padding {
+        padding: 10px 15px;
+    }
+
+    .bookNowCardMobileMarginBottom {
+        margin-bottom: 10px;
+    }
+
+    .firstFilterRow {}
+
+    .filtersTitle p {
+        margin-left: 6px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 575.98px) {
+    .dashboard1 {
+        padding: 15px 0px;
+    }
+
+    .Dashboard_navbar_custom {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .Dashboard1PaddingFixfor375 {
+        padding: 10px;
+        /* margin-right: 10px; */
+        border-radius: none !important;
+    }
+
+    .resetData {
+        text-align: start;
+    }
+
+    .Dashboard2FilterpartContainer {
+        margin: 10px 0px;
+    }
+
+    .DashboardfooterTextWrpper span {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .DashboardFooterleftPartLinks li a {}
+
+    .DashboardNavban {
+        justify-content: space-around !important;
+    }
+
+    .DashboardlanguageFlagWrapper {
+        justify-content: start !important;
+    }
+
+    .active_and_pending_column {
+        margin: 10px 6px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .activeEmployeeCard {
+        text-align: center;
+        margin: 0px 10px;
+        padding: 10px 10px;
+        margin: 0px !important;
+    }
+
+    .pendingInvoicesClass {
+        text-align: center;
+        padding: 10px 10px;
+        margin: 0px 10px;
+    }
+
+    .MHEmployeeText {
+        text-align: start !important;
+        padding-left: 2px;
+    }
+
+    .custom_dashboard_right_side_cards {
+        padding: 10px;
+        margin: 10px 8px;
+    }
+
+    .bookmarkImageWrapper {
+        align-items: start !important;
+    }
+
+    .bookmarkImageWrapper img {
+        padding: 0px 0px 12px 3px;
+    }
+
+    .bookNowButton {
+        width: 100%;
+    }
+
+    .experienceLogo {
+        margin-left: 3px;
+    }
+
+    .custom_card_padding {
+        padding: 10px 15px;
+    }
+
+    .bookNowCardMobileMarginBottom {
+        margin-bottom: 10px;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 162px;
+    }
+
+    .DashboardFilterexperienceDropown {
+        padding-right: 184px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .filtersTitle p {
+        margin-left: 6px;
+    }
+
+    .welcome_card {
+        padding: 54px 10px 10px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .custom_card_image {
+        flex-direction: row;
+    }
+
+    .card-img-top {
+        width: 43%;
+        height: 130px;
+    }
+
+    .customforfilerrow2 {
+        padding: 20px;
+    }
+
+    .clock {
+        margin: 0px;
+    }
+
+    .rate {
+        margin: 0px;
+    }
+
+    .Dashboardfooter {
+        padding: 20px 5px;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        text-align: center;
+        padding: 10px 11px;
+    }
+
+    .footerTextWrpper span {
+        padding-top: 3px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .DashboardFooterLogo {
+        width: 40%;
+    }
+
+    .DashboardfooterFinal {
+        padding: 15px 5px;
+    }
+
+    .DashboardFootermiddlePart h5 {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 819.98px) {
+    .dashboard1 {
+        padding: 10px 0px;
+    }
+
+    .welcome_card {
+        padding: 10px 26px 10px 28px;
+    }
+
+    .DashboarddarkModeToggle {
+        margin-right: 5px;
+    }
+
+    .DashboardFilterCategoryDropdown {
+        height: 64px;
+    }
+
+    .margin768 {
+        display: flex;
+        flex-direction: row;
+
+        justify-content: space-around;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .Dashboard2BookNowButton button {
+        margin-left: 5px;
+        padding: 0px 16px;
+        height: 37px;
+        font-size: 14px;
+    }
+
+    .Dashboard2FilterpartContainer {
+        margin: 20px 10px 20px 2px;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 500px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .resetData {
+        text-align: start;
+    }
+
+    .Dashboard2CardbodyPaddingFixfor768 {
+        padding: 10px 14px;
+    }
+
+    .Dashboard2Perhour {
+        font-size: 13px;
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 10px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+
+    .Dashboard2Rate {
+        font-size: 12px;
+    }
+
+    .Dashboard_navbar_custom_hover {
+        margin: 0px 1px;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        z-index: 1;
+        right: 73%;
+        bottom: -543.6%;
+    }
+
+    .customPadding_for_768 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .bookNowButton {
+        padding: 10px 8px;
+    }
+
+    .customCardTitle {
+        margin-left: 5px;
+    }
+
+    .rating_logo img {
+        margin-left: 0px;
+    }
+
+    .clock {
+        margin-left: 0px;
+    }
+
+    .rate {
+        margin-left: 0px;
+    }
+
+    .totalHoursSpan {
+        font-size: 12px !important;
+    }
+
+    .bookmarkImageWrapper {
+        align-items: start !important;
+        margin-bottom: 10px;
+    }
+
+    .bookNowButton {
+        width: 100%;
+    }
+
+    .bookmarkImageWrapper img {
+        padding-left: 0px;
+        padding-top: 0px;
+    }
+
+    .customCardTitle {
+        font-weight: 700;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .bookNowCardMobileMarginBottom {
+        padding: 4px;
+    }
+
+    .custom_card_padding {
+        padding: 1rem 8px;
+    }
+
+    .filtersTitle p {
+        margin-left: 6px;
+    }
+
+    .Dashboardfooter {
+        z-index: -1;
+        padding: 40px 0px 40px 0px;
+        background-color: #111111;
+    }
+
+    .DashboardFooterleftPartLinks ul li a {
+        font-size: 13px;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        padding: 10px 0px;
+    }
+
+    .DashboardFooterrightPartLinks ul li a {
+        font-size: 13px;
+    }
+
+    .rightPartLogoWrapper img {
+        width: 20%;
+    }
+
+    .DashboardFootermiddlePart h5 {
+        font-size: 17px;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        font-size: 17px;
+    }
+
+    .DashboardFootersocialMediaIcons {
+        display: flex;
+    }
+
+    .footerTextWrpper span {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1023.98px) {
+    .dashboard1 {
+        padding: 10px 0px;
+    }
+
+    .DashboarddarkModeToggle {
+        margin-right: 5px;
+    }
+
+    .welcome_card {
+        padding: 10px 26px 10px 28px;
+    }
+
+    .margin768 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .Dashboard_navbar_custom_hover {
+        margin: 0px 1px;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        z-index: 1;
+        right: 73%;
+        bottom: -543.6%;
+    }
+
+    .customPadding_for_768 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .bookNowButton {
+        padding: 10px 8px;
+    }
+
+    .customCardTitle {
+        margin-left: 5px;
+    }
+
+    .Dashboard2CardbodyPaddingFixfor768 {
+        padding: 10px 8px;
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+
+    .resetData {
+        text-align: start;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 507px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .Dashboard2BookNowButton button {
+        padding: 0px 17px;
+    }
+
+    .Dashboard2CardTItle {
+        font-size: 13px;
+    }
+
+    .Dashboard2FilterpartContainer {
+        margin-top: 20px;
+    }
+
+    .totalHoursSpan {
+        font-size: 12px !important;
+    }
+
+    .bookmarkImageWrapper {
+        align-items: start !important;
+        margin-bottom: 10px;
+    }
+
+    .bookNowButton {
+        width: 100%;
+    }
+
+    .bookmarkImageWrapper img {
+        padding-left: 0px;
+        padding-top: 0px;
+    }
+
+    .customCardTitle {
+        font-weight: 700;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .bookNowCardMobileMarginBottom {
+        padding: 4px;
+    }
+
+    .custom_card_padding {
+        padding: 1rem 8px;
+    }
+
+    .filtersTitle p {
+        margin-left: 6px;
+    }
+
+    .Dashboardfooter {
+        z-index: -1;
+        padding: 40px 0px 40px 0px;
+        background-color: #111111;
+    }
+
+    .DashboardFooterleftPartLinks ul li a {
+        font-size: 13px;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        padding: 10px 0px;
+    }
+
+    .DashboardFooterrightPartLinks ul li a {
+        font-size: 13px;
+    }
+
+    .rightPartLogoWrapper img {
+        width: 20%;
+    }
+
+    .DashboardFootermiddlePart h5 {
+        font-size: 17px;
+    }
+
+    .DashboardFootermiddlePart h6 {
+        font-size: 17px;
+    }
+
+    .DashboardFootersocialMediaIcons {
+        display: flex;
+    }
+
+    .DashboardfooterTextWrpper span {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1198.98px) {
+    .Dashboard_nav_logo {
+        padding-left: 10px;
+    }
+
+    .welcome_card {
+        padding: 10px 10px 10px 10px;
+    }
+
+    .custom_dashboard_right_side_cards p {
+        font-size: 16px;
+    }
+
+    .activeEmployeeCard {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .pendingInvoicesClass {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .active_and_pending_column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .minimumTotalHourInput {
+        font-size: 12px;
+    }
+
+    .maximuTotalHourInput {
+        font-size: 13px;
+    }
+
+    .Dashboard2CardbodyPaddingFixfor768 {
+        padding: 10px 8px;
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+
+    .resetData {
+        text-align: end;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 748px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .Dashboard2BookNowButton button {
+        padding: 0px 48px;
+    }
+
+    .Dashboard2CardTItle {
+        font-size: 13px;
+    }
+
+    .Dashboard2FilterpartContainer {
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1339.98px) {
+    .activeEmployeeCard {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .pendingInvoicesClass {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .active_and_pending_column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .minimumTotalHourInput {
+        font-size: 12px;
+    }
+
+    .maximuTotalHourInput {
+        font-size: 13px;
+    }
+
+    .Dashboard2CardbodyPaddingFixfor768 {
+        padding: 10px 8px;
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+
+    .resetData {
+        text-align: end;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 748px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .Dashboard2BookNowButton button {
+        padding: 0px 34px;
+    }
+
+    .Dashboard2CardTItle {
+        font-size: 13px;
+    }
+
+    .Dashboard2FilterpartContainer {
+        /* margin-top: 2px; */
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1340px) and (max-width: 1399.98px) {
+    .activeEmployeeCard {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .pendingInvoicesClass {
+        padding: 10px 14px 10px 8px !important;
+    }
+
+    .active_and_pending_column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .minimumTotalHourInput {
+        font-size: 12px;
+    }
+
+    .maximuTotalHourInput {
+        font-size: 13px;
+    }
+
+    .Dashboard2CardbodyPaddingFixfor768 {
+        padding: 10px 8px;
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+
+    .resetData {
+        text-align: end;
+    }
+
+    .ratingRow {
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        right: 748px;
+    }
+
+    .experienceH6 {
+        margin-top: 40px;
+    }
+
+    .Dashboard2BookNowButton button {
+        padding: 0px 34px;
+    }
+
+    .Dashboard2CardTItle {
+        font-size: 13px;
+    }
+
+    .Dashboard2FilterpartContainer {
+        /* margin-top: 20px; */
+    }
+
+    .dashboard2totalhourspan {
+        font-size: 12px;
+    }
+
+    .dashboard2totalhoursspent {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1535.98px) {}
+
+@media (min-width: 1536px) and (max-width: 1598.98px) {
+    .dashboardMyemloyeeCardHeightFix {
+        padding: 29px 10px;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1798.98px) {
+    .dashboardMyemloyeeCardHeightFix {
+        padding: 29px 10px;
+    }
+}
+
+@media (min-width: 1800px) and (max-width: 2098.98px) {
+    .Dashboard1WelcomeCardFor1080p {
+        padding: 0px !important;
+    }
+
+    .welcome_card {
+        padding: 10px 10px 10px 16px;
+    }
+
+    .dashboardMyemloyeeCardHeightFix {
+        padding: 29px 10px;
+    }
+}

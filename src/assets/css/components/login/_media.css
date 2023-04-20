@@ -1,0 +1,240 @@
+/* // X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+@media (min-width: 320px) and (max-width: 374.98px) {
+    .first_eclips_img img {
+        left: -198px;
+        top: -62px;
+    }
+    .left_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 10px;
+    }
+    .button_wrapper {
+        margin-left: 15px;
+    }
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+    .custom_for_320 {
+        padding: 0px;
+    }
+    .custom_card {
+        width: 100%;
+    }
+    .card-body_custom {
+        padding: 15px 15px;
+    }
+    .user_name_label {
+        left: 51px;
+        top: 83px;
+    }
+    .contact_logo_img img {
+        left: 21px;
+    }
+    .form-control-custom {
+        padding-left: 44px;
+    }
+    .password_logo_img img {
+        left: 18px;
+    }
+    .check_me_out_custom {
+        padding-left: 2px;
+        font-size: 16px;
+    }
+    .forget_password_custom {
+        font-size: 16px;
+    }
+    .login_button {
+        height: 43px;
+    }
+    .save_forget_pass_wrapper {
+        margin: 0px 0px;
+    }
+    .accountandregisterwrapper {
+        margin: 8px 0px;
+    }
+}
+@media (min-width: 375px) and (max-width: 575.98px) {
+    .left_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 10px;
+    }
+    .button_wrapper {
+        margin-left: 35px;
+    }
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+    .custom_for_320 {
+        padding: 0px;
+    }
+    .custom_card {
+        width: 100%;
+    }
+    .card-body_custom {
+        padding: 15px 15px;
+    }
+    .user_name_label {
+        left: 51px;
+        top: 83px;
+    }
+    .contact_logo_img img {
+        left: 21px;
+    }
+    .form-control-custom {
+        padding-left: 44px;
+    }
+    .password_logo_img img {
+        left: 18px;
+    }
+    .check_me_out_custom {
+        padding-left: 2px;
+        font-size: 16px;
+    }
+    .forget_password_custom {
+        font-size: 16px;
+    }
+    .login_button {
+        height: 43px;
+    }
+    .save_forget_pass_wrapper {
+        margin: 0px 0px;
+    }
+    .accountandregisterwrapper {
+        margin: 8px 0px;
+    }
+}
+
+/* @media (min-width: 576px) and (max-width: 767.98.98px) { ... } */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    .left_part {
+        /* display: flex; */
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        padding: 0px 15px;
+    }
+    .button_wrapper {
+        margin-top: 55px;
+    }
+    r .left_part_wrapper {
+        margin-top: 236px;
+    }
+
+    .button_wrapper {
+        margin-left: 30px;
+    }
+    .premier_stuffing_wrapper h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    .mh_premier_wrapping p {
+        padding: 10px 10px;
+        line-height: 30px;
+    }
+    .custom_for_320 {
+        padding: 0px;
+    }
+    .custom_card {
+        width: 100%;
+    }
+    .card-body_custom {
+        padding: 15px 15px;
+    }
+    .user_name_label {
+        left: 51px;
+        top: 83px;
+    }
+    .contact_logo_img img {
+        left: 21px;
+    }
+    .form-control-custom {
+        padding-left: 44px;
+    }
+    .password_logo_img img {
+        left: 18px;
+    }
+    .check_me_out_custom {
+        padding-top: 2px;
+        padding-left: 2px;
+        font-size: 15px;
+    }
+    .forget_password_custom {
+        font-size: 16px;
+    }
+    .login_button {
+        height: 43px;
+    }
+    .save_forget_pass_wrapper {
+        margin: 0px 0px;
+    }
+    .accountandregisterwrapper {
+        margin: 8px 0px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1198.98px) {
+    .card-body_custom {
+        padding: 18px 18px;
+    }
+    .user_name_label {
+        top: 86px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1398.98px) {
+    .premier_stuffing_wrapper h1 {
+        margin-bottom: 0px !important;
+    }
+    .custom_card {
+        margin-top: 37px;
+    }
+    .card-body_custom {
+        padding: 16px 30px;
+    }
+    .user_name_label {
+        left: 75px;
+        top: 84px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1599.98px) {
+    .button_wrapper {
+        margin-top: 0px !important;
+    }
+    .left_part_wrapper {
+        margin-top: 60px;
+    }
+    .logo_wrapper {
+        padding-top: 5px !important;
+    }
+}
+/* 
+/*  */
+@media (min-width: 1800px) and (max-width: 2099.98px) {
+    .logo_wrapper {
+        padding-top: 155px;
+    }
+    .first_eclips_img img {
+        left: -177px;
+        top: -27px;
+    }
+    .last_eclips_img_wrapper img {
+        right: 1px;
+        bottom: -34px;
+    }
+}

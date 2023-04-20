@@ -10,8 +10,6 @@ import CountryWiseValidationRules from '../../../utils/static/countryList';
 import { employeeRegisterHandler } from '../../../api/employee';
 import defaultImage from '../../../assets/images/default.png';
 
-import './Register.css';
-
 const { Option } = Select;
 
 function EmployeeRegister() {
@@ -115,11 +113,11 @@ function EmployeeRegister() {
 
     return (
         <div className='row'>
-            <div className='col-md-6 col-sm-12' style={{ background: "#343a40", height: '100vh' }}>
+            <div className='col-md-6 col-sm-12' style={{ background: "#f6f1e5", height: '100vh' }}>
                 <div style={{ padding: "20px 30px", marginTop: '190px' }}>
                     <br />
                     <br />
-                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#c6a34f" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
+                    <h4 className='class="mt-40 text-center mb-25' style={{ color: "#111111" }}>WELCOME TO MH PREMIER STAFFING SOLUTIONS</h4>
                     <div className='mt-5' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center' }}>
                         <img style={{ width: 'auto', height: 'auto', objectFit: "cover" }} src='logo.png' alt='img' />
                     </div>
@@ -133,7 +131,7 @@ function EmployeeRegister() {
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to="/client-register">Client Register</NavLink>
+                                        <NavLink className="nav-link" to="/register">Client Register</NavLink>
                                     </li>
 
                                     <li className="nav-item">

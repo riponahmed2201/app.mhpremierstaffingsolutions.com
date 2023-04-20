@@ -1,9 +1,11 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import axios from "axios";
-import { Form, Select, Input, DatePicker, Space } from 'antd';
+import { Form, Select, Input, DatePicker, Space, Upload, Button } from 'antd';
+import ImgCrop from "antd-img-crop";
+import { UploadOutlined } from '@ant-design/icons';
 
 import moment from "moment";
 import _ from "lodash";
@@ -16,6 +18,7 @@ import { fetchPositionListForDropdownHandler } from '../../../api/position';
 import { fetchSourceListForDropdownHandler } from '../../../api/source';
 import { staticLanguageName } from '../../../utils/static/languageList';
 import CountryWiseValidationRules from '../../../utils/static/countryList';
+import defaultImage from '../../../assets/images/default.png';
 
 const { Option } = Select;
 
@@ -33,9 +36,33 @@ function EmployeeDetails() {
     const [basicInfoUpdateloading, setBasicInfoUpdateloading] = useState(false);
     const [getError, setError] = useState();
     const [getDateOfBirth, setDateOfBirth] = useState(undefined);
+    const [profilePicture, setProfilePicture] = useState([]);
+    const [summaryPdf, setSummaryPdf] = useState([]);
+    const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
+    const [getEditDateOfBirth, setEditDateOfBirth] = useState(undefined);
 
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
+
+    const onProfileChange = ({ fileList: newFileList }) => {
+        setProfilePicture(newFileList);
+    };
+
+    // image preview
+    const onPreview = async (file) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow?.document.write(image.outerHTML);
+    };
 
     //Fetch refer person list for dropdown
     const fetchSingleEmployeeData = useCallback(async () => {
@@ -50,14 +77,17 @@ function EmployeeDetails() {
                 }
             );
 
+            setEditDateOfBirth(res?.data?.details.dateOfBirth);
+
             //Employee Basic Information
             formEdit.setFieldsValue({
-                name: res?.data?.details.name,
+                firstName: res?.data?.details.firstName,
+                lastName: res?.data?.details.lastName,
                 email: res?.data?.details.email,
                 phoneNumber: res?.data?.details.phoneNumber,
                 positionId: res?.data?.details.positionId,
                 gender: res?.data?.details.gender,
-                dateOfBirth: res?.data?.details.dateOfBirth,
+                // dateOfBirth: moment(res?.data?.details.dateOfBirth).format("YYYY-MM-DD"),
                 presentAddress: res?.data?.details.presentAddress,
                 permanentAddress: res?.data?.details.permanentAddress,
                 countryName: res?.data?.details.countryName,
@@ -69,6 +99,7 @@ function EmployeeDetails() {
                 skills: res?.data?.details.skills,
                 sourceId: res?.data?.details.sourceId,
                 referPersonId: res?.data?.details.referPersonId,
+                hourlyRate: res?.data?.details.hourlyRate,
             });
 
             //bank information
@@ -108,25 +139,27 @@ function EmployeeDetails() {
 
         try {
 
-            setBankUpdateLoading(true);
+            if (id && receivedEmployeeFields) {
+                setBankUpdateLoading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields, {
-                headers: {
-                    Authorization: `Bearer ${token()}`,
-                },
-            });
+                const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-bank-dress`, receivedEmployeeFields, {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                });
 
-            if (res?.data?.statusCode === 200) {
-                setError(undefined);
-                setBankUpdateLoading(false);
-                responseNotification("Employee bank updated successfully!", "success");
+                if (res?.data?.statusCode === 200) {
+                    setError(undefined);
+                    setBankUpdateLoading(false);
+                    responseNotification("Employee bank updated successfully!", "success");
 
-            } else if (res?.data?.statusCode === 400) {
-                setError(res?.data?.errors?.[0].msg);
-                setBankUpdateLoading(false);
-            } else if (res?.data?.statusCode === 500) {
-                setError(res?.message);
-                setBankUpdateLoading(false);
+                } else if (res?.data?.statusCode === 400) {
+                    setError(res?.data?.errors?.[0].msg);
+                    setBankUpdateLoading(false);
+                } else if (res?.data?.statusCode === 500) {
+                    setError(res?.message);
+                    setBankUpdateLoading(false);
+                }
             }
 
         } catch (error) {
@@ -176,7 +209,8 @@ function EmployeeDetails() {
         // console.log("values: ", values);
         const receivedEmployeeFields = {
             id: id,
-            name: values?.name,
+            firstName: values?.firstName,
+            lastName: values?.lastName,
             email: values?.email,
             phoneNumber: values?.phoneNumber,
             countryName: values?.countryName,
@@ -192,40 +226,47 @@ function EmployeeDetails() {
             referPersonId: values?.referPersonId,
             skills: values?.skills,
             sourceId: values?.sourceId,
-            employeeExperience: Number(values?.employeeExperience)
+            hourlyRate: values?.hourlyRate,
+            employeeExperience: values?.employeeExperience
 
             // values.dateOfBirth
         };
 
-        // console.log("receivedEmployeeFields: ", receivedEmployeeFields);
         try {
 
             setBasicInfoUpdateloading(true);
 
-            const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields, {
-                headers: {
-                    Authorization: `Bearer ${token()}`,
-                },
-            });
+            if (id && receivedEmployeeFields) {
+                const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/users/update-employee`, receivedEmployeeFields, {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                });
 
-            if (res?.data?.statusCode === 200) {
-                setError(undefined);
-                setBasicInfoUpdateloading(false);
-                responseNotification("Employee information updated successfully!", "success");
-                // form.resetFields();
+                if (res?.data?.statusCode === 200) {
+                    setError(undefined);
+                    setBasicInfoUpdateloading(false);
+                    responseNotification("Employee information updated successfully!", "success");
 
-            } else if (res?.data?.statusCode === 400) {
-                setError(res?.data?.errors?.[0].msg);
-                setBasicInfoUpdateloading(false);
-            } else if (res?.data?.statusCode === 500) {
-                setError(res?.message);
-                setBasicInfoUpdateloading(false);
+                } else if (res?.data?.statusCode === 400) {
+                    setError(res?.data?.errors?.[0].msg);
+                    setBasicInfoUpdateloading(false);
+                } else if (res?.data?.statusCode === 500) {
+                    setError(res?.message);
+                    setBasicInfoUpdateloading(false);
+                }
             }
 
         } catch (error) {
             setError(error?.response?.data?.errors?.[0].msg);
             setBasicInfoUpdateloading(false);
         }
+    };
+
+    //CV onchange
+    const summaryPdfChange = ({ fileList: newFileList }) => {
+        setSummaryPdf(newFileList);
+        setSummaryPdfFileShow(newFileList[0]?.originFileObj?.name);
     };
 
     return (
@@ -235,49 +276,14 @@ function EmployeeDetails() {
                     <h3 className='mb-4 title'>Employee Information</h3>
                 </div>
             </div>
-
             <div className='card'>
                 <div className='card-header'>
-                    Employee Profile Info
-                </div>
-                <div className='card-body'>
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <td style={{ width: '200px' }}> <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + getSingleEmployeeDetails?.profilePicture} /> </td>
-                                <td> <a target='_blank' href={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + getSingleEmployeeDetails?.cv}>Curriculum Vitae (CV)</a> </td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <br />
-
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Certificate Name</th>
-                                <th>Certificate File</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {_.map(getSingleEmployeeDetails?.certificates, (item, index) => (
-                                <tr key={index}>
-                                    <td>{item?.certificateName}</td>
-                                    <td>
-                                        <img style={{ width: '100px', height: '100px' }} src={`${process.env.REACT_APP_ASSETs_BASE_URL}/` + item?.attachment} />
-                                    </td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br />
-            <div className='card'>
-
-                <div className='card-header'>
-                    Update Employee Information
+                    <div className='d-flex justify-content-between'>
+                        <h5>Edit Employee Information</h5>
+                        <Link to={`/admin/view-certificate/${id}`} style={{ background: '#C6A34F', color: 'white' }} className='btn btn-sm'>
+                            View Certificate
+                        </Link>
+                    </div>
                 </div>
 
                 <div className='card-body'>
@@ -292,17 +298,33 @@ function EmployeeDetails() {
 
                                 <div className="col-md-4">
                                     <Form.Item
-                                        label="Name"
-                                        name="name"
+                                        label="First Name"
+                                        name="firstName"
                                         hasFeedback
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Please enter name',
+                                                message: 'Please enter first name',
                                             },
                                         ]}
                                     >
-                                        <Input placeholder="Enter name" className="ant-input ant-input-lg" />
+                                        <Input placeholder="Enter first name" className="ant-input ant-input-lg" />
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item
+                                        label="Last Name"
+                                        name="lastName"
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter last name',
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="Enter last name" className="ant-input ant-input-lg" />
                                     </Form.Item>
                                 </div>
 
@@ -392,7 +414,7 @@ function EmployeeDetails() {
                                         name="dateOfBirth"
                                         rules={[
                                             {
-                                                // required: true,
+                                                required: true,
                                                 message: 'Please enter date of birth',
                                             },
                                         ]}
@@ -403,8 +425,10 @@ function EmployeeDetails() {
 
                                             <DatePicker
                                                 style={{ width: '100%' }}
-                                                id="dateOfBirth"
                                                 placeholder="Date of Birth"
+                                                defaultValue={
+                                                    (getEditDateOfBirth && moment(getEditDateOfBirth, 'YYYY-MM-DD')) || ''
+                                                }
                                                 onChange={(value) => {
                                                     setDateOfBirth(
                                                         moment(value)
@@ -541,6 +565,22 @@ function EmployeeDetails() {
 
                                 <div className="col-md-4">
                                     <Form.Item
+                                        label="Per hour rate($ or £)"
+                                        name="hourlyRate"
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter per hour rate',
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="Enter per hour rate" className="ant-input ant-input-lg" />
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item
                                         label="Languages"
                                         name="languages"
                                         hasFeedback
@@ -634,6 +674,54 @@ function EmployeeDetails() {
                                                 <Option key={index} value={refer?._id}>{refer?.name}</Option>
                                             ))}
                                         </Select>
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item name="profilePicture" label="Profile Picture">
+                                        <div>
+                                            <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
+                                            <ImgCrop rotate aspect={2 / 1}>
+                                                <Upload
+                                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                    listType="picture-card"
+                                                    fileList={profilePicture}
+                                                    onChange={onProfileChange}
+                                                    onPreview={onPreview}
+                                                >
+                                                    {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
+                                                </Upload>
+                                            </ImgCrop>
+                                        </div>
+                                    </Form.Item>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <Form.Item
+                                        name="summaryPdf"
+                                        className="p-1 m-0"
+                                        label="Curriculam Vitea (CV)"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please enter curriculam vitea (CV)',
+                                            },
+                                        ]}
+                                    >
+                                        <Upload
+                                            listType="picture"
+                                            defaultFileList={[...summaryPdf]}
+                                            fileList={summaryPdf}
+                                            onChange={summaryPdfChange}
+                                            maxCount={1}
+                                            accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
+                                        >
+                                            <Button icon={<UploadOutlined />}>
+                                                {" "}
+                                                {!summaryPdfFileShow ? "Upload" : "Uploaded"}{" "}
+                                            </Button>
+                                        </Upload>
+
                                     </Form.Item>
                                 </div>
 

@@ -1,0 +1,178 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.SelectedEmployee {
+    background-color: #f5f5f5;
+    padding: 100px 0px 68px 0px;
+}
+
+.selectedEmploImgBackBtn {
+    position: relative;
+}
+
+.selectedEmploImgBackBtn img {
+    position: absolute;
+    top: 26px;
+    right: 120px;
+}
+
+.selectedEmployeeBookmarkImg {
+    position: relative;
+}
+
+.selectedEmployeeBookmarkImg img {
+    position: absolute;
+    top: 26px;
+    left: 120px;
+}
+
+.profileMarker {
+    position: relative;
+}
+
+.profileMarker img {
+    position: absolute;
+    bottom: 26px;
+    left: 37px;
+}
+
+.selectEmployeeCardBookNowButton button {
+    margin-top: 17px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: none;
+    height: 64px;
+    background-color: #c6a34f;
+    color: white;
+    -webkit-border-top-left-radius: 14px;
+    -webkit-border-bottom-right-radius: 14px;
+    -moz-border-radius-topleft: 14px;
+    -moz-border-radius-bottomright: 014px;
+    border-top-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.sctEmplTitleBox {
+    padding: 20px 0px 0px;
+}
+
+.slctEmpProfileRateRow {
+    padding: 7px 0px;
+}
+
+.slcEmpProfilLicenseRow {
+    margin-top: 26px;
+}
+
+.slctProfileNameTitle {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.sctProfileAge {
+    color: #7b7b7b;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.scltEmpProfileRatingIcon {
+    margin-top: -6px;
+    margin-left: 8px;
+}
+
+.slctProfiletotalRating {
+    color: #111111;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.SlctProrateIcon {
+    margin-top: -3px;
+
+    margin-right: 8px;
+}
+
+.slctProfileRateName {
+    color: #7b7b7b;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.slctprofilePerHourPrice {
+    color: #111111;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.selectEmployeeTotalHours {
+    color: #7b7b7b;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.selectEmployeeTotalHoursValue {
+    color: #111111;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.slctProfileExpName,
+.selectEmpLicense {
+    color: #7b7b7b;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.slctProfileExpValue,
+.selectEmpLicenseValue {
+    color: #111111;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.selectEmpReviewspan {
+    color: #7b7b7b;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.selectEmpReviewspanValue {
+    color: #111111;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.selectEmpCardCard_body {
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+.selectEmpLocationBar {
+    margin-bottom: 32px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 20px;
+}
+
+.selectEmpLocationBar p {
+    margin-bottom: 0px !important;
+    font-size: 24px;
+    font-weight: 500;
+    color: #111111;
+}
+
+.selectEmpLocationBar span {
+    color: #7b7b7b;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.selectEmpLocationBar img {
+    margin-top: -4px;
+    margin-right: 2px;
+}
+
+.selectEmpReviewCol {
+    padding: 0px !important;
+}

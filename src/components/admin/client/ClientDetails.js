@@ -127,9 +127,9 @@ function ClientDetails() {
                         >
                             <div className='col-12'>
                                 <div className='row'>
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                         <Form.Item
-                                            label="Discount Name"
+                                            label="Discount Amount"
                                             name="clientDiscount"
                                             hasFeedback
                                             rules={[

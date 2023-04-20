@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { responseNotification } from '../../../utils/notifcation';
-import { Input, Space, Switch, Table } from 'antd';
+import { Input, Select, Switch, Table, DatePicker, Space } from 'antd';
 import _ from "lodash";
+import moment from "moment";
 import { Link, useLocation } from 'react-router-dom';
 import { getPage } from '../../../utils/getPage';
 import { fetchClientListHandler } from '../../../api/employee';
 import Loader from '../../loadar/Loader';
 import { token } from '../../../utils/authentication';
+import { donwloadCSV } from '../../../utils/static/donwloadCSV.js';
+import axios from 'axios';
+
 
 const { Search } = Input;
+const { Option } = Select;
 
 const columns = [
     {
@@ -59,6 +64,8 @@ function ClientList() {
     const [loading, setLoading] = useState(false);
     const [getName, setName] = useState(undefined);
     const [getStatus, setStatus] = useState(undefined);
+    const [getFilterFromDate, setFilterFromDate] = useState(undefined);
+    const [getFilterToDate, setFilterToDate] = useState(undefined);
 
     const fetchClient = useCallback(async () => {
         setLoading(true);
@@ -82,8 +89,8 @@ function ClientList() {
     };
 
     //search
-    const handleSearchkeywordOnChange = (value) => {
-        setName(value);
+    const handleSearchkeywordOnChange = (e) => {
+        setName(e?.target?.value);
     };
 
     const data1 = [];
@@ -110,7 +117,7 @@ function ClientList() {
             action: (
                 <>
                     <div className='btn-group'>
-                        <Link to={`/admin/client-details/${item._id}`} className='btn btn-primary btn-sm'>
+                        <Link to={`/admin/client-details/${item._id}`} style={{ background: '#C6A34F', color: 'white' }} className='btn btn-sm'>
                             Edit
                         </Link>
                     </div>
@@ -150,6 +157,37 @@ function ClientList() {
         [fetchClient]
     );
 
+    const handleExportData = async () => {
+
+        try {
+
+            // &fromDate=${getFilterFromDate}&toDate=${getFilterToDate}
+            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=CLIENT`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token()}`,
+                    },
+                }
+            );
+
+            const data = responseData?.data?.users?.map((item) => {
+                return {
+                    RestaurantName: item?.restaurantName,
+                    RestaurantAddress: item?.restaurantAddress,
+                    Email: item?.email,
+                    PhoneNumber: item?.phoneNumber,
+                    ClientIDNumber: item?.userIdNumber,
+                    Discount: item?.clientDiscount
+                };
+            });
+
+            donwloadCSV(data, "Employee List");
+
+        } catch (error) {
+
+        }
+    };
+
     return (
         <div className="container-fluid px-4">
             <div className='row mt-4'>
@@ -158,24 +196,69 @@ function ClientList() {
                 </div>
             </div>
             <div className='card'>
+                <div className="card-header">
+                    <div className='col-12'>
+                        <div className='row'>
+                            <div className='col-10'>
+                                <div className='d-flex justify-content-start'>
+                                    <Space>
+                                        <Search
+                                            placeholder="Search"
+                                            allowClear
+                                            size="large"
+                                            onChange={handleSearchkeywordOnChange}
+                                            style={{
+                                                width: 300,
+                                                marginLeft: '10px'
+                                            }}
+                                        />
 
-                <div className='d-flex flex-row-reverse'>
-                    <div className='m-2'>
-                        <Space direction="vertical">
-                            <Search
-                                placeholder="Enter client name"
-                                enterButton="Search"
-                                size="large"
-                                style={{
-                                    fontSize: 16,
-                                    color: '#c6a34f',
-                                }}
-                                onSearch={handleSearchkeywordOnChange}
-                            />
-                        </Space>
+                                        <Select size="large" allowClear placeholder="Active" onChange={handleChangeStatus}>
+                                            <Option value="YES">YES</Option>
+                                            <Option value="NO">NO</Option>
+                                        </Select>
+
+                                        <DatePicker
+                                            size="large"
+                                            style={{ width: '12' }}
+                                            id="fromDate"
+                                            placeholder="From Date"
+                                            onChange={(value) => {
+                                                setFilterFromDate(
+                                                    moment(value)
+                                                        .format("YYYY-MM-DD")
+                                                        .valueOf()
+                                                );
+                                            }}
+                                        />
+                                        <DatePicker
+                                            size="large"
+                                            style={{ width: '12' }}
+                                            id="toDate"
+                                            placeholder="To Date"
+                                            onChange={(value) => {
+                                                setFilterToDate(
+                                                    moment(value)
+                                                        .format("YYYY-MM-DD")
+                                                        .valueOf()
+                                                );
+                                            }}
+                                        />
+                                    </Space>
+                                </div>
+                            </div>
+                            <div className='col-2'>
+                                <button
+                                    style={{ background: '#C6A34F', color: 'white' }}
+                                    onClick={handleExportData}
+                                    className="btn float-end"
+                                >
+                                    Export
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br />
                 {loading ? (
                     <tr>
                         <td>

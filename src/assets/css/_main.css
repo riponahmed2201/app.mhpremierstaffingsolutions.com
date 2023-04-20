@@ -1,0 +1,13 @@
+@import url('./components/login/_login.css');
+@import url('./components/login/_media.css');
+@import url('./components/register/_register.css');
+@import url('./components/register/_media.css');
+@import url('./components/home/_style.css');
+@import url('./components/home/_media.css');
+@import url('./components/dashboard/_media.css');
+@import url('./components/dashboard/_index.css');
+@import url('./components/client/myemployee/_style.css');
+@import url('./components/client/myemployee/_media.css');
+@import url('./components/client/employeeViewDetails/_style.css');
+@import url('./components/client/employeeViewDetails/_media.css');
+@import url('./components/aboutUs/_style.css');

@@ -1,0 +1,1082 @@
+/*.nav-link:hover/* // X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+@media (min-width: 320px) and (max-width: 374.98px) {
+    .Indexbanner {
+        padding: 20px 0px;
+    }
+
+    .IndexcustomNav320 {
+        margin: 0px;
+    }
+
+    .Index_header_container {
+        padding: 8px;
+    }
+
+    .nav_logo {
+        width: 75%;
+        margin: 0px 0px 0px 8px;
+    }
+
+    .languageFlagWrapper {
+        margin-left: 8px;
+        justify-content: start !important;
+    }
+
+    .navButton {
+        margin-left: 8px;
+        width: 50%;
+    }
+
+    .h1Wrapper h2 {
+        padding-bottom: 10px;
+        font-size: 40px;
+        font-weight: 700px;
+        line-height: 48px;
+    }
+
+    .left_part {
+        margin-top: 20px;
+    }
+
+    .pTextWrapper p {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500px;
+        line-height: 24px;
+    }
+
+    .bannerButtonWrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .bannerButtonWrapper button {
+        margin-right: 4px;
+        margin-top: 10px;
+    }
+
+    .perticle1,
+    .perticle2 {
+        display: none;
+    }
+
+    .right_part {
+        margin-top: 50px;
+    }
+
+    .ourServicesSpan {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .custom_span1 {
+        margin-right: 20px;
+        font-size: 16px;
+    }
+
+    .custom_span2 {
+        font-size: 16px;
+    }
+
+    .custom_span2 {
+        padding: 10px 0px;
+    }
+
+    .human {
+        width: 88%;
+    }
+
+    .workers {
+        width: 44% !important;
+        right: 45px;
+        top: -254px;
+    }
+
+    .jobs {
+        right: 0px;
+        width: 50% !important;
+        top: -162px;
+    }
+
+    .jobsh1 h1 {
+        margin-top: 40px;
+        text-align: right;
+        font-size: 42px;
+    }
+
+    .jobsp {
+        padding: 10px 0px 10px 35px;
+        text-align: right;
+        font-size: 16px;
+    }
+
+    .find_jobs {
+        padding-bottom: 50px;
+    }
+
+    .downloadApp {
+        margin: 0px;
+        padding: 15px 0px;
+    }
+
+    .appAvailableImage {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .h2DownloadWrapper {
+        margin-bottom: 0px;
+    }
+
+    .h2DownloadWrapper h2 {
+        font-size: 26px;
+    }
+
+    .pDownloadWrapper p {
+        margin-bottom: 5px !important;
+        font-size: 16px;
+    }
+
+    .buttonDownloadWrapper {
+        margin-bottom: 23px;
+    }
+
+    .custom_container_Testimonial {
+        padding: 0px;
+    }
+
+    .testimonialHEading {
+        margin: 20px 0px;
+    }
+
+    .custom_container_Testimonial {
+        padding: 20px 0px 80px 0px;
+        height: auto;
+    }
+
+    .contactUs {
+        padding: 20px 0px;
+    }
+
+    .contactUsFormContainer {
+        position: static;
+        padding: 20px;
+        margin: 0px 9px;
+        border-radius: 10px;
+        width: auto;
+    }
+
+    .footer {
+        padding: 10px 5px;
+    }
+
+    .middlePart h6 {
+        text-align: center;
+        padding: 10px 10px;
+    }
+
+    .middlePart h5 {
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
+
+    .middlePart h3 {
+        margin-bottom: 10px;
+    }
+
+    .middlePart h4 {
+        margin-bottom: 7px;
+    }
+
+    .socialMediaIcons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .leftPartLinks li a {
+        margin-bottom: -6px;
+    }
+
+    .rightPartLinks li a {
+        margin-bottom: 0px;
+    }
+
+    .middlePart {
+        padding: 22px 0px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .cards img {
+        width: 85%;
+    }
+
+    .customGutterspace {
+        --bs-gutter-y: 1.5rem;
+    }
+
+    .place_image {
+        display: none;
+    }
+
+    .footerFinal {
+        margin-top: 40px;
+        padding: 5px 10px;
+    }
+
+    .footerTextWrpper span {
+        padding-top: 0px;
+        font-weight: 400;
+        font-size: 8px;
+    }
+
+    .footerFinalLogo {
+        width: 40%;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 575.98px) {
+    .Indexbanner {
+        padding: 20px 0px;
+    }
+
+    .Index_header_container {
+        padding: 13px;
+    }
+
+    .nav_logo {
+        width: 75%;
+        margin: 0px 0px 0px 8px;
+    }
+
+    .languageFlagWrapper {
+        margin-left: 8px;
+        justify-content: start !important;
+    }
+
+    .navButton {
+        margin-left: 8px;
+        width: 50%;
+    }
+
+    .h1Wrapper h2 {
+        font-size: 53px;
+        /* font-weight: 700px !important; */
+        line-height: 49px;
+    }
+
+    .left_part {
+        margin-top: 20px;
+    }
+
+    .pTextWrapper p {
+        margin-top: 25px !important;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500px;
+        line-height: 24px;
+    }
+
+    .perticle1,
+    .perticle2 {
+        display: none;
+    }
+
+    .Indexbanner {
+        height: auto;
+    }
+
+    .bannerButtonWrapper {
+        margin-top: 3px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+    }
+
+    .bannerButtonWrapper button {
+        padding: 6px;
+        margin-right: 4px;
+    }
+
+    .right_part {
+        margin-top: 57px;
+        margin-bottom: 50px;
+    }
+
+    .custom_span2 {
+        padding: 8px 10px;
+    }
+
+    .custom_span1 {
+        margin-right: 6px;
+    }
+
+    .human {
+        width: 88%;
+    }
+
+    .workers {
+        width: 44% !important;
+        right: 45px;
+        top: -295px;
+    }
+
+    .jobs {
+        right: 0px;
+        width: 50% !important;
+        top: -162px;
+    }
+
+    .jobsh1 h1 {
+        margin-top: 40px;
+        text-align: left;
+        font-size: 42px;
+    }
+
+    .jobsp {
+        padding: 10px 0px 10px 1px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .find_jobs {
+        padding-bottom: 50px;
+        padding-top: 40px;
+    }
+
+    .phoneImgWrapper {
+        padding: 15px 10pxf;
+    }
+
+    .downloadApp {
+        margin: 0px;
+        padding: 15px 0px;
+    }
+
+    .appAvailableImage {
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    .h2DownloadWrapper {
+        margin-bottom: 0px;
+    }
+
+    .h2DownloadWrapper h2 {
+        text-align: center;
+        font-size: 26px;
+    }
+
+    .pDownloadWrapper p {
+        text-align: center;
+        margin-bottom: 5px !important;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .buttonDownloadWrapper {
+        margin-bottom: 23px;
+    }
+
+    .custom_container_Testimonial {
+        padding: 0px;
+    }
+
+    .testimonialHEading {
+        margin: 20px 0px;
+    }
+
+    .custom_container_Testimonial {
+        padding: 20px 0px 80px 0px;
+        height: auto;
+    }
+
+    .contactUs {
+        padding: 20px 0px;
+    }
+
+    .contactUsFormContainer {
+        position: static !important;
+        padding: 20px;
+        margin: 0px 9px;
+        border-radius: 10px;
+        width: auto;
+    }
+
+    .footer {
+        padding: 10px 5px;
+    }
+
+    .middlePart h6 {
+        text-align: center;
+        padding: 10px 10px;
+    }
+
+    .middlePart h5 {
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
+
+    .middlePart h3 {
+        margin-bottom: 10px;
+    }
+
+    .middlePart h4 {
+        margin-bottom: 7px;
+    }
+
+    .socialMediaIcons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .leftPartLinks li a {
+        margin-bottom: -6px;
+    }
+
+    .rightPartLinks li a {
+        margin-bottom: 0px;
+    }
+
+    .middlePart {
+        padding: 22px 0px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .cards img {
+        width: 65%;
+    }
+
+    .customGutterspace {
+        --bs-gutter-y: 1.5rem;
+    }
+
+    .footerTextWrpper span {
+        padding-top: 7px;
+        font-size: 10px;
+    }
+
+    .footerFinal {
+        margin-top: 40px;
+        padding: 15px 12px;
+    }
+
+    .place_image {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 818.98px) {
+    .our_services {
+        display: none;
+    }
+
+    .slider {
+        display: none;
+    }
+
+    .Indexbanner {
+        padding: 30px 0px;
+    }
+
+    .languageFlagWrapper {
+        justify-content: start !important;
+        flex-direction: row !important;
+        padding-left: 5px;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        z-index: 1;
+        right: 73%;
+        bottom: -543.6%;
+    }
+
+    .perticle2 {
+        z-index: -1;
+        position: absolute;
+
+        top: 214%;
+    }
+
+    .contactUsFormContainer {
+        position: static;
+    }
+
+    .card-img-top {
+        width: 25%;
+    }
+
+    .human {
+        width: 65%;
+    }
+
+    .workers {
+        width: 30% !important;
+
+        right: 169px;
+        top: -405px;
+    }
+
+    .jobs {
+        width: 40% !important;
+        right: -3px;
+        top: -262px;
+    }
+
+    .find_jobs {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .phoneImgWrapper {
+        margin-top: 30px;
+    }
+
+    .contactUs {
+        padding-bottom: 50px;
+    }
+
+    .rightPartLogoWrapper img {
+        width: 45%;
+    }
+
+    .downloadApp {
+        margin: 30px 0px;
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1023.98px) {
+    .navButton {
+        margin-top: 15px;
+    }
+
+    .languageFlagWrapper {
+        margin-left: 8px;
+        justify-content: start !important;
+    }
+
+    .left_part {
+        margin-top: 40px;
+    }
+
+    .Indexbanner {
+        padding-bottom: 70px;
+        height: auto;
+    }
+
+    .perticle1 {
+        display: none;
+    }
+
+    .perticle2 {
+        display: none;
+        bottom: -66.6%;
+    }
+
+    .right_part {
+        margin-top: 60px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cards img {
+        width: 40%;
+    }
+
+    .customGutterspace {
+        flex-direction: row;
+
+        --bs-gutter-y: 1.5rem;
+    }
+
+    .workers {
+        right: 205px;
+        top: -505px;
+        width: 30% !important;
+    }
+
+    .human {
+        width: 80%;
+    }
+
+    .jobs {
+        width: 30% !important;
+        right: 65px;
+        top: -303px;
+    }
+
+    .find_jobs {
+        padding-top: 10px;
+        padding-bottom: 54px;
+    }
+
+    .appAvailableImage {
+        text-align: center;
+    }
+
+    .downloadApp {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .buttonDownloadWrapper {
+        justify-content: center !important;
+    }
+
+    .h2DownloadWrapper {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .phoneImgWrapper {
+        text-align: center !important;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .pDownloadWrapper p {
+        text-align: center !important;
+    }
+
+    .nav-link:hover {
+        /* color: #c6a34f !important; */
+        /* border: none !important; */
+    }
+
+    .our_services {
+        margin-top: 0px !important;
+    }
+
+    .custom_container_Testimonial {
+        height: auto;
+    }
+
+    .contactUsFormContainer {
+        padding: 30px;
+    }
+
+    .leftPartLinks li a {
+        margin-bottom: 0px;
+    }
+
+    .rightPartLinks li a {
+        margin-bottom: 0px;
+    }
+
+    .place_image {
+        display: none;
+    }
+
+    .footer {
+        z-index: -1;
+        padding: 30px 5px;
+    }
+
+    .rightPartLogoWrapper {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .rightPartLogoWrapper a {
+        margin: 0px 5px;
+    }
+
+    .middlePart h3 {
+        margin-bottom: 12px;
+    }
+
+    .middlePart h4 {
+        margin-bottom: 8px;
+    }
+
+    .middlePart h6 {
+        text-align: center;
+        padding: 10px 29px;
+    }
+
+    .contactUs {
+        padding: 30px 0px;
+    }
+
+    .contactUsFormContainer {
+        position: static;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1198.98px) {
+    .home_navbar_custom ul li a {
+        font-size: 15px;
+    }
+
+    .perticle1 {
+        width: 26%;
+        z-index: 1;
+    }
+
+    .perticle2 {
+        /* bottom: -16.6%; */
+        top: 67%;
+        z-index: 1;
+    }
+
+    .navbar_custom ul li a {
+        color: #111111 !important;
+        margin: 0px 2px;
+    }
+
+    .left_part {
+        margin-top: 0px;
+    }
+
+    .right_part {
+        margin-top: 120px;
+    }
+
+    .h1Wrapper h2 {
+        line-height: 60px;
+    }
+
+    .pTextWrapper p {
+        line-height: 29px;
+        font-size: 19px;
+    }
+
+    .Indexbanner {
+        padding: 70px;
+    }
+
+    .find_jobs {
+        padding: 40px 0px 50px 0px;
+    }
+
+    .workers {
+        right: -159px;
+        top: -375px;
+    }
+
+    .jobs {
+        right: -241px;
+        top: -218px;
+    }
+
+    .downloadPerticle2 {
+        top: 270%;
+    }
+
+    .downloadPerticle {
+        top: 359%;
+    }
+
+    .testimonial_top {
+        height: 150px;
+    }
+
+    .contactUsFormContainer {
+        position: absolute;
+        right: 15.5%;
+
+        bottom: -20% !important;
+    }
+
+    .place_image {
+        display: none;
+    }
+
+    .middlePart h6 {
+        text-align: center;
+        padding: 10px 35px;
+    }
+
+    .home_navbar_custom ul li a {
+        margin: 0px 7px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1339.98px) {
+    .Indexbanner {
+        height: 100vh;
+    }
+
+    .left_part {
+        margin-top: 82px;
+    }
+
+    .right_part {
+        margin-top: 200px;
+    }
+
+    .downloadPerticle2 {
+        top: 295%;
+        width: 23%;
+    }
+
+    .downloadPerticle {
+        top: 382%;
+        width: 19%;
+    }
+
+    .perticle1 {
+        z-index: 1;
+        width: 22%;
+        top: 10.6%;
+    }
+
+    .perticle2 {
+        width: 17%;
+        top: 79%;
+        bottom: -14.6%;
+        left: 0%;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        right: 62%;
+        bottom: -534.4%;
+    }
+
+    .contactUsFormContainer {
+        right: 21%;
+        bottom: -20%;
+    }
+}
+
+@media (min-width: 1340px) and (max-width: 1399.98px) {
+    .contactUsFormContainer {
+        bottom: -75px;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        bottom: -470%;
+
+        right: 61.5%;
+        bottom: -408.4%;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1535.98px) {
+    .left_part {
+        margin-top: 104px;
+    }
+
+    .right_part {
+        margin-top: 148px;
+    }
+
+    .Indexbanner {
+        height: 600px;
+    }
+
+    .perticle1 {
+        width: 24%;
+        top: 9.6%;
+    }
+
+    .perticle2 {
+        width: 18%;
+        top: 68%;
+
+        bottom: 9.4%;
+    }
+
+    .downloadPerticle2 {
+        top: 229.8%;
+    }
+
+    .downloadPerticle {
+        top: 303%;
+        width: 17%;
+    }
+
+    .workers {
+        right: -196px;
+        top: -486px;
+    }
+
+    .jobs {
+        right: -299px;
+        top: -299px;
+    }
+
+    .jobsh1 h1 {
+        margin-top: 101px;
+    }
+
+    .contactUsFormContainer {
+        right: 26%;
+        bottom: -20%;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        right: 64.5%;
+        bottom: -527.2%;
+    }
+
+    .placeImgWrapper img {
+        right: 64.5%;
+        bottom: -393.8%;
+    }
+
+    .appAvailableImage {
+        margin-top: 113px;
+    }
+
+    .buttonDownloadWrapper {
+        justify-content: start !important;
+    }
+}
+
+@media (min-width: 1536px) and (max-width: 1598.98px) {
+    .downloadPerticle2 {
+        top: 253.5%;
+    }
+
+    .perticle1 {
+        top: 11.6%;
+    }
+
+    .perticle2 {
+        position: absolute;
+        top: 48%;
+    }
+
+    .contactUsFormContainer {
+        right: 26.5%;
+        bottom: -20%;
+    }
+
+    .downloadPerticle {
+        top: 324%;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1798.98px) {
+    .contactUsFormContainer {
+        right: 28.5%;
+        bottom: -20%;
+    }
+}
+
+@media (min-width: 1800px) and (max-width: 2098.98px) {
+    .Indexbanner {
+        height: auto;
+        padding: 200px 0px;
+    }
+
+    .right_part,
+    .left_part {
+        margin: 0px;
+    }
+
+    .perticle1 {
+        width: 20%;
+        top: 7.6%;
+    }
+
+    .perticle2 {
+        top: 49%;
+        z-index: 2;
+    }
+
+    .workers {
+        top: -502px;
+    }
+
+    .jobs {
+        right: -304px;
+        top: -306px;
+    }
+
+    .jobsh1 h1 {
+        margin-top: 66px;
+        line-height: 75px;
+        padding: 0px 27px;
+    }
+
+    .jobsp {
+        padding: 0px 0px 0px 92px;
+        line-height: 40px;
+    }
+
+    .bannerButtonWrapper1,
+    .bannerButtonWrapper2 {
+        padding: 10px 15px 10px 15px;
+    }
+
+    .buttonDownloadWrapper {
+        justify-content: flex-start !important;
+    }
+
+    .pDownloadWrapper p {
+        padding: 0px 200px 0px 0px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 39px;
+    }
+
+    .downloadApp {
+        margin-top: 92px;
+        margin-bottom: 92px;
+    }
+
+    .custom_container_Testimonial {
+        height: auto;
+    }
+
+    .contactUsFormContainer {
+        right: 31%;
+        bottom: -20%;
+        padding: 40px;
+        border-radius: 10px;
+        width: 700px;
+        background-color: #fff;
+    }
+
+    .contactUs {
+        padding: 66px 0px 238px 0px;
+    }
+
+    .downloadPerticle {
+        position: absolute;
+    }
+
+    .downloadPerticle {
+        position: absolute;
+        left: 0px;
+        z-index: -1;
+        top: 248%;
+        z-index: -1;
+    }
+
+    .downloadPerticle2 {
+        top: 205.7%;
+        z-index: -1;
+    }
+
+    .placeImgWrapper img {
+        position: absolute;
+        right: 61%;
+        bottom: -309.2%;
+    }
+}
