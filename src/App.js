@@ -37,6 +37,14 @@ import EmployeeViewDetails from './components/frontend/dashboard/EmployeeViewDet
 import Payroll from './components/frontend/services/Payroll';
 import Recruiting from './components/frontend/services/Recruiting';
 import StrategyConsultancy from './components/frontend/services/StrategyConsultancy';
+import Services from './components/frontend/services/Services';
+import Mission from './components/frontend/mission/Mission';
+import Contact from './components/frontend/contact/Contact';
+import MeetTheTeam from './components/frontend/meetTeam/MeetTheTeam';
+import Faq from './components/frontend/faq/Faq';
+import CorporateInformation from './components/frontend/legal/CorporateInformation';
+import TermsOfUse from './components/frontend/legal/TermsOfUse';
+import Privacy from './components/frontend/legal/Privacy';
 
 function App() {
   return (
@@ -61,9 +69,17 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/career' element={<Career />} />
+            <Route path='/our-services' element={<Services />} />
+            <Route path='/our-mission' element={<Mission />} />
             <Route path='/payroll-services' element={<Payroll />} />
             <Route path='/recruiting-services' element={<Recruiting />} />
             <Route path='/strategy-consultancy-services' element={<StrategyConsultancy />} />
+            <Route path='/meet-the-team' element={<MeetTheTeam />} />
+            <Route path='/faq' element={<Faq />} />
+            <Route path='/contact-us' element={<Contact />} />
+            <Route path='/corporate-information' element={<CorporateInformation />} />
+            <Route path='/terms-of-use' element={<TermsOfUse />} />
+            <Route path='/privacy' element={<Privacy />} />
           </Route>
 
 

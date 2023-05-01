@@ -48,12 +48,21 @@ function Navbar() {
                       About Us
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+
+                  <li className="nav-item dropdown">
                     <NavLink
                       className="nav-link navbar_custom_hover"
-                      to="/customer"
+                      to="/our-services"
                     >
-                      Customers
+                     Our Services
+                    </NavLink>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link navbar_custom_hover"
+                      to="/our-mission"
+                    >
+                     Our Mission & Vision
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -63,47 +72,6 @@ function Navbar() {
                     >
                       Career
                     </NavLink>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="javascript:void(0)"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Services
-                    </a>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <li>
-                        <Link
-                          className="dropdown-item"
-                          to="/payroll-services"
-                        >
-                          PAYROLL
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item"
-                          to="/recruiting-services"
-                        >
-                          RECRUITING
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item"
-                          to="/strategy-consultancy-services"
-                        >
-                          STRATEGY CONSULTANCY
-                        </Link>
-                      </li>
-                    </ul>
                   </li>
                   <div className="languageFlagWrapper d-flex justify-content-center align-items-center">
                     <img

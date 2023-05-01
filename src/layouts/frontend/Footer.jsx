@@ -11,12 +11,12 @@ function Footer() {
               <ul>
                 <li>
                   <Link to="/">Home</Link>
-                  <Link to="/customer">Customers</Link>
+                  <Link to="/contact-us">Contact</Link>
                   <Link to="/career">Career</Link>
                   <Link to="/about">About Us</Link>
-                  <Link to="/payroll-services">Services</Link>
-                  <Link to="/">Meet The Team</Link>
-                  <Link to="/">Faq</Link>
+                  <Link to="/our-services">Our Services</Link>
+                  <Link to="/meet-the-team">Meet The Team</Link>
+                  <Link to="/faq">Faq</Link>
                 </li>
               </ul>
             </div>
@@ -37,28 +37,37 @@ function Footer() {
               </div>
               <span>Follow us on</span>
               <div className="socialMediaIcons">
-                <a href>
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/RecruitmentMirkoHospitality/"
+                >
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/indexImages/socialMedia/Group 116168.png"
                     alt="image"
                   />
                 </a>
-                <a href>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/recruitmentmirkohospitality/"
+                >
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/indexImages/socialMedia/Group 116169.png"
                     alt="image"
                   />
                 </a>
-                <a href>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/company/mirko-hospitality/mycompany/?viewAsMember=true"
+                >
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/indexImages/socialMedia/Group 116170.png"
                     alt="image"
                   />
                 </a>
-                <a href>
+                <a href="https://vm.tiktok.com/ZGJmndX98/" target="_blank">
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/indexImages/socialMedia/Group 116171.png"
@@ -72,22 +81,28 @@ function Footer() {
             <div className="rightPartLinks">
               <ul>
                 <li>
-                  <a href>CORPORATE INFORMATION</a>
-                  <a href>WEBSITE TERM OF USE</a>
-                  <a href>PRIVACY NOTICE</a>
-                  <a href>COOKIES</a>
-                  <a href>DOWNLOAD THE APP</a>
+                  <Link to="/corporate-information">CORPORATE INFORMATION</Link>
+                  <Link to="/terms-of-use">WEBSITE TERM OF USE</Link>
+                  <Link to="/privacy">PRIVACY NOTICE</Link>
+                  <Link to="/">COOKIES</Link>
+                  <a href="javascript:void(0)">DOWNLOAD THE APP</a>
                 </li>
               </ul>
               <div className="rightPartLogoWrapper text-end">
-                <a href>
+                <a
+                  href="https://apps.apple.com/us/app/mh/id6446052294"
+                  target="_blank"
+                >
                   <img
-                    className="img-fluid"
+                    className="img-fluid me-2"
                     src="assets/frontend/images/indexImages/socialMedia/Group 117303.png"
                     alt="image"
                   />
                 </a>
-                <a href>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.invain.mh"
+                  target="_blank"
+                >
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/indexImages/socialMedia/Group 117304.png"
