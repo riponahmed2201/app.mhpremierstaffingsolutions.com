@@ -3,13 +3,38 @@ import React from "react";
 function About() {
   return (
     <div>
+      <div
+        class="banner-header section-padding valign bg-img bg-fixed img-fluid"
+        style={{
+          backgroundImage: `url('assets/frontend/images/aboutUs/about.png')`,
+          minHeight: "400px",
+          width: "100%",
+          backgroundSize: "100% 100%",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-md-12 caption align-middle"
+              style={{ marginTop: "150px" }}
+            >
+              <h5 style={{ color: "white", fontSize: "18px" }}>
+                MH PREMIER STAFFING SOLUTIONS
+              </h5>
+              <h1 style={{ color: "white", fontSize: "70px" }}>About Us</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container">
-        <h2 className="mt-5">Abouts Us</h2>
         <div className="mt-5 mb-5">
           <div className="about_us_section_title">MH</div>
           <div className="about_us_section_sub_title">
-            MH PREMIER STAFFING SOLUTIONS
+            <strong>PREMIER STAFFING SOLUTIONS</strong>
           </div>
+          <br />
           <p className="about_us_section_paragraph">
             MH premier staffing solutions represents the natural progression of
             a path born in 2016 with Mirko Hospitality.
@@ -26,7 +51,9 @@ function About() {
             European and global connections of qualified professionals such as:
             executive chef, restaurants, and hotels.
           </p>
-          <p>Why are we different from others?</p>
+          <p>
+            <strong>Why are we different from others?</strong>
+          </p>
           <p className="about_us_section_paragraph">
             Our main feature is to consider the customer a partner, not just a
             patron; our customer’s success is our success. Our recruiters don’t
@@ -39,7 +66,7 @@ function About() {
             Knowing our clients’ problems represents a daily success in
             recruitment processes, despite the challenge it brings.
           </p>
-          <p className="text-justify">
+          <p className="about_us_section_paragraph">
             Many of London’s leading hotels and restaurants already have their
             trust in us; we are just waiting for you. No matter if you are a
             junior or senior talent for us, you are a person and a human
