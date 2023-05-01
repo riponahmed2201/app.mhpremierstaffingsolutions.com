@@ -19,21 +19,29 @@ const TermsOfUse = () => {
               className="col-md-12  caption align-middle"
               style={{ marginTop: "150px" }}
             >
+              <h5 style={{ color: "white", fontSize: "18px" }}>
+                MH PREMIER STAFFING SOLUTIONS
+              </h5>
               <h1 style={{ color: "white", fontSize: "70px" }}>TERMS OF USE</h1>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container " style={{ marginTop: "150px" }}>
+      <div className="container " style={{ marginTop: "60px" }}>
         <h1 className="mt-5">MH</h1>
         <p style={{ fontSize: "20px" }} className="my-3">
           MH PREMIER STAFFING SOLUTIONS
         </p>
-        <strong style={{ fontSize: "15px" }} className="my-5">
-          Internal standards and conditions for Clients:
-        </strong>
-        <p className="mt-4" style={{ fontSize: "18px", marginBottom: "200px" }}>
+        <p>
+          <strong style={{ fontSize: "15px" }} className="my-5">
+            Internal standards and conditions for Clients
+          </strong>
+        </p>
+        <p
+          className="about_us_section_paragraph mt-4"
+          style={{ marginBottom: "60px" }}
+        >
           Our website is for personal, non-commercial use only. No illegal or
           unauthorized use allowed. All website content is our property and
           protected by copyright laws. No reproduction or modification without
@@ -45,7 +53,7 @@ const TermsOfUse = () => {
           of our website. These terms of use are governed by the laws of London,
           UK. Any disputes must be resolved in the state or federal courts
           located in 48 Warwick St Regent Street W1B 5AW London. If you have
-          questions, contact us info@mhpremierstaffingsolutions.com
+          questions, contact us <strong>info@mhpremierstaffingsolutions.com</strong>
         </p>
       </div>
     </div>

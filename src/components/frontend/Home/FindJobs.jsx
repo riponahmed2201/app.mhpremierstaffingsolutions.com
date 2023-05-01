@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function FindJobs() {
   return (
@@ -46,16 +47,20 @@ function FindJobs() {
               </p>
             </div>
             <div className="bannerButtonWrapper text-end">
-              <button type="button" className="btn bannerButtonWrapper1">
-                Hire a worker
-              </button>
-              <button
-                type="button"
-                style={{ marginLeft: "5px" }}
-                className="btn bannerButtonWrapper2"
-              >
-                Drop your CV, if Job Needed
-              </button>
+              <Link to="/login">
+                <button type="button" className="btn bannerButtonWrapper1">
+                  Hire a worker
+                </button>
+              </Link>
+              <Link to="/register">
+                <button
+                  type="button"
+                  style={{ marginLeft: "5px" }}
+                  className="btn bannerButtonWrapper2"
+                >
+                  Drop your CV, if Job Needed
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,7 +1,4 @@
 import React from "react";
-import { AiFillApple, AiOutlineAndroid, AiOutlineApple } from "react-icons/ai";
-import { BsArrowUpRight } from "react-icons/bs";
-// import './job.css'
 
 const CorporateInformation = () => {
   return (
@@ -43,14 +40,14 @@ const CorporateInformation = () => {
         </p>
         <p>
           <strong style={{ fontSize: "15px" }} className="my-5">
-            Internal standards and conditions for Clients:
+            Internal standards and conditions for Clients
           </strong>
         </p>
         <p
           className="about_us_section_paragraph mt-4"
           style={{ marginBottom: "100px" }}
         >
-          submitting their details. We treat all our candidates and clients'
+          Submitting their details. We treat all our candidates and clients'
           information in strict confidence. The Client will be able to select
           the Candidate that fits the job role. The Client has to describe the
           type of work the Candidate is required to do, the location and the

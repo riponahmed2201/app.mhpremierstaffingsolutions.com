@@ -1,3 +1,4 @@
+import Link from "antd/es/typography/Link";
 import React from "react";
 
 function Banner() {
@@ -22,12 +23,34 @@ function Banner() {
               </p>
             </div>
             <div className="bannerButtonWrapper">
-              <button type="button" className="btn bannerButtonWrapper1">
-                Hire a worker
-              </button>
-              <button type="button" style={{ marginLeft:'5px' }} className="btn bannerButtonWrapper2">
-                Drop your CV, if Job Needed
-              </button>
+              {/* <Link to="/login">
+                <button type="button" className="btn bannerButtonWrapper1">
+                  Hire a worker
+                </button>
+              </Link>
+              <Link to="/register">
+                <button
+                  type="button"
+                  style={{ marginLeft: "5px" }}
+                  className="btn bannerButtonWrapper2"
+                >
+                  Drop your CV, if Job Needed
+                </button>
+              </Link> */}
+              <Link to="/login">
+                <button type="button" className="btn bannerButtonWrapper1">
+                  Hire a worker
+                </button>
+              </Link>
+              <Link to="/register">
+                <button
+                  type="button"
+                  style={{ marginLeft: "5px" }}
+                  className="btn bannerButtonWrapper2"
+                >
+                  Drop your CV, if Job Needed
+                </button>
+              </Link>
             </div>
           </div>
           <div className="col-lg-6 col-sm-12 Home_page_right_part">

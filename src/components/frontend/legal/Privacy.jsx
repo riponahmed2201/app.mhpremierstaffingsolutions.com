@@ -40,7 +40,7 @@ const Privacy = () => {
         </p>
         <p>
           <strong style={{ fontSize: "15px" }} className="my-5">
-            Rules and Regulations for Workers:
+            Rules and Regulations for Workers
           </strong>
         </p>
         <p className="about_us_section_paragraph mt-4">
@@ -60,12 +60,11 @@ const Privacy = () => {
         </p>
 
         <p>
-          {" "}
           <strong
             style={{ fontSize: "15px", marginTop: "20px" }}
             className="my-5"
           >
-            Internal standards and conditions for Clients:
+            Internal standards and conditions for Clients
           </strong>
         </p>
         <p

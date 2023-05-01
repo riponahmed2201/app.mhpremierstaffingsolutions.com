@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineAndroid, AiOutlineApple } from "react-icons/ai";
-import { BsArrowUpRight } from "react-icons/bs";
 import "./job.css";
 
 const Career = () => {
@@ -10,7 +9,7 @@ const Career = () => {
         className="banner-header section-padding valign bg-img bg-fixed img-fluid"
         style={{
           backgroundImage: `url('https://i.ibb.co/J26y8YG/career2.jpg)`,
-          minHeight: "600px",
+          minHeight: "500px",
           width: "100%",
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
@@ -20,7 +19,7 @@ const Career = () => {
           <div className="row">
             <div
               className="col-md-12  caption align-middle"
-              style={{ marginTop: "330px" }}
+              style={{ marginTop: "244px" }}
             >
               <h5 style={{ color: "white" }}>MH PREMIER STAFFING SOLUTIONS</h5>
               <h1 style={{ color: "white" }}>Job Opening</h1>
@@ -46,17 +45,31 @@ const Career = () => {
                 className="d-flex justify-content-evenly px-3 py-2"
               >
                 <div>
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
+                  <a
+                    href="https://apps.apple.com/us/app/mh/id6446052294"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineApple
+                      style={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        marginRight: "15px",
+                      }}
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.invain.mh"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineAndroid
+                      style={{ fontSize: "25px", cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
-                <AiOutlineAndroid style={{ fontSize: "23px" }} />
               </div>
             </div>
-
-            <BsArrowUpRight
-              style={{ fontSize: "20px", color: "#c6a34f" }}
-              className="mt-5 mx-3 right-hover"
-            />
           </div>
         </div>
 
@@ -76,17 +89,31 @@ const Career = () => {
                 className="d-flex justify-content-evenly px-3 py-2"
               >
                 <div>
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
+                  <a
+                    href="https://apps.apple.com/us/app/mh/id6446052294"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineApple
+                      style={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        marginRight: "15px",
+                      }}
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.invain.mh"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineAndroid
+                      style={{ fontSize: "25px", cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
-                <AiOutlineAndroid style={{ fontSize: "23px" }} />
               </div>
             </div>
-
-            <BsArrowUpRight
-              style={{ fontSize: "20px", color: "#c6a34f" }}
-              className="mt-5 mx-3 right-hover"
-            />
           </div>
         </div>
 
@@ -108,17 +135,31 @@ const Career = () => {
                 className="d-flex justify-content-evenly px-3 py-2"
               >
                 <div>
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
+                  <a
+                    href="https://apps.apple.com/us/app/mh/id6446052294"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineApple
+                      style={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        marginRight: "15px",
+                      }}
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.invain.mh"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineAndroid
+                      style={{ fontSize: "25px", cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
-                <AiOutlineAndroid style={{ fontSize: "23px" }} />
               </div>
             </div>
-
-            <BsArrowUpRight
-              style={{ fontSize: "20px", color: "#c6a34f" }}
-              className="mt-5 mx-3 right-hover"
-            />
           </div>
         </div>
         <hr />
@@ -138,17 +179,31 @@ const Career = () => {
                 className="d-flex justify-content-evenly px-3 py-2"
               >
                 <div>
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
-                  <AiOutlineApple style={{ fontSize: "25px" }} />
+                  <a
+                    href="https://apps.apple.com/us/app/mh/id6446052294"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineApple
+                      style={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        marginRight: "15px",
+                      }}
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.invain.mh"
+                    target="_blank"
+                    className="text-white"
+                  >
+                    <AiOutlineAndroid
+                      style={{ fontSize: "25px", cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
-                <AiOutlineAndroid style={{ fontSize: "23px" }} />
               </div>
             </div>
-
-            <BsArrowUpRight
-              style={{ fontSize: "20px", color: "#c6a34f" }}
-              className="mt-5 mx-3 right-hover"
-            />
           </div>
         </div>
 

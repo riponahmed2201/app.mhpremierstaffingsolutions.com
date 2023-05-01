@@ -1,4 +1,5 @@
 import React from "react";
+import Position from "../Home/Position";
 
 function Services() {
   return (
@@ -65,6 +66,10 @@ function Services() {
             Kingdom.
           </p>
         </div>
+      </div>
+
+      <div className="container">
+        <Position />
       </div>
     </div>
   );
