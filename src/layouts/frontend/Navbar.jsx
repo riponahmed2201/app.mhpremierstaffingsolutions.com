@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import "./select.css";
 
 function Navbar() {
   return (
@@ -54,7 +55,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-services"
                     >
-                     Our Services
+                      Our Services
                     </NavLink>
                   </li>
                   <li className="nav-item dropdown">
@@ -62,7 +63,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-mission"
                     >
-                     Our Mission & Vision
+                      Our Mission & Vision
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -80,7 +81,7 @@ function Navbar() {
                       alt="image"
                     />
                   </div>
-                  <li className="nav-item dropdown">
+                  {/* <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
                       href="javascript:void(0)"
@@ -114,7 +115,15 @@ function Navbar() {
                         </a>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
+
+                  <select className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem">
+                    {/* <option>En</option> */}
+                    <option value={"en"} selected>
+                      English
+                    </option>
+                    <option value={"ar"}>Arabic</option>
+                  </select>
                   <button type="button" className="navButton btn">
                     <Link to="/login">
                       <img

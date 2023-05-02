@@ -148,10 +148,7 @@ function Login() {
                                                                 <div className="password_logo_img">
                                                                     <img src="assets/frontend/images/login_page_images/Icon.png" className="img-fluid password_logo" alt="iamge" />
                                                                 </div>
-                                                                <input placeholder="Enter password" type="password" className="form-control form-control-custom" id="exampleInputPassword1" />
-                                                                <div className="password_icon_wrapper">
-                                                                    <img src="assets/frontend/images/login_page_images/Vector.png" className="img-fluid" alt="iamge" />
-                                                                </div>
+                                                                <input placeholder="Enter password" type="password" className="form-control form-control-custom"/>
                                                             </div>
 
                                                         </Form.Item>
@@ -203,7 +200,7 @@ function Login() {
                                 {/* Register Section start*/}
                                 <div className="accountandregisterwrapper text-center">
                                     <span className="donthaveaccounttext">Don’t have an account?</span>
-                                    <Link to="/register">Register</Link>
+                                    <Link to="/client-register">Register</Link>
                                 </div>
                                 {/* Register Section end*/}
                                 {/* Form part end */}
