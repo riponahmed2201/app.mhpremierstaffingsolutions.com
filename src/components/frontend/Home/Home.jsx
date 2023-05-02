@@ -22,14 +22,19 @@ function Home() {
 
       <CookieConsent
         location="bottom"
-        buttonText="Sure man!!"
+        buttonText="Allow Cookies!!"
         cookieName="myAwesomeCookieName2"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+        style={{ background: "#c6a34f" }}
+        buttonStyle={{ color: "#ffffff", fontSize: "16px" }}
         expires={150}
       >
-        This website uses cookies to enhance the user experience.
-        <span style={{ fontSize: "10px" }}>This bit of text is smaller :O</span>
+        “This website collects cookies to deliver better user experience” “We
+        collect cookies to analyze our website traffic and performance; we never
+        collect any personal data” “Cookies help us display personalized product
+        recommendations and ensure you have great shopping experience”
+        {/* <span style={{ fontSize: "14px" }}>
+          This bit of text is smaller :O
+        </span> */}
       </CookieConsent>
     </div>
   );

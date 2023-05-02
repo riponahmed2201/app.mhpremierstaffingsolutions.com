@@ -6,12 +6,11 @@ import PrivateRoute from './routes/PrivateRoute';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
 import AdminLogin from './components/frontend/auth/AdminLogin';
-import Register from './components/frontend/register/Register';
+import EmployeeRegister from './components/frontend/register/EmployeeRegister';
 import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
-import EmployeeRegister from './components/frontend/auth/EmployeeRegister';
-import EmployeeRegisterWelcome from './components/frontend/profile/EmployeeRegisterWelcome';
+import RegisterWelcome from './components/frontend/profile/RegisterWelcome';
 import EmployeeList from './components/admin/employee/EmployeeList';
 import ClientList from './components/admin/client/ClientList';
 import EmployeeDetails from './components/admin/employee/EmployeeDetails';
@@ -45,6 +44,7 @@ import Faq from './components/frontend/faq/Faq';
 import CorporateInformation from './components/frontend/legal/CorporateInformation';
 import TermsOfUse from './components/frontend/legal/TermsOfUse';
 import Privacy from './components/frontend/legal/Privacy';
+import ClientRegister from './components/frontend/register/ClientRegister';
 
 function App() {
   return (
@@ -54,9 +54,9 @@ function App() {
 
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
           <Route path='/employee-register' element={<EmployeeRegister />} />
-          <Route path='/employee-welcome' element={<EmployeeRegisterWelcome />} />
+          <Route path='/client-register' element={<ClientRegister />} />
+          <Route path='/register-welcome' element={<RegisterWelcome />} />
 
           <Route path="/" element={<DashboardLayout />} >
             <Route index path='client-dashboard' element={<ClientDashboard />} />

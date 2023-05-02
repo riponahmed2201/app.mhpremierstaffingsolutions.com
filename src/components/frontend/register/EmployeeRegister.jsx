@@ -13,7 +13,7 @@ import { employeeRegisterHandler } from "../../../api/employee";
 import { fetchPositionListForDropdownHandler } from "../../../api/position";
 import defaultImage from "../../../assets/images/default.png";
 
-function Register() {
+function EmployeeRegister() {
   const [referPerson, setReferPerson] = useState([]);
   const [sourceFrom, setSourceFrom] = useState([]);
   const [position, setPosition] = useState([]);
@@ -114,7 +114,7 @@ function Register() {
             // form.resetFields();
             setSummaryPdf([]);
 
-            navigate("/login");
+            navigate("/register-welcome");
 
             // window.location.reload();
           } else if (res?.statusCode === 400) {
@@ -177,6 +177,7 @@ function Register() {
             </div>
           </div>
           {/*leftpart end*/}
+
           {/*Right Part Start*/}
           <div className="col-lg-6 col-md-6 col-sm-12 Registration_page_right_part">
             <div className="eclips_wrapper1">
@@ -193,277 +194,35 @@ function Register() {
               />
             </div>
             <div className="clientButtonWrapper d-flex justify-content-center align-items-center">
-              <ul
-                className="nav mobile_320  ClientButtonNavTabs nav-tabs"
-                id="myTab"
-                role="tablist"
-              >
-                <li
-                  className="nav-item ClientButtonNavItem"
-                  role="presentation"
-                >
-                  <button
-                    className="nav-link active client_tab_button"
-                    id="home-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#home"
-                    type="button"
-                    role="tab"
-                    aria-controls="home"
-                    aria-selected="true"
-                  >
-                    Client
-                  </button>
+              <ul className="nav mobile_320  ClientButtonNavTabs nav-tabs">
+                <li className="nav-item ClientButtonNavItem">
+                  <Link to="/client-register" className="text-decoration-none">
+                    <button className="nav-link client_tab_button">
+                      Client
+                    </button>
+                  </Link>
                 </li>
-                <li className="nav-item" role="presentation">
-                  <button
-                    className="nav-link employee_tab_button"
-                    id="profile-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#profile"
-                    type="button"
-                    role="tab"
-                    aria-controls="profile"
-                    aria-selected="false"
+                <li className="nav-item">
+                  <Link
+                    to="/employee-register"
+                    className="text-decoration-none"
                   >
-                    Employee
-                  </button>
+                    <button className="nav-link active employee_tab_button">
+                      Employee
+                    </button>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="formWrappper">
-              <div className="tab-content" id="myTabContent">
-                {/* Clients Form */}
-                <div
-                  className="tab-pane fade show active"
-                  id="home"
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                >
-                  <div className="container card_looking_container">
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="resturauntNameWrapper">
-                          <label
-                            htmlFor="exampleInputEmail1"
-                            className="form-label restaurantNameText"
-                          >
-                            Resturaunt Name
-                          </label>
-                        </div>
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Vector.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Name"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Email.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Email Address"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <label
-                          htmlFor="exampleInputEmail1"
-                          className="hidden_input form-label restaurantNameText"
-                        >
-                          Resturaunt Name
-                        </label>
-                        {/* This is an hidden label for  empty space */}
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/Subtract.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Resturaunt Address"
-                          type="text"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/phone.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Phone Number"
-                          type="email"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid hidden_input"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/ip.png"
-                            alt="image"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Password"
-                          type="password"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="inputLogoWrapper">
-                          <img
-                            className="img-fluid"
-                            src="assets/frontend/images/registrationFormImages/clientFormPictures/pass.png"
-                            alt="image"
-                          />
-                        </div>
-                        <input
-                          placeholder="Confirm Password"
-                          type="password"
-                          className="form-control custom_client_input_for_registration_page mb-3"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
-                      </div>
-                    </div>
-                    {/* Please Provide Text */}
-                    <div className="row">
-                      <div className="col-lg-12 please_provide_wrapper text-center">
-                        <p className="pleaseProvideText">
-                          Please provide the following info too
-                        </p>
-                        <img
-                          className="img-fluid pleaseProvideImage"
-                          src="assets/frontend/images/registrationFormImages/clientFormPictures/rectangle.png"
-                          alt="image"
-                        />
-                      </div>
-                    </div>
-                    {/* Please Provide Text End */}
-                    {/* About Us form */}
-                    <div className="container dropdownContainer">
-                      <div className="row">
-                        <div className="col-lg-6">
-                          <p className="how_youKnow_text">
-                            How You Know About Us
-                          </p>
-                          <div className="dropdownbuttonwrapper">
-                            <div className="dropdown">
-                              <div className="inputLogoWrapper">
-                                <img
-                                  className="img-fluid"
-                                  src="assets/frontend/images/registrationFormImages/clientFormPictures/selectFrom.png"
-                                  alt="image"
-                                />
-                              </div>
-                              <select
-                                className="form-select custom_select"
-                                aria-label="Select country"
-                              >
-                                <option selected disabled>
-                                  Select from here
-                                </option>
-                                <option value="Afghanistan">Afghanistan</option>
-                                <option value="Brazil">Brazil</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Denmark">Denmark</option>
-                                <option value="Egypt">Egypt</option>
-                                <option value="Finland">Finland</option>
-                                <option value="Greece">Greece</option>
-                                <option value="Hungary">Hungary</option>
-                                <option value="India">India</option>
-                                <option value="Japan">Japan</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-6">
-                          <p className="how_youKnow_text">Refer</p>
-                          <div className="referFieldWrapper">
-                            <div className="inputLogoWrapper">
-                              <img
-                                className="img-fluid"
-                                src="assets/frontend/images/registrationFormImages/clientFormPictures/EnterHere.png"
-                                alt="image"
-                              />
-                            </div>
-                            <input
-                              placeholder="Enter Here"
-                              type="password"
-                              className="form-control custom_client_input_for_registration_page mb-3"
-                              id="exampleInputEmail1"
-                              aria-describedby="emailHelp"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* About Us form End */}
-                    {/* Register Button */}
-                    <div className="registerButton text-center">
-                      <button type="submit" className="btn register_button">
-                        Register
-                      </button>
-                    </div>
-
-                    <div className="accountandregisterwrapper text-center">
-                      <span className="donthaveaccounttext">
-                        Already have an account?
-                      </span>
-                      <Link to="/login" style={{ color: "#ceb26e" }}>
-                        Login
-                      </Link>
-                    </div>
-                    {/* Register Button End */}
-                  </div>
-                </div>
-
-                {/* Employee form */}
+              <div className="tab-content">
                 <Form
                   className="ant-form ant-form-vertical"
                   layout="vertical"
                   onFinish={onFinish}
                   form={form}
                 >
-                  <div
-                    className="tab-pane fade"
-                    id="profile"
-                    role="tabpanel"
-                    aria-labelledby="profile-tab"
-                  >
+                  <div className="tab-pane fade show active">
                     <div className="container">
                       <div className="row">
                         <div className="col-lg-12">
@@ -482,7 +241,6 @@ function Register() {
                                 <ImgCrop rotate aspect={2 / 1}>
                                   <Upload
                                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                    listType="picture-card"
                                     fileList={profilePicture}
                                     onChange={onProfileChange}
                                     onPreview={onPreview}
@@ -493,6 +251,7 @@ function Register() {
                                           style={{
                                             height: "100px",
                                             width: "100px",
+                                            marginTop: "10px",
                                           }}
                                           src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadeImage.png"
                                           alt="Default Image"
@@ -519,14 +278,6 @@ function Register() {
                             ]}
                           >
                             <div>
-                              <div className="resturauntNameWrapper">
-                                <label
-                                  htmlFor="exampleInputEmail1"
-                                  className="form-label restaurantNameText"
-                                >
-                                  First Name
-                                </label>
-                              </div>
                               <div className="inputLogoWrapper">
                                 <img
                                   className="img-fluid"
@@ -723,11 +474,7 @@ function Register() {
                                 onChange={summaryPdfChange}
                                 maxCount={1}
                                 accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
-                              >
-                                {/* <Button icon={<UploadOutlined />}>
-                                  {!summaryPdfFileShow ? "Upload" : "Uploaded"}
-                                </Button> */}
-                              </Upload>
+                              ></Upload>
                             </label>
                           </div>
                         </div>
@@ -795,4 +542,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default EmployeeRegister;
