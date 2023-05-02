@@ -23,12 +23,15 @@ function Banner() {
               </p>
             </div>
             <div className="bannerButtonWrapper">
-              {/* <Link to="/login">
-                <button type="button" className="btn bannerButtonWrapper1">
+              <a href="/login">
+                <button
+                  style={{ cursor: "pointer" }}
+                  className="btn bannerButtonWrapper1"
+                >
                   Hire a worker
                 </button>
-              </Link>
-              <Link to="/register">
+              </a>
+              <a href="/employee-register">
                 <button
                   type="button"
                   style={{ marginLeft: "5px" }}
@@ -36,29 +39,17 @@ function Banner() {
                 >
                   Drop your CV, if Job Needed
                 </button>
-              </Link> */}
-              <Link to="/login">
-                <button type="button" className="btn bannerButtonWrapper1">
-                  Hire a worker
-                </button>
-              </Link>
-              <Link to="/register">
-                <button
-                  type="button"
-                  style={{ marginLeft: "5px" }}
-                  className="btn bannerButtonWrapper2"
-                >
-                  Drop your CV, if Job Needed
-                </button>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="col-lg-6 col-sm-12 Home_page_right_part">
-            <img
-              src="assets/frontend/images/indexImages/PERTICLE2.png"
-              className="img-fluid perticle2"
-              alt
-            />
+            <a href="/login">
+              <img
+                src="assets/frontend/images/indexImages/PERTICLE2.png"
+                className="img-fluid perticle2"
+                alt
+              />
+            </a>
             <div className="bannerImageWrapper">
               <img
                 src="assets/frontend/images/indexImages/Group 117293.png"

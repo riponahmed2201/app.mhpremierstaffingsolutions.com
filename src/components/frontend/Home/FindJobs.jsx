@@ -52,7 +52,7 @@ function FindJobs() {
                   Hire a worker
                 </button>
               </Link>
-              <Link to="/register">
+              <Link to="/employee-register">
                 <button
                   type="button"
                   style={{ marginLeft: "5px" }}
