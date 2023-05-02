@@ -238,7 +238,7 @@ function EmployeeRegister() {
                               ]}
                             >
                               <div>
-                                <ImgCrop rotate aspect={2 / 1}>
+                                {/* <ImgCrop rotate aspect={2 / 1}> */}
                                   <Upload
                                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                     fileList={profilePicture}
@@ -259,7 +259,7 @@ function EmployeeRegister() {
                                       </>
                                     )}
                                   </Upload>
-                                </ImgCrop>
+                                {/* </ImgCrop> */}
                               </div>
                             </Form.Item>
                           </div>

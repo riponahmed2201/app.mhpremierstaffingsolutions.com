@@ -90,7 +90,6 @@ function ClientRegister() {
     }
   };
 
-  console.log("sourceFrom: ", sourceFrom);
   return (
     <section className="total_wrapper">
       <div className="container-fluid">
@@ -98,7 +97,7 @@ function ClientRegister() {
           <div className="col-lg-6 col-md-6 col-sm-12 Registration_left_part ">
             <div className="row left_part_wrapper">
               <div className="button_wrapper">
-                <Link href="/login">
+                <Link to="/login">
                   <img
                     src="assets/frontend/images/registrationFormImages/clientAndEmployee/Group 685.png"
                     className="img-fluid"
