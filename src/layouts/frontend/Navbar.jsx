@@ -56,7 +56,7 @@ function Navbar() {
                       className="navbar_custom_hover nav-link"
                       to="/about"
                     >
-                    {t("home_navbar_about_us")}
+                      {t("home_navbar_about_us")}
                     </NavLink>
                   </li>
 
@@ -65,7 +65,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-services"
                     >
-                        {t("home_navbar_our_services")}
+                      {t("home_navbar_our_services")}
                     </NavLink>
                   </li>
                   <li className="nav-item dropdown">
@@ -73,7 +73,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-mission"
                     >
-                        {t("home_navbar_our_mission_vision")}
+                      {t("home_navbar_our_mission_vision")}
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -81,7 +81,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/career"
                     >
-                        {t("home_navbar_career")}
+                      {t("home_navbar_career")}
                     </NavLink>
                   </li>
                   <div className="languageFlagWrapper d-flex justify-content-center align-items-center">
@@ -132,8 +132,8 @@ function Navbar() {
                     className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
                   >
                     {/* <option>En</option> */}
-                    <option value={"en"}>{t("home_navbar_english")}</option>
-                    <option value={"ar"}>{t("home_navbar_arabic")}</option>
+                    <option value={"en"}>English</option>
+                    <option value={"ar"}>Arabic</option>
                   </select>
                   <button type="button" className="navButton btn">
                     <Link to="/login">
