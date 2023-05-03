@@ -1,7 +1,9 @@
-import Link from "antd/es/typography/Link";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function Banner() {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="Indexbanner">
       <div className="container">
@@ -13,14 +15,10 @@ function Banner() {
               alt
             />
             <div className="h1Wrapper">
-              <h2>PREMIER STAFFING SOLUTIONS</h2>
+              <h2>{t("home_banner_heading")}</h2>
             </div>
             <div className="pTextWrapper">
-              <p>
-                MH PREMIER STAFFING SOLUTIONS helps you hire great &amp;
-                experienced workers at a moment's notice. You can Apply for Jobs
-                as well
-              </p>
+              <p>{t("home_banner_description")}</p>
             </div>
             <div className="bannerButtonWrapper">
               <a href="/login">
@@ -28,7 +26,7 @@ function Banner() {
                   style={{ cursor: "pointer" }}
                   className="btn bannerButtonWrapper1"
                 >
-                  Hire a worker
+                  {t("home_banner_hire_worker")}
                 </button>
               </a>
               <a href="/employee-register">
@@ -37,7 +35,7 @@ function Banner() {
                   style={{ marginLeft: "5px" }}
                   className="btn bannerButtonWrapper2"
                 >
-                  Drop your CV, if Job Needed
+                  {t("home_banner_drop_your_cv")}
                 </button>
               </a>
             </div>

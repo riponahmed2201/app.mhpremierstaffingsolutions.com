@@ -1,8 +1,18 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
+
 import "./select.css";
 
+const changeLanguage = (e) => {
+  // console.log(`Language change to ${e.target.value}`);
+  return i18n.changeLanguage(e.target.value);
+};
+
 function Navbar() {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="header sticky-top">
       <div className="container Index_header_container">
@@ -38,7 +48,7 @@ function Navbar() {
                       aria-current="page"
                       to="/"
                     >
-                      Home
+                      {t("home_navbar_home")}
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -46,7 +56,7 @@ function Navbar() {
                       className="navbar_custom_hover nav-link"
                       to="/about"
                     >
-                      About Us
+                    {t("home_navbar_about_us")}
                     </NavLink>
                   </li>
 
@@ -55,7 +65,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-services"
                     >
-                      Our Services
+                        {t("home_navbar_our_services")}
                     </NavLink>
                   </li>
                   <li className="nav-item dropdown">
@@ -63,7 +73,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/our-mission"
                     >
-                      Our Mission & Vision
+                        {t("home_navbar_our_mission_vision")}
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -71,7 +81,7 @@ function Navbar() {
                       className="nav-link navbar_custom_hover"
                       to="/career"
                     >
-                      Career
+                        {t("home_navbar_career")}
                     </NavLink>
                   </li>
                   <div className="languageFlagWrapper d-flex justify-content-center align-items-center">
@@ -117,12 +127,13 @@ function Navbar() {
                     </ul>
                   </li> */}
 
-                  <select className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem">
+                  <select
+                    onChange={(e) => changeLanguage(e)}
+                    className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
+                  >
                     {/* <option>En</option> */}
-                    <option value={"en"} selected>
-                      English
-                    </option>
-                    <option value={"ar"}>Arabic</option>
+                    <option value={"en"}>{t("home_navbar_english")}</option>
+                    <option value={"ar"}>{t("home_navbar_arabic")}</option>
                   </select>
                   <button type="button" className="navButton btn">
                     <Link to="/login">
@@ -130,7 +141,7 @@ function Navbar() {
                         src="assets/frontend/images/indexImages/person.png"
                         alt="image"
                       />
-                      Sign In
+                      {t("home_navbar_sign_in")}
                     </Link>
                   </button>
                 </ul>
