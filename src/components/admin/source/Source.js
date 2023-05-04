@@ -7,6 +7,7 @@ import { responseNotification } from '../../../utils/notifcation';
 import { addHandler, fetchHandler, updateSourceHandler } from '../../../api/source';
 
 import { token } from '../../../utils/authentication';
+import Loader from '../../loadar/Loader';
 
 const { Option } = Select;
 
@@ -157,9 +158,9 @@ function Source() {
         </div>
       </div>
       <div className='card sd'>
-        {loading ? <div className='loader-bg text-center my-2 '> <Spin tip="Loading..." size="large" /> </div> : <table className="table table-bordered table-hover">
-          <thead>
-            <tr>
+        <table className="table table-bordered table-hover">
+          <thead style={{ backgroundColor: "#C6A34F", color: 'white' }}>
+            <tr className='text-center'>
               <th>#</th>
               <th>Name</th>
               <th>Status</th>
@@ -167,23 +168,32 @@ function Source() {
             </tr>
           </thead>
           <tbody>
-            {
-              source?.map((data, index) => (
-                <tr key={index}>
-                  <th>{index + 1}</th>
-                  <td>{data?.name}</td>
-                  <td>{data?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
-                  <td>
-                    <Button type="primary" style={{ background: '#C6A34F', color: 'white' }} className='ml-5'
-                      onClick={() => showEditDrawer(data?._id)}>
-                      Edit
-                    </Button>
-                  </td>
+            {loading ? (
+              <tr>
+                <td>
+                  <Loader />
+                </td>
+              </tr>
+            ) : source.length ? (source?.map((data, index) => (
+              <tr key={index} className='text-center'>
+                <th>{index + 1}</th>
+                <td>{data?.name}</td>
+                <td>{data?.active === true ? "YES" : "NO"}</td>
+                <td>
+                  <Button type="primary" style={{ background: '#C6A34F', color: 'white' }} className='ml-5'
+                    onClick={() => showEditDrawer(data?._id)}>
+                    Edit
+                  </Button>
+                </td>
+              </tr>
+            )))
+              : (
+                <tr>
+                  <td colSpan={5} className='text-center text-danger'>No Data Found!</td>
                 </tr>
-              ))
-            }
+              )}
           </tbody>
-        </table>}
+        </table>
 
         <Drawer title="Add new source" width={520} form={form} closable={false} onClose={onClose} open={open}>
           <div className="drawer-toggle-wrapper">

@@ -1,14 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function Contact() {
+  const { t } = useTranslation();
+
   return (
     <section className="contactUs">
       <div className="container">
         <div className="row mb-4">
           <div className="col-lg-12">
             <div className="contactUsText text-center">
-              <span className="contactUsSpan">Contact Us</span>
-              <span className="todaySpan">Today</span>
+              <span className="contactUsSpan">{t("home_contact_us")}</span>
+              <span className="todaySpan">{t("home_contact_us_today")}</span>
             </div>
           </div>
         </div>
@@ -26,11 +29,9 @@ function Contact() {
                   />
                 </div>
                 <input
-                  placeholder="Name"
+                  placeholder={t("home_contact_form_name")}
                   type="text"
                   className="form-control custom_client_input mb-3"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
                 />
               </div>
               <div className="col-lg-6">
@@ -42,11 +43,9 @@ function Contact() {
                   />
                 </div>
                 <input
-                  placeholder="Enter your email"
+                  placeholder={t("home_contact_form_email")}
                   type="email"
                   className="form-control custom_client_input mb-3"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
                 />
               </div>
             </div>
@@ -61,19 +60,25 @@ function Contact() {
                 </div>
                 <textarea
                   className="form-control contactUsMessage"
-                  placeholder="Messages"
+                  placeholder={t("home_contact_form_message")}
                   id="floatingTextarea2"
                   style={{ height: 100 }}
                   defaultValue={""}
                 />
               </div>
               <div className="sendButtonWrapper text-center">
-                <a href>
-                  <img
-                    src="assets/frontend/images/indexImages/contactForm/Group 821.png"
-                    className="img-fluid"
-                    alt="image"
-                  />
+                <a
+                  href="#"
+                  className="btn"
+                  style={{
+                    width: "152px",
+                    height: "40px",
+                    backgroundColor: "#c6a34f",
+                    color: "#ffffff",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {t("home_contact_form_send_button")}
                 </a>
               </div>
             </div>

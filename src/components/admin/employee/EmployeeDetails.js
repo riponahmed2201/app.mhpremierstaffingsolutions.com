@@ -680,8 +680,8 @@ function EmployeeDetails() {
                                 <div className="col-md-4">
                                     <Form.Item name="profilePicture" label="Profile Picture">
                                         <div>
-                                            <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
-                                            <ImgCrop rotate aspect={2 / 1}>
+                                           
+                                            {/* <ImgCrop rotate aspect={2 / 1}> */}
                                                 <Upload
                                                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                                     listType="picture-card"
@@ -691,7 +691,8 @@ function EmployeeDetails() {
                                                 >
                                                     {profilePicture?.length < 1 && (<><img style={{ height: '60px', width: '60px' }} src={defaultImage} alt="Default Image" /></>)}
                                                 </Upload>
-                                            </ImgCrop>
+                                                <p style={{ color: 'gray' }}>Image must passport size with white backgound</p>
+                                            {/* </ImgCrop> */}
                                         </div>
                                     </Form.Item>
                                 </div>

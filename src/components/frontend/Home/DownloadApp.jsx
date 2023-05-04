@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function DownloadApp() {
+  const { t } = useTranslation();
   return (
     <section className="downloadApp">
       <div className="container">
@@ -19,13 +21,11 @@ function DownloadApp() {
               />
             </div>
             <div className="h2DownloadWrapper">
-              <h2>Download The App</h2>
+              <h2>{t("home_footer_download_the_app")}</h2>
             </div>
             <div className="pDownloadWrapper">
               <p>
-                MH PREMIER STAFFING SOLUTIONS helps you hire great &amp;
-                experienced workers at a moment's notice. You can Apply for Jobs
-                as well
+                 {t("home_help_hire_great")}
               </p>
             </div>
             <div className="buttonDownloadWrapper d-flex justify-content-around align-items-center">

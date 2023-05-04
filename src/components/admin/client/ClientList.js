@@ -161,8 +161,7 @@ function ClientList() {
 
         try {
 
-            // &fromDate=${getFilterFromDate}&toDate=${getFilterToDate}
-            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=CLIENT`,
+            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=CLIENT` + (getFilterFromDate ? `&fromDate=${getFilterFromDate}` : ``) + (getFilterToDate ? `&toDate=${getFilterToDate}` : ``),
                 {
                     headers: {
                         Authorization: `Bearer ${token()}`,
