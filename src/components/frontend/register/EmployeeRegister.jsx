@@ -259,10 +259,12 @@ function EmployeeRegister() {
                                       </>
                                     )}
                                   </Upload>
+                                  {/* <p style={{ color: 'gray' }}>Image must passport size with white backgound</p> */}
                                 {/* </ImgCrop> */}
                               </div>
                             </Form.Item>
                           </div>
+                          
                         </div>
                       </div>
                       <div className="row">

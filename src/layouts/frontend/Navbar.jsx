@@ -11,7 +11,7 @@ const changeLanguage = (e) => {
 };
 
 function Navbar() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <section className="header sticky-top">

@@ -11,8 +11,6 @@ import { token } from '../../../utils/authentication';
 import { donwloadCSV } from '../../../utils/static/donwloadCSV.js';
 import axios from 'axios';
 
-
-
 const { Search } = Input;
 const { Option } = Select;
 
@@ -33,6 +31,14 @@ const columns = [
     {
         title: 'Phone Number',
         dataIndex: 'phoneNumber',
+    },
+    {
+        title: 'Employee ID',
+        dataIndex: 'userIdNumber',
+    },
+    {
+        title: 'Password',
+        dataIndex: 'plainPassword',
     },
     {
         title: 'Active',
@@ -90,6 +96,8 @@ function EmployeeList() {
             name: item.name,
             email: item.email,
             phoneNumber: item.phoneNumber,
+            userIdNumber: item.userIdNumber,
+            plainPassword: item.plainPassword,
             active: item.active ? 'YES' : 'NO',
             status: (
                 <>
@@ -153,10 +161,7 @@ function EmployeeList() {
 
         try {
 
-            console.log("getFilterFromDate: ", getFilterFromDate);
-            console.log("getFilterToDate: ", getFilterToDate);
-            // &fromDate=${getFilterFromDate}&toDate=${getFilterToDate}
-            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=EMPLOYEE`,
+            const responseData = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=EMPLOYEE` + (getFilterFromDate ? `&fromDate=${getFilterFromDate}` : ``) + (getFilterToDate ? `&toDate=${getFilterToDate}` : ``),
                 {
                     headers: {
                         Authorization: `Bearer ${token()}`,

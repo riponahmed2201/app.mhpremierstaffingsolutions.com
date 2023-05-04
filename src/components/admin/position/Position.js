@@ -157,8 +157,8 @@ function Position() {
       </div>
       <div className='card sd'>
         <table className="table table-bordered table-hover">
-          <thead>
-            <tr>
+          <thead style={{ backgroundColor: "#C6A34F", color: 'white' }}>
+            <tr className='text-center'>
               <th>#</th>
               <th>Name</th>
               <th>Slug</th>
@@ -175,11 +175,11 @@ function Position() {
               </tr>
             ) : positions.length ? (
               _.map(positions, (item, index) => (
-                <tr key={index}>
+                <tr key={index} className='text-center'>
                   <th>{index + 1}</th>
                   <td>{item?.name}</td>
                   <td>{item?.slug}</td>
-                  <td>{item?.active === true ? <span className="badge text-bg-success">YES</span> : <span className="badge text-bg-danger">NO</span>}</td>
+                  <td>{item?.active === true ? "YES" : "NO"}</td>
                   <td>
                     <Button type="primary" style={{ background: '#C6A34F', color: 'white' }} className='ml-5'
                       onClick={() => showEditDrawer(item?._id)}>
