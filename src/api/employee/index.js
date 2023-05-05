@@ -64,7 +64,7 @@ export const fetchEmployeeListHandler = async (limit, getName, getStatus, locati
 
     const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
-    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
+    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
         (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=EMPLOYEE`),
         {
             headers: {
@@ -80,7 +80,7 @@ export const fetchClientListHandler = async (limit, getName, getStatus, location
 
     const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
-    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
+    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
         (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=CLIENT`),
         {
             headers: {

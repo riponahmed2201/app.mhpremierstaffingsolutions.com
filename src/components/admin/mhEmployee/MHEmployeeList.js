@@ -102,7 +102,7 @@ function MHEmployeeList() {
             action: (
                 <>
                     <div className='btn-group'>
-                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-sm'  style={{ background: '#C6A34F', color: 'white' }}>
+                        <Link to={`/admin/edit-mh-employee/${item._id}`} className='btn btn-sm' style={{ background: '#C6A34F', color: 'white' }}>
                             Edit
                         </Link>
                     </div>
@@ -171,11 +171,7 @@ function MHEmployeeList() {
                     </Select>
                 </div>
                 {loading ? (
-                    <tr>
-                        <td>
-                            <Loader />
-                        </td>
-                    </tr>
+                    <Loader />
                 ) : (
                     <div className='m-2'> <Table columns={columns} dataSource={data1} /></div>)
                 }
