@@ -270,11 +270,7 @@ function EmployeeList() {
                     </div>
                 </div>
                 {loading ? (
-                    <tr>
-                        <td>
-                            <Loader />
-                        </td>
-                    </tr>
+                    <Loader />
                 ) : (
                     <div className='m-2'> <Table columns={columns} dataSource={data1} /></div>)
                 }

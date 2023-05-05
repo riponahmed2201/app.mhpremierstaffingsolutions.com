@@ -45,6 +45,7 @@ import CorporateInformation from './components/frontend/legal/CorporateInformati
 import TermsOfUse from './components/frontend/legal/TermsOfUse';
 import Privacy from './components/frontend/legal/Privacy';
 import ClientRegister from './components/frontend/register/ClientRegister';
+import ContactList from './components/admin/contact/ContactList';
 
 function App() {
   return (
@@ -103,6 +104,8 @@ function App() {
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
             <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
             <Route path='edit-mh-employee/:id' element={<PrivateRoute><EditMHEmployee /></PrivateRoute>} />
+
+            <Route path='contact-list' element={<PrivateRoute><ContactList /></PrivateRoute>} />
 
           </Route>
 

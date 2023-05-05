@@ -1,10 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { Form } from "antd";
 
 import { FiPhoneOutgoing } from "react-icons/fi";
 import { TfiEmail } from "react-icons/tfi";
 import { MdPlace } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+
+import { addContactHandler } from "../../../api/contact";
+import { responseNotification } from "../../../utils/notifcation";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    const name = values?.name;
+    const email = values?.email;
+    const message = values?.message;
+
+    const addContactFields = { name, email, message };
+
+    if (addContactFields) {
+      setLoading(true);
+      addContactHandler(addContactFields)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 201) {
+            setError(undefined);
+            setLoading(false);
+            responseNotification(
+              "Contact information received successfully!",
+              "success"
+            );
+            form.resetFields();
+          } else if (res?.statusCode === 400) {
+            setError(res?.errors?.[0].msg);
+            setLoading(false);
+          } else if (res?.statusCode === 500) {
+            setError(res?.message);
+            setLoading(false);
+          }
+        });
+    }
+  };
+
   return (
     <div style={{ backgroundColor: "white" }}>
       <div
@@ -91,105 +134,110 @@ const Contact = () => {
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-6 mt-5">
-            {/* <div className="col-md-5 mb-30 offset-md-1"> */}
-            <h3>Get in touch</h3>
-            <form method="post" className="contact__form" action="#">
-              <div className="row">
-                <div className="col-12">
-                  <div
-                    className="alert alert-success contact__msg"
-                    style={{ display: "none" }}
-                    role="alert"
-                  >
-                    Your message was sent successfully.
-                  </div>
-                </div>
-              </div>
-
+            <h3 className="mb-3">Get in touch</h3>
+            <Form
+              className="ant-form ant-form-vertical"
+              layout="vertical"
+              onFinish={onFinish}
+              form={form}
+            >
               <div className="row">
                 <div className="col-12 col-md-6 col-lg-6  form-group">
-                  <input
+                  <Form.Item
                     name="name"
-                    type="text"
-                    placeholder="Your Name *"
-                    required=""
-                    className="border-bottom border-0 px-2 py-2 mb-5 "
-                    style={{ outline: "none" }}
-                  />
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter name",
+                      },
+                    ]}
+                  >
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="Enter name"
+                      required=""
+                      className="form-control"
+                      style={{ outline: "none" }}
+                    />
+                  </Form.Item>
                 </div>
                 <div className="col-12 col-md-6 col-lg-6 form-group">
-                  <input
+                  <Form.Item
                     name="email"
-                    type="email"
-                    placeholder="Your Email *"
-                    required=""
-                    className="border-bottom border-0 px-2 py-2 mb-2 "
-                    style={{ outline: "none" }}
-                  />
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter email",
+                      },
+                    ]}
+                  >
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="Enter email"
+                      required=""
+                      className="form-control"
+                      style={{ outline: "none" }}
+                    />
+                  </Form.Item>
                 </div>
-                <div className="col-12 col-md-6 col-lg-6 form-group">
-                  <input
-                    name="phone"
-                    type="text"
-                    placeholder="Your Number *"
-                    required=""
-                    className="border-bottom border-0 px-2 py-2 mb-2 "
-                    style={{ outline: "none" }}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6  form-group">
-                  <input
-                    name="subject"
-                    type="text"
-                    placeholder="Subject *"
-                    required=""
-                    className="border-bottom border-0 px-2 py-2 mb-5 "
-                    style={{ outline: "none" }}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6  form-group">
-                  <textarea
+
+                <div className="col-12 col-md-12 col-lg-12 form-group">
+                  <Form.Item
                     name="message"
-                    id="message"
-                    cols="30"
-                    rows="4"
-                    placeholder="Message *"
-                    required=""
-                    className="border-bottom border-0 px-5 py-2 mb-2 "
-                    style={{ outline: "none" }}
-                  ></textarea>
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter message",
+                      },
+                    ]}
+                  >
+                    <textarea
+                      style={{ height: 100 }}
+                      placeholder="Enter message"
+                      className="form-control"
+                    />
+                  </Form.Item>
                 </div>
                 <div className="col-md-12">
                   <button
+                    disabled={loading}
+                    className="btn"
                     style={{
-                      backgroundColor: "#C6A34F",
-                      outline: "none",
+                      width: "152px",
+                      height: "40px",
+                      backgroundColor: "#c6a34f",
+                      color: "#ffffff",
+                      fontWeight: "bold",
                       marginBottom: "50px",
                     }}
-                    className="border-0 px-5 py-3"
+                    type="submit"
                   >
-                    <a
-                      href="#0"
-                      style={{
-                        backgroundColor: "#C6A34F",
-                        outline: "none",
-                        color: "white",
-                        fontSize: "20px",
-                      }}
-                      className="text-decoration-none"
-                    >
-                      <span>Send Message</span>
-                    </a>
+                    {!loading && (
+                      <div> {t("home_contact_form_send_button")}</div>
+                    )}
+                    {loading && (
+                      <span
+                        className="indicator-progress"
+                        style={{ display: "block" }}
+                      >
+                        Please wait...
+                        <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                      </span>
+                    )}
                   </button>
                 </div>
               </div>
-            </form>
-            {/* </div> */}
+            </Form>
           </div>
         </div>
       </div>
 
-      <div className="container">
+      <div className="container mt-5">
         <div className="mapouter">
           <div className="gmap_canvas">
             <iframe
@@ -197,10 +245,10 @@ const Contact = () => {
               height="500px"
               id="gmap_canvas"
               src="https://maps.google.com/maps?q=48 Warwick St Regent Street W1B 5AW London&t=&z=14&ie=UTF8&iwloc=&output=embed"
-              frameborder="0"
-              scrolling="no"
-              marginheight="0"
-              marginwidth="0"
+              // frameborder="0"
+              // scrolling="no"
+              // marginheight="0"
+              // marginwidth="0"
             ></iframe>
           </div>
         </div>
