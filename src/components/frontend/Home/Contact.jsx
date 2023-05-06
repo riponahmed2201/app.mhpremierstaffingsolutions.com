@@ -56,11 +56,13 @@ function Contact() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
       <div className="container contactUsFormContainer">
         <div className="row">
           <Form
-            className="ant-form ant-form-vertical"
-            layout="vertical"
+            // className="ant-form ant-form-vertical"
+            // layout="vertical"
             onFinish={onFinish}
             form={form}
           >
