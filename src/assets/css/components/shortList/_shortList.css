@@ -1,0 +1,61 @@
+.container-style {
+  background-color: #fff;
+  border: 0.74px solid #a6a6a6;
+  border-radius: 14.8px;
+  padding: 30px;
+}
+
+.short-list-card {
+  background: #ffffff;
+  border: 0.74px solid #a6a6a6;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.card-title-style {
+  font-size: 15px;
+}
+
+.start-text {
+  font-size: 13px;
+}
+
+.fvt-btn {
+  background-color: #fff;
+  border: none;
+  padding: 0px;
+}
+
+.book-btn {
+  background-color: #c6a34f;
+  border: none;
+  padding: 3px 20px;
+  border-radius: 10px 0px;
+  color: #ffffff;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.apply-range-btn {
+  background-color: #c6a34f;
+  border: none;
+  border-radius: 10px 0px;
+  color: #ffffff;
+  padding: 5px 15px;
+}
+
+.bg-color {
+  background-color: #c6a34f;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.date-picker-custom {
+  border: 0.74px solid #a6a6a6;
+  border-radius: 15px;
+  padding: 10px;
+}

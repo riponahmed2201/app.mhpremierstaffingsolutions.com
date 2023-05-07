@@ -46,6 +46,8 @@ import TermsOfUse from './components/frontend/legal/TermsOfUse';
 import Privacy from './components/frontend/legal/Privacy';
 import ClientRegister from './components/frontend/register/ClientRegister';
 import ContactList from './components/admin/contact/ContactList';
+import ShortList from './components/frontend/shortList/ShortList';
+import PaymentInvoice from './components/frontend/invoicePayment/PaymentInvoice';
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
             <Route index path='client-dashboard' element={<ClientDashboard />} />
             <Route path='client-myemployee' element={<MyEmployee />} />
             <Route path='employee-view-details/:id' element={<EmployeeViewDetails />} />
+            <Route path='short-list' element={<ShortList />} />
+            <Route path='payment-invoice' element={<PaymentInvoice />} />
           </Route>
 
           <Route path="/" element={<ClientMasterLayout />} >

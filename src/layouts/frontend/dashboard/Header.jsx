@@ -1,13 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import i18n from "../../../i18n";
+import { useTranslation } from "react-i18next";
+
+const changeLanguage = (e) => {
+  return i18n.changeLanguage(e.target.value);
+};
 
 function Header() {
+  const { t } = useTranslation();
+
   return (
     <section className="Dashboardheader sticky-top">
       <div className="container header_container">
         <div className="row">
           <div className="col-lg-12">
             <nav className="navbar DashboardNavban navbar-expand-md navbar-light">
-              <a className="navbar-brand " href="#">
+              <a className="navbar-brand " href="/">
                 <img
                   className="img-fluid Dashboard_nav_logo"
                   src="assets/frontend/images/Dashboardimages/logo.png"
@@ -31,10 +41,10 @@ function Header() {
               >
                 <ul className="Dashboard_navbar_custom navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="Dashboard_navbar_custom_hover nav-link"
                       aria-current="page"
-                      href="#"
+                      to="/short-list"
                     >
                       <div className="navLinkImageTextWraper">
                         <img
@@ -43,7 +53,7 @@ function Header() {
                         />
                         <span className="DashboardBookmarkNavSpan">5</span>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a
@@ -78,41 +88,16 @@ function Header() {
                       alt
                     />
                   </div>
-                  <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle navDropDownPlaceholder"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Eng
-                    </a>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <hr className="dropdown-divider" />
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+
+                  <select
+                    onChange={(e) => changeLanguage(e)}
+                    className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
+                  >
+                    {/* <option>En</option> */}
+                    <option value={"en"}>English</option>
+                    <option value={"ar"}>Arabic</option>
+                  </select>
+
                   {/* Language Dropdown */}
                   {/* Dark Mode Toggle */}
                   <div className="DashboarddarkModeToggle">

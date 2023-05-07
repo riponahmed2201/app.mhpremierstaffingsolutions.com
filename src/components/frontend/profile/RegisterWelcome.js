@@ -5,7 +5,10 @@ function RegisterWelcome() {
         <div className='col-lg-6 justify-content-center p-5 offset-lg-3'>
             <div className="card">
                 <div className="text-right" style={{ display: 'none' }}> <i className="fa fa-times" /> </div>
-                <div className="card-body text-center"> <img style={{ width: '100px', height: '100px' }} src="logo.png" alt='logo' />
+                <div className="card-body text-center">
+                    <a href="/">
+                        <img style={{ width: '100px', height: '100px' }} src="logo.png" alt='logo' />
+                    </a>
                     <h4 style={{ marginTop: '15px' }}>
                         Congratulations!
                         Register successfully.

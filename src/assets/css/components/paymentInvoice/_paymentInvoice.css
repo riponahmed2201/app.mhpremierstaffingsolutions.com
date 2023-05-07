@@ -1,0 +1,90 @@
+/* font-family: "Montserrat", sans-serif;
+font-family: "Poppins", sans-serif; */
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Table Start */
+.InvoicePaymentTable {
+    padding: 20px 0px;
+}
+
+.InvoiceTableItemsWhite {
+    background-color: white;
+    /* margin: 10px 0px !important; */
+}
+
+.InvoiceAndPaymentTableHead {
+    background-color: #c6a34f;
+    color: white;
+}
+
+.InvoiceAndPaymentTableHead th {
+    padding: 25px;
+}
+
+.InvoiceAndPaymentTableHead th:first-child {
+    -webkit-box-shadow: 10px 2px 5px -9px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 10px 2px 5px -9px rgba(0, 0, 0, 0.38);
+    box-shadow: 10px 2px 5px -9px rgba(0, 0, 0, 0.38);
+}
+
+.weekDateWrapper span {
+    font-family: "Montserrat", sans-serif;
+    color: #7b7b7b;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.InvoiceAndPaymentTableBody td {
+    font-family: "Montserrat", sans-serif;
+    color: #7b7b7b;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 25px;
+}
+
+.InvoicePaidColor {
+    color: #00c92c !important;
+}
+
+.InvoiceTableHeadingGreenColor {
+    padding-top: 26px !important;
+    -webkit-box-shadow: 10px 2px 0px -6px rgba(0, 201, 44, 1) !important;
+    -moz-box-shadow: 10px 2px 0px -6px rgba(0, 201, 44, 1) !important;
+    box-shadow: 10px 2px 0px -6px rgba(0, 201, 44, 1) !important;
+}
+
+.InvoiceTableHeadingRedColor {
+    padding-top: 26px !important;
+    -webkit-box-shadow: 10px 2px 0px -6px rgba(255, 80, 41, 1) !important;
+    -moz-box-shadow: 10px 2px 0px -6px rgba(255, 80, 41, 1) !important;
+    box-shadow: 10px 2px 0px -6px rgba(255, 80, 41, 1) !important;
+}
+
+.InvoiceDueColor {
+    color: #ff5029 !important;
+}
+
+.InvoicePayButton {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 30px;
+    color: white;
+    border: none;
+    background-color: #c6a34f;
+    -webkit-border-top-left-radius: 16px;
+    -webkit-border-bottom-right-radius: 16px;
+    -moz-border-radius-topleft: 16px;
+    -moz-border-radius-bottomright: 16px;
+    border-top-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.InvoiceTableItemsRed {
+    background-color: #ffedea;
+}
+
+/* Table End */
