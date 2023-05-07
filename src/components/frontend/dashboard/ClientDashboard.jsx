@@ -68,7 +68,7 @@ function ClientDashboard() {
                         style={{ fontWeight: 600, fontSize: 20 }}
                       >
                         Hi <br />
-                        {jwtDecode?.name},
+                        {jwtDecode?.restaurantName},
                       </h5>
                       <p
                         className="card-text"
@@ -190,21 +190,26 @@ function ClientDashboard() {
                   </Link>
                 </div>
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
-                  <div
-                    className="card-body custom_dashboard_right_side_cards text-center"
-                    style={{ backgroundColor: "#f6f1e5" }}
+                  <Link
+                    className="text-decoration-none text-black"
+                    to="/payment-invoice"
                   >
-                    <div className="invoiceImg">
-                      <img
-                        src="assets/frontend/images/Dashboardimages/dashboard 1/image 2.png"
-                        className="img-fluid"
-                        alt="image"
-                      />
+                    <div
+                      className="card-body custom_dashboard_right_side_cards text-center"
+                      style={{ backgroundColor: "#f6f1e5" }}
+                    >
+                      <div className="invoiceImg">
+                        <img
+                          src="assets/frontend/images/Dashboardimages/dashboard 1/image 2.png"
+                          className="img-fluid"
+                          alt="image"
+                        />
+                      </div>
+                      <div className="invoiceP">
+                        <p>Invoice &amp; Payment</p>
+                      </div>
                     </div>
-                    <div className="invoiceP">
-                      <p>Invoice &amp; Payment</p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
                   <div
@@ -249,8 +254,8 @@ function ClientDashboard() {
                   </div>
                   <div className="col-lg-6 col-md-6">
                     <div className="MHEmployeeText text-end">
-                      <span className="mr-2">{getEmployee?.total}</span>
-                      <span>employees are showing</span>
+                      <span>{getEmployee?.total} </span>
+                      <span> Employees are showing</span>
                     </div>
                   </div>
                 </div>
@@ -557,9 +562,8 @@ function ClientDashboard() {
         </div>
       </section>
       {/* Dashboard 2 End */}
-
       {/* Pagination Start */}
-      <section className="pagination">
+      {/* <section className="pagination">
         <div className="container">
           <div className="row ">
             <div className="col-lg-12 d-flex justify-content-center">
@@ -595,8 +599,9 @@ function ClientDashboard() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Pagination Start */}
+      <br /> <br />
     </div>
   );
 }

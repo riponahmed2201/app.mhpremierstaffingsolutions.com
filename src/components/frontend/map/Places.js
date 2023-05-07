@@ -16,11 +16,13 @@ import "@reach/combobox/styles.css";
 import './map.css'
 
 export default function Places() {
-    const { isLoaded } = useLoadScript({
+    
+    const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: ["places"],
     });
 
+    if(loadError) console.log("loadError: ", loadError);
     if (!isLoaded) return <div>Loading...</div>;
     return <Map />;
 }
@@ -61,6 +63,8 @@ const PlacesAutocomplete = ({ setSelected }) => {
 
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
+        console.log("Lat: ", lat);
+        console.log("Long: ", lng);
         setSelected({ lat, lng });
     };
 

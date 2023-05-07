@@ -11,6 +11,9 @@
 @import url('./components/client/employeeViewDetails/_style.css');
 @import url('./components/client/employeeViewDetails/_media.css');
 @import url('./components/aboutUs/_style.css');
+@import url('./components/shortList/_shortList.css');
+@import url('./components/paymentInvoice/_paymentInvoice.css');
+@import url('./components/paymentInvoice/_paymentInvoiceMedia.css');
 
 .ant-table-thead .ant-table-cell {
     background-color: #C6A34F !important;
