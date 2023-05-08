@@ -489,8 +489,8 @@ body {
 .DashboardFilterCategoryDropdown {
     border: 1px solid #a6a6a6;
     height: 65px;
-    background-color: #fafafa;
-    color: #111111;
+    /* background-color: #fafafa;
+    color: #111111; */
     border-radius: 7.4px;
 
     font-family: "Montserrat", sans-serif;

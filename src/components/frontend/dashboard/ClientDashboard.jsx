@@ -6,13 +6,24 @@ import { jwtTokenDecode } from "../../../utils/jwtDecode";
 import { Link } from "react-router-dom";
 import Loader from "../../loadar/Loader";
 import defaultImage from "../../../assets/images/default.png";
+import { responseNotification } from "../../../utils/notifcation";
+import { addShortHandler } from "../../../api/shortList";
+import { Select, InputNumber, Space } from "antd";
+import { fetchHandler } from "../../../api/position";
+import { staticEmployeeExperiance } from "../../../utils/static/employeeExperiance";
+
+const { Option } = Select;
 
 function ClientDashboard() {
   const jwtDecode = jwtTokenDecode();
 
   const [getEmployee, setEmployee] = useState([]);
+  const [getShortList, setShortList] = useState([]);
+  const [addShortListData, setAddShortListData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [shortListLoading, setShortListLoading] = useState(false);
   const [getError, setError] = useState();
+  const [positions, setPositions] = useState([]);
 
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
@@ -45,6 +56,60 @@ function ClientDashboard() {
     fetchEmployees();
   }, []);
 
+  const fetchPositions = useCallback(async () => {
+    setLoading(true);
+    await fetchHandler().then((res) => {
+      if (res?.status === 200) {
+        setPositions(res?.data?.positions);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchPositions();
+  }, []);
+
+  const addShortListOnclikHandler = (employeeId) => {
+    const shortListReceivedField = { employeeId };
+    if (shortListReceivedField) {
+      setAddShortListData(shortListReceivedField);
+
+      setShortListLoading(true);
+
+      addShortHandler(shortListReceivedField)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 201) {
+            setError(undefined);
+            setShortListLoading(false);
+
+            responseNotification("Short list created successfully!", "success");
+
+            window.location.reload();
+          } else if (res?.statusCode === 400) {
+            setError(res?.errors?.[0].msg);
+            setShortListLoading(false);
+          } else if (res?.statusCode === 500) {
+            setError(res?.message);
+            setShortListLoading(false);
+          }
+        });
+    }
+  };
+
+  const handleChangeStatus = (value) => {
+    // setStatus(value);
+  };
+
+  const onChange = (value) => {
+    console.log("changed", value);
+  };
+
+  console.log("addShortListData: ", addShortListData);
   return (
     <div>
       {/* Dashboard part 1 */}
@@ -167,6 +232,7 @@ function ClientDashboard() {
                     </div>
                   </div>
                 </div>
+
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
                   <Link
                     className="text-decoration-none text-black"
@@ -189,6 +255,7 @@ function ClientDashboard() {
                     </div>
                   </Link>
                 </div>
+
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
                   <Link
                     className="text-decoration-none text-black"
@@ -211,6 +278,7 @@ function ClientDashboard() {
                     </div>
                   </Link>
                 </div>
+
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
                   <div
                     className="card-body custom_dashboard_right_side_cards text-center"
@@ -274,11 +342,11 @@ function ClientDashboard() {
                           key={index}
                           className="col-lg-3 col-md-6 Dashboard2CardbottomMarginFixForSmallScreens mb-3"
                         >
-                          <Link
-                            className="text-decoration-none"
-                            to={`/employee-view-details/${item?._id}`}
-                          >
-                            <div className="card DashboardEmployeeCard">
+                          <div className="card DashboardEmployeeCard">
+                            <Link
+                              className="text-decoration-none"
+                              to={`/employee-view-details/${item?._id}`}
+                            >
                               <img
                                 style={{
                                   width: "215px",
@@ -295,97 +363,106 @@ function ClientDashboard() {
                                 className="Dashboard2-card-img-top"
                                 alt="image"
                               />
-                              <div className="card-body Dashboard2CardbodyPaddingFixfor768">
-                                <h5 className="card-title Dashboard2CardTItle">
-                                  {item?.name}
-                                </h5>
-                                <div className="row">
-                                  <div className="col-lg-5 col-md-4">
-                                    <div className="DashboardratingimgWraper">
-                                      <img
-                                        src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
-                                        className="img-fluid"
-                                        alt="image"
-                                      />
-                                      <span className="Dashboard2Card_rating">
-                                        4.5
-                                      </span>
-                                      <span className="Dashboard2Card_count">
-                                        (123)
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-7 col-md-8">
-                                    <div className="DashboardexperienceWrapperimg">
-                                      <img
-                                        src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
-                                        className="img-fluid"
-                                        alt="image"
-                                      />
-                                      <span className="Dashboard2ExpSpan">
-                                        Exp:
-                                      </span>
-                                      <span className="Dashboardcard2Years">
-                                        {item?.employeeExperience
-                                          ? item?.employeeExperience
-                                          : 0}
-                                        Y
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="dashboard2chefwrapper">
+                            </Link>
+                            <div className="card-body Dashboard2CardbodyPaddingFixfor768">
+                              <h5 className="card-title Dashboard2CardTItle">
+                                {item?.name}
+                              </h5>
+                              <div className="row">
+                                <div className="col-lg-5 col-md-4">
+                                  <div className="DashboardratingimgWraper">
                                     <img
-                                      src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
                                       className="img-fluid"
                                       alt="image"
                                     />
-                                    <span>{item?.positionName}</span>
+                                    <span className="Dashboard2Card_rating">
+                                      4.5
+                                    </span>
+                                    <span className="Dashboard2Card_count">
+                                      (123)
+                                    </span>
                                   </div>
                                 </div>
-                                <div className="row">
-                                  <div className="dashboard2TotalHourwrapper">
+                                <div className="col-lg-7 col-md-8">
+                                  <div className="DashboardexperienceWrapperimg">
                                     <img
-                                      src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
                                       className="img-fluid"
                                       alt="image"
                                     />
-                                    <span className="dashboard2totalhourspan">
-                                      Total Hours :
+                                    <span className="Dashboard2ExpSpan">
+                                      Exp:
                                     </span>
-                                    <span className="dashboard2totalhoursspent">
-                                      2456 H
+                                    <span className="Dashboardcard2Years">
+                                      {item?.employeeExperience
+                                        ? item?.employeeExperience
+                                        : 0}
+                                      Y
                                     </span>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="dashboard2Rate">
-                                    <img
-                                      src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
-                                      className="img-fluid"
-                                      alt="image"
-                                    />
-                                    <span className="Dashboard2Rate">
-                                      Rate:
-                                    </span>
-                                    <span className="Dashboard2Perhour">
-                                      {item?.hourlyRate}$/hour
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="Dashboard2BookNowButton">
-                                    <img
-                                      src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                                      alt="image"
-                                    />
-                                    <button>Book Now</button>
                                   </div>
                                 </div>
                               </div>
+
+                              <div className="row">
+                                <div className="dashboard2chefwrapper">
+                                  <img
+                                    src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
+                                    className="img-fluid"
+                                    alt="image"
+                                  />
+                                  <span>{item?.positionName}</span>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="dashboard2TotalHourwrapper">
+                                  <img
+                                    src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
+                                    className="img-fluid"
+                                    alt="image"
+                                  />
+                                  <span className="dashboard2totalhourspan">
+                                    Total Hours :
+                                  </span>
+                                  <span className="dashboard2totalhoursspent">
+                                    2456 H
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="dashboard2Rate">
+                                  <img
+                                    src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
+                                    className="img-fluid"
+                                    alt="image"
+                                  />
+                                  <span className="Dashboard2Rate">Rate:</span>
+                                  <span className="Dashboard2Perhour">
+                                    {item?.hourlyRate}$/hour
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="Dashboard2BookNowButton">
+                                  <img
+                                    src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
+                                    alt="image"
+                                  />
+
+                                  <button
+                                    onClick={() =>
+                                      addShortListOnclikHandler(item?._id)
+                                    }
+                                  >
+                                    Book Now
+                                  </button>
+                                </div>
+                              </div>
                             </div>
-                          </Link>
+                          </div>
                         </div>
                       ))
                     ) : (
@@ -413,149 +490,81 @@ function ClientDashboard() {
                   </div>
                 </div>
                 <div className="row">
-                  <h6 style={{ color: "#000000" }}>Category</h6>
+                  <h6 style={{ color: "#000000" }}>Position:</h6>
                 </div>
                 <div className="row">
-                  <div className="btn-group">
-                    <button
-                      className="btn DashboardFilterCategoryDropdown btn-sm dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                  <div>
+                    <Select
+                      size="large"
+                      style={{
+                        width: "100%",
+                      }}
+                      allowClear
+                      placeholder="Select Position"
+                      onChange={handleChangeStatus}
                     >
-                      <img
-                        src="assets/frontend/images/Dashboardimages/dashboard2/filterChef.png"
-                        className="img-fluid"
-                        alt="image"
-                      />
-                      Chef
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton1"
-                    >
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
+                      {positions?.map((item, index) => (
+                        <Option key={index} value={item?._id}>
+                          {item?.name}
+                        </Option>
+                      ))}
+                    </Select>
                   </div>
                 </div>
-                <div className="row ratingRow">
-                  <div className="rating">
-                    <input
-                      type="radio"
-                      name="rating"
-                      id="star1"
+
+                <div className="row mt-3">
+                  <h6 className="experienceH6">Experience:</h6>
+                </div>
+                <div>
+                  <Select
+                    size="large"
+                    style={{
+                      width: "100%",
+                    }}
+                    allowClear
+                    placeholder="Select Experience"
+                    onChange={handleChangeStatus}
+                  >
+                    {staticEmployeeExperiance?.map((item, index) => (
+                      <Option key={index} value={item}>
+                        {item}
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="row mt-3">
+                  <h6 className="experienceH6">Total Hour:</h6>
+                </div>
+                <div className="row">
+                  <Space>
+                    <InputNumber
+                      size="large"
+                      style={{
+                        width: 118,
+                      }}
+                      min={1}
+                      max={100000}
                       defaultValue={1}
+                      onChange={onChange}
                     />
-                    <label htmlFor="star1" />
-                    <input
-                      type="radio"
-                      name="rating"
-                      id="star2"
-                      defaultValue={2}
-                    />
-                    <label htmlFor="star2" />
-                    <input
-                      type="radio"
-                      name="rating"
-                      id="star3"
-                      defaultValue={3}
-                    />
-                    <label htmlFor="star3" />
-                    <input
-                      type="radio"
-                      name="rating"
-                      id="star4"
-                      defaultValue={4}
-                    />
-                    <label htmlFor="star4" />
-                    <input
-                      type="radio"
-                      name="rating"
-                      id="star5"
-                      defaultValue={5}
-                    />
-                    <label htmlFor="star5" />
-                  </div>
-                </div>
-                <div className="row">
-                  <h6 className="experienceH6">Experience</h6>
-                </div>
-                <div className="row">
-                  <div className="btn-group">
-                    <button
-                      className="btn DashboardFilterexperienceDropown btn-sm dropdown-toggle dropdown-toggle-end"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      10-20 years
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton1"
-                    >
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="row mt-4">
-                  <h6 style={{ margin: "5px 0px" }}>Total Hour</h6>
-                </div>
-                <div className="row g-2">
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control minimumTotalHourInput"
-                      placeholder="Min:"
-                      aria-label="First name"
-                    />
-                  </div>
-                  <div className="col-auto align-self-center">
                     <span>-</span>
-                  </div>
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control maximuTotalHourInput"
-                      placeholder="Max:"
-                      aria-label="Last name"
+                    <InputNumber
+                      size="large"
+                      style={{
+                        width: 118,
+                      }}
+                      min={1}
+                      max={100000}
+                      defaultValue={1}
+                      onChange={onChange}
                     />
-                  </div>
+                  </Space>
                 </div>
                 <div className="row">
                   <a href="#">
                     <button className="filterApply">Apply</button>
                   </a>
                 </div>
-                <div className="row"></div>
               </div>
             </div>
           </div>

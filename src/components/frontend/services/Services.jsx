@@ -31,43 +31,57 @@ function Services() {
 
       <div className="container">
         <div className="mt-5 mb-5">
-          <div className="about_us_section_title">MH</div>
-          <div className="about_us_section_sub_title">
-            <strong>PREMIER STAFFING SOLUTIONS</strong>
-          </div>
-          <br />
+          <div className="about_us_section_title"> RECRUITING </div>
           <p className="about_us_section_paragraph">
-            It represents the most intricate process for a company. Our client
-            offers us their complete confidence in looking for a talent to hire
-            as staff.
-          </p>
-          <p className="about_us_section_paragraph">
-            The process begins with discussing and listening, gaining an
-            understanding as to who would be the ideal candidate for them; we
-            face this task with importance.
-          </p>
-          <p className="about_us_section_paragraph">
-            Like all recruitment agencies, we use web portals and social media
-            to intercept ideal candidates, but this may not be enough in the
-            hospitality sector!
-          </p>
-
-          <p className="about_us_section_paragraph">
-            A CV cannot tell the accurate skills of a chef or senior waiter.
-          </p>
-          <p className="about_us_section_paragraph">
-            Our recruitment staff, with many years of operational experience in
-            the hospitality world, can.
-          </p>
-          <p className="about_us_section_paragraph">
-            Finally, we have a capillary network of global connections in the
-            world of restaurants and hotels, allowing us to have reports of
-            junior and senior talents looking for new challenges in the United
-            Kingdom.
+            It represents the most delicate process for a company. Our client
+            offers us his complete confidence in looking for a talent to hire in
+            his staff. <br />
+            The process begins with discussing and listening to our client to
+            understand exactly who is the ideal candidate they want. <br />
+            We face this task with great seriousness and with a skill that is
+            not only technological but also human. Like all recruitment
+            agencies, we use web portals and social media to intercept the ideal
+            candidates, but in the HOSPITALITY sector this may not be enough!
+            <br />
+            A CV. it cannot tell the true skills of a CHEF or a senior waiter or
+            a PIZZA CHEF. <br />
+            Our recruitment staff all with many years of operational experience
+            in the world of hospitality make use of their experience to select
+            the ideal candidates. <br />
+            Finally, we have a capillary network of European and global
+            connections in the world of restaurants and hotels which allows us
+            to have reports of junior and senior TALENTs looking for new
+            challenges in London and the UK. <br />
           </p>
         </div>
       </div>
 
+      <div className="container">
+        <div className="mt-5 mb-5">
+          <div className="about_us_section_title"> PAY ROLL - RENT STAFF</div>
+          <p className="about_us_section_paragraph">
+            We have highly qualified personnel able to support hotels and
+            restaurants for work peaks and to fill vacant roles from a few hours
+            to medium-long periods. <br />
+            The advantage for the CUSTOMER is to have personnel without any type
+            of direct recruitment and to save on expensive selection processes
+            by making use of the constant support of a dedicated consultant.{" "}
+            <br />
+            The savings for the customer also includes the costs relating to a
+            direct employee and the obvious advantage of being able to
+            remodulate his staff by requesting different figures day by day.{" "}
+            <br />
+            All our staff is selected on the basis of active research processes
+            and before being sent on a mission to our customers, they are chosen
+            on the basis of the requests of the RESTAURANT or HOTEL. <br />
+            The selection processes always include interviews to understand if
+            the skills present in the candidate are the ideal ones for our
+            client. <br />
+            The goal is to determine the perfect match between the COMPANIES of
+            the HOSPITALITY world and the STAFF.
+          </p>
+        </div>
+      </div>
       <div className="container">
         <Position />
       </div>
