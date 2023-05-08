@@ -97,8 +97,8 @@ function Footer() {
                   </Link>
                   <Link to="/privacy">{t("home_footer_privacy_notice")}</Link>
                   <Link to="/"> {t("home_footer_cookies")}</Link>
-                  <a href="javascript:void(0)">
-                    {" "}
+                  <a href="#">
+                
                     {t("home_footer_download_the_app")}
                   </a>
                 </li>

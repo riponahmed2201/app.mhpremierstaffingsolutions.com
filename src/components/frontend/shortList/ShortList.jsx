@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { fetchShortListHandler } from "../../../api/shortList";
 // import Modal from 'react-bootstrap/Modal';
 // import { DateRange } from 'react-date-range';
 
@@ -22,6 +23,32 @@ const ShortList = () => {
     },
   ]);
 
+  const [getShortList, setShortList] = useState([]);
+  const [getPosition, setPosition] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  const fetchShortListData = useCallback(async () => {
+    setLoading(true);
+    await fetchShortListHandler().then((res) => {
+      if (res?.status === 200) {
+        setShortList(res?.data?.shortList);
+        setPosition(res?.data?.positions);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchShortListData();
+  }, []);
+
+  console.log("getPosition: ", getPosition);
+  console.log("getPosition: ", getPosition);
+  
   const chef = [
     {
       id: 1,

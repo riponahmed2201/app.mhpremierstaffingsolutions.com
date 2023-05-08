@@ -4,6 +4,7 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 
 import "./select.css";
+import { jwtTokenDecode } from "../../utils/jwtDecode";
 
 const changeLanguage = (e) => {
   // console.log(`Language change to ${e.target.value}`);
@@ -12,6 +13,8 @@ const changeLanguage = (e) => {
 
 function Navbar() {
   const { t } = useTranslation();
+
+  const jwt_decode = jwtTokenDecode();
 
   return (
     <section className="header sticky-top">
@@ -94,7 +97,7 @@ function Navbar() {
                   {/* <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
-                      href="javascript:void(0)"
+                      href="#"
                       id="navbarDropdown"
                       role="button"
                       data-bs-toggle="dropdown"
@@ -136,13 +139,23 @@ function Navbar() {
                     <option value={"ar"}>Arabic</option>
                   </select>
                   <button type="button" className="navButton btn">
-                    <Link to="/login">
-                      <img
-                        src="assets/frontend/images/indexImages/person.png"
-                        alt="image"
-                      />
-                      {t("home_navbar_sign_in")}
-                    </Link>
+                    {jwt_decode && jwt_decode._id ? (
+                      <Link to="/client-dashboard">
+                        <img
+                          src="assets/frontend/images/indexImages/person.png"
+                          alt="image"
+                        />
+                        Dashboard
+                      </Link>
+                    ) : (
+                      <Link to="/login">
+                        <img
+                          src="assets/frontend/images/indexImages/person.png"
+                          alt="image"
+                        />
+                        {t("home_navbar_sign_in")}
+                      </Link>
+                    )}
                   </button>
                 </ul>
               </div>

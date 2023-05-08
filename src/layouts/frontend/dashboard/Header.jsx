@@ -21,7 +21,7 @@ function Header() {
                 <img
                   className="img-fluid Dashboard_nav_logo"
                   src="assets/frontend/images/Dashboardimages/logo.png"
-                  alt
+                  alt="image"
                 />
               </a>
               <button
@@ -49,13 +49,13 @@ function Header() {
                       <div className="navLinkImageTextWraper">
                         <img
                           src="assets/frontend/images/Dashboardimages/navbar/Rectangle 40265.png"
-                          alt
+                          alt="image"
                         />
                         <span className="DashboardBookmarkNavSpan">5</span>
                       </div>
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a
                       className="Dashboard_navbar_custom_hover nav-link"
                       href="#"
@@ -68,7 +68,7 @@ function Header() {
                         <span className="DashboardNotificationNavSpan">3</span>
                       </div>
                     </a>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <a
                       className="Dashboard_navbar_custom_hover nav-link"
@@ -76,7 +76,7 @@ function Header() {
                     >
                       <img
                         src="assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
-                        alt
+                        alt="image"
                       />
                     </a>
                   </li>
@@ -85,7 +85,7 @@ function Header() {
                     <img
                       className="img-fluid"
                       src="assets/frontend/images/Dashboardimages/flag.png"
-                      alt
+                      alt="image"
                     />
                   </div>
 
