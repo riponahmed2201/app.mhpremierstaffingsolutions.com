@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import i18n from "../../../i18n";
 import { useTranslation } from "react-i18next";
+import { fetchShortListHandler } from "../../../api/shortList";
+
+import { AiOutlineLogout } from "react-icons/ai";
 
 const changeLanguage = (e) => {
   return i18n.changeLanguage(e.target.value);
@@ -10,6 +13,26 @@ const changeLanguage = (e) => {
 
 function Header() {
   const { t } = useTranslation();
+
+  const [getShortList, setShortList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchShortListData = useCallback(async () => {
+    setLoading(true);
+    await fetchShortListHandler().then((res) => {
+      if (res?.status === 201) {
+        setShortList(res?.data);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchShortListData();
+  }, []);
 
   return (
     <section className="Dashboardheader sticky-top">
@@ -51,7 +74,9 @@ function Header() {
                           src="assets/frontend/images/Dashboardimages/navbar/Rectangle 40265.png"
                           alt="image"
                         />
-                        <span className="DashboardBookmarkNavSpan">5</span>
+                        <span className="DashboardBookmarkNavSpan mx-1">
+                          {getShortList ? getShortList?.total : 0}
+                        </span>
                       </div>
                     </Link>
                   </li>
@@ -98,33 +123,12 @@ function Header() {
                     <option value={"ar"}>Arabic</option>
                   </select>
 
-                  {/* Language Dropdown */}
-                  {/* Dark Mode Toggle */}
                   <div className="DashboarddarkModeToggle">
                     <div className="DashBoardNavform-check form-switch">
-                      <input
-                        className="form-check-input custom_formCheck_input"
-                        type="checkbox"
-                        id="dark-mode-toggle"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="dark-mode-toggle"
-                      >
-                        <img
-                          src="assets/frontend/images/Dashboardimages/navbar/moon.png"
-                          alt="Light mode"
-                          className="toggle-img light-mode"
-                        />
-                        <img
-                          src="assets/frontend/images/Dashboardimages/navbar/sundark (1).png"
-                          alt="Dark mode"
-                          className="toggle-img dark-mode"
-                        />
-                      </label>
+                      Logout
+                      <AiOutlineLogout />
                     </div>
                   </div>
-                  {/* Dark Mode Toggle */}
                 </ul>
               </div>
             </nav>
