@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { fetchShortListHandler } from "../../../api/shortList";
-// import Modal from 'react-bootstrap/Modal';
+import Modal from 'react-bootstrap/Modal';
 // import { DateRange } from 'react-date-range';
 import _ from "lodash";
 
 import defaultImage from "../../../assets/images/default.png";
 import Loader from "../../loadar/Loader";
+import { responseNotification } from "../../../utils/notifcation";
+import { token } from "../../../utils/authentication";
 const styles = {
   selectionRange: {
     background: "#c6a34f",
@@ -48,7 +50,36 @@ const ShortList = () => {
     fetchShortListData();
   }, []);
 
-  _.map((getPosition, () => {}));
+  //delete short list info here
+  const deleteShortListInfo = useCallback(
+    async (shortListId) => {
+      const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
+      console.log("shortListId: ", shortListId);
+      if (true) {
+        await fetch(`${unicodeUri}/short-list/delete/${shortListId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token()}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res?.statusCode === 200) {
+              responseNotification(
+                "Short list removed successfully",
+                "success"
+              );
+              // fetchShortListData();
+              window.location.reload();
+            } else if (res?.statusCode === 400) {
+              responseNotification("Bad request", "danger");
+            }
+          });
+      }
+    },
+    [fetchShortListData]
+  );
 
   return (
     <div className="my-5 mb-5">
@@ -117,7 +148,7 @@ const ShortList = () => {
                             className="ms-2 pointer"
                             style={{ fontSize: "14px" }}
                           >
-                            2 Jan - 10 Jan (9 days)
+                            -- /-- - --/--
                           </span>
                         </div>
                         <div className="d-flex align-items-center justify-content-between">
@@ -128,7 +159,12 @@ const ShortList = () => {
                               alt=""
                             />
                           </button>
-                          <button className="book-btn ms-2 fw-500">
+                          <button
+                            onClick={() =>
+                              deleteShortListInfo(item?._id)
+                            }
+                            className="book-btn ms-2 fw-500"
+                          >
                             Removed
                           </button>
                         </div>
@@ -144,7 +180,7 @@ const ShortList = () => {
         <div className="text-center text-danger">No Data Found!</div>
       )}
 
-      {/* <Modal className="modal-md" show={show} onHide={handleClose} animation={true}>
+      <Modal className="modal-md" show={show} onHide={handleClose} animation={true}>
                 <div className='mt-2'>
                     <div className="d-flex justify-content-between align-items-center px-4">
                         <div className='pointer bg-color px-2 rounded' onClick={handleClose}>
@@ -154,7 +190,7 @@ const ShortList = () => {
                     </div>
                 </div>
                 <Modal.Body className="text-center">
-                    <DateRange
+                    {/* <DateRange
                         editableDateInputs={true}
                         onChange={item => setState([item.selection])}
                         moveRangeOnFirstSelection={false}
@@ -162,9 +198,9 @@ const ShortList = () => {
                         rangeColors={['#c6a34f']}
                         className={'date-range-wrapper date-picker-custom'}
                         styles={styles}
-                    />
+                    /> */}
                 </Modal.Body>
-            </Modal> */}
+            </Modal>
     </div>
   );
 };
