@@ -122,7 +122,7 @@ function ClientDetails() {
             >
               <div className="col-12">
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <Form.Item
                       label="Discount Amount"
                       name="clientDiscount"
@@ -140,7 +140,7 @@ function ClientDetails() {
                       />
                     </Form.Item>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <Form.Item
                       label="VAT Number"
                       name="vatNumber"
@@ -158,7 +158,7 @@ function ClientDetails() {
                       />
                     </Form.Item>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <Form.Item
                       label="Company Register Number"
                       name="companyRegisterNumber"
