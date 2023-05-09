@@ -109,7 +109,6 @@ function ClientDashboard() {
     console.log("changed", value);
   };
 
-  console.log("addShortListData: ", addShortListData);
   return (
     <div>
       {/* Dashboard part 1 */}
@@ -485,7 +484,9 @@ function ClientDashboard() {
                   </div>
                   <div className="col-lg-7">
                     <div className="resetData">
-                      <button>Reset Data</button>
+                      <button onClick={() => window.location.reload()}>
+                        Reset Data
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -500,6 +501,7 @@ function ClientDashboard() {
                         width: "100%",
                       }}
                       allowClear
+                      showSearch={true}
                       placeholder="Select Position"
                       onChange={handleChangeStatus}
                     >
@@ -522,6 +524,7 @@ function ClientDashboard() {
                       width: "100%",
                     }}
                     allowClear
+                    showSearch={true}
                     placeholder="Select Experience"
                     onChange={handleChangeStatus}
                   >

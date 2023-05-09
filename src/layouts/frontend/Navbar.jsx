@@ -4,17 +4,13 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 
 import "./select.css";
-import { jwtTokenDecode } from "../../utils/jwtDecode";
 
 const changeLanguage = (e) => {
-  // console.log(`Language change to ${e.target.value}`);
   return i18n.changeLanguage(e.target.value);
 };
 
 function Navbar() {
   const { t } = useTranslation();
-
-  const jwt_decode = jwtTokenDecode();
 
   return (
     <section className="header sticky-top">
@@ -139,23 +135,13 @@ function Navbar() {
                     <option value={"ar"}>Arabic</option>
                   </select>
                   <button type="button" className="navButton btn">
-                    {jwt_decode && jwt_decode._id ? (
-                      <Link to="/client-dashboard">
-                        <img
-                          src="assets/frontend/images/indexImages/person.png"
-                          alt="image"
-                        />
-                        Dashboard
-                      </Link>
-                    ) : (
-                      <Link to="/login">
-                        <img
-                          src="assets/frontend/images/indexImages/person.png"
-                          alt="image"
-                        />
-                        {t("home_navbar_sign_in")}
-                      </Link>
-                    )}
+                    <Link to="/login">
+                      <img
+                        src="assets/frontend/images/indexImages/person.png"
+                        alt="image"
+                      />
+                      {t("home_navbar_sign_in")}
+                    </Link>
                   </button>
                 </ul>
               </div>

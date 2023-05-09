@@ -3,7 +3,7 @@ import { token } from "../../utils/authentication";
 
 // fetch api call
 export const fetchShortListHandler = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/short-list`,
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/short-list/list`,
         {
             headers: {
                 Authorization: `Bearer ${token()}`,
