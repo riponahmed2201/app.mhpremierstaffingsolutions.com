@@ -501,6 +501,7 @@ function ClientDashboard() {
                         width: "100%",
                       }}
                       allowClear
+                      showSearch={true}
                       placeholder="Select Position"
                       onChange={handleChangeStatus}
                     >
@@ -523,6 +524,7 @@ function ClientDashboard() {
                       width: "100%",
                     }}
                     allowClear
+                    showSearch={true}
                     placeholder="Select Experience"
                     onChange={handleChangeStatus}
                   >

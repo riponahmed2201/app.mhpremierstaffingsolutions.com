@@ -36,7 +36,6 @@ const ShortList = () => {
     await fetchShortListHandler().then((res) => {
       if (res?.status === 201) {
         setShortList(res?.data?.shortList);
-        setPosition(res?.data?.positions);
       } else {
         setLoading(false);
       }
@@ -49,6 +48,8 @@ const ShortList = () => {
     fetchShortListData();
   }, []);
 
+  _.map((getPosition, () => {}));
+
   return (
     <div className="my-5 mb-5">
       {loading ? (
@@ -59,8 +60,8 @@ const ShortList = () => {
             </div>
           </div>
         </div>
-      ) : getPosition?.length ? (
-        _.map(getPosition, (positionItem, positionIndex) => (
+      ) : getShortList?.length ? (
+        _.map(getShortList, (positionItem, positionIndex) => (
           <div className="container px-0" key={positionIndex}>
             <div className="mt-2 container-style mb-4">
               <div className="mb-3 d-flex align-items-center">
@@ -71,11 +72,11 @@ const ShortList = () => {
                   alt="image"
                 />
                 <span className="ms-2 fw-500" style={{ fontSize: "17px" }}>
-                  {positionItem?.name}
+                  {positionItem?.positionName}
                 </span>
               </div>
               <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-sm-2  g-4">
-                {getShortList?.map((item, index) => (
+                {positionItem?.employeeDetails?.map((item, index) => (
                   <div className="col" key={index}>
                     <div className="card h-100 short-list-card">
                       <img
@@ -91,7 +92,7 @@ const ShortList = () => {
                       />
                       <div className="card-body">
                         <span className="card-title card-title-style fw-500">
-                          {item.name}
+                          {item?.employeeDetails?.name}
                         </span>
                         <div className="card-text mb-2 d-flex justify-content-start align-items-center">
                           <img

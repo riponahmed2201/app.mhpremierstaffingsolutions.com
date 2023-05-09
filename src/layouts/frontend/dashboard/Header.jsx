@@ -118,17 +118,9 @@ function Header() {
                     onChange={(e) => changeLanguage(e)}
                     className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
                   >
-                    {/* <option>En</option> */}
                     <option value={"en"}>English</option>
                     <option value={"ar"}>Arabic</option>
                   </select>
-
-                  <div className="DashboarddarkModeToggle">
-                    <div className="DashBoardNavform-check form-switch">
-                      Logout
-                      <AiOutlineLogout />
-                    </div>
-                  </div>
                 </ul>
               </div>
             </nav>
