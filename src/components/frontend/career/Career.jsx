@@ -22,7 +22,7 @@ const Career = () => {
               style={{ marginTop: "244px" }}
             >
               <h5 style={{ color: "white" }}>MH PREMIER STAFFING SOLUTIONS</h5>
-              <h1 style={{ color: "white" }}>Job Opening</h1>
+              <h1 style={{ color: "white" }}>Job Opening (Comming soon...)</h1>
             </div>
           </div>
         </div>

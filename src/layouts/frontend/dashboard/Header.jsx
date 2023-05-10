@@ -1,19 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import i18n from "../../../i18n";
-import { useTranslation } from "react-i18next";
 import { fetchShortListHandler } from "../../../api/shortList";
-
 import { AiOutlineLogout } from "react-icons/ai";
 
-const changeLanguage = (e) => {
-  return i18n.changeLanguage(e.target.value);
-};
-
 function Header() {
-  const { t } = useTranslation();
-
   const [getShortList, setShortList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -80,7 +71,7 @@ function Header() {
                       </div>
                     </Link>
                   </li>
-                  {/* <li className="nav-item">
+                  <li className="nav-item">
                     <a
                       className="Dashboard_navbar_custom_hover nav-link"
                       href="#"
@@ -93,7 +84,7 @@ function Header() {
                         <span className="DashboardNotificationNavSpan">3</span>
                       </div>
                     </a>
-                  </li> */}
+                  </li>
                   <li className="nav-item">
                     <a
                       className="Dashboard_navbar_custom_hover nav-link"
@@ -105,22 +96,6 @@ function Header() {
                       />
                     </a>
                   </li>
-                  {/* Language Dropdown */}
-                  <div className="DashboardlanguageFlagWrapper d-flex justify-content-center align-items-center">
-                    <img
-                      className="img-fluid"
-                      src="assets/frontend/images/Dashboardimages/flag.png"
-                      alt="image"
-                    />
-                  </div>
-
-                  <select
-                    onChange={(e) => changeLanguage(e)}
-                    className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
-                  >
-                    <option value={"en"}>English</option>
-                    <option value={"ar"}>Arabic</option>
-                  </select>
                 </ul>
               </div>
             </nav>

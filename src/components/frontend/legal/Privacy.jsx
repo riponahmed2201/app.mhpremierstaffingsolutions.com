@@ -23,7 +23,7 @@ const Privacy = () => {
                 MH PREMIER STAFFING SOLUTIONS
               </h5>
               <h1 style={{ color: "white", fontSize: "70px" }}>
-                PRIVACY NOTICE
+                Privacy Notice
               </h1>
             </div>
           </div>

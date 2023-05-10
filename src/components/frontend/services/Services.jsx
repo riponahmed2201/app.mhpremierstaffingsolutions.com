@@ -1,5 +1,5 @@
 import React from "react";
-import Position from "../Home/Position";
+import ServicePosition from "./ServicePosition";
 
 function Services() {
   return (
@@ -83,7 +83,7 @@ function Services() {
         </div>
       </div>
       <div className="container">
-        <Position />
+        <ServicePosition />
       </div>
     </div>
   );

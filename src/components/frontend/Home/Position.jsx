@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Position() {
   return (
@@ -15,192 +16,232 @@ function Position() {
                 <div className="carousel-item active">
                   <div className="row customGutterspace d-flex justify-content-center">
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117169.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117169.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117170.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117170.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117171.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117171.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117180.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117180.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117179.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117179.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                   </div>
                   <div className="row customGutterspace carousel_row_margin d-flex justify-content-center">
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117178.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117178.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117177.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117177.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117176.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117176.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117175.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117175.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117174.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117174.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="carousel-item">
                   <div className="row customGutterspace d-flex justify-content-center">
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117169.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117169.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117170.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117170.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117171.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117171.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117180.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117180.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117179.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117179.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                   </div>
                   <div className="row customGutterspace carousel_row_margin d-flex justify-content-center">
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117178.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117178.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117177.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117177.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117176.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117176.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117175.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117175.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                     <div className="col-lg-2">
-                      <div className="cards">
-                        <img
-                          className="card-img-top"
-                          src="assets/frontend/images/indexImages/card/Group 117174.png"
-                          alt="Card image"
-                        />
-                      </div>
+                      <Link to="/our-services">
+                        <div className="cards">
+                          <img
+                            className="card-img-top"
+                            src="assets/frontend/images/indexImages/card/Group 117174.png"
+                            alt="Card image"
+                          />
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
