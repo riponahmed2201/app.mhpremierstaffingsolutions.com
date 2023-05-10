@@ -101,6 +101,9 @@ const MeetTheTeam = () => {
             >
               <h1 className="mt-5 mx-2">Filippo Becchino</h1>
               <h5 className="mx-2">RECRUITMENT CONSULTANT</h5>
+              <p className=" mx-2">
+                filippo@mhpremierstaffingsolutions.com <br /> +44 7459 552887
+              </p>
               <p className="about_us_section_paragraph mx-2">
                 Its history in the world of restaurants was born and
                 consolidated in Italy. <br />
@@ -133,6 +136,10 @@ const MeetTheTeam = () => {
                 Manila Bartocci
               </h1>
               <h5 className="mx-2">RECRUITMENT CONSULTANT</h5>
+              <p className=" mx-2">
+                manila@mhpremierstaffingsolutions.com <br />
+                +44 7944 111197
+              </p>
               <p className="mx-2 about_us_section_paragraph">
                 Being a professional Recruitment Consultant comes naturally to
                 Manila. Experiencing her Grandfather's vineyard in childhood and
@@ -176,7 +183,6 @@ const MeetTheTeam = () => {
               <h5 className="mx-2">ACCOUNTANCY & FINANCE</h5>
             </div>
           </div>
-
           <br />
           <br />
           <br />

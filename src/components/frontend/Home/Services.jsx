@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function Services() {
@@ -11,9 +12,11 @@ function Services() {
           <div className="col-lg-12 text-center">
             <div className="ourServicesSpan">
               <span className="custom_span1">{t("home_service_our")}</span>
-              <span className="custom_span2">
-                {t("home_service_services")}
-              </span>
+              <Link to="/our-services">
+                <span className="custom_span2">
+                  {t("home_service_services")}
+                </span>
+              </Link>
             </div>
           </div>
         </div>

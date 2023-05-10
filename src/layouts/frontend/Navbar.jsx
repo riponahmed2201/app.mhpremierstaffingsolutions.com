@@ -83,49 +83,6 @@ function Navbar() {
                       {t("home_navbar_career")}
                     </NavLink>
                   </li>
-                  <div className="languageFlagWrapper d-flex justify-content-center align-items-center">
-                    <img
-                      className="img-fluid"
-                      src="assets/frontend/images/indexImages/flag.png"
-                      alt="image"
-                    />
-                  </div>
-                  {/* <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Eng
-                    </a>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="navbarDropdown"
-                    >
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <hr className="dropdown-divider" />
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
-                  </li> */}
-
                   <select
                     onChange={(e) => changeLanguage(e)}
                     className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
@@ -134,15 +91,17 @@ function Navbar() {
                     <option value={"en"}>English</option>
                     <option value={"ar"}>Arabic</option>
                   </select>
-                  <button type="button" className="navButton btn">
-                    <Link to="/login">
-                      <img
-                        src="assets/frontend/images/indexImages/person.png"
-                        alt="image"
-                      />
-                      {t("home_navbar_sign_in")}
+                  <li>
+                    <Link to="/login" >
+                      <button type="button" className="navButton btn" style={{ color: "#c6a34f" }}>
+                        <img
+                          src="assets/frontend/images/indexImages/person.png"
+                          alt="image"
+                        />
+                        {t("home_navbar_sign_in")}
+                      </button>
                     </Link>
-                  </button>
+                  </li>
                 </ul>
               </div>
             </nav>

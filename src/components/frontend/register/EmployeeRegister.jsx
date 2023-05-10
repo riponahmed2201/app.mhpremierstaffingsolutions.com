@@ -239,32 +239,31 @@ function EmployeeRegister() {
                             >
                               <div>
                                 {/* <ImgCrop rotate aspect={2 / 1}> */}
-                                  <Upload
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                    fileList={profilePicture}
-                                    onChange={onProfileChange}
-                                    onPreview={onPreview}
-                                  >
-                                    {profilePicture?.length < 1 && (
-                                      <>
-                                        <img
-                                          style={{
-                                            height: "100px",
-                                            width: "100px",
-                                            marginTop: "10px",
-                                          }}
-                                          src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadeImage.png"
-                                          alt="Default Image"
-                                        />
-                                      </>
-                                    )}
-                                  </Upload>
-                                  {/* <p style={{ color: 'gray' }}>Image must passport size with white backgound</p> */}
+                                <Upload
+                                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                  fileList={profilePicture}
+                                  onChange={onProfileChange}
+                                  onPreview={onPreview}
+                                >
+                                  {profilePicture?.length < 1 && (
+                                    <>
+                                      <img
+                                        style={{
+                                          height: "100px",
+                                          width: "100px",
+                                          marginTop: "10px",
+                                        }}
+                                        src="assets/frontend/images/registrationFormImages/employeeFormPictures/uploadeImage.png"
+                                        alt="Default Image"
+                                      />
+                                    </>
+                                  )}
+                                </Upload>
+                                {/* <p style={{ color: 'gray' }}>Image must passport size with white backgound</p> */}
                                 {/* </ImgCrop> */}
                               </div>
                             </Form.Item>
                           </div>
-                          
                         </div>
                       </div>
                       <div className="row">
@@ -276,6 +275,13 @@ function EmployeeRegister() {
                               {
                                 required: true,
                                 message: "Please enter your first name",
+                              },
+                              {
+                                pattern: new RegExp(
+                                  /^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i
+                                ),
+                                message:
+                                  "First name field does not accept numbers",
                               },
                             ]}
                           >
@@ -299,6 +305,10 @@ function EmployeeRegister() {
                             name="email"
                             hasFeedback
                             rules={[
+                              {
+                                type: "email",
+                                message: "Please enter a valid email address!",
+                              },
                               {
                                 required: true,
                                 message: "Please enter your email",
@@ -367,6 +377,13 @@ function EmployeeRegister() {
                                 required: true,
                                 message: "Please enter your last name",
                               },
+                              {
+                                pattern: new RegExp(
+                                  /^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i
+                                ),
+                                message:
+                                  "Last name field does not accept numbers",
+                              },
                             ]}
                           >
                             <div>
@@ -392,6 +409,16 @@ function EmployeeRegister() {
                               {
                                 required: true,
                                 message: "Please enter your phone number",
+                              },
+                              {
+                                min: 10,
+                                message:
+                                  "Value should be greater than 10 character",
+                              },
+                              {
+                                max: 13,
+                                message:
+                                  "Value should be less than 13 character",
                               },
                             ]}
                           >

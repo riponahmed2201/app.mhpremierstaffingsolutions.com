@@ -79,8 +79,12 @@ const Contact = () => {
       <div className="container " style={{ marginTop: "60px" }}>
         <div className="row justify-content-end">
           <div className="col-12 col-md-6 col-lg-6 ">
-            <h1 style={{ fontSize: "25px" }}>MH</h1>
-            <h5 style={{ fontSize: "16px" }}>
+            <div className="about_us_section_title">MH</div>
+            <div className="about_us_section_sub_title">
+              <strong>PREMIER STAFFING SOLUTIONS</strong>
+            </div>
+            <br />
+            <h5 className="about_us_section_paragraph">
               MH is a premium staffing solution with years of hospitality
               industry experience. we understand the challenges our clients have
               in recruiting competent and experienced staff.
@@ -97,7 +101,7 @@ const Contact = () => {
               <div className="mx-5">
                 <p>Reservation</p>
                 <h5 style={{ fontSize: "20px", color: "#8e6d45" }}>
-                  075 001 46699
+                  +44 075 001 46699
                 </h5>
               </div>
             </div>

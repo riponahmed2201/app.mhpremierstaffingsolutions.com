@@ -22,7 +22,9 @@ const TermsOfUse = () => {
               <h5 style={{ color: "white", fontSize: "18px" }}>
                 MH PREMIER STAFFING SOLUTIONS
               </h5>
-              <h1 style={{ color: "white", fontSize: "70px" }}>TERMS OF USE</h1>
+              <h1 style={{ color: "white", fontSize: "70px" }}>
+                Terms Of Use
+              </h1>
             </div>
           </div>
         </div>
@@ -53,7 +55,8 @@ const TermsOfUse = () => {
           of our website. These terms of use are governed by the laws of London,
           UK. Any disputes must be resolved in the state or federal courts
           located in 48 Warwick St Regent Street W1B 5AW London. If you have
-          questions, contact us <strong>info@mhpremierstaffingsolutions.com</strong>
+          questions, contact us{" "}
+          <strong>info@mhpremierstaffingsolutions.com</strong>
         </p>
       </div>
     </div>
