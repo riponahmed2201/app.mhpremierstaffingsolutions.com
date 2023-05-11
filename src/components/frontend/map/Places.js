@@ -19,6 +19,7 @@ export default function Places() {
     
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        // googleMapsApiKey: "AIzaSyBUzlSqpz5Fx14kw-3GrsTfuqs-Van7ouA",
         libraries: ["places"],
     });
 

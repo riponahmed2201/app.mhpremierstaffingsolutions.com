@@ -79,7 +79,7 @@ function Header() {
                       <div className="navLinkImageTextWraper">
                         <img
                           src="assets/frontend/images/Dashboardimages/navbar/path113.png"
-                          alt
+                          alt="image"
                         />
                         <span className="DashboardNotificationNavSpan">3</span>
                       </div>

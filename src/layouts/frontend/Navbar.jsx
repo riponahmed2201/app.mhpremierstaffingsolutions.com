@@ -83,17 +83,23 @@ function Navbar() {
                       {t("home_navbar_career")}
                     </NavLink>
                   </li>
-                  <select
-                    onChange={(e) => changeLanguage(e)}
-                    className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
-                  >
-                    {/* <option>En</option> */}
-                    <option value={"en"}>English</option>
-                    <option value={"ar"}>Arabic</option>
-                  </select>
+                  <li className="nav-item">
+                    <select
+                      onChange={(e) => changeLanguage(e)}
+                      className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"
+                    >
+                      {/* <option>En</option> */}
+                      <option value={"en"}>English</option>
+                      <option value={"ar"}>Arabic</option>
+                    </select>
+                  </li>
                   <li>
-                    <Link to="/login" >
-                      <button type="button" className="navButton btn" style={{ color: "#c6a34f" }}>
+                    <Link to="/login">
+                      <button
+                        type="button"
+                        className="navButton btn"
+                        style={{ color: "#c6a34f" }}
+                      >
                         <img
                           src="assets/frontend/images/indexImages/person.png"
                           alt="image"
