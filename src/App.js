@@ -48,6 +48,9 @@ import ClientRegister from './components/frontend/register/ClientRegister';
 import ContactList from './components/admin/contact/ContactList';
 import ShortList from './components/frontend/shortList/ShortList';
 import PaymentInvoice from './components/frontend/invoicePayment/PaymentInvoice';
+import EmployeeProfile from './components/frontend/employee/profile/EmployeeDashboard';
+import EmployeeMeeting from './components/frontend/employee/meeting/EmployeeMeeting';
+import EmployeePdf from './components/frontend/employee/pdf/EmployeePdf';
 
 function App() {
   return (
@@ -85,6 +88,11 @@ function App() {
             <Route path='/corporate-information' element={<CorporateInformation />} />
             <Route path='/terms-of-use' element={<TermsOfUse />} />
             <Route path='/privacy' element={<Privacy />} />
+
+            {/* //For Employee Section */}
+            <Route path='/employee-profile' element={<EmployeeProfile />} />
+            <Route path='/employee-meeting' element={<EmployeeMeeting />} />
+            <Route path='/employee-pdf' element={<EmployeePdf />} />
           </Route>
 
 

@@ -30,10 +30,21 @@ const MeetTheTeam = () => {
         </div>
       </div>
 
-      <div style={{ marginTop: "60px", backgroundColor: "#f8f5f0" }}>
+      <div style={{ marginTop: "150px", backgroundColor: "white" }}>
         <div className="container ">
           <div className="row justify-content-end">
             <div className="col-12 col-md-6 col-lg-6">
+              <img
+                src="assets/frontend/images/meetTeam/ceo.jpg"
+                alt="the mission"
+                className="img-fluid"
+                style={{ height: "800px" }}
+              />
+            </div>
+            <div
+              className="col-12 col-md-6 col-lg-6 mt-5"
+              style={{ backgroundColor: "#f8f5f0" }}
+            >
               <h5 className="mt-5">MIRKO PICICCO</h5>
               <h1>Managing Director</h1>
 
@@ -72,12 +83,31 @@ const MeetTheTeam = () => {
                 people's dreams come true as he made his own.
               </p>
             </div>
+          </div>
+
+          {/* // */}
+          <div className="row justify-content-end">
+            <div
+              className="col-12 col-md-6 col-lg-6 "
+              style={{ backgroundColor: "#f8f5f0" }}
+            >
+              <h1 className=" mx-2" style={{ marginTop: "200px" }}>
+                Rose Picicco
+              </h1>
+              <h5 className="mx-2">Managing Director(Dubai)</h5>
+              <p className=" mx-2">
+                rose@mhpremierstaffingsolutions.com
+                <br />
+                +971 52 416 0552
+              </p>
+              <p className="mx-2 about_us_section_paragraph"></p>
+            </div>
             <div className="col-12 col-md-6 col-lg-6 mt-5">
               <img
-                src="assets/frontend/images/meetTeam/ceo.jpg"
-                alt="the mission"
+                src="assets/frontend/images/meetTeam/ceo_dubai.jpg"
+                alt="image"
                 className="img-fluid"
-                style={{ height: "800px" }}
+                style={{ height: "800px", marginTop: "20px" }}
               />
             </div>
           </div>
@@ -164,25 +194,7 @@ const MeetTheTeam = () => {
               />
             </div>
           </div>
-          <div className="row justify-content-end">
-            <div className="col-12 col-md-6 col-lg-6 ">
-              <img
-                src="assets/frontend/images/meetTeam/alina.png"
-                alt="the mission"
-                className="img-fluid"
-                style={{ height: "800px", marginTop: "20px" }}
-              />
-            </div>
-            <div
-              className="col-12 col-md-6 col-lg-6 "
-              style={{ backgroundColor: "#f8f5f0" }}
-            >
-              <h1 className=" mx-2" style={{ marginTop: "300px" }}>
-                Aline Capotorto
-              </h1>
-              <h5 className="mx-2">ACCOUNTANCY & FINANCE</h5>
-            </div>
-          </div>
+
           <br />
           <br />
           <br />

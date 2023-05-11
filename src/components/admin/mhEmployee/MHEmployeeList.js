@@ -90,13 +90,16 @@ function MHEmployeeList() {
             active: item?.active ? 'YES' : 'NO',
             status: (
                 <>
-                    <Switch
-                        size="small"
-                        defaultChecked={item?.active === true}
-                        onChange={(e) => {
-                            onEmployeeStatusChange(item?._id, e);
-                        }}
-                    />
+                    {
+                        item?.role !== "ADMIN" ? <Switch
+                            size="small"
+                            defaultChecked={item?.active === true}
+                            onChange={(e) => {
+                                onEmployeeStatusChange(item?._id, e);
+                            }}
+                        /> : ""
+                    }
+
                 </>
             ),
             action: (
