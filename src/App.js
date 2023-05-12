@@ -48,9 +48,10 @@ import ClientRegister from './components/frontend/register/ClientRegister';
 import ContactList from './components/admin/contact/ContactList';
 import ShortList from './components/frontend/shortList/ShortList';
 import PaymentInvoice from './components/frontend/invoicePayment/PaymentInvoice';
-import EmployeeProfile from './components/frontend/employee/profile/EmployeeDashboard';
+import EmployeeProfile from './components/frontend/employee/profile/EmployeeProfile';
 import EmployeeMeeting from './components/frontend/employee/meeting/EmployeeMeeting';
 import EmployeePdf from './components/frontend/employee/pdf/EmployeePdf';
+import ViewEmployeeDetails from './components/admin/employee/ViewEmployeeDetails';
 
 function App() {
   return (
@@ -108,6 +109,7 @@ function App() {
             <Route path='source' element={<PrivateRoute><Source /></PrivateRoute>} />
             <Route path='employee-list' element={<PrivateRoute><EmployeeList /></PrivateRoute>} />
             <Route path='employee-details/:id' element={<PrivateRoute><EmployeeDetails /></PrivateRoute>} />
+            <Route path='view-employee-details/:id' element={<PrivateRoute><ViewEmployeeDetails /></PrivateRoute>} />
             <Route path='view-certificate/:id' element={<PrivateRoute><ViewCertificate /></PrivateRoute>} />
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
