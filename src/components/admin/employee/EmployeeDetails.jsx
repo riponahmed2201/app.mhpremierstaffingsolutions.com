@@ -448,9 +448,7 @@ function EmployeeDetails() {
                         style={{ width: "100%" }}
                         placeholder="Date of Birth"
                         defaultValue={
-                          (getEditDateOfBirth &&
-                            moment(getEditDateOfBirth, "YYYY-MM-DD")) ||
-                          ""
+                          moment(getEditDateOfBirth, "YYYY-MM-DD") || ""
                         }
                         onChange={(value) => {
                           setDateOfBirth(
@@ -757,7 +755,7 @@ function EmployeeDetails() {
                     label="Curriculam Vitea (CV)"
                     rules={[
                       {
-                        required: true,
+                        // required: true,
                         message: "Please enter curriculam vitea (CV)",
                       },
                     ]}

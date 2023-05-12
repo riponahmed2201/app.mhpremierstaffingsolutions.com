@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Mission = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div
@@ -20,10 +23,10 @@ const Mission = () => {
               style={{ marginTop: "150px" }}
             >
               <h5 style={{ color: "white", fontSize: "20px" }}>
-                MH PREMIER STAFFING SOLUTIONS
+                {t("meet_the_team_company_name")}
               </h5>
               <h1 style={{ color: "white", fontSize: "70px" }}>
-                Mission & Values
+                {t("mission_and_values")}
               </h1>
             </div>
           </div>
@@ -33,29 +36,9 @@ const Mission = () => {
       <div class="container" style={{ marginTop: "60px" }}>
         <div class="row justify-content-end">
           <div class="col-12 col-md-6 col-lg-6">
-            <h2 class="my-5">Our Mission</h2>
+            <h2 class="my-5">{t("our_mission")} </h2>
             <p className="about_us_section_paragraph">
-              Our mission is to create shared success amongst customers and
-              recruited staff.
-            </p>
-            <p className="about_us_section_paragraph">
-              A company that trusts a recruitment agency in finding personnel
-              puts the keys to success or failure in its hands, especially in a
-              world as elegant as that of hospitality, hotels & restaurants.
-            </p>
-            <p className="about_us_section_paragraph">
-              We take this mission with eminent significance by living this
-              world at the pace of our customers.
-            </p>
-            <p className="about_us_section_paragraph">
-              We measure our success at the end of the mission of recruiting
-              staff when our client calls us back for a new challenge.
-            </p>
-            <p className="about_us_section_paragraph">
-              The secret to this success is to always consider the client and
-              their well-being, objectives and goals, as well as the selected
-              recruited staff, instead of thinking of the income you can gain
-              from the opportunity.
+              {t("our_mission_description")}
             </p>
           </div>
           <div class="col-12 col-md-6 col-lg-6 mt-5">
@@ -76,33 +59,9 @@ const Mission = () => {
             />
           </div>
           <div class="col-12 col-md-6 col-lg-6">
-            <h2 class="my-5">Our Vision</h2>
+            <h2 class="my-5">{t("our_vision")}</h2>
             <p className="about_us_section_paragraph">
-              The human being put first is always our priority. Making sure that
-              they come before the business is a value we stand by.
-            </p>
-            <p className="about_us_section_paragraph">
-              We believe that someone hired in the right position becomes a
-              person who enjoys their job, positively affecting their whole
-              life.
-            </p>
-            <p className="about_us_section_paragraph">
-              A customer who expresses their concerns and tells us their dreams
-              for their company is someone who wants us to overcome a challenge,
-              which we do with help from each other.
-            </p>
-            <p className="about_us_section_paragraph">
-              We live in a globalised world where the human component is often
-              forgotten. However, the most successful stories and the
-              significant chalenges won were made by people who considered the
-              human being as the added value of the company.
-            </p>
-            <p
-              className="about_us_section_paragraph"
-              style={{ marginBottom: "100px" }}
-            >
-              Education, compared to listening, is a must for everyone;
-              constructive comparison represents a daily enrichment for us.
+              {t("our_vision_description")}
             </p>
           </div>
         </div>
