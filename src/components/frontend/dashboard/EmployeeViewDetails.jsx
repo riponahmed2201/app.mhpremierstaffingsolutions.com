@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 function EmployeeViewDetails() {
-
   const { id } = useParams();
 
   return (
@@ -15,7 +14,7 @@ function EmployeeViewDetails() {
                 <div className="selectedEmploImgBackBtn">
                   <a href>
                     <img
-                      src="assets/frontend/images/selectedEmployee/backButton.png"
+                      src="/assets/frontend/images/selectedEmployee/backButton.png"
                       className="img-fluid"
                       alt="image"
                     />
@@ -26,7 +25,7 @@ function EmployeeViewDetails() {
                 <div className="selectedEmployeeBookmarkImg">
                   <a href>
                     <img
-                      src="assets/frontend/images/selectedEmployee/SelecEmployeeCardBookmaricon.png"
+                      src="/assets/frontend/images/selectedEmployee/SelecEmployeeCardBookmaricon.png"
                       className="img-fluid"
                       alt="image"
                     />
@@ -37,7 +36,7 @@ function EmployeeViewDetails() {
             <div className="row">
               <div className="selectedEmpProfilePic">
                 <img
-                  src="assets/frontend/images/selectedEmployee/slcEmpPro.png"
+                  src="/assets/frontend/images/selectedEmployee/slcEmpPro.png"
                   className="img-fluid"
                   alt="image"
                 />
@@ -46,7 +45,7 @@ function EmployeeViewDetails() {
             <div className="row">
               <div className="profileMarker">
                 <img
-                  src="assets/frontend/images/selectedEmployee/profileMarkLogo.png"
+                  src="/assets/frontend/images/selectedEmployee/profileMarkLogo.png"
                   className="img-fluid"
                   alt="image"
                 />
@@ -65,7 +64,7 @@ function EmployeeViewDetails() {
                     <span className="sctProfileAge">Age: 45 years</span>
                     <span className="slctProfiletotalRating">
                       <img
-                        src="assets/frontend/images/selectedEmployee/Star 1.png "
+                        src="/assets/frontend/images/selectedEmployee/Star 1.png "
                         className="img-fluid scltEmpProfileRatingIcon"
                         alt="image"
                       />
@@ -73,7 +72,7 @@ function EmployeeViewDetails() {
                     </span>
                     <div className="slctproLine">
                       <img
-                        src="assets/frontend/images/selectedEmployee/Line 1.png"
+                        src="/assets/frontend/images/selectedEmployee/Line 1.png"
                         className="img-fluid"
                         alt="image"
                       />
@@ -84,7 +83,7 @@ function EmployeeViewDetails() {
                       <span className="slctProfileRateName">
                         <img
                           className="img-fluid SlctProrateIcon"
-                          src="assets/frontend/images/selectedEmployee/rate.png"
+                          src="/assets/frontend/images/selectedEmployee/rate.png"
                           alt="image"
                         />
                         Rate:
@@ -94,7 +93,7 @@ function EmployeeViewDetails() {
                     <div className="col-xl-5 col-md-6">
                       <span className="slctProfileExpName">
                         <img
-                          src="assets/frontend/images/selectedEmployee/experience.png"
+                          src="/assets/frontend/images/selectedEmployee/experience.png"
                           alt="image"
                         />
                         Exp:
@@ -106,7 +105,7 @@ function EmployeeViewDetails() {
                     <div className="col-xl-7 col-md-6">
                       <span className="selectEmployeeTotalHours">
                         <img
-                          src="assets/frontend/images/selectedEmployee/clock.png"
+                          src="/assets/frontend/images/selectedEmployee/clock.png"
                           alt="image"
                         />
                         Total Hours:
@@ -118,7 +117,7 @@ function EmployeeViewDetails() {
                     <div className="col-xl-5 col-md-6 selectEmpReviewCol">
                       <span className="selectEmpReviewspan">
                         <img
-                          src="assets/frontend/images/selectedEmployee/Review.png"
+                          src="/assets/frontend/images/selectedEmployee/Review.png"
                           alt="image"
                         />
                         Review:
@@ -130,7 +129,7 @@ function EmployeeViewDetails() {
                     <div className="col-xl-12">
                       <span className="selectEmpLicense">
                         <img
-                          src="assets/frontend/images/selectedEmployee//licenceLogo.png"
+                          src="/assets/frontend/images/selectedEmployee//licenceLogo.png"
                           className="img-fluid selectEmpLicenseLogo"
                           alt="image"
                         />
@@ -152,25 +151,28 @@ function EmployeeViewDetails() {
             <div className="selectEmpLocationBar">
               <p>Location</p>
               <img
-                src="assets/frontend/images/selectedEmployee/Line 2.png"
+                src="/assets/frontend/images/selectedEmployee/Line 2.png"
                 className="img-fluid"
                 alt="image"
               />
               <span>
-                <img src="assets/frontend/images/selectedEmployee/location.png" alt="image" />
+                <img
+                  src="/assets/frontend/images/selectedEmployee/location.png"
+                  alt="image"
+                />
                 &nbsp;20 Ranipukur Lane, Ciatle, #PO 42345, Camodia
               </span>
             </div>
             <div className="selectEmpLocationBar">
               <p>Education</p>
               <img
-                src="assets/frontend/images/selectedEmployee/Line 2.png"
+                src="/assets/frontend/images/selectedEmployee/Line 2.png"
                 className="img-fluid"
                 alt="image"
               />
               <span>
                 <img
-                  src="assets/frontend/images/selectedEmployee/education (2).png"
+                  src="/assets/frontend/images/selectedEmployee/education (2).png"
                   alt="image"
                 />
                 &nbsp;2015-17: Oxford High School, Camodia
@@ -178,7 +180,7 @@ function EmployeeViewDetails() {
               <div className="row">
                 <span>
                   <img
-                    src="assets/frontend/images/selectedEmployee/education (2).png"
+                    src="/assets/frontend/images/selectedEmployee/education (2).png"
                     alt="image"
                   />
                   &nbsp;2018-20: (B.Sc.)Cambridge University, Camodia
@@ -188,13 +190,13 @@ function EmployeeViewDetails() {
             <div className="selectEmpLocationBar">
               <p>Certificate</p>
               <img
-                src="assets/frontend/images/selectedEmployee/Line 2.png"
+                src="/assets/frontend/images/selectedEmployee/Line 2.png"
                 className="img-fluid"
                 alt="image"
               />
               <span>
                 <img
-                  src="assets/frontend/images/selectedEmployee/certificateICon.png"
+                  src="/assets/frontend/images/selectedEmployee/certificateICon.png"
                   alt="image"
                 />
                 &nbsp;College Certificate in Culinary Skills
@@ -202,7 +204,7 @@ function EmployeeViewDetails() {
               <div className="row">
                 <span>
                   <img
-                    src="assets/frontend/images/selectedEmployee/certificateICon.png"
+                    src="/assets/frontend/images/selectedEmployee/certificateICon.png"
                     alt="image"
                   />
                   &nbsp;College Certificate in Culinary Skills &amp; Cookery
@@ -210,7 +212,7 @@ function EmployeeViewDetails() {
               </div>
               <span>
                 <img
-                  src="assets/frontend/images/selectedEmployee/certificateICon.png"
+                  src="/assets/frontend/images/selectedEmployee/certificateICon.png"
                   alt="image"
                 />
                 &nbsp;Advanced Certificate in Culinary Arts
@@ -218,7 +220,7 @@ function EmployeeViewDetails() {
               <div className="row">
                 <span>
                   <img
-                    src="assets/frontend/images/selectedEmployee/certificateICon.png"
+                    src="/assets/frontend/images/selectedEmployee/certificateICon.png"
                     alt="image"
                   />
                   &nbsp;Certificate IV Program
@@ -228,13 +230,13 @@ function EmployeeViewDetails() {
             <div className="selectEmpLocationBar">
               <p>Language</p>
               <img
-                src="assets/frontend/images/selectedEmployee/Line 2.png"
+                src="/assets/frontend/images/selectedEmployee/Line 2.png"
                 className="img-fluid"
                 alt="image"
               />
               <span>
                 <img
-                  src="assets/frontend/images/selectedEmployee/googleTranslate.png"
+                  src="/assets/frontend/images/selectedEmployee/googleTranslate.png"
                   alt="image"
                 />
                 &nbsp;English (Native)
@@ -242,7 +244,7 @@ function EmployeeViewDetails() {
               <div className="row">
                 <span>
                   <img
-                    src="assets/frontend/images/selectedEmployee/googleTranslate.png"
+                    src="/assets/frontend/images/selectedEmployee/googleTranslate.png"
                     alt="image"
                   />
                   &nbsp;Spanish, Hindi (Conversational)

@@ -34,7 +34,7 @@ function Header() {
               <a className="navbar-brand " href="/">
                 <img
                   className="img-fluid Dashboard_nav_logo"
-                  src="assets/frontend/images/Dashboardimages/logo.png"
+                  src="/assets/frontend/images/Dashboardimages/logo.png"
                   alt="image"
                 />
               </a>
@@ -62,7 +62,7 @@ function Header() {
                     >
                       <div className="navLinkImageTextWraper">
                         <img
-                          src="assets/frontend/images/Dashboardimages/navbar/Rectangle 40265.png"
+                          src="/assets/frontend/images/Dashboardimages/navbar/Rectangle 40265.png"
                           alt="image"
                         />
                         <span className="DashboardBookmarkNavSpan mx-1">
@@ -78,7 +78,7 @@ function Header() {
                     >
                       <div className="navLinkImageTextWraper">
                         <img
-                          src="assets/frontend/images/Dashboardimages/navbar/path113.png"
+                          src="/assets/frontend/images/Dashboardimages/navbar/path113.png"
                           alt="image"
                         />
                         <span className="DashboardNotificationNavSpan">3</span>
@@ -91,7 +91,7 @@ function Header() {
                       href="#"
                     >
                       <img
-                        src="assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
+                        src="/assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
                         alt="image"
                       />
                     </a>
