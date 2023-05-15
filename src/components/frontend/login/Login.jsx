@@ -77,7 +77,7 @@ function Login() {
                   <img
                     src="assets/frontend/images/login_page_images/Group 685.png"
                     className="img-fluid"
-                    alt="iamge"
+                    alt="Group"
                   />
                 </Link>
               </div>
@@ -87,7 +87,7 @@ function Login() {
                 <img
                   className="img-fluid"
                   src="assets/frontend/images/login_page_images/Logo.png"
-                  alt="iamge"
+                  alt="Logo"
                 />
               </div>
               <div className="premier_stuffing_wrapper text-center">
@@ -110,7 +110,7 @@ function Login() {
                   <img
                     className="img-fluid"
                     src="assets/frontend/images/login_page_images/Ellipse 70.png"
-                    alt="iamge"
+                    alt="Ellipse"
                   />
                 </div>
                 {/* Form part start */}
@@ -144,7 +144,7 @@ function Login() {
                                   <img
                                     src="assets/frontend/images/login_page_images/Profile.png"
                                     className="img-fluid "
-                                    alt="iamge"
+                                    alt="Profile"
                                   />
                                 </div>
                                 <input
@@ -174,7 +174,7 @@ function Login() {
                                   <img
                                     src="assets/frontend/images/login_page_images/Icon.png"
                                     className="img-fluid password_logo"
-                                    alt="iamge"
+                                    alt="Password Icon"
                                   />
                                 </div>
                                 <input
@@ -252,16 +252,12 @@ function Login() {
                   </span>
                   <Link to="/client-register">Register</Link>
                 </div>
-                {/* Register Section end*/}
-                {/* Form part end */}
-                {/* last eclips image start */}
                 <div className="last_eclips_img_wrapper">
                   <img
                     src="assets/frontend/images/login_page_images/Ellipse 69.png"
-                    alt="iamge"
+                    alt="Ellipse"
                   />
                 </div>
-                {/* last eclips image end*/}
               </div>
             </div>
           </div>

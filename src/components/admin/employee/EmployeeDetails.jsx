@@ -38,7 +38,6 @@ function EmployeeDetails() {
   const [profilePicture, setProfilePicture] = useState([]);
   const [summaryPdf, setSummaryPdf] = useState([]);
   const [summaryPdfFileShow, setSummaryPdfFileShow] = useState(undefined);
-  const [getEditDateOfBirth, setEditDateOfBirth] = useState(undefined);
 
   const [form] = Form.useForm();
   const [formEdit] = Form.useForm();
@@ -73,8 +72,6 @@ function EmployeeDetails() {
         }
       );
 
-      setEditDateOfBirth(res?.data?.details.dateOfBirth);
-
       //Employee Basic Information
       formEdit.setFieldsValue({
         firstName: res?.data?.details.firstName,
@@ -92,7 +89,7 @@ function EmployeeDetails() {
         emmergencyContact: res?.data?.details.emmergencyContact,
         employeeExperience: res?.data?.details.employeeExperience,
         languages: res?.data?.details.languages,
-        skills: res?.data?.details.skills,
+        // skills: res?.data?.details.skills,
         sourceId: res?.data?.details.sourceId,
         referPersonId: res?.data?.details.referPersonId,
         hourlyRate: res?.data?.details.hourlyRate,
@@ -204,10 +201,8 @@ function EmployeeDetails() {
   }, []);
 
   const onFinishBasicInfoUpdate = async (values) => {
-    const dateOfBirthFromOnchanage = getDateOfBirth
-      ? moment(getDateOfBirth).format("YYYY-MM-DD").valueOf()
-      : undefined;
-    // console.log("dateOfBirthFromOnchanage: ", dateOfBirthFromOnchanage);
+    console.log("getDateOfBirth: ", getDateOfBirth);
+
     const receivedEmployeeFields = {
       id: id,
       firstName: values?.firstName,
@@ -215,7 +210,7 @@ function EmployeeDetails() {
       email: values?.email,
       phoneNumber: values?.phoneNumber,
       countryName: values?.countryName,
-      dateOfBirth: dateOfBirthFromOnchanage,
+      dateOfBirth: getDateOfBirth,
       emmergencyContact: values?.emmergencyContact,
       gender: values?.gender,
       higherEducation: values?.higherEducation,
@@ -288,16 +283,6 @@ function EmployeeDetails() {
       },
     ]);
   }, [getSingleEmployeeDetails]);
-
-  const [skillsInitialValues, setSkillsInitialValues] = useState([]);
-  
-  getSingleEmployeeDetails?.skills?.map(
-    (skillName, index) => (
-      setSkillsInitialValues(skillName.skillId)
-    )
-  )
-
-  console.log("skillsInitialValues: ", skillsInitialValues);
 
   return (
     <div className="container-fluid px-4">
@@ -465,6 +450,7 @@ function EmployeeDetails() {
                     <Form.Item
                       label="Date Of Birth"
                       name="dateOfBirth"
+                      hasFeedback
                       rules={[
                         {
                           // required: true,
@@ -479,19 +465,26 @@ function EmployeeDetails() {
                         }}
                       >
                         <DatePicker
-                          style={{ width: "100%" }}
+                          id="dateOfBirth"
                           placeholder="Date of Birth"
-                          initialValue={
+                          style={{ width: "100% !important" }}
+                          className="w-100"
+                          defaultValue={
                             getSingleEmployeeDetails?.dateOfBirth
                               ? moment(getSingleEmployeeDetails?.dateOfBirth)
-                                  .format("YYYY-MM-DD")
-                                  .valueOf()
                               : undefined
                           }
-                          onChange={(value) => {
+                          onChange={(value, dateOfBirthString) => {
                             setDateOfBirth(
-                              moment(value).format("YYYY-MM-DD").valueOf()
+                              moment(dateOfBirthString)
+                                .format("YYYY-MM-DD")
+                                .valueOf()
                             );
+
+                            // console.log(
+                            //   "test: ",
+                            //   moment(dateOfBirthString).format("YYYY-MM-DD")
+                            // );
                           }}
                         />
                       </Space>
@@ -696,11 +689,7 @@ function EmployeeDetails() {
                         },
                       ]}
                       initialValue={getSingleEmployeeDetails?.skills?.map(
-                        (skillName, index) => (
-                          <Option key={index} value={skillName?._id}>
-                            {skillName?.name}
-                          </Option>
-                        )
+                        (item) => item.skillId
                       )}
                     >
                       <Select
