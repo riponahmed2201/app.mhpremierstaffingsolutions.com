@@ -80,7 +80,7 @@ const ViewEmployeeDetails = () => {
               <div className="row">
                 <div className="selectedEmpProfilePic">
                   <img
-                    style={{ borderRadius: 14, width: "381px", height: "309px" }}
+                    style={{ borderRadius: 14, width: "397px", height: "309px" }}
                     src={
                       getSingleEmployeeDetails?.profilePicture
                         ? process.env.REACT_APP_ASSETs_BASE_URL +

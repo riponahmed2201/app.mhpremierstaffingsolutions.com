@@ -1,8 +1,11 @@
 import React from "react";
 import { AiOutlineAndroid, AiOutlineApple } from "react-icons/ai";
 import "./job.css";
+import { useTranslation } from "react-i18next";
 
 const Career = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div
@@ -21,8 +24,10 @@ const Career = () => {
               className="col-md-12  caption align-middle"
               style={{ marginTop: "244px" }}
             >
-              <h5 style={{ color: "white" }}>MH PREMIER STAFFING SOLUTIONS</h5>
-              <h1 style={{ color: "white" }}>Job Opening (Comming soon...)</h1>
+              <h5 style={{ color: "white" }}>
+                {t("meet_the_team_company_name")}
+              </h5>
+              <h1 style={{ color: "white" }}> {t("job_opening")} </h1>
             </div>
           </div>
         </div>
@@ -48,6 +53,7 @@ const Career = () => {
                   <a
                     href="https://apps.apple.com/us/app/mh/id6446052294"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineApple
@@ -61,6 +67,7 @@ const Career = () => {
                   <a
                     href="https://play.google.com/store/apps/details?id=com.invain.mh"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineAndroid
@@ -92,6 +99,7 @@ const Career = () => {
                   <a
                     href="https://apps.apple.com/us/app/mh/id6446052294"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineApple
@@ -105,6 +113,7 @@ const Career = () => {
                   <a
                     href="https://play.google.com/store/apps/details?id=com.invain.mh"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineAndroid
@@ -138,6 +147,7 @@ const Career = () => {
                   <a
                     href="https://apps.apple.com/us/app/mh/id6446052294"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineApple
@@ -151,6 +161,7 @@ const Career = () => {
                   <a
                     href="https://play.google.com/store/apps/details?id=com.invain.mh"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineAndroid
@@ -182,6 +193,7 @@ const Career = () => {
                   <a
                     href="https://apps.apple.com/us/app/mh/id6446052294"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineApple
@@ -195,6 +207,7 @@ const Career = () => {
                   <a
                     href="https://play.google.com/store/apps/details?id=com.invain.mh"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-white"
                   >
                     <AiOutlineAndroid
