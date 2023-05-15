@@ -36,7 +36,7 @@ function Footer() {
               <div className="placeImg">
                 <h6>
                   <img
-                    src="assets/frontend/images/indexImages/place.png"
+                    src="/assets/frontend/images/indexImages/place.png"
                     alt="image"
                   />
                   {t("home_footer_company_address")}
@@ -50,7 +50,7 @@ function Footer() {
                 >
                   <img
                     className="img-fluid"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 116168.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 116168.png"
                     alt="image"
                   />
                 </a>
@@ -60,7 +60,7 @@ function Footer() {
                 >
                   <img
                     className="img-fluid"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 116169.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 116169.png"
                     alt="image"
                   />
                 </a>
@@ -70,14 +70,14 @@ function Footer() {
                 >
                   <img
                     className="img-fluid"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 116170.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 116170.png"
                     alt="image"
                   />
                 </a>
                 <a href="https://vm.tiktok.com/ZGJmndX98/" target="_blank">
                   <img
                     className="img-fluid"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 116171.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 116171.png"
                     alt="image"
                   />
                 </a>
@@ -97,10 +97,7 @@ function Footer() {
                   </Link>
                   <Link to="/privacy">{t("home_footer_privacy_notice")}</Link>
                   <Link to="/"> {t("home_footer_cookies")}</Link>
-                  <a href="#">
-                
-                    {t("home_footer_download_the_app")}
-                  </a>
+                  <a href="#">{t("home_footer_download_the_app")}</a>
                 </li>
               </ul>
               <div className="rightPartLogoWrapper text-end">
@@ -110,7 +107,7 @@ function Footer() {
                 >
                   <img
                     className="img-fluid me-2"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 117303.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 117303.png"
                     alt="image"
                   />
                 </a>
@@ -120,7 +117,7 @@ function Footer() {
                 >
                   <img
                     className="img-fluid"
-                    src="assets/frontend/images/indexImages/socialMedia/Group 117304.png"
+                    src="/assets/frontend/images/indexImages/socialMedia/Group 117304.png"
                     alt="image"
                   />
                 </a>
@@ -134,7 +131,7 @@ function Footer() {
               <span>{t("home_footer_copy_right_all_reserved")}</span>
               <img
                 className="img-fluid footerFinalLogo"
-                src="assets/frontend/images/indexImages/footerLogo.png"
+                src="/assets/frontend/images/indexImages/footerLogo.png"
                 alt="image"
               />
             </div>

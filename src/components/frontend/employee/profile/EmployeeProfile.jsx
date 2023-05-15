@@ -1,7 +1,39 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { token } from "../../../../utils/authentication";
+import axios from "axios";
 
 const EmployeeProfile = () => {
+  const { id } = useParams();
+
+  const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  
+  const fetchSingleEmployeeData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token()}`,
+          },
+        }
+      );
+
+      setSingleEmployeeDetails(res?.data?.details);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSingleEmployeeData();
+  }, [id]);
+
   return (
     <div className="pb-5">
       <div
@@ -31,13 +63,12 @@ const EmployeeProfile = () => {
               lineHeight: "30px",
             }}
           >
-            Hey Razinul Karim, Your Profile is{" "}
+            Hey {getSingleEmployeeDetails?.name}, Your Profile is
             <strong style={{ color: "#C6A34F" }}>30%</strong> Done. Please,
             complete your profile to Proceed Next!
             <span className="mx-3 rounded-circle border border-white border-5 px-1 py-2 ">
-              {" "}
-              30%{" "}
-            </span>{" "}
+              30%
+            </span>
           </p>
         </div>
 
@@ -66,9 +97,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" Razinul "
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.firstName}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -134,9 +164,9 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" +880-1726332325 "
+                  placeholder={getSingleEmployeeDetails?.phoneNumber}
                   required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -167,9 +197,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" Latif School, Patuakhali"
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.presentAddress}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -200,9 +229,9 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" -- / -- / --"
+                  placeholder={getSingleEmployeeDetails?.dateOfBirth}
                   required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -266,9 +295,9 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" -"
+                  placeholder={getSingleEmployeeDetails?.higherEducation}
                   required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -299,9 +328,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" - "
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.emmergencyContact}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -335,9 +363,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" karim "
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.lastName}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -368,9 +395,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" - "
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.gender}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -401,9 +427,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" raz.cse5.bu@gmail.com"
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.email}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -434,9 +459,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.permanentAddress}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -467,9 +491,8 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  placeholder={getSingleEmployeeDetails?.countryName}
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -500,9 +523,9 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" type here"
+                  placeholder="Skills"
                   required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -533,9 +556,9 @@ const EmployeeProfile = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder=" -"
+                  placeholder={getSingleEmployeeDetails?.licensesNo}
                   required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -567,8 +590,7 @@ const EmployeeProfile = () => {
                   name="name"
                   type="text"
                   placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
+                  className="border-bottom border-0 px-1"
                   style={{
                     fontWeight: "500",
                     fontSize: "15px",
@@ -578,28 +600,6 @@ const EmployeeProfile = () => {
                 />
               </div>
             </div>
-          </div>
-
-          <div
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-            }}
-            className="mt-5"
-          >
-            <button
-              style={{
-                background: "#C6A34F",
-                borderTopLeftRadius: "10px",
-                borderBottomRightRadius: "10px",
-                color: "white",
-                outline: "none",
-              }}
-              className="px-5 py-2 border-0"
-            >
-              Submit Info
-            </button>
           </div>
         </div>
       </div>

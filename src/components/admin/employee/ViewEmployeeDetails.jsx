@@ -1,589 +1,275 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link, useParams } from "react-router-dom";
+import { token } from "../../../utils/authentication";
+import axios from "axios";
+import Loader from "../../loadar/Loader";
+import moment from "moment";
+import defaultImage from "../../../assets/images/default.png";
 
 const ViewEmployeeDetails = () => {
   const { id } = useParams();
 
-  console.log("Id: ", id);
+  const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  //Fetch refer person list for dropdown
+  const fetchSingleEmployeeData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token()}`,
+          },
+        }
+      );
+
+      setSingleEmployeeDetails(res?.data?.details);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSingleEmployeeData();
+  }, [id]);
 
   return (
-    <div className="pb-5 container-fluid px-4">
-      <div
-        style={{
-          background: "#FFFFFF",
-          border: "0.5px solid #A6A6A6",
-          borderRadius: "14.8px",
-        }}
-        className="container mt-5 pb-5"
-      >
-        <div
-          style={{
-            height: "95px",
-            marginLeft: "-12px",
-            marginRight: "-12px",
-            borderTopLeftRadius: "10px",
-            borderTopRightRadius: "10px",
-            backgroundColor: "black",
-          }}
-        >
-          <p
-            className="text-center py-4 "
+    <div className="container-fluid px-4">
+      <section className="SelectedEmployee">
+        <div className="card">
+          <div
+            className="card-header"
             style={{
-              color: "white",
-              fontWeight: "600",
-              fontSize: "12px",
-              lineHeight: "30px",
+              height: "95px",
+              backgroundColor: "#C6A34F",
             }}
           >
-            Hey Razinul Karim, Your Profile is{" "}
-            <strong style={{ color: "#C6A34F" }}>30%</strong> Done. Please,
-            complete your profile to Proceed Next!
-            <span className="mx-3 rounded-circle border border-white border-5 px-1 py-2 ">
-              30%
-            </span>
-          </p>
+            <p
+              className="text-center py-4 "
+              style={{
+                color: "white",
+                fontWeight: "600",
+                fontSize: "12px",
+                lineHeight: "30px",
+              }}
+            >
+              Hey {getSingleEmployeeDetails?.name}, Your Profile is
+              <strong style={{ color: "white" }}> 30%</strong> Done. Please,
+              complete your profile to Proceed Next!
+              <span className="mx-3 rounded-circle border border-white border-5 px-1 py-2 ">
+                30%
+              </span>
+            </p>
+          </div>
         </div>
-
-        <div className="container mt-5">
-          <div className="d-md-flex d-lg-flex  justify-content-evenly">
-            <div>
-              <div>
-                <div className="d-flex mt-2">
+        <br />
+        {loading ? (
+          <div className="card-body">
+            <Loader /> <br />
+            <br />
+            <br />
+          </div>
+        ) : (
+          <div className="row">
+            <div className="col-xl-4 col-md-5">
+              <div className="row">
+                <div className="selectedEmpProfilePic">
                   <img
-                    src="/assets/frontend/images/employeeProfile/Profile (1).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
+                    style={{ borderRadius: 14, width: "381px", height: "309px" }}
+                    src={
+                      getSingleEmployeeDetails?.profilePicture
+                        ? process.env.REACT_APP_ASSETs_BASE_URL +
+                          "/" +
+                          getSingleEmployeeDetails?.profilePicture
+                        : defaultImage
+                    }
+                    className="img-fluid"
+                    alt="image"
                   />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    First Name
-                  </p>
                 </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" Razinul "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
               </div>
-
-              <div className="mt-2">
-                <div className="d-flex mt-2">
+              <div className="row">
+                <div className="profileMarker">
                   <img
-                    src="/assets/frontend/images/employeeProfile/Vector (1).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
+                    src="/assets/frontend/images/selectedEmployee/profileMarkLogo.png"
+                    className="img-fluid"
+                    alt="image"
                   />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Position
-                  </p>
                 </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" Manager "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
               </div>
-
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (2).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Phone Number
-                  </p>
+              <div className="row">
+                <div
+                  className="selectProfileRowForMargin"
+                  style={{ width: "auto", borderRadius: 14 }}
+                >
+                  <div className="card selectEmpCardCard_body card-body">
+                    <div className="sctEmplTitleBox">
+                      <h5 className="card-title slctProfileNameTitle">
+                        {getSingleEmployeeDetails?.name}
+                      </h5>
+                      <span className="sctProfileAge">
+                        Date Of Birth:
+                        {moment(getSingleEmployeeDetails?.dateOfBirth)
+                          .format("YYYY-MM-DD")
+                          .valueOf()}
+                      </span>
+                      <span className="slctProfiletotalRating">
+                        <img
+                          src="/assets/frontend/images/selectedEmployee/Star 1.png "
+                          className="img-fluid scltEmpProfileRatingIcon"
+                          alt="image"
+                        />
+                        {getSingleEmployeeDetails?.rating}
+                      </span>
+                      <div className="slctproLine">
+                        <img
+                          src="/assets/frontend/images/selectedEmployee/Line 1.png"
+                          className="img-fluid"
+                          alt="image"
+                        />
+                      </div>
+                    </div>
+                    <div className="row slctEmpProfileRateRow">
+                      <div className="col-xl-7 col-md-6">
+                        <span className="slctProfileRateName">
+                          <img
+                            className="img-fluid SlctProrateIcon"
+                            src="/assets/frontend/images/selectedEmployee/rate.png"
+                            alt="image"
+                          />
+                          Rate:
+                        </span>
+                        <span className="slctprofilePerHourPrice">
+                          {getSingleEmployeeDetails?.hourlyRate}$/Hour
+                        </span>
+                      </div>
+                      <div className="col-xl-5 col-md-6">
+                        <span className="slctProfileExpName">
+                          <img
+                            src="/assets/frontend/images/selectedEmployee/experience.png"
+                            alt="image"
+                          />
+                          Exp:
+                        </span>
+                        <span className="slctProfileExpValue">
+                          {getSingleEmployeeDetails?.employeeExperience}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="row slctEmpProfileRateRow">
+                      <div className="col-xl-7 col-md-6">
+                        <span className="selectEmployeeTotalHours">
+                          <img
+                            src="/assets/frontend/images/selectedEmployee/clock.png"
+                            alt="image"
+                          />
+                          Total Hours:
+                        </span>
+                        <span className="selectEmployeeTotalHoursValue">
+                          {getSingleEmployeeDetails?.totalWorkingHour} H
+                        </span>
+                      </div>
+                      <div className="col-xl-5 col-md-6 selectEmpReviewCol">
+                        <span className="selectEmpReviewspan">
+                          <img
+                            src="/assets/frontend/images/selectedEmployee/Review.png"
+                            alt="image"
+                          />
+                          Review:
+                        </span>
+                        <span className="selectEmpReviewspanValue">1 time</span>
+                      </div>
+                    </div>
+                    <div className="row slcEmpProfilLicenseRow">
+                      <div className="col-xl-12">
+                        <span className="selectEmpLicense">
+                          <img
+                            src="/assets/frontend/images/selectedEmployee//licenceLogo.png"
+                            className="img-fluid selectEmpLicenseLogo"
+                            alt="image"
+                          />
+                          License No:
+                        </span>
+                        <span className="selectEmpLicenseValue">
+                          {getSingleEmployeeDetails?.licensesNo}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="selectEmployeeCardBookNowButton">
+                      <Link to="/admin/employee-list">
+                        <button>Back To List</button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" +880-1726332325 "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Subtract.png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Present Address
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" Latif School, Patuakhali"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (3).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Date of Birth
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -- / -- / --"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (4).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    language
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" Type here..."
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (5).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Higher Education
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (2).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Emergency Contact
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" - "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
               </div>
             </div>
+            <div className="col-xl-8 col-md-7">
+              <div className="selectEmpLocationBar">
+                <p>Location</p>
+                <img
+                  src="/assets/frontend/images/selectedEmployee/Line 2.png"
+                  className="img-fluid"
+                  alt="image"
+                />
+                <span>
+                  <img
+                    src="/assets/frontend/images/selectedEmployee/location.png"
+                    alt="image"
+                  />
+                  &nbsp; {getSingleEmployeeDetails?.presentAddress}
+                </span>
+              </div>
+              <div className="selectEmpLocationBar">
+                <p>Education</p>
+                <div className="row">
+                  <span>
+                    <img
+                      src="/assets/frontend/images/selectedEmployee/education (2).png"
+                      alt="image"
+                    />
+                    &nbsp;{getSingleEmployeeDetails?.higherEducation}
+                  </span>
+                </div>
+              </div>
+              <div className="selectEmpLocationBar">
+                <p>Certificate</p>
+                {getSingleEmployeeDetails?.certificates?.map((item, index) => (
+                  <div className="row" key={index}>
+                    <span>
+                      <img
+                        src="/assets/frontend/images/selectedEmployee/certificateICon.png"
+                        alt="image"
+                      />
+                      &nbsp; {item?.certificateName}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="selectEmpLocationBar">
+                <p>Language</p>
 
-            <div>
-              <div>
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Profile (1).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Last Name
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" karim "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (6).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Gender
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" - "
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (7).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Email
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" raz.cse5.bu@gmail.com"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Subtract.png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Permanent Address
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (8).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Country
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Union.png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Skills
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" type here"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (9).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Licenses No.
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1   "
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
-              </div>
-              <div className="mt-2">
-                <div className="d-flex mt-2">
-                  <img
-                    src="/assets/frontend/images/employeeProfile/Vector (10).png"
-                    alt="tt"
-                    style={{ height: "15px", width: "15px", marginTop: "8px" }}
-                  />
-                  <p
-                    className="mx-2"
-                    style={{
-                      color: "#C6A34F",
-                      fontWeight: "400",
-                      fontSize: "11px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Certificate Name
-                  </p>
-                </div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder=" -"
-                  required=""
-                  className="border-bottom border-0 px-1"
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "15px",
-                    marginTop: "5px",
-                    outline: "none",
-                  }}
-                />
+                {getSingleEmployeeDetails?.languages?.map((item, index) => (
+                  <div className="row" key={index}>
+                    <span>
+                      <img
+                        src="/assets/frontend/images/selectedEmployee/googleTranslate.png"
+                        alt="image"
+                      />
+                      &nbsp;{item}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </section>
     </div>
   );
 };

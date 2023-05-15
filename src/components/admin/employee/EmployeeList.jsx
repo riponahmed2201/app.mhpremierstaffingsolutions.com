@@ -296,7 +296,6 @@ function EmployeeList() {
           <Loader />
         ) : (
           <div className="m-2">
-            {" "}
             <Table columns={columns} dataSource={data1} />
           </div>
         )}
