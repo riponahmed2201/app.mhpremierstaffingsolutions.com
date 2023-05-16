@@ -98,7 +98,7 @@ function EmployeeList() {
   _.map(getEmployee, (item, index) => {
     data1.push({
       key: index + 1,
-      name: item?.name,
+      name: item?.firstName + " " + item?.lastName,
       email: item?.email,
       phoneNumber: item?.phoneNumber,
       userIdNumber: item?.userIdNumber,

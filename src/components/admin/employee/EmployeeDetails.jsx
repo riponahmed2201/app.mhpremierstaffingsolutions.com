@@ -80,7 +80,6 @@ function EmployeeDetails() {
         phoneNumber: res?.data?.details.phoneNumber,
         positionId: res?.data?.details.positionId,
         gender: res?.data?.details.gender,
-        // dateOfBirth: moment(res?.data?.details.dateOfBirth).format("YYYY-MM-DD"),
         presentAddress: res?.data?.details.presentAddress,
         permanentAddress: res?.data?.details.permanentAddress,
         countryName: res?.data?.details.countryName,
@@ -89,7 +88,6 @@ function EmployeeDetails() {
         emmergencyContact: res?.data?.details.emmergencyContact,
         employeeExperience: res?.data?.details.employeeExperience,
         languages: res?.data?.details.languages,
-        // skills: res?.data?.details.skills,
         sourceId: res?.data?.details.sourceId,
         referPersonId: res?.data?.details.referPersonId,
         hourlyRate: res?.data?.details.hourlyRate,
@@ -201,40 +199,65 @@ function EmployeeDetails() {
   }, []);
 
   const onFinishBasicInfoUpdate = async (values) => {
-    console.log("getDateOfBirth: ", getDateOfBirth);
 
-    const receivedEmployeeFields = {
-      id: id,
-      firstName: values?.firstName,
-      lastName: values?.lastName,
-      email: values?.email,
-      phoneNumber: values?.phoneNumber,
-      countryName: values?.countryName,
-      dateOfBirth: getDateOfBirth,
-      emmergencyContact: values?.emmergencyContact,
-      gender: values?.gender,
-      higherEducation: values?.higherEducation,
-      languages: values?.languages,
-      licensesNo: values?.licensesNo,
-      permanentAddress: values?.permanentAddress,
-      positionId: values?.positionId,
-      presentAddress: values?.presentAddress,
-      referPersonId: values?.referPersonId,
-      skills: values?.skills,
-      sourceId: values?.sourceId,
-      hourlyRate: values?.hourlyRate,
-      employeeExperience: values?.employeeExperience,
+    const file = new FormData();
+    file.append("id", id);
+    file.append("firstName", values?.firstName);
+    file.append("lastName", values?.lastName);
+    file.append("email", values?.email);
+    file.append("phoneNumber", values?.phoneNumber);
+    file.append("countryName", values?.countryName);
+    file.append("emmergencyContact", values?.emmergencyContact);
+    file.append("gender", values?.gender);
+    file.append("higherEducation", values?.higherEducation);
+    file.append("permanentAddress", values?.permanentAddress);
+    file.append("positionId", values?.positionId);
+    file.append("presentAddress", values?.presentAddress);
+    file.append("sourceId", values?.sourceId);
+    file.append("hourlyRate", values?.hourlyRate);
+    file.append("employeeExperience", values?.employeeExperience);
 
-      // values.dateOfBirth
-    };
+    if (getDateOfBirth) {
+      file.append("dateOfBirth", getDateOfBirth);
+    } else {
+      file.append(
+        "dateOfBirth",
+        getSingleEmployeeDetails?.dateOfBirth
+          ? moment(getSingleEmployeeDetails?.dateOfBirth).format("YYYY-MM-DD")
+          : undefined
+      );
+    }
+
+    // if (_.size(summaryPdf)) {
+    //   file.append(
+    //     "cv",
+    //     summaryPdf[0].originFileObj || getSingleEmployeeDetails?.cv
+    //   );
+    // }
+
+    if (_.size(profilePicture)) {
+      file.append(
+        "profilePicture",
+        profilePicture[0].originFileObj ||
+          getSingleEmployeeDetails?.profilePicture
+      );
+    }
+
+    values?.skills.forEach((element, index) => {
+      file.append(`skills[${index}]`, element);
+    });
+
+    if (values?.referPersonId) {
+      file.append("referPersonId", values?.referPersonId);
+    }
 
     try {
-      setBasicInfoUpdateloading(true);
+      if (id && file) {
+        setBasicInfoUpdateloading(true);
 
-      if (id && receivedEmployeeFields) {
         const res = await axios.put(
           `${process.env.REACT_APP_API_BASE_URL}/users/update-employee`,
-          receivedEmployeeFields,
+          file,
           {
             headers: {
               Authorization: `Bearer ${token()}`,
@@ -249,6 +272,8 @@ function EmployeeDetails() {
             "Employee information updated successfully!",
             "success"
           );
+          window.location.reload();
+          
         } else if (res?.data?.statusCode === 400) {
           setError(res?.data?.errors?.[0].msg);
           setBasicInfoUpdateloading(false);
@@ -283,6 +308,13 @@ function EmployeeDetails() {
       },
     ]);
   }, [getSingleEmployeeDetails]);
+
+  console.log(
+    "getSingleEmployeeDetails?.dateOfBirth: ",
+    getSingleEmployeeDetails?.dateOfBirth
+      ? moment(getSingleEmployeeDetails?.dateOfBirth)
+      : undefined
+  );
 
   return (
     <div className="container-fluid px-4">
