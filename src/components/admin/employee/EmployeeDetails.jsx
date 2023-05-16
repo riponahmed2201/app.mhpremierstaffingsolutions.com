@@ -199,8 +199,8 @@ function EmployeeDetails() {
   }, []);
 
   const onFinishBasicInfoUpdate = async (values) => {
-
     const file = new FormData();
+
     file.append("id", id);
     file.append("firstName", values?.firstName);
     file.append("lastName", values?.lastName);
@@ -216,6 +216,7 @@ function EmployeeDetails() {
     file.append("sourceId", values?.sourceId);
     file.append("hourlyRate", values?.hourlyRate);
     file.append("employeeExperience", values?.employeeExperience);
+    file.append("licensesNo", values?.licensesNo);
 
     if (getDateOfBirth) {
       file.append("dateOfBirth", getDateOfBirth);
@@ -242,6 +243,10 @@ function EmployeeDetails() {
           getSingleEmployeeDetails?.profilePicture
       );
     }
+
+    values?.languages.forEach((element, index) => {
+      file.append(`languages[${index}]`, element);
+    });
 
     values?.skills.forEach((element, index) => {
       file.append(`skills[${index}]`, element);
@@ -273,7 +278,6 @@ function EmployeeDetails() {
             "success"
           );
           window.location.reload();
-          
         } else if (res?.data?.statusCode === 400) {
           setError(res?.data?.errors?.[0].msg);
           setBasicInfoUpdateloading(false);
@@ -512,11 +516,6 @@ function EmployeeDetails() {
                                 .format("YYYY-MM-DD")
                                 .valueOf()
                             );
-
-                            // console.log(
-                            //   "test: ",
-                            //   moment(dateOfBirthString).format("YYYY-MM-DD")
-                            // );
                           }}
                         />
                       </Space>
