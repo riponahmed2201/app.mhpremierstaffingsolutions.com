@@ -543,18 +543,18 @@ function EmployeeDetails() {
 
                   <div className="col-md-4">
                     <Form.Item
-                      label="Permanent Address"
+                      label="Post Code"
                       name="permanentAddress"
                       hasFeedback
                       rules={[
                         {
                           required: true,
-                          message: "Please enter your permanent address",
+                          message: "Please enter your post code",
                         },
                       ]}
                     >
                       <Input
-                        placeholder="Enter your permanent address"
+                        placeholder="Enter your post code"
                         className="ant-input ant-input-lg"
                       />
                     </Form.Item>
@@ -953,18 +953,18 @@ function EmployeeDetails() {
 
                     <div className="col-md-4">
                       <Form.Item
-                        label="Routing Number"
+                        label="Sort Code"
                         name="routingNumber"
                         hasFeedback
                         rules={[
                           {
                             required: true,
-                            message: "Please enter routing number",
+                            message: "Please enter sort code",
                           },
                         ]}
                       >
                         <Input
-                          placeholder="Enter routing number"
+                          placeholder="Enter sort code"
                           className="ant-input ant-input-lg"
                         />
                       </Form.Item>
