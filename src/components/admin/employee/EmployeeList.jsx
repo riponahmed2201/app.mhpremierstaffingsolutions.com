@@ -96,6 +96,23 @@ function EmployeeList() {
 
   const data1 = [];
   _.map(getEmployee, (item, index) => {
+    let profileCompletedPercentage = 0;
+    if (item?.firstName && item?.lastName) profileCompletedPercentage += 10;
+    if (item?.positionId) profileCompletedPercentage += 10;
+    if (item?.gender) profileCompletedPercentage += 5;
+    if (item?.presentAddress) profileCompletedPercentage += 5;
+    if (item?.emmergencyContact) profileCompletedPercentage += 5;
+    if (item?.profilePicture) profileCompletedPercentage += 10;
+    if (item?.bankName) profileCompletedPercentage += 10;
+    if (item?.cv) profileCompletedPercentage += 10;
+    if (item?.countryName) profileCompletedPercentage += 5;
+    if (item?.higherEducation) profileCompletedPercentage += 5;
+    if (item?.dateOfBirth) profileCompletedPercentage += 5;
+    if (item?.phoneNumber) profileCompletedPercentage += 5;
+    if (_.size(item?.skills)) profileCompletedPercentage += 5;
+    if (_.size(item?.languages)) profileCompletedPercentage += 5;
+    if (item?.employeeExperience) profileCompletedPercentage += 5;
+
     data1.push({
       key: index + 1,
       name: item?.firstName + " " + item?.lastName,
@@ -104,7 +121,7 @@ function EmployeeList() {
       userIdNumber: item?.userIdNumber,
       profileCompleted: (
         <>
-          <div className="text-center">30%</div>
+          <div className="text-center">{profileCompletedPercentage}%</div>
         </>
       ),
       plainPassword: item?.plainPassword,

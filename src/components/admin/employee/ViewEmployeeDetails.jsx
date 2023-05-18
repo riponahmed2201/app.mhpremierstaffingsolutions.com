@@ -4,6 +4,7 @@ import { token } from "../../../utils/authentication";
 import axios from "axios";
 import Loader from "../../loadar/Loader";
 import moment from "moment";
+import _ from "lodash";
 import defaultImage from "../../../assets/images/default.png";
 
 const ViewEmployeeDetails = () => {
@@ -38,6 +39,29 @@ const ViewEmployeeDetails = () => {
     fetchSingleEmployeeData();
   }, [id]);
 
+  let profileCompletedPercentage = 0;
+  if (getSingleEmployeeDetails?.firstName && getSingleEmployeeDetails?.lastName)
+    profileCompletedPercentage += 10;
+  if (getSingleEmployeeDetails?.positionId) profileCompletedPercentage += 10;
+  if (getSingleEmployeeDetails?.gender) profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.presentAddress) profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.emmergencyContact)
+    profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.profilePicture)
+    profileCompletedPercentage += 10;
+  if (getSingleEmployeeDetails?.bankName) profileCompletedPercentage += 10;
+  if (getSingleEmployeeDetails?.cv) profileCompletedPercentage += 10;
+  if (getSingleEmployeeDetails?.countryName) profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.higherEducation)
+    profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.dateOfBirth) profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.phoneNumber) profileCompletedPercentage += 5;
+  if (_.size(getSingleEmployeeDetails?.skills)) profileCompletedPercentage += 5;
+  if (_.size(getSingleEmployeeDetails?.languages))
+    profileCompletedPercentage += 5;
+  if (getSingleEmployeeDetails?.employeeExperience)
+    profileCompletedPercentage += 5;
+
   return (
     <div className="container-fluid px-4">
       <section className="SelectedEmployee">
@@ -59,10 +83,18 @@ const ViewEmployeeDetails = () => {
               }}
             >
               Hey {getSingleEmployeeDetails?.name}, Your Profile is
-              <strong style={{ color: "white" }}> 30%</strong> Done. Please,
-              complete your profile to Proceed Next!
+              <strong
+                style={{
+                  color: "white",
+                  marginLeft: "3px",
+                  marginRight: "3px",
+                }}
+              >
+                {profileCompletedPercentage}%
+              </strong>
+              Done. Please, complete your profile to Proceed Next!
               <span className="mx-3 rounded-circle border border-white border-5 px-1 py-2 ">
-                30%
+                {profileCompletedPercentage}%
               </span>
             </p>
           </div>
@@ -80,7 +112,11 @@ const ViewEmployeeDetails = () => {
               <div className="row">
                 <div className="selectedEmpProfilePic">
                   <img
-                    style={{ borderRadius: 14, width: "397px", height: "309px" }}
+                    style={{
+                      borderRadius: 14,
+                      width: "397px",
+                      height: "309px",
+                    }}
                     src={
                       getSingleEmployeeDetails?.profilePicture
                         ? process.env.REACT_APP_ASSETs_BASE_URL +
@@ -89,7 +125,7 @@ const ViewEmployeeDetails = () => {
                         : defaultImage
                     }
                     className="img-fluid"
-                    alt="image"
+                    alt="custom-image"
                   />
                 </div>
               </div>
@@ -98,7 +134,7 @@ const ViewEmployeeDetails = () => {
                   <img
                     src="/assets/frontend/images/selectedEmployee/profileMarkLogo.png"
                     className="img-fluid"
-                    alt="image"
+                    alt="custom-image"
                   />
                 </div>
               </div>
@@ -122,7 +158,7 @@ const ViewEmployeeDetails = () => {
                         <img
                           src="/assets/frontend/images/selectedEmployee/Star 1.png "
                           className="img-fluid scltEmpProfileRatingIcon"
-                          alt="image"
+                          alt="custom-image"
                         />
                         {getSingleEmployeeDetails?.rating}
                       </span>
@@ -130,7 +166,7 @@ const ViewEmployeeDetails = () => {
                         <img
                           src="/assets/frontend/images/selectedEmployee/Line 1.png"
                           className="img-fluid"
-                          alt="image"
+                          alt="custom-image"
                         />
                       </div>
                     </div>
@@ -140,7 +176,7 @@ const ViewEmployeeDetails = () => {
                           <img
                             className="img-fluid SlctProrateIcon"
                             src="/assets/frontend/images/selectedEmployee/rate.png"
-                            alt="image"
+                            alt="custom-image"
                           />
                           Rate:
                         </span>
@@ -152,7 +188,7 @@ const ViewEmployeeDetails = () => {
                         <span className="slctProfileExpName">
                           <img
                             src="/assets/frontend/images/selectedEmployee/experience.png"
-                            alt="image"
+                            alt="custom-image"
                           />
                           Exp:
                         </span>
@@ -166,7 +202,7 @@ const ViewEmployeeDetails = () => {
                         <span className="selectEmployeeTotalHours">
                           <img
                             src="/assets/frontend/images/selectedEmployee/clock.png"
-                            alt="image"
+                            alt="custom-image"
                           />
                           Total Hours:
                         </span>
@@ -178,7 +214,7 @@ const ViewEmployeeDetails = () => {
                         <span className="selectEmpReviewspan">
                           <img
                             src="/assets/frontend/images/selectedEmployee/Review.png"
-                            alt="image"
+                            alt="custom-image"
                           />
                           Review:
                         </span>
@@ -191,7 +227,7 @@ const ViewEmployeeDetails = () => {
                           <img
                             src="/assets/frontend/images/selectedEmployee//licenceLogo.png"
                             className="img-fluid selectEmpLicenseLogo"
-                            alt="image"
+                            alt="custom-image"
                           />
                           License No:
                         </span>
@@ -215,12 +251,12 @@ const ViewEmployeeDetails = () => {
                 <img
                   src="/assets/frontend/images/selectedEmployee/Line 2.png"
                   className="img-fluid"
-                  alt="image"
+                  alt="custom-image"
                 />
                 <span>
                   <img
                     src="/assets/frontend/images/selectedEmployee/location.png"
-                    alt="image"
+                    alt="custom-image"
                   />
                   &nbsp; {getSingleEmployeeDetails?.presentAddress}
                 </span>
@@ -231,7 +267,7 @@ const ViewEmployeeDetails = () => {
                   <span>
                     <img
                       src="/assets/frontend/images/selectedEmployee/education (2).png"
-                      alt="image"
+                      alt="custom-image"
                     />
                     &nbsp;{getSingleEmployeeDetails?.higherEducation}
                   </span>
@@ -244,7 +280,7 @@ const ViewEmployeeDetails = () => {
                     <span>
                       <img
                         src="/assets/frontend/images/selectedEmployee/certificateICon.png"
-                        alt="image"
+                        alt="custom-image"
                       />
                       &nbsp; {item?.certificateName}
                     </span>
@@ -259,7 +295,7 @@ const ViewEmployeeDetails = () => {
                     <span>
                       <img
                         src="/assets/frontend/images/selectedEmployee/googleTranslate.png"
-                        alt="image"
+                        alt="custom-image"
                       />
                       &nbsp;{item}
                     </span>

@@ -8,7 +8,7 @@ import Loader from "../../loadar/Loader";
 import defaultImage from "../../../assets/images/default.png";
 import { responseNotification } from "../../../utils/notifcation";
 import { addShortHandler } from "../../../api/shortList";
-import { Select, InputNumber, Space } from "antd";
+import { Select } from "antd";
 import { fetchHandler } from "../../../api/position";
 import { staticEmployeeExperiance } from "../../../utils/static/employeeExperiance";
 
@@ -25,12 +25,24 @@ function ClientDashboard() {
   const [getError, setError] = useState();
   const [positions, setPositions] = useState([]);
 
+  //Set filter data
+  const [getName, setName] = useState(undefined);
+  const [getExperience, setExperience] = useState(undefined);
+  const [getTotalMinHour, setTotalMinHour] = useState(undefined);
+  const [getTotalMaxHour, setTotalMaxHour] = useState(undefined);
+  const [getPosition, setPosition] = useState(undefined);
+
+  //get filter data from on change
+  const [getFilterPosition, setFilterPosition] = useState(undefined);
+  const [getFilterExperience, setFilterExperience] = useState(undefined);
+
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
 
     try {
       const responseData = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&requestType=EMPLOYEE`,
+        `${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&active=YES&requestType=EMPLOYEE` +
+          (getName ? `&searchKeyword=${getName}` : ``),
         {
           headers: {
             Authorization: `Bearer ${token()}`,
@@ -50,7 +62,7 @@ function ClientDashboard() {
       setLoading(true);
       console.log(error);
     }
-  }, []);
+  }, [getName]);
 
   useEffect(() => {
     fetchEmployees();
@@ -101,12 +113,12 @@ function ClientDashboard() {
     }
   };
 
-  const handleChangeStatus = (value) => {
-    // setStatus(value);
-  };
+  const handleApplyOnclick = (e) => {
+    console.log("getFilterPosition: ", getFilterPosition);
+    console.log("getFilterExperience: ", getFilterExperience);
 
-  const onChange = (value) => {
-    console.log("changed", value);
+    if (getFilterPosition) setPosition(getFilterPosition);
+    if (getFilterExperience) setExperience(getFilterExperience);
   };
 
   return (
@@ -162,7 +174,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/eclipsegreen.png"
                           className="img-fluid"
-                          alt="image"
+                          alt="custom-image"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -191,7 +203,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/EllipseRed.png"
                           className="img-fluid"
-                          alt="image"
+                          alt="custom-image"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -223,7 +235,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard 1/dashboard.png"
                         className="img-fluid"
-                        alt="image"
+                        alt="custom-image"
                       />
                     </div>
                     <div className="dashP">
@@ -313,7 +325,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard2/search.png"
                         className="img-fluid"
-                        alt="image"
+                        alt="custom-image"
                       />
                       <span>MH</span>
                       <span>Employees</span>
@@ -360,7 +372,7 @@ function ClientDashboard() {
                                     : defaultImage
                                 }
                                 className="Dashboard2-card-img-top"
-                                alt="image"
+                                alt="custom-image"
                               />
                             </Link>
                             <div className="card-body Dashboard2CardbodyPaddingFixfor768">
@@ -373,7 +385,7 @@ function ClientDashboard() {
                                     <img
                                       src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
                                       className="img-fluid"
-                                      alt="image"
+                                      alt="custom-image"
                                     />
                                     <span className="Dashboard2Card_rating">
                                       4.5
@@ -388,7 +400,7 @@ function ClientDashboard() {
                                     <img
                                       src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
                                       className="img-fluid"
-                                      alt="image"
+                                      alt="custom-image"
                                     />
                                     <span className="Dashboard2ExpSpan">
                                       Exp:
@@ -408,7 +420,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
                                     className="img-fluid"
-                                    alt="image"
+                                    alt="custom-image"
                                   />
                                   <span>{item?.positionName}</span>
                                 </div>
@@ -419,7 +431,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
                                     className="img-fluid"
-                                    alt="image"
+                                    alt="custom-image"
                                   />
                                   <span className="dashboard2totalhourspan">
                                     Total Hours :
@@ -435,7 +447,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
                                     className="img-fluid"
-                                    alt="image"
+                                    alt="custom-image"
                                   />
                                   <span className="Dashboard2Rate">Rate:</span>
                                   <span className="Dashboard2Perhour">
@@ -448,7 +460,7 @@ function ClientDashboard() {
                                 <div className="Dashboard2BookNowButton">
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                                    alt="image"
+                                    alt="custom-image"
                                   />
 
                                   <button
@@ -503,7 +515,9 @@ function ClientDashboard() {
                       allowClear
                       showSearch={true}
                       placeholder="Select Position"
-                      onChange={handleChangeStatus}
+                      onChange={(value) => {
+                        setFilterPosition(value);
+                      }}
                     >
                       {positions?.map((item, index) => (
                         <Option key={index} value={item?._id}>
@@ -526,7 +540,9 @@ function ClientDashboard() {
                     allowClear
                     showSearch={true}
                     placeholder="Select Experience"
-                    onChange={handleChangeStatus}
+                    onChange={(value) => {
+                      setFilterExperience(value);
+                    }}
                   >
                     {staticEmployeeExperiance?.map((item, index) => (
                       <Option key={index} value={item}>
@@ -535,38 +551,14 @@ function ClientDashboard() {
                     ))}
                   </Select>
                 </div>
-                <div className="row mt-3">
-                  <h6 className="experienceH6">Total Hour:</h6>
-                </div>
                 <div className="row">
-                  <Space>
-                    <InputNumber
-                      size="large"
-                      style={{
-                        width: 118,
-                      }}
-                      min={1}
-                      max={100000}
-                      defaultValue={1}
-                      onChange={onChange}
-                    />
-                    <span>-</span>
-                    <InputNumber
-                      size="large"
-                      style={{
-                        width: 118,
-                      }}
-                      min={1}
-                      max={100000}
-                      defaultValue={1}
-                      onChange={onChange}
-                    />
-                  </Space>
-                </div>
-                <div className="row">
-                  <a href="#">
-                    <button className="filterApply">Apply</button>
-                  </a>
+                  <button
+                    type="button"
+                    onClick={handleApplyOnclick}
+                    className="filterApply"
+                  >
+                    Apply
+                  </button>
                 </div>
               </div>
             </div>
