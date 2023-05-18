@@ -91,13 +91,15 @@ const Contact = () => {
             </h5>
 
             <div className="d-flex mt-4">
-              <FiPhoneOutgoing
-                style={{
-                  fontSize: "45px",
-                  color: "#8e6d45",
-                  marginTop: "15px",
-                }}
-              />
+              <a href="tel:+4407500146699">
+                <FiPhoneOutgoing
+                  style={{
+                    fontSize: "45px",
+                    color: "#8e6d45",
+                    marginTop: "15px",
+                  }}
+                />
+              </a>
               <div className="mx-5">
                 <p>Reservation</p>
                 <h5 style={{ fontSize: "20px", color: "#8e6d45" }}>
@@ -106,13 +108,15 @@ const Contact = () => {
               </div>
             </div>
             <div className="d-flex mt-4">
-              <TfiEmail
-                style={{
-                  fontSize: "45px",
-                  color: "#8e6d45",
-                  marginTop: "15px",
-                }}
-              />
+              <a href="mailto:info@mhpremierstaffingsolutions.com">
+                <TfiEmail
+                  style={{
+                    fontSize: "45px",
+                    color: "#8e6d45",
+                    marginTop: "15px",
+                  }}
+                />
+              </a>
               <div className="mx-5">
                 <p>Email Info</p>
                 <h5 style={{ fontSize: "15px", color: "#8e6d45" }}>

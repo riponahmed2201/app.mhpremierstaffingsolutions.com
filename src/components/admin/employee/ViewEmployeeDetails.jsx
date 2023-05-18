@@ -181,7 +181,7 @@ const ViewEmployeeDetails = () => {
                           Rate:
                         </span>
                         <span className="slctprofilePerHourPrice">
-                          {getSingleEmployeeDetails?.hourlyRate}$/Hour
+                          {getSingleEmployeeDetails?.hourlyRate}£/Hour
                         </span>
                       </div>
                       <div className="col-xl-5 col-md-6">
