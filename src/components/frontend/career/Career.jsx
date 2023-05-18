@@ -11,7 +11,8 @@ const Career = () => {
       <div
         className="banner-header section-padding valign bg-img bg-fixed img-fluid"
         style={{
-          backgroundImage: `url('https://i.ibb.co/J26y8YG/career2.jpg)`,
+          // backgroundImage: `url('assets/frontend/images/findJobs/find_jobs.png)`,
+          backgroundImage: `url('assets/frontend/images/findJobs/find-jobs.png')`,
           minHeight: "500px",
           width: "100%",
           backgroundSize: "100% 100%",

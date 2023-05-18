@@ -91,6 +91,7 @@ function EmployeeDetails() {
         sourceId: res?.data?.details.sourceId,
         referPersonId: res?.data?.details.referPersonId,
         hourlyRate: res?.data?.details.hourlyRate,
+        contractorHourlyRate: res?.data?.details.contractorHourlyRate,
       });
 
       //bank information
@@ -254,6 +255,10 @@ function EmployeeDetails() {
 
     if (values?.referPersonId) {
       file.append("referPersonId", values?.referPersonId);
+    }
+
+    if (values?.contractorHourlyRate) {
+      file.append("contractorHourlyRate", values?.contractorHourlyRate);
     }
 
     try {
@@ -664,7 +669,7 @@ function EmployeeDetails() {
 
                   <div className="col-md-4">
                     <Form.Item
-                      label="Per hour rate($ or £)"
+                      label="Per hour rate(£)"
                       name="hourlyRate"
                       hasFeedback
                       rules={[
@@ -676,6 +681,25 @@ function EmployeeDetails() {
                     >
                       <Input
                         placeholder="Enter per hour rate"
+                        className="ant-input ant-input-lg"
+                      />
+                    </Form.Item>
+                  </div>
+
+                  <div className="col-md-4">
+                    <Form.Item
+                      label="Contractor Per hour rate(£)"
+                      name="contractorHourlyRate"
+                      hasFeedback
+                      rules={[
+                        {
+                          // required: true,
+                          message: "Please enter contractor per hour rate",
+                        },
+                      ]}
+                    >
+                      <Input
+                        placeholder="Enter contractor per hour rate"
                         className="ant-input ant-input-lg"
                       />
                     </Form.Item>
@@ -784,7 +808,7 @@ function EmployeeDetails() {
                     </Form.Item>
                   </div>
 
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <Form.Item name="profilePicture" label="Profile Picture">
                       <div>
                         {/* <ImgCrop rotate aspect={2 / 1}> */}
@@ -806,14 +830,14 @@ function EmployeeDetails() {
                           )}
                         </Upload>
                         <p style={{ color: "gray" }}>
-                          Image must passport size with white backgound
+                          Image must be passport size with white backgound
                         </p>
                         {/* </ImgCrop> */}
                       </div>
                     </Form.Item>
                   </div>
 
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <Form.Item
                       name="summaryPdf"
                       className="p-1 m-0"
