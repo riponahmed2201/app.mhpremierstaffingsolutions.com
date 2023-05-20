@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { FiPhoneOutgoing } from "react-icons/fi";
+import { TfiEmail } from "react-icons/tfi";
 
 const MeetTheTeam = () => {
   const { t } = useTranslation();
@@ -39,7 +41,7 @@ const MeetTheTeam = () => {
             <div className="col-12 col-md-3 col-lg-3 mt-5">
               <img
                 src="assets/frontend/images/meetTeam/ceo.jpg"
-                alt="the mission"
+                alt="custom"
                 className="img-fluid"
                 style={{ height: "420px" }}
               />
@@ -68,8 +70,24 @@ const MeetTheTeam = () => {
               </h1>
               <h5 className="mx-4">{t("meet_the_team_rose_md_designation")}</h5>
               <p className=" mx-4">
+                <a href="mailto:rose@mhpremierstaffingsolutions.com">
+                  <TfiEmail
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>
                 rose@mhpremierstaffingsolutions.com
                 <br />
+                <a href="tel:+971524160552">
+                  <FiPhoneOutgoing
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>
                 +971 52 416 0552
               </p>
               <p className="mx-4 about_us_section_paragraph">
@@ -79,7 +97,7 @@ const MeetTheTeam = () => {
             <div className="col-12 col-md-3 col-lg-3 mt-5">
               <img
                 src="assets/frontend/images/meetTeam/ceo_dubai.jpg"
-                alt="image"
+                alt="custom"
                 className="img-fluid"
                 style={{ height: "420px", marginTop: "20px" }}
               />
@@ -94,7 +112,7 @@ const MeetTheTeam = () => {
             <div className="col-12 col-md-3 col-lg-3">
               <img
                 src="assets/frontend/images/meetTeam/2.jpg"
-                alt="the mission"
+                alt="custom"
                 className="img-fluid"
                 style={{ height: "420px", marginTop: "20px" }}
               />
@@ -110,7 +128,24 @@ const MeetTheTeam = () => {
                 {t("meet_the_team_recruitment_consultant")}
               </h5>
               <p className=" mx-4">
-                filippo@mhpremierstaffingsolutions.com <br /> +44 7459 552887
+                <a href="mailto:filippo@mhpremierstaffingsolutions.com">
+                  <TfiEmail
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>{" "}
+                filippo@mhpremierstaffingsolutions.com <br />
+                <a href="tel:+44 7459 552887">
+                  <FiPhoneOutgoing
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>
+                +44 7459 552887
               </p>
               <p className="about_us_section_paragraph mx-4">
                 {t("meet_the_team_recruitment_consultant_designation")}
@@ -131,7 +166,23 @@ const MeetTheTeam = () => {
                 {t("meet_the_team_recruitment_consultant")}
               </h5>
               <p className=" mx-4">
+                <a href="mailto:manila@mhpremierstaffingsolutions.com">
+                  <TfiEmail
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>
                 manila@mhpremierstaffingsolutions.com <br />
+                <a href="tel:+447944111197">
+                  <FiPhoneOutgoing
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                </a>
                 +44 7944 111197
               </p>
               <p className="mx-4 about_us_section_paragraph">
@@ -141,7 +192,7 @@ const MeetTheTeam = () => {
             <div className="col-12 col-md-3 col-lg-3 mt-5">
               <img
                 src="assets/frontend/images/meetTeam/1.jpg"
-                alt="the mission"
+                alt="custom"
                 className="img-fluid"
                 style={{ height: "420px", marginTop: "20px" }}
               />
