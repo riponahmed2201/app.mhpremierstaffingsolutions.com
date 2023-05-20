@@ -15,10 +15,20 @@ function Login() {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+    // Get the value from the input field
+    const emailOrUserId = values.email;
+
     const receivedLoginFields = {
-      email: values?.email,
       password: values?.password,
     };
+
+    const regex = /@/;
+
+    if (regex.test(emailOrUserId)) {
+      receivedLoginFields.email = values?.email;
+    } else {
+      receivedLoginFields.userIdNumber = values?.email;
+    }
 
     if (receivedLoginFields) {
       setLoading(true);
@@ -134,12 +144,11 @@ function Login() {
                               rules={[
                                 {
                                   required: true,
-                                  message: "Please enter your email",
+                                  message: "Please enter your email or userid",
                                 },
                               ]}
                             >
                               <div>
-                                {/* <label htmlFor="exampleInputEmail1" className="form-label user_name_label">User Name/ID</label> */}
                                 <div className="contact_logo_img">
                                   <img
                                     src="assets/frontend/images/login_page_images/Profile.png"
@@ -148,11 +157,9 @@ function Login() {
                                   />
                                 </div>
                                 <input
-                                  placeholder="Enter email"
-                                  type="email"
+                                  placeholder="Enter email or userid"
+                                  type="text"
                                   className="form-control form-control-custom"
-                                  id="exampleInputEmail1"
-                                  aria-describedby="emailHelp"
                                 />
                               </div>
                             </Form.Item>
@@ -203,7 +210,7 @@ function Login() {
                                 className="form-check-label "
                                 htmlFor="exampleCheck1"
                               >
-                                <a className="forget_password_custom" href>
+                                <a className="forget_password_custom" href="#">
                                   Forget Password
                                 </a>
                               </label>

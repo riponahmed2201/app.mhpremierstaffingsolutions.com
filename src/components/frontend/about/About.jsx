@@ -40,7 +40,32 @@ function About() {
           </div>
           <br />
           <p className="about_us_section_paragraph">
-            {t("about_us_description")}
+            {t("about_us_description1")}{" "}
+            <a target="_blank" href="https://www.mirkohospitality.com/">
+              Mirko Hospitality.
+            </a>
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description2")}
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description3")}
+          </p>
+          <p className="about_us_section_paragraph">
+            <b>{t("about_us_description4")}</b> <br />
+            {t("about_us_description5")}
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description6")}
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description7")}
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description8")}
+          </p>
+          <p className="about_us_section_paragraph">
+            {t("about_us_description9")}
           </p>
         </div>
       </div>

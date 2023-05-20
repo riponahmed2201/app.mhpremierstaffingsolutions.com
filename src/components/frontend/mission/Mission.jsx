@@ -49,7 +49,6 @@ const Mission = () => {
             />
           </div>
         </div>
-
         <div class="row justify-content-end mt-5">
           <div class="col-12 col-md-6 col-lg-6 mt-5">
             <img
@@ -64,7 +63,11 @@ const Mission = () => {
               {t("our_vision_description")}
             </p>
           </div>
-        </div>
+        </div>{" "}
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   );
