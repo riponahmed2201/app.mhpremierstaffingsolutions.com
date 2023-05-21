@@ -11,7 +11,10 @@ import _ from "lodash";
 
 import { token } from "../../../utils/authentication";
 import { responseNotification } from "../../../utils/notifcation";
-import { fetchReferPersonListForDropdownHandler } from "../../../api/employee";
+import {
+  employeeUpdateHandler,
+  fetchReferPersonListForDropdownHandler,
+} from "../../../api/employee";
 import { fetchSkillListForDropdownHandler } from "../../../api/skill";
 import { fetchPositionListForDropdownHandler } from "../../../api/position";
 import { fetchSourceListForDropdownHandler } from "../../../api/source";
@@ -200,100 +203,93 @@ function EmployeeDetails() {
   }, []);
 
   const onFinishBasicInfoUpdate = async (values) => {
-    const file = new FormData();
+    if (true) {
+      setBasicInfoUpdateloading(true);
 
-    file.append("id", id);
-    file.append("firstName", values?.firstName);
-    file.append("lastName", values?.lastName);
-    file.append("email", values?.email);
-    file.append("phoneNumber", values?.phoneNumber);
-    file.append("countryName", values?.countryName);
-    file.append("emmergencyContact", values?.emmergencyContact);
-    file.append("gender", values?.gender);
-    file.append("higherEducation", values?.higherEducation);
-    file.append("permanentAddress", values?.permanentAddress);
-    file.append("positionId", values?.positionId);
-    file.append("presentAddress", values?.presentAddress);
-    file.append("sourceId", values?.sourceId);
-    file.append("hourlyRate", values?.hourlyRate);
-    file.append("employeeExperience", values?.employeeExperience);
-    file.append("licensesNo", values?.licensesNo);
+      const formData = new FormData();
 
-    if (getDateOfBirth) {
-      file.append("dateOfBirth", getDateOfBirth);
-    } else {
-      file.append(
-        "dateOfBirth",
-        getSingleEmployeeDetails?.dateOfBirth
-          ? moment(getSingleEmployeeDetails?.dateOfBirth).format("YYYY-MM-DD")
-          : undefined
-      );
-    }
+      formData.append("id", id);
+      formData.append("firstName", values?.firstName);
+      formData.append("lastName", values?.lastName);
+      formData.append("email", values?.email);
+      formData.append("phoneNumber", values?.phoneNumber);
+      formData.append("countryName", values?.countryName);
+      formData.append("emmergencyContact", values?.emmergencyContact);
+      formData.append("gender", values?.gender);
+      formData.append("higherEducation", values?.higherEducation);
+      formData.append("permanentAddress", values?.permanentAddress);
+      formData.append("positionId", values?.positionId);
+      formData.append("presentAddress", values?.presentAddress);
+      formData.append("sourceId", values?.sourceId);
+      formData.append("hourlyRate", values?.hourlyRate);
+      formData.append("employeeExperience", values?.employeeExperience);
+      formData.append("licensesNo", values?.licensesNo);
 
-    // if (_.size(summaryPdf)) {
-    //   file.append(
-    //     "cv",
-    //     summaryPdf[0].originFileObj || getSingleEmployeeDetails?.cv
-    //   );
-    // }
-
-    if (_.size(profilePicture)) {
-      file.append(
-        "profilePicture",
-        profilePicture[0].originFileObj ||
-          getSingleEmployeeDetails?.profilePicture
-      );
-    }
-
-    values?.languages.forEach((element, index) => {
-      file.append(`languages[${index}]`, element);
-    });
-
-    values?.skills.forEach((element, index) => {
-      file.append(`skills[${index}]`, element);
-    });
-
-    if (values?.referPersonId) {
-      file.append("referPersonId", values?.referPersonId);
-    }
-
-    if (values?.contractorHourlyRate) {
-      file.append("contractorHourlyRate", values?.contractorHourlyRate);
-    }
-
-    try {
-      if (id && file) {
-        setBasicInfoUpdateloading(true);
-
-        const res = await axios.put(
-          `${process.env.REACT_APP_API_BASE_URL}/users/update-employee`,
-          file,
-          {
-            headers: {
-              Authorization: `Bearer ${token()}`,
-            },
-          }
+      if (getDateOfBirth) {
+        formData.append("dateOfBirth", getDateOfBirth);
+      } else {
+        formData.append(
+          "dateOfBirth",
+          getSingleEmployeeDetails?.dateOfBirth
+            ? moment(getSingleEmployeeDetails?.dateOfBirth).format("YYYY-MM-DD")
+            : undefined
         );
-
-        if (res?.data?.statusCode === 200) {
-          setError(undefined);
-          setBasicInfoUpdateloading(false);
-          responseNotification(
-            "Employee information updated successfully!",
-            "success"
-          );
-          window.location.reload();
-        } else if (res?.data?.statusCode === 400) {
-          setError(res?.data?.errors?.[0].msg);
-          setBasicInfoUpdateloading(false);
-        } else if (res?.data?.statusCode === 500) {
-          setError(res?.message);
-          setBasicInfoUpdateloading(false);
-        }
       }
-    } catch (error) {
-      setError(error?.response?.data?.errors?.[0].msg);
-      setBasicInfoUpdateloading(false);
+
+      if (_.size(summaryPdf)) {
+        formData.append("cv", summaryPdf[0].originFileObj);
+      }
+
+      if (_.size(profilePicture)) {
+        formData.append(
+          "profilePicture",
+          profilePicture[0].originFileObj ||
+            getSingleEmployeeDetails?.profilePicture
+        );
+      }
+
+      values?.languages.forEach((element, index) => {
+        formData.append(`languages[${index}]`, element);
+      });
+
+      values?.skills.forEach((element, index) => {
+        formData.append(`skills[${index}]`, element);
+      });
+
+      if (values?.referPersonId) {
+        formData.append("referPersonId", values?.referPersonId);
+      }
+
+      if (values?.contractorHourlyRate) {
+        formData.append("contractorHourlyRate", values?.contractorHourlyRate);
+      }
+
+      await employeeUpdateHandler(formData)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.statusCode === 200) {
+            responseNotification(
+              "Employee information updated successfully!",
+              "success"
+            );
+
+            window.location.reload();
+          } else if (res?.statusCode === 400) {
+            responseNotification(
+              "Bad request please upload valid file or check you internet",
+              "warning"
+            );
+            setError(res?.errors?.[0]?.msg);
+            setBasicInfoUpdateloading(false);
+          } else {
+            setBasicInfoUpdateloading(false);
+            setError(res?.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setBasicInfoUpdateloading(false);
+        });
     }
   };
 
@@ -317,13 +313,6 @@ function EmployeeDetails() {
       },
     ]);
   }, [getSingleEmployeeDetails]);
-
-  console.log(
-    "getSingleEmployeeDetails?.dateOfBirth: ",
-    getSingleEmployeeDetails?.dateOfBirth
-      ? moment(getSingleEmployeeDetails?.dateOfBirth)
-      : undefined
-  );
 
   return (
     <div className="container-fluid px-4">
@@ -693,7 +682,7 @@ function EmployeeDetails() {
                       hasFeedback
                       rules={[
                         {
-                          // required: true,
+                          required: true,
                           message: "Please enter contractor per hour rate",
                         },
                       ]}
@@ -824,7 +813,7 @@ function EmployeeDetails() {
                               <img
                                 style={{ height: "60px", width: "60px" }}
                                 src={defaultImage}
-                                alt="Default Image"
+                                alt="Default"
                               />
                             </>
                           )}
@@ -856,10 +845,10 @@ function EmployeeDetails() {
                           fileList={summaryPdf}
                           onChange={summaryPdfChange}
                           maxCount={1}
-                          accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
+                          // accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
                         >
                           <Button icon={<UploadOutlined />}>
-                            {!summaryPdfFileShow ? "Upload" : "Uploaded"}{" "}
+                            {!summaryPdfFileShow ? "Upload" : "Uploaded"}
                           </Button>
                         </Upload>
 

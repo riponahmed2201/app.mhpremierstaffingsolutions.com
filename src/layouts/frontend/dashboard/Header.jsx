@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { fetchShortListHandler } from "../../../api/shortList";
-import { AiOutlineLogout } from "react-icons/ai";
 
 function Header() {
   const [getShortList, setShortList] = useState([]);
@@ -35,7 +34,7 @@ function Header() {
                 <img
                   className="img-fluid Dashboard_nav_logo"
                   src="/assets/frontend/images/Dashboardimages/logo.png"
-                  alt="image"
+                  alt="Default"
                 />
               </a>
               <button
@@ -63,7 +62,7 @@ function Header() {
                       <div className="navLinkImageTextWraper">
                         <img
                           src="/assets/frontend/images/Dashboardimages/navbar/Rectangle 40265.png"
-                          alt="image"
+                          alt="Default"
                         />
                         <span className="DashboardBookmarkNavSpan mx-1">
                           {getShortList ? getShortList?.total : 0}
@@ -79,7 +78,7 @@ function Header() {
                       <div className="navLinkImageTextWraper">
                         <img
                           src="/assets/frontend/images/Dashboardimages/navbar/path113.png"
-                          alt="image"
+                          alt="Default"
                         />
                         <span className="DashboardNotificationNavSpan">3</span>
                       </div>
@@ -92,7 +91,7 @@ function Header() {
                     >
                       <img
                         src="/assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
-                        alt="image"
+                        alt="Default"
                       />
                     </a>
                   </li>
