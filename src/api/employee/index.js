@@ -114,3 +114,15 @@ export const removedCertificateHandler = async (receivedCertificateFields) => {
     );
     return res;
 };
+
+//Employee update api call
+export const employeeUpdateHandler = async (receivedBlogFields) => {
+    const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/users/update-employee`,
+        {
+            method: "PUT",
+            body: receivedBlogFields,
+        }
+    );
+    return res;
+};
