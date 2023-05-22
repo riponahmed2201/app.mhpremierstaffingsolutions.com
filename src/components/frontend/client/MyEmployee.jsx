@@ -1,7 +1,108 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import _ from "lodash";
+
+import { jwtTokenDecode } from "../../../utils/jwtDecode";
+import { token } from "../../../utils/authentication";
+import Loader from "../../loadar/Loader";
+
+import defaultImage from "../../../assets/images/default.png";
+import { responseNotification } from "../../../utils/notifcation";
+
+import { addShortHandler } from "../../../api/shortList";
+import { fetchHandler } from "../../../api/position";
 
 function MyEmployee() {
+  const jwtDecode = jwtTokenDecode();
+
+  const [getEmployee, setEmployee] = useState([]);
+  const [addShortListData, setAddShortListData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [shortListLoading, setShortListLoading] = useState(false);
+  const [getError, setError] = useState();
+  const [positions, setPositions] = useState([]);
+
+  //Set filter data
+  const [getName, setName] = useState(undefined);
+
+  const fetchEmployees = useCallback(async () => {
+    setLoading(true);
+
+    try {
+      const responseData = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/hired-histories/employee-list-for-client ` +
+          (getName ? `&searchKeyword=${getName}` : ``),
+        {
+          headers: {
+            Authorization: `Bearer ${token()}`,
+          },
+        }
+      );
+
+      if (responseData && responseData?.data.statusCode == 200) {
+        setEmployee(responseData?.data);
+        setLoading(false);
+      } else if (responseData && responseData?.data.statusCode == 400) {
+        setError(responseData.errors);
+        setLoading(false);
+      }
+    } catch (error) {
+      setError(error);
+      setLoading(true);
+      console.log(error);
+    }
+  }, [getName]);
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  const fetchPositions = useCallback(async () => {
+    setLoading(true);
+    await fetchHandler().then((res) => {
+      if (res?.status === 200) {
+        setPositions(res?.data?.positions);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchPositions();
+  }, []);
+
+  const addShortListOnclikHandler = (employeeId) => {
+    const shortListReceivedField = { employeeId };
+    if (shortListReceivedField) {
+      setAddShortListData(shortListReceivedField);
+
+      setShortListLoading(true);
+
+      addShortHandler(shortListReceivedField)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 201) {
+            setError(undefined);
+            setShortListLoading(false);
+
+            responseNotification("Short list created successfully!", "success");
+
+            window.location.reload();
+          } else if (res?.statusCode === 400) {
+            setError(res?.errors?.[0].msg);
+            setShortListLoading(false);
+          } else if (res?.statusCode === 500) {
+            setError(res?.message);
+            setShortListLoading(false);
+          }
+        });
+    }
+  };
+
   return (
     <div>
       {/* Inner Dashboard Search Part Start */}
@@ -10,21 +111,23 @@ function MyEmployee() {
           <div className="row">
             <div className="col-lg-6">
               <div className="innerDashSearchItems d-flex align-items-center">
-               <Link to="/client-dashboard">
-               <button className="innerdashboardBackButton">
-                  <img
-                    src="assets/frontend/images/InnerDashboard/arrow.png"
-                    className="img-fluid"
-                    alt="image"
-                  />
-                </button>
+                <Link to="/client-dashboard">
+                  <button className="innerdashboardBackButton">
+                    <img
+                      src="assets/frontend/images/InnerDashboard/arrow.png"
+                      className="img-fluid"
+                      alt="arrow"
+                    />
+                  </button>
                 </Link>
                 <img
                   src="assets/frontend/images/InnerDashboard/mapSearch.png"
                   className="img-fluid"
-                  alt="image"
+                  alt="mapSearch"
                 />
-                <span className="innerDashSearchItemsSpan">Dashboard</span>
+                <span className="innerDashSearchItemsSpan">
+                  My Employees ({getEmployee?.total})
+                </span>
               </div>
             </div>
             <div className="col-lg-6">
@@ -32,7 +135,7 @@ function MyEmployee() {
                 <div className="InnerDashSearchCion">
                   <img
                     src="assets/frontend/images/InnerDashboard/SearchIcon.png"
-                    alt="image"
+                    alt="SearchIcon"
                   />
                 </div>
                 <input
@@ -46,245 +149,121 @@ function MyEmployee() {
           </div>
         </div>
       </section>
-      {/* Inner Dashboard Search Part End */}
-      {/* InnerDashboardTable Start */}
-      <section className="InnnerDashboardTable">
+
+      <section className="dashboard2">
         <div className="container">
           <div className="row">
-            <table className="table">
-              {/* Table  Start */}
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="InnerTableHeadingGlobalStyle InnerTableHeadingGlobalStyleFirstChild"
-                  >
-                    Employee
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Check In
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Check Out
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Break time
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Total hours
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Total Amount
-                  </th>
-                  <th scope="col" className="InnerTableHeadingGlobalStyle">
-                    Chat
-                  </th>
-                  <th
-                    scope="col"
-                    className="InnerTableHeadingGlobalStylelastChild InnerTableHeadingGlobalStyle"
-                  >
-                    More
-                  </th>
-                </tr>
-                <tr>
-                  <td className="InnerTableDateShow">
-                    <span>Sun, 11 Jan , 2023</span>
-                  </td>
-                </tr>
-              </thead>
-              {/* Table body 1 */}
-              <tbody style={{ textAlign: "center" }}>
-                <tr>
-                  <th scope="row">
-                    <div
-                      className="row"
-                      style={{ textAlign: "start !important" }}
-                    >
-                      <div className="col-lg-3">
-                        <div className="InnerDashTableEmployee">
-                          <img
-                            src="assets/frontend/images/InnerDashboard/TableProfilePic.png"
-                            className="img-fluid"
-                            alt="image"
-                          />
+            <div className="col-xl-12 DashboardColXL9">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="card-group">
+                    {loading ? (
+                      <div>
+                        <Loader />
+                      </div>
+                    ) : getEmployee?.hiredHistories?.length ? (
+                      _.map(getEmployee?.hiredHistories, (item, index) => (
+                        <div
+                          key={index}
+                          className="col-lg-3 col-md-6 Dashboard2CardbottomMarginFixForSmallScreens mb-3"
+                        >
+                          <div className="card DashboardEmployeeCard">
+                            <Link
+                              className="text-decoration-none"
+                              to={`/employee-view-details/${item?._id}`}
+                            >
+                              <img
+                                style={{
+                                  height: 280,
+                                  width: 313,
+                                  borderRadius: 15,
+                                }}
+                                src={
+                                  item?.employeeDetails?.profilePicture
+                                    ? process.env.REACT_APP_ASSETs_BASE_URL +
+                                      "/" +
+                                      item?.employeeDetails?.profilePicture
+                                    : defaultImage
+                                }
+                                className="Dashboard2-card-img-top"
+                                alt="custom-image"
+                              />
+                            </Link>
+                            <div className="card-body Dashboard2CardbodyPaddingFixfor768">
+                              <h5 className="card-title Dashboard2CardTItle">
+                                {item?.employeeDetails?.name}
+                              </h5>
+                              <div className="row">
+                                <div className="col-lg-5 col-md-4">
+                                  <div className="DashboardratingimgWraper">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
+                                      className="img-fluid"
+                                      alt="custom-image"
+                                    />
+                                    <span className="Dashboard2Card_rating">
+                                    {" "} {item?.employeeDetails?.rating}
+                                    </span>
+                                    {/* <span className="Dashboard2Card_count">
+                                      (123)
+                                    </span> */}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="dashboard2chefwrapper">
+                                  <img
+                                    src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
+                                    className="img-fluid"
+                                    alt="custom-image"
+                                  />
+                                  <span>
+                                    {item?.employeeDetails?.positionName}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="dashboard2TotalHourwrapper">
+                                  <p className="dashboard2totalhourspan">
+                                    <img
+                                      src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
+                                      className="img-fluid"
+                                      alt="custom-image"
+                                    />{" "}
+                                    Total Hours :{" "}
+                                    {item?.employeeDetails?.totalWorkingHour} H
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="Dashboard2BookNowButton">
+                                  <button>
+                                    £{item?.employeeDetails?.hourlyRate} / Hour
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                      ))
+                    ) : (
+                      <div className="text-center text-danger">
+                        No Data Found!
                       </div>
-                      <div className="col-lg-9">
-                        <span className="InnerTableEmployeeName">
-                          John Smith Mcculumn
-                        </span>
-                        <p className="InnerTableEmployeeDesignation">Manager</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="InnerTablebodyItemPaddingTopFix">9:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">12:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">30 min</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">2.5 Hours</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">$45.00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">
-                    <button className="TableChatIcon">
-                      <img
-                        src="assets/frontend/images/InnerDashboard/tableChatIcon.png"
-                        className="img-fluid"
-                        alt="image"
-                      />
-                    </button>
-                  </td>
-                  <td className="text-center">
-                    <div className="btn-group  InnerDashTableSelectDselectWrap">
-                      <button type="button" className="btn  ">
-                        <img
-                          className="InnerDashboardMoreSelectBtnImg"
-                          src="assets/frontend/images/InnerDashboard/select.png"
-                          alt="image"
-                        />
-                      </button>
-                      <img
-                        src="assets/frontend/images/InnerDashboard/InnerBTNLine.png"
-                        className="InnerDashLineImageBtn"
-                        alt="image"
-                      />
-                      <button type="button" className="btn ">
-                        <img
-                          className="InnerDashboardMoreDeselectBtnImg"
-                          src="assets/frontend/images/InnerDashboard/Union.png"
-                          alt="image"
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* Table body 2 */}
-                <tr>
-                  <th scope="row">
-                    <div
-                      className="row"
-                      style={{ textAlign: "start !important" }}
-                    >
-                      <div className="col-lg-3">
-                        <div className="InnerDashTableEmployee">
-                          <img
-                            src="assets/frontend/images/InnerDashboard/TableProfilePic.png"
-                            className="img-fluid"
-                            alt="image"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <span className="InnerTableEmployeeName">
-                          John Smith Mcculumn
-                        </span>
-                        <p className="InnerTableEmployeeDesignation">Manager</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="InnerTablebodyItemPaddingTopFix">9:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">12:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">30 min</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">2.5 Hours</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">$45.00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">
-                    <button className="TableChatIcon">
-                      <img
-                        src="assets/frontend/images/InnerDashboard/tableChatIcon.png"
-                        className="img-fluid"
-                        alt="image"
-                      />
-                    </button>
-                  </td>
-                  <td className="text-center">
-                    <div className="btn-group  InnerDashTableSelectDselectWrap">
-                      <button type="button" className="btn ">
-                        <img
-                          src="assets/frontend/images/InnerDashboard/select.png"
-                          className="img-fluid"
-                          alt="image"
-                        />
-                      </button>
-                      <img
-                        src="assets/frontend/images/InnerDashboard/InnerBTNLine.png"
-                        className="InnerDashLineImageBtn"
-                        alt="image"
-                      />
-                      <button type="button" className="btn ">
-                        <img
-                          src="assets/frontend/images/InnerDashboard/Union.png"
-                          className="img-fluid"
-                          alt="image"
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* Table body 3 */}
-                <tr>
-                  <th scope="row">
-                    <div
-                      className="row"
-                      style={{ textAlign: "start !important" }}
-                    >
-                      <div className="col-lg-3">
-                        <div className="InnerDashTableEmployee">
-                          <img
-                            src="assets/frontend/images/InnerDashboard/TableProfilePic.png"
-                            className="img-fluid"
-                            alt="image"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <span className="InnerTableEmployeeName">
-                          John Smith Mcculumn
-                        </span>
-                        <p className="InnerTableEmployeeDesignation">Manager</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="InnerTablebodyItemPaddingTopFix">9:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">12:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">30 min</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">2.5 Hours</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">$45.00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">
-                    <button className="TableChatIcon">
-                      <img
-                        src="assets/frontend/images/InnerDashboard/tableChatIcon.png"
-                        className="img-fluid"
-                        alt="image"
-                      />
-                    </button>
-                  </td>
-                  <td className="text-center">
-                    <div className="btn-group  InnerDashTableSelectDselectWrap">
-                      <button type="button" className="btn ">
-                        <img
-                          src="assets/frontend/images/InnerDashboard/select.png"
-                          className="img-fluid"
-                          alt="image"
-                        />
-                      </button>
-                      <img
-                        src="assets/frontend/images/InnerDashboard/InnerBTNLine.png"
-                        className="InnerDashLineImageBtn"
-                        alt="image"
-                      />
-                      <button type="button" className="btn ">
-                        <img
-                          src="assets/frontend/images/InnerDashboard/Union.png"
-                          className="img-fluid"
-                          alt="image"
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      {/* InnerDashboard End */}
+
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

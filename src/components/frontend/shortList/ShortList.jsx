@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 
-import _, { values } from "lodash";
+import _ from "lodash";
 import moment from "moment";
 
 import { Button, Form, Modal, DatePicker, Space } from "antd";

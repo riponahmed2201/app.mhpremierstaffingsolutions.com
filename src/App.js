@@ -52,6 +52,7 @@ import EmployeeProfile from './components/frontend/employee/profile/EmployeeProf
 import EmployeeMeeting from './components/frontend/employee/meeting/EmployeeMeeting';
 import EmployeePdf from './components/frontend/employee/pdf/EmployeePdf';
 import ViewEmployeeDetails from './components/admin/employee/ViewEmployeeDetails';
+import CheckInCheckOut from './components/frontend/client/CheckInCheckOut';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route path="/" element={<DashboardLayout />} >
             <Route index path='client-dashboard' element={<ClientDashboard />} />
             <Route path='client-myemployee' element={<MyEmployee />} />
+            <Route path='dashboard-history' element={<CheckInCheckOut />} />
             <Route path='employee-view-details/:id' element={<EmployeeViewDetails />} />
             <Route path='short-list' element={<ShortList />} />
             <Route path='payment-invoice' element={<PaymentInvoice />} />
