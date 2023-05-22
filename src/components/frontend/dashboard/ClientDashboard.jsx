@@ -114,9 +114,6 @@ function ClientDashboard() {
   };
 
   const handleApplyOnclick = (e) => {
-    console.log("getFilterPosition: ", getFilterPosition);
-    console.log("getFilterExperience: ", getFilterExperience);
-
     if (getFilterPosition) setPosition(getFilterPosition);
     if (getFilterExperience) setExperience(getFilterExperience);
   };
@@ -227,21 +224,26 @@ function ClientDashboard() {
             >
               <div className="row">
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
-                  <div
-                    className="card-body custom_dashboard_right_side_cards text-center"
-                    style={{ backgroundColor: "#f6f1e5" }}
+                  <Link
+                    className="text-decoration-none text-black"
+                    to="/dashboard-history"
                   >
-                    <div className="dashimg">
-                      <img
-                        src="assets/frontend/images/Dashboardimages/dashboard 1/dashboard.png"
-                        className="img-fluid"
-                        alt="custom-image"
-                      />
+                    <div
+                      className="card-body custom_dashboard_right_side_cards text-center"
+                      style={{ backgroundColor: "#f6f1e5" }}
+                    >
+                      <div className="dashimg">
+                        <img
+                          src="assets/frontend/images/Dashboardimages/dashboard 1/dashboard.png"
+                          className="img-fluid"
+                          alt="custom-image"
+                        />
+                      </div>
+                      <div className="dashP">
+                        <p>Dashboard</p>
+                      </div>
                     </div>
-                    <div className="dashP">
-                      <p>Dashboard</p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
 
                 <div className="col-lg-3 col-md-3 customPadding_for_768">
@@ -360,9 +362,10 @@ function ClientDashboard() {
                             >
                               <img
                                 style={{
-                                  width: "215px",
-                                  height: "149px",
+                                  width: 230,
+                                  height: 235,
                                   objectFit: "cover",
+                                  borderRadius: 15
                                 }}
                                 src={
                                   item?.profilePicture

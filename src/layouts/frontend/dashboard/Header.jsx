@@ -1,9 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { fetchShortListHandler } from "../../../api/shortList";
+import { jwtTokenDecode } from "../../../utils/jwtDecode";
 
 function Header() {
+
+  const navigate = useNavigate();
+
+  const jwtDecode = jwtTokenDecode();
+
   const [getShortList, setShortList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +29,15 @@ function Header() {
   useEffect(() => {
     fetchShortListData();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("loginData");
+
+    navigate("/");
+
+    window.location.reload();
+  };
 
   return (
     <section className="Dashboardheader sticky-top">
@@ -85,15 +100,25 @@ function Header() {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a
-                      className="Dashboard_navbar_custom_hover nav-link"
-                      href="#"
-                    >
-                      <img
-                        src="/assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
-                        alt="Default"
-                      />
-                    </a>
+                    {!jwtDecode ? (
+                      <a
+                        className="Dashboard_navbar_custom_hover nav-link"
+                        href="#"
+                      >
+                        <img
+                          src="/assets/frontend/images/Dashboardimages/navbar/CONTACT.png"
+                          alt="Default"
+                        />
+                      </a>
+                    ) : (
+                      <button
+                      style={{ color:"#ffffff" }}
+                        className=" btn btn-sm btn-danger nav-link"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    )}
                   </li>
                 </ul>
               </div>
