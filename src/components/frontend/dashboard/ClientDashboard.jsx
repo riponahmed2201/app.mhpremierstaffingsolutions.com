@@ -1,16 +1,21 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { token } from "../../../utils/authentication";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 import _ from "lodash";
-import { jwtTokenDecode } from "../../../utils/jwtDecode";
-import { Link } from "react-router-dom";
+import { Select, Modal, Input } from "antd";
+
+import { FiPhoneOutgoing } from "react-icons/fi";
+import { TfiEmail } from "react-icons/tfi";
+
 import Loader from "../../loadar/Loader";
 import defaultImage from "../../../assets/images/default.png";
 import { responseNotification } from "../../../utils/notifcation";
 import { addShortHandler } from "../../../api/shortList";
-import { Select } from "antd";
 import { fetchHandler } from "../../../api/position";
 import { staticEmployeeExperiance } from "../../../utils/static/employeeExperiance";
+import { jwtTokenDecode } from "../../../utils/jwtDecode";
+import { token } from "../../../utils/authentication";
 
 const { Option } = Select;
 
@@ -36,13 +41,29 @@ function ClientDashboard() {
   const [getFilterPosition, setFilterPosition] = useState(undefined);
   const [getFilterExperience, setFilterExperience] = useState(undefined);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
 
     try {
       const responseData = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/users?skipLimit=YES&active=YES&requestType=EMPLOYEE` +
-          (getName ? `&searchKeyword=${getName}` : ``),
+          (getName ? `&searchKeyword=${getName}` : ``) +
+          (getPosition ? `&positionId=${getPosition}` : ``) +
+          (getExperience ? `&employeeExperience=${getExperience}` : ``),
         {
           headers: {
             Authorization: `Bearer ${token()}`,
@@ -50,10 +71,10 @@ function ClientDashboard() {
         }
       );
 
-      if (responseData && responseData?.data.statusCode == 200) {
+      if (responseData && responseData?.data.statusCode === 200) {
         setEmployee(responseData?.data);
         setLoading(false);
-      } else if (responseData && responseData?.data.statusCode == 400) {
+      } else if (responseData && responseData?.data.statusCode === 400) {
         setError(responseData.errors);
         setLoading(false);
       }
@@ -62,11 +83,11 @@ function ClientDashboard() {
       setLoading(true);
       console.log(error);
     }
-  }, [getName]);
+  }, [getName, getPosition, getExperience]);
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [fetchEmployees]);
 
   const fetchPositions = useCallback(async () => {
     setLoading(true);
@@ -113,7 +134,8 @@ function ClientDashboard() {
     }
   };
 
-  const handleApplyOnclick = (e) => {
+  const handleApplyOnclick = () => {
+    setLoading(true);
     if (getFilterPosition) setPosition(getFilterPosition);
     if (getFilterExperience) setExperience(getFilterExperience);
   };
@@ -171,7 +193,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/eclipsegreen.png"
                           className="img-fluid"
-                          alt="custom-image"
+                          alt="eclipsegreen"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -200,7 +222,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/EllipseRed.png"
                           className="img-fluid"
-                          alt="custom-image"
+                          alt="EllipseRed"
                         />
                       </div>
                       <div className="col-lg-6 col-md-6 p-0">
@@ -236,7 +258,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/dashboard.png"
                           className="img-fluid"
-                          alt="custom-image"
+                          alt="customImage"
                         />
                       </div>
                       <div className="dashP">
@@ -259,7 +281,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/employe.png"
                           className="img-fluid"
-                          alt="image"
+                          alt="employe"
                         />
                       </div>
                       <div className="employeeP">
@@ -282,7 +304,7 @@ function ClientDashboard() {
                         <img
                           src="assets/frontend/images/Dashboardimages/dashboard 1/image 2.png"
                           className="img-fluid"
-                          alt="image"
+                          alt="payment"
                         />
                       </div>
                       <div className="invoiceP">
@@ -292,7 +314,11 @@ function ClientDashboard() {
                   </Link>
                 </div>
 
-                <div className="col-lg-3 col-md-3 customPadding_for_768">
+                <div
+                  style={{ cursor: "pointer" }}
+                  className="col-lg-3 col-md-3 customPadding_for_768"
+                  onClick={showModal}
+                >
                   <div
                     className="card-body custom_dashboard_right_side_cards text-center"
                     style={{ backgroundColor: "#f6f1e5" }}
@@ -301,7 +327,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard 1/helpSupport.png"
                         className="img-fluid"
-                        alt="image"
+                        alt="helpSupport"
                       />
                     </div>
                     <div className="helpP">
@@ -327,7 +353,7 @@ function ClientDashboard() {
                       <img
                         src="assets/frontend/images/Dashboardimages/dashboard2/search.png"
                         className="img-fluid"
-                        alt="custom-image"
+                        alt="search"
                       />
                       <span>MH</span>
                       <span>Employees</span>
@@ -365,7 +391,7 @@ function ClientDashboard() {
                                   width: 230,
                                   height: 235,
                                   objectFit: "cover",
-                                  borderRadius: 15
+                                  borderRadius: 15,
                                 }}
                                 src={
                                   item?.profilePicture
@@ -375,7 +401,7 @@ function ClientDashboard() {
                                     : defaultImage
                                 }
                                 className="Dashboard2-card-img-top"
-                                alt="custom-image"
+                                alt="profilePicture"
                               />
                             </Link>
                             <div className="card-body Dashboard2CardbodyPaddingFixfor768">
@@ -388,7 +414,7 @@ function ClientDashboard() {
                                     <img
                                       src="assets/frontend/images/Dashboardimages/dashboard2/Star 1.png"
                                       className="img-fluid"
-                                      alt="custom-image"
+                                      alt="Star"
                                     />
                                     <span className="Dashboard2Card_rating">
                                       4.5
@@ -403,7 +429,7 @@ function ClientDashboard() {
                                     <img
                                       src="assets/frontend/images/Dashboardimages/dashboard2/experience.png"
                                       className="img-fluid"
-                                      alt="custom-image"
+                                      alt="experience"
                                     />
                                     <span className="Dashboard2ExpSpan">
                                       Exp:
@@ -423,7 +449,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/chef.png"
                                     className="img-fluid"
-                                    alt="custom-image"
+                                    alt="chef"
                                   />
                                   <span>{item?.positionName}</span>
                                 </div>
@@ -434,7 +460,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/clock.png"
                                     className="img-fluid"
-                                    alt="custom-image"
+                                    alt="clock"
                                   />
                                   <span className="dashboard2totalhourspan">
                                     Total Hours :
@@ -450,7 +476,7 @@ function ClientDashboard() {
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/rate.png"
                                     className="img-fluid"
-                                    alt="custom-image"
+                                    alt="rate"
                                   />
                                   <span className="Dashboard2Rate">Rate:</span>
                                   <span className="Dashboard2Perhour">
@@ -463,7 +489,7 @@ function ClientDashboard() {
                                 <div className="Dashboard2BookNowButton">
                                   <img
                                     src="assets/frontend/images/Dashboardimages/dashboard2/bookmark.png"
-                                    alt="custom-image"
+                                    alt="bookmark"
                                   />
 
                                   <button
@@ -535,7 +561,7 @@ function ClientDashboard() {
                   <h6 className="experienceH6">Experience:</h6>
                 </div>
                 <div>
-                  <Select
+                  {/* <Select
                     size="large"
                     style={{
                       width: "100%",
@@ -552,7 +578,14 @@ function ClientDashboard() {
                         {item}
                       </Option>
                     ))}
-                  </Select>
+                  </Select> */}
+                  <Input
+                    placeholder="Search Experience"
+                    onChange={(e) => {
+                      setFilterExperience(e.target.value);
+                    }}
+                    className="ant-input ant-input-lg"
+                  />
                 </div>
                 <div className="row">
                   <button
@@ -608,6 +641,95 @@ function ClientDashboard() {
         </div>
       </section> */}
       {/* Pagination Start */}
+      <Modal
+        title="Help & Support"
+        okButtonProps={{ style: { display: "none" } }}
+        open={isModalOpen}
+        onCancel={handleCancel}
+        cancelText="Close"
+        cancelButtonProps={{
+          style: { backgroundColor: "#c6a34f", color: "white" },
+        }}
+      >
+        <div className="col-lg-12 mb-4">
+          {/* <div className="row"></div> */}
+          <div className="socialMediaIcons">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/RecruitmentMirkoHospitality/"
+            >
+              <img
+                className="img-fluid"
+                src="/assets/frontend/images/indexImages/socialMedia/Group 116168.png"
+                alt="image"
+              />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/recruitmentmirkohospitality/"
+            >
+              <img
+                className="img-fluid"
+                src="/assets/frontend/images/indexImages/socialMedia/Group 116169.png"
+                alt="image"
+              />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/company/mirko-hospitality/mycompany/?viewAsMember=true"
+            >
+              <img
+                className="img-fluid"
+                src="/assets/frontend/images/indexImages/socialMedia/Group 116170.png"
+                alt="image"
+              />
+            </a>
+            <a href="https://vm.tiktok.com/ZGJmndX98/" target="_blank">
+              <img
+                className="img-fluid"
+                src="/assets/frontend/images/indexImages/socialMedia/Group 116171.png"
+                alt="image"
+              />
+            </a>
+          </div>
+          <div>
+            <div className="d-flex mt-4">
+              <a href="tel:+4407500146699">
+                <FiPhoneOutgoing
+                  style={{
+                    fontSize: "45px",
+                    color: "#8e6d45",
+                    marginTop: "15px",
+                  }}
+                />
+              </a>
+              <div className="mx-5">
+                <p>Reservation</p>
+                <h5 style={{ fontSize: "20px", color: "#8e6d45" }}>
+                  +44 075 001 46699
+                </h5>
+              </div>
+            </div>
+            <div className="d-flex mt-4">
+              <a href="mailto:info@mhpremierstaffingsolutions.com">
+                <TfiEmail
+                  style={{
+                    fontSize: "45px",
+                    color: "#8e6d45",
+                    marginTop: "15px",
+                  }}
+                />
+              </a>
+              <div className="mx-5">
+                <p>Email Info</p>
+                <h5 style={{ fontSize: "15px", color: "#8e6d45" }}>
+                  info@mhpremierstaffingsolutions.com
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
       <br /> <br />
     </div>
   );
