@@ -8,20 +8,13 @@ import { token } from "../../../utils/authentication";
 import Loader from "../../loadar/Loader";
 
 import defaultImage from "../../../assets/images/default.png";
-import { responseNotification } from "../../../utils/notifcation";
-
-import { addShortHandler } from "../../../api/shortList";
-import { fetchHandler } from "../../../api/position";
 
 function MyEmployee() {
   const jwtDecode = jwtTokenDecode();
 
   const [getEmployee, setEmployee] = useState([]);
-  const [addShortListData, setAddShortListData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [shortListLoading, setShortListLoading] = useState(false);
   const [getError, setError] = useState();
-  const [positions, setPositions] = useState([]);
 
   //Set filter data
   const [getName, setName] = useState(undefined);
@@ -31,8 +24,8 @@ function MyEmployee() {
 
     try {
       const responseData = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/hired-histories/employee-list-for-client ` +
-          (getName ? `&searchKeyword=${getName}` : ``),
+        `${process.env.REACT_APP_API_BASE_URL}/hired-histories/employee-list-for-client` +
+          (getName ? `?searchKeyword=${getName}` : ``),
         {
           headers: {
             Authorization: `Bearer ${token()}`,
@@ -40,10 +33,10 @@ function MyEmployee() {
         }
       );
 
-      if (responseData && responseData?.data.statusCode == 200) {
+      if (responseData && responseData?.data.statusCode === 200) {
         setEmployee(responseData?.data);
         setLoading(false);
-      } else if (responseData && responseData?.data.statusCode == 400) {
+      } else if (responseData && responseData?.data.statusCode === 400) {
         setError(responseData.errors);
         setLoading(false);
       }
@@ -56,51 +49,13 @@ function MyEmployee() {
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [fetchEmployees]);
 
-  const fetchPositions = useCallback(async () => {
-    setLoading(true);
-    await fetchHandler().then((res) => {
-      if (res?.status === 200) {
-        setPositions(res?.data?.positions);
-      } else {
-        setLoading(false);
-      }
-    });
+  //search
+  const handleSearchkeywordOnChange = (e) => {
 
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchPositions();
-  }, []);
-
-  const addShortListOnclikHandler = (employeeId) => {
-    const shortListReceivedField = { employeeId };
-    if (shortListReceivedField) {
-      setAddShortListData(shortListReceivedField);
-
-      setShortListLoading(true);
-
-      addShortHandler(shortListReceivedField)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res?.statusCode === 201) {
-            setError(undefined);
-            setShortListLoading(false);
-
-            responseNotification("Short list created successfully!", "success");
-
-            window.location.reload();
-          } else if (res?.statusCode === 400) {
-            setError(res?.errors?.[0].msg);
-            setShortListLoading(false);
-          } else if (res?.statusCode === 500) {
-            setError(res?.message);
-            setShortListLoading(false);
-          }
-        });
-    }
+    console.log("e?.target?.value: ", e?.target?.value);
+    setName(e?.target?.value);
   };
 
   return (
@@ -139,6 +94,7 @@ function MyEmployee() {
                   />
                 </div>
                 <input
+                  onChange={handleSearchkeywordOnChange}
                   type="text"
                   className="form-control innerDashRightSideSearchBar"
                   placeholder="search here"
@@ -202,7 +158,8 @@ function MyEmployee() {
                                       alt="custom-image"
                                     />
                                     <span className="Dashboard2Card_rating">
-                                    {" "} {item?.employeeDetails?.rating}
+                                      {" "}
+                                      {item?.employeeDetails?.rating}
                                     </span>
                                     {/* <span className="Dashboard2Card_count">
                                       (123)

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { jwtTokenDecode } from "../../../utils/jwtDecode";
 import { token } from "../../../utils/authentication";
 import axios from "axios";
+import Loader from "../../loadar/Loader";
+import _ from "lodash";
+import defaultImage from "../../../assets/images/default.png";
 
 function CheckInCheckOut() {
   // https://server.mhpremierstaffingsolutions.com/api/v1/check-in-check-out-histories?filterDate=2023-05-22&clientId=642d066dcec196373a33360a
@@ -33,7 +36,7 @@ function CheckInCheckOut() {
           },
         }
       );
-console.log("responseData: ", responseData);
+
       if (responseData && responseData?.data.statusCode == 200) {
         setEmployee(responseData?.data);
         setLoading(false);
@@ -50,7 +53,9 @@ console.log("responseData: ", responseData);
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [fetchEmployees]);
+
+  console.log("getEmployee: ", getEmployee);
 
   return (
     <div>
@@ -124,12 +129,6 @@ console.log("responseData: ", responseData);
                   <th scope="col" className="InnerTableHeadingGlobalStyle">
                     Total Amount
                   </th>
-                  <th
-                    scope="col"
-                    className="InnerTableHeadingGlobalStylelastChild InnerTableHeadingGlobalStyle"
-                  >
-                    Complain
-                  </th>
                 </tr>
                 <tr>
                   <td className="InnerTableDateShow">
@@ -137,61 +136,66 @@ console.log("responseData: ", responseData);
                   </td>
                 </tr>
               </thead>
-              {/* Table body 1 */}
-              <tbody style={{ textAlign: "center" }}>
-                <tr>
-                  <th scope="row">
-                    <div
-                      className="row"
-                      style={{ textAlign: "start !important" }}
-                    >
-                      <div className="col-lg-3">
-                        <div className="InnerDashTableEmployee">
-                          <img
-                            src="assets/frontend/images/InnerDashboard/TableProfilePic.png"
-                            className="img-fluid"
-                            alt="TableProfilePic"
-                          />
+              {loading ? (
+                <Loader />
+              ) : getEmployee?.checkInCheckOutHistory?.length ? (
+                _.map(getEmployee?.checkInCheckOutHistory, (item, index) => (
+                  <tbody style={{ textAlign: "center" }}>
+                    <tr key={index}>
+                      <th scope="row">
+                        <div
+                          className="row"
+                          style={{ textAlign: "start !important" }}
+                        >
+                          <div className="col-lg-3">
+                            <div className="InnerDashTableEmployee">
+                              <img
+                                style={{
+                                  height: 45,
+                                  width: 46,
+                                  borderRadius: 5,
+                                }}
+                                src={
+                                  item?.employeeDetails?.profilePicture
+                                    ? process.env.REACT_APP_ASSETs_BASE_URL +
+                                      "/" +
+                                      item?.employeeDetails?.profilePicture
+                                    : defaultImage
+                                }
+                                className="img-fluid"
+                                alt="TableProfilePic"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-9">
+                            <span className="InnerTableEmployeeName">
+                              {item?.employeeDetails.name}
+                            </span>
+                            <p className="InnerTableEmployeeDesignation">
+                              {item?.employeeDetails.positionName}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <span className="InnerTableEmployeeName">
-                          John Smith Mcculumn
-                        </span>
-                        <p className="InnerTableEmployeeDesignation">Manager</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="InnerTablebodyItemPaddingTopFix">9:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">12:00</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">30 min</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">2.5 Hours</td>
-                  <td className="InnerTablebodyItemPaddingTopFix">£45.00</td>
-                  <td className="text-center">
-                    <div className="btn-group  InnerDashTableSelectDselectWrap">
-                      <button type="button" className="btn  ">
-                        <img
-                          className="InnerDashboardMoreSelectBtnImg"
-                          src="assets/frontend/images/InnerDashboard/select.png"
-                          alt="select"
-                        />
-                      </button>
-                      <img
-                        src="assets/frontend/images/InnerDashboard/InnerBTNLine.png"
-                        className="InnerDashLineImageBtn"
-                        alt="InnerBTNLine"
-                      />
-                      <button type="button" className="btn ">
-                        <img
-                          className="InnerDashboardMoreDeselectBtnImg"
-                          src="assets/frontend/images/InnerDashboard/Union.png"
-                          alt="Union"
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+                      </th>
+                      <td className="InnerTablebodyItemPaddingTopFix">9:00</td>
+                      <td className="InnerTablebodyItemPaddingTopFix">12:00</td>
+                      <td className="InnerTablebodyItemPaddingTopFix">
+                        30 min
+                      </td>
+                      <td className="InnerTablebodyItemPaddingTopFix">
+                        {item?.employeeDetails.totalWorkingHour} Hours
+                      </td>
+                      <td className="InnerTablebodyItemPaddingTopFix">
+                        £
+                        {item?.employeeDetails.totalWorkingHour *
+                          item?.employeeDetails.hourlyRate}
+                      </td>
+                    </tr>
+                  </tbody>
+                ))
+              ) : (
+                <div className="text-center text-danger">No Data Found!</div>
+              )}
             </table>
           </div>
         </div>
