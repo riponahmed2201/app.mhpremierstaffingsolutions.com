@@ -1,7 +1,54 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { jwtTokenDecode } from "../../../utils/jwtDecode";
+import { token } from "../../../utils/authentication";
+import axios from "axios";
+import _ from "lodash";
+import moment from "moment";
+import Loader from "../../loadar/Loader";
 
 function PaymentInvoice() {
+  const jwtDecode = jwtTokenDecode();
+
+  const [getInvoice, setInvoice] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  const fetchInvoiceList = useCallback(async () => {
+    setLoading(true);
+
+    if (jwtDecode?._id) {
+      try {
+        const responseData = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/invoices?clientId=${jwtDecode?._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token()}`,
+            },
+          }
+        );
+
+        if (responseData && responseData?.data.statusCode === 200) {
+          setInvoice(responseData?.data);
+          setLoading(false);
+        } else if (responseData && responseData?.data.statusCode === 400) {
+          setError(responseData.errors);
+          setLoading(false);
+        }
+      } catch (error) {
+        setError(error);
+        setLoading(true);
+        console.log(error);
+      }
+    }
+  }, [jwtDecode?._id]);
+
+  useEffect(() => {
+    fetchInvoiceList();
+  }, [jwtDecode?._id]);
+
+  console.log("getInvoice: ", getInvoice);
+
   return (
     <div>
       {/* Inner Dashboard Search Part Start */}
@@ -15,14 +62,14 @@ function PaymentInvoice() {
                     <img
                       src="assets/frontend/images/InvoiceAndPayment/arrow.png"
                       className="img-fluid"
-                      alt
+                      alt="arrow"
                     />
                   </button>
                 </Link>
                 <img
                   src="assets/frontend/images/InvoiceAndPayment/moneyLogo.png"
                   className="img-fluid"
-                  alt
+                  alt="arrow"
                 />
                 <span className="innerDashSearchItemsSpan">
                   Invoice &amp; Payment
@@ -32,10 +79,10 @@ function PaymentInvoice() {
             <div className="col-lg-6">
               {/* <div class="innerDashboardRightSideFormWrapper d-flex align-items-center">
                   <div class="InnerDashSearchCion">
-                      <img src="images/InnerDashboard/SearchIcon.png" alt="">
+                      <img src="images/InnerDashboard/SearchIcon.png"  alt="arrow" />
                   </div>
                   <input type="text" class="form-control innerDashRightSideSearchBar" placeholder="search here"
-                      aria-label="First name">
+                      aria-label="First name" />
               </div> */}
             </div>
           </div>
@@ -55,157 +102,46 @@ function PaymentInvoice() {
                   <th scope="col">Amount</th>
                   <th scope="col">Invoice Number</th>
                   <th scope="col">Status</th>
-                  <th scope="col">
-                    <div />
-                  </th>
                 </tr>
               </thead>
-              <tbody className="InvoiceAndPaymentTableBody">
-                {/* Paid Table Start */}
-                <tr className="InvoiceTableItemsWhite">
-                  <th scope="row" className="InvoiceTableHeadingGreenColor">
-                    <div className="weekDateWrapper">
-                      <span>Sat, 2 Jan, 23</span>
-                      <span>-</span>
-                      <span>Mon, 8 Jan, 23</span>
-                    </div>
-                  </th>
-                  <td>20</td>
-                  <td>100</td>
-                  <td>$500</td>
-                  <td>
-                    #10010
-                    <div className="InvoicePdfWrpapper">
-                      <a href>
-                        <img
-                          src="assets/frontend/images/InvoiceAndPayment/InvoicePdfDownloadButton.png"
-                          className="img-fluid"
-                          alt
-                        />
-                      </a>
-                    </div>
-                  </td>
-                  <td className="InvoicePaidColor">Paid</td>
-                  <td />
-                </tr>
-                {/* Paid Table End */}
-                {/* Due Table Start */}
-                <tr className="InvoiceTableItemsRed">
-                  <th scope="row" className="InvoiceTableHeadingRedColor">
-                    <div className="weekDateWrapper">
-                      <span>Sat, 2 Jan, 23</span>
-                      <span>-</span>
-                      <span>Mon, 8 Jan, 23</span>
-                    </div>
-                  </th>
-                  <td>20</td>
-                  <td>100</td>
-                  <td>$500</td>
-                  <td>
-                    #10010
-                    <div className="InvoicePdfWrpapper">
-                      <a href>
-                        <img
-                          src="assets/frontend/images/InvoiceAndPayment/InvoicePdfDownloadButton.png"
-                          className="img-fluid"
-                          alt
-                        />
-                      </a>
-                    </div>
-                  </td>
-                  <td className="InvoiceDueColor">Due</td>
-                  <td>
-                    <button className="InvoicePayButton">Pay</button>
-                  </td>
-                </tr>
-                {/* Due Table End */}
-                {/* Paid Table Start */}
-                <tr className="InvoiceTableItemsWhite">
-                  <th scope="row" className="InvoiceTableHeadingGreenColor">
-                    <div className="weekDateWrapper">
-                      <span>Sat, 2 Jan, 23</span>
-                      <span>-</span>
-                      <span>Mon, 8 Jan, 23</span>
-                    </div>
-                  </th>
-                  <td>20</td>
-                  <td>100</td>
-                  <td>$500</td>
-                  <td>
-                    #10010
-                    <div className="InvoicePdfWrpapper">
-                      <a href>
-                        <img
-                          src="assets/frontend/images/InvoiceAndPayment/InvoicePdfDownloadButton.png"
-                          className="img-fluid"
-                          alt
-                        />
-                      </a>
-                    </div>
-                  </td>
-                  <td className="InvoicePaidColor">Paid</td>
-                  <td />
-                </tr>
-                {/* Paid Table End */}
-                {/* Paid Table Start */}
-                <tr className="InvoiceTableItemsWhite">
-                  <th scope="row" className="InvoiceTableHeadingGreenColor">
-                    <div className="weekDateWrapper">
-                      <span>Sat, 2 Jan, 23</span>
-                      <span>-</span>
-                      <span>Mon, 8 Jan, 23</span>
-                    </div>
-                  </th>
-                  <td>20</td>
-                  <td>100</td>
-                  <td>$500</td>
-                  <td>
-                    #10010
-                    <div className="InvoicePdfWrpapper">
-                      <a href>
-                        <img
-                          src="assets/frontend/images/InvoiceAndPayment/InvoicePdfDownloadButton.png"
-                          className="img-fluid"
-                          alt
-                        />
-                      </a>
-                    </div>
-                  </td>
-                  <td className="InvoicePaidColor">Paid</td>
-                  <td />
-                </tr>
-                {/* Paid Table End */}
-                {/* Due Table Start */}
-                <tr className="InvoiceTableItemsRed">
-                  <th scope="row" className="InvoiceTableHeadingRedColor">
-                    <div className="weekDateWrapper">
-                      <span>Sat, 2 Jan, 23</span>
-                      <span>-</span>
-                      <span>Mon, 8 Jan, 23</span>
-                    </div>
-                  </th>
-                  <td>20</td>
-                  <td>100</td>
-                  <td>$500</td>
-                  <td>
-                    #10010
-                    <div className="InvoicePdfWrpapper">
-                      <a href>
-                        <img
-                          src="assets/frontend/images/InvoiceAndPayment/InvoicePdfDownloadButton.png"
-                          className="img-fluid"
-                          alt
-                        />
-                      </a>
-                    </div>
-                  </td>
-                  <td className="InvoiceDueColor">Due</td>
-                  <td>
-                    <button className="InvoicePayButton">Pay</button>
-                  </td>
-                </tr>
-                {/* Due Table End */}
-              </tbody>
+              {loading ? (
+                <Loader />
+              ) : getInvoice?.invoices?.length ? (
+                _.map(getInvoice?.invoices, (item, index) => (
+                  <tbody className="InvoiceAndPaymentTableBody">
+                    <tr key={index} className="InvoiceTableItemsWhite">
+                      <th scope="row" className="InvoiceTableHeadingGreenColor">
+                        <div className="weekDateWrapper">
+                          <span>
+                            {moment(item?.fromWeekDate).format(
+                              "ddd, D MMM, YY"
+                            )}
+                          </span>
+                          <span> - </span>
+                          <span>
+                            {moment(item?.toWeekDate).format("ddd, D MMM, YY")}
+                          </span>
+                        </div>
+                      </th>
+                      <td>{item?.totalEmployee}</td>
+                      <td>
+                        {moment
+                          .duration(
+                            moment(item?.toWeekDate).diff(
+                              moment(item?.fromWeekDate)
+                            )
+                          )
+                          .asHours()}
+                      </td>
+                      <td>£{item?.amount}</td>
+                      <td>{item?.invoiceNumber}</td>
+                      <td className="InvoicePaidColor">{item?.status}</td>
+                    </tr>
+                  </tbody>
+                ))
+              ) : (
+                <div className="text-center text-danger">No Data Found!</div>
+              )}
             </table>
           </div>
         </div>

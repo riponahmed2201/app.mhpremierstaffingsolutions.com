@@ -12,7 +12,7 @@ function Banner() {
             <img
               src="assets/frontend/images/indexImages/PERTICLE1 (2).png"
               className="img-fluid perticle1"
-              alt
+               alt="PERTICLE1"
             />
             <div className="h1Wrapper">
               <h2>{t("home_banner_heading")}</h2>
@@ -45,14 +45,14 @@ function Banner() {
               <img
                 src="assets/frontend/images/indexImages/PERTICLE2.png"
                 className="img-fluid perticle2"
-                alt
+                 alt="PERTICLE1"
               />
             </a>
             <div className="bannerImageWrapper">
               <img
                 src="assets/frontend/images/indexImages/Group 117293.png"
                 className="img-fluid"
-                alt
+                 alt="PERTICLE1"
               />
             </div>
           </div>
