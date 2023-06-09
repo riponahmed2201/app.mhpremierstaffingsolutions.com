@@ -171,6 +171,30 @@ function AddMHEmployee() {
 
                                     <div className="col-md-4">
                                         <Form.Item
+                                            label="Country Name"
+                                            name="countryName"
+                                            hasFeedback
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Country name is required",
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch={true}
+                                                placeholder="Please select country name"
+                                                optionFilterProp="children"
+                                            >
+                                                <Option value="UK">UK</Option>
+                                                <Option value="DUBAI">DUBAI</Option>
+                                                <Option value="OTHERS">OTHERS</Option>
+                                            </Select>
+                                        </Form.Item>
+                                    </div>
+
+                                    <div className="col-md-4">
+                                        <Form.Item
                                             label="Active"
                                             name="active"
                                             hasFeedback

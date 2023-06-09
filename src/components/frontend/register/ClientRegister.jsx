@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { clientRegisterHandler } from "../../../api/client";
 import { responseNotification } from "../../../utils/notifcation";
+import CountryWiseValidationRules from "../../../utils/static/countryList";
 
 function ClientRegister() {
   const [referPerson, setReferPerson] = useState([]);
@@ -53,6 +54,7 @@ function ClientRegister() {
       sourceId: values?.sourceId,
       phoneNumber: values?.phoneNumber,
       email: values?.email,
+      countryName: values?.countryName,
       password: values?.password,
       lat: "123.23122242",
       long: "4545.354545",
@@ -288,6 +290,45 @@ function ClientRegister() {
                       <div className="row">
                         <div className="col-lg-6">
                           <Form.Item
+                            name="countryName"
+                            hasFeedback
+                            rules={[
+                              {
+                                required: true,
+                                message: "Please select your country name",
+                              },
+                            ]}
+                          >
+                            <div className="dropdownbuttonwrapper">
+                              <div className="dropdown">
+                                <div className="inputLogoWrapper">
+                                  <img
+                                    className="img-fluid"
+                                    src="assets/frontend/images/registrationFormImages/clientFormPictures/selectFrom.png"
+                                    alt="image"
+                                  />
+                                </div>
+                                <select
+                                  className="form-select custom_select"
+                                  aria-label="Select country"
+                                >
+                                  <option selected disabled>
+                                    Please select country name
+                                  </option>
+                                  {CountryWiseValidationRules?.map(
+                                    (item, index) => (
+                                      <option key={index} value={item?.name}>
+                                        {item?.name}
+                                      </option>
+                                    )
+                                  )}
+                                </select>
+                              </div>
+                            </div>
+                          </Form.Item>
+                        </div>
+                        <div className="col-lg-6">
+                          <Form.Item
                             name="password"
                             hasFeedback
                             rules={[
@@ -313,7 +354,7 @@ function ClientRegister() {
                             </div>
                           </Form.Item>
                         </div>
-                        <div className="col-lg-6">
+                        {/* <div className="col-lg-6">
                           <Form.Item
                             name="confirmPassword"
                             hasFeedback
@@ -339,7 +380,7 @@ function ClientRegister() {
                               />
                             </div>
                           </Form.Item>
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="row">

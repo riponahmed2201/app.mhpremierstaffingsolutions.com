@@ -37,10 +37,10 @@ function CheckInCheckOut() {
         }
       );
 
-      if (responseData && responseData?.data.statusCode == 200) {
+      if (responseData && responseData?.data.statusCode === 200) {
         setEmployee(responseData?.data);
         setLoading(false);
-      } else if (responseData && responseData?.data.statusCode == 400) {
+      } else if (responseData && responseData?.data.statusCode === 400) {
         setError(responseData.errors);
         setLoading(false);
       }
