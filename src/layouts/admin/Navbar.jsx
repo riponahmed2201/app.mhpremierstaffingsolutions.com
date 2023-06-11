@@ -53,6 +53,14 @@ function Navbar() {
             aria-labelledby="navbarDropdown"
           >
             <li>
+              <Link to="/admin/change-password" className="dropdown-item">
+                Change Password
+              </Link>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
               <button onClick={handleLogout} className="dropdown-item">
                 Logout
               </button>
