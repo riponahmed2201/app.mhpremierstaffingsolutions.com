@@ -10,6 +10,7 @@ import Loader from "../../loadar/Loader";
 import { token } from "../../../utils/authentication";
 import { donwloadCSV } from "../../../utils/static/donwloadCSV.js";
 import axios from "axios";
+import CountryWiseValidationRules from "../../../utils/static/countryList";
 
 const { Search } = Input;
 const { Option } = Select;
@@ -70,23 +71,28 @@ function ClientList() {
   const [loading, setLoading] = useState(false);
   const [getName, setName] = useState(undefined);
   const [getStatus, setStatus] = useState(undefined);
+  const [getCountryName, setCountryName] = useState(undefined);
   const [getFilterFromDate, setFilterFromDate] = useState(undefined);
   const [getFilterToDate, setFilterToDate] = useState(undefined);
 
   const fetchClient = useCallback(async () => {
     setLoading(true);
 
-    await fetchClientListHandler(limit, getName, getStatus, loc?.search).then(
-      (res) => {
-        if (res?.status === 200) {
-          setLoading(false);
-          setClient(res?.data?.users);
-        } else {
-          setLoading(false);
-        }
+    await fetchClientListHandler(
+      limit,
+      getName,
+      getStatus,
+      getCountryName,
+      loc?.search
+    ).then((res) => {
+      if (res?.status === 200) {
+        setLoading(false);
+        setClient(res?.data?.users);
+      } else {
+        setLoading(false);
       }
-    );
-  }, [limit, loc?.search, getName, getStatus]);
+    });
+  }, [limit, loc?.search, getName, getStatus, getCountryName]);
   useEffect(() => {
     fetchClient();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,6 +100,10 @@ function ClientList() {
 
   const handleChangeStatus = (value) => {
     setStatus(value);
+  };
+
+  const handleChangeCountryName = (value) => {
+    setCountryName(value);
   };
 
   //search
@@ -209,7 +219,7 @@ function ClientList() {
         };
       });
 
-      donwloadCSV(data, "Employee List");
+      donwloadCSV(data, "Client List");
     } catch (error) {}
   };
 
@@ -241,6 +251,21 @@ function ClientList() {
                     <Select
                       size="large"
                       allowClear
+                      showSearch={true}
+                      placeholder="Select Country Name"
+                      onChange={handleChangeCountryName}
+                    >
+                      <Option value="United Kingdom">United Kingdom</Option>
+                      <Option value="United Arab Emirates">
+                        United Arab Emirates
+                      </Option>
+                      <Option value="OTHERS">OTHERS</Option>
+                    </Select>
+
+                    <Select
+                      size="large"
+                      allowClear
+                      showSearch={true}
                       placeholder="Active"
                       onChange={handleChangeStatus}
                     >
