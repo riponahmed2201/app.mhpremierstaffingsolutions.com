@@ -845,7 +845,6 @@ function EmployeeDetails() {
                           fileList={summaryPdf}
                           onChange={summaryPdfChange}
                           maxCount={1}
-                          // accept=".pdf, .PDF, docs, DOCS, .doc, .DOC, .docx"
                         >
                           <Button icon={<UploadOutlined />}>
                             {!summaryPdfFileShow ? "Upload" : "Uploaded"}
