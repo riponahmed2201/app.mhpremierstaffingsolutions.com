@@ -60,12 +60,12 @@ export const employeeRegisterHandler = async (receivedBlogFields) => {
 };
 
 //HR fetch api call
-export const fetchEmployeeListHandler = async (limit, getName, getStatus, locationsearch) => {
+export const fetchEmployeeListHandler = async (limit, getName, getStatus, getCountryName, locationsearch) => {
 
     const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
     const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
-        (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=EMPLOYEE`),
+        (getStatus ? `&active=${getStatus}` : ``) + (getCountryName ? `&countryName=${getCountryName}` : ``) + (`&requestType=EMPLOYEE`),
         {
             headers: {
                 Authorization: `Bearer ${token()}`,
@@ -76,12 +76,12 @@ export const fetchEmployeeListHandler = async (limit, getName, getStatus, locati
 };
 
 //HR fetch api call
-export const fetchClientListHandler = async (limit, getName, getStatus, locationsearch) => {
+export const fetchClientListHandler = async (limit, getName, getStatus, getCountryName, locationsearch) => {
 
     const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
     const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
-        (getStatus ? `&active=${getStatus}` : ``) + (`&requestType=CLIENT`),
+        (getStatus ? `&active=${getStatus}` : ``) + (getCountryName ? `&countryName=${getCountryName}` : ``) + (`&requestType=CLIENT`),
         {
             headers: {
                 Authorization: `Bearer ${token()}`,

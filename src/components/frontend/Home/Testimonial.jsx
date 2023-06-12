@@ -32,7 +32,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -59,7 +59,7 @@ function Testimonial() {
                                     // borderRadius: "25px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -102,7 +102,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -130,7 +130,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -173,7 +173,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -196,7 +196,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -239,7 +239,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -267,7 +267,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -310,7 +310,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -339,7 +339,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -382,7 +382,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -405,7 +405,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -448,7 +448,7 @@ function Testimonial() {
                         <img
                           className="w-25 img-fluid"
                           src="assets/frontend/images/indexImages/Group 117314.png"
-                          alt
+                          alt="img"
                         />
                       </div>
                       <div className="row justify-content-center">
@@ -471,7 +471,7 @@ function Testimonial() {
                                     width: "72px",
                                   }}
                                   src="assets/frontend/images/testmonial/Ellipse 9.png"
-                                  alt="picture"
+                                  alt="img"
                                 />
                                 <div
                                   className="text-white mt-2"
@@ -522,7 +522,7 @@ function Testimonial() {
                     <img
                       className="img-fluid"
                       src="assets/frontend/images/indexImages/sliderIconLeft.png"
-                      alt
+                      alt="img"
                     />
                   </span>
                   <span className="visually-hidden">Previous</span>
@@ -540,7 +540,7 @@ function Testimonial() {
                     <img
                       className="img-fluid"
                       src="assets/frontend/images/indexImages/SliderIconRight.png"
-                      alt
+                      alt="img"
                     />
                   </span>
                   <span className="visually-hidden">Next</span>

@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Form, Input } from "antd";
+import { Form, Input, Select } from "antd";
 import axios from "axios";
 
 import { token } from "../../../utils/authentication";
 import { responseNotification } from "../../../utils/notifcation";
+import CountryWiseValidationRules from "../../../utils/static/countryList";
+
+const { Option } = Select;
 
 function ClientDetails() {
   const { id } = useParams();
@@ -31,6 +34,7 @@ function ClientDetails() {
         clientDiscount: res?.data?.details.clientDiscount,
         vatNumber: res?.data?.details.vatNumber,
         companyRegisterNumber: res?.data?.details.companyRegisterNumber,
+        countryName: res?.data?.details.countryName,
       });
 
       setSingleClientDetails(res?.data?.details);
@@ -47,6 +51,7 @@ function ClientDetails() {
       clientDiscount: values?.clientDiscount,
       vatNumber: values?.vatNumber,
       companyRegisterNumber: values?.companyRegisterNumber,
+      countryName: values?.countryName,
     };
 
     try {
@@ -65,7 +70,10 @@ function ClientDetails() {
       if (res?.data?.statusCode === 200) {
         setError(undefined);
         setLoading(false);
-        responseNotification("Client bank updated successfully!", "success");
+        responseNotification(
+          "Client information updated successfully!",
+          "success"
+        );
       } else if (res?.data?.statusCode === 400) {
         setError(res?.data?.errors?.[0].msg);
         setLoading(false);
@@ -122,7 +130,7 @@ function ClientDetails() {
             >
               <div className="col-12">
                 <div className="row">
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <Form.Item
                       label="Discount Amount"
                       name="clientDiscount"
@@ -140,7 +148,7 @@ function ClientDetails() {
                       />
                     </Form.Item>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <Form.Item
                       label="VAT Number"
                       name="vatNumber"
@@ -158,7 +166,7 @@ function ClientDetails() {
                       />
                     </Form.Item>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <Form.Item
                       label="Company Register Number"
                       name="companyRegisterNumber"
@@ -174,6 +182,32 @@ function ClientDetails() {
                         placeholder="Enter company register number"
                         className="ant-input ant-input-lg"
                       />
+                    </Form.Item>
+                  </div>
+
+                  <div className="col-md-6">
+                    <Form.Item
+                      label="Country Name"
+                      name="countryName"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter country name",
+                        },
+                      ]}
+                    >
+                      <Select
+                        showSearch={true}
+                        placeholder="Please Select Country Name"
+                        optionFilterProp="children"
+                      >
+                        {CountryWiseValidationRules?.map((item, index) => (
+                          <Option key={index} value={item?.name}>
+                            {item?.name}
+                          </Option>
+                        ))}
+                      </Select>
                     </Form.Item>
                   </div>
                 </div>
