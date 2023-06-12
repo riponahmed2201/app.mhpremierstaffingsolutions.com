@@ -210,8 +210,10 @@ function EditMHEmployee() {
                         placeholder="Please select country name"
                         optionFilterProp="children"
                       >
-                        <Option value="UK">UK</Option>
-                        <Option value="DUBAI">DUBAI</Option>
+                        <Option value="United Kingdom">United Kingdom</Option>
+                        <Option value="United Arab Emirates">
+                          United Arab Emirates
+                        </Option>
                         <Option value="OTHERS">OTHERS</Option>
                       </Select>
                     </Form.Item>
