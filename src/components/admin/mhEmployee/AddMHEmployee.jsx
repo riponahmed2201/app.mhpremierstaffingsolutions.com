@@ -27,6 +27,7 @@ function AddMHEmployee() {
             phoneNumber: values?.phoneNumber,
             password: values?.password,
             role: values?.role,
+            countryName: values?.countryName,
             active: active,
             permissions: values?.permission
         };

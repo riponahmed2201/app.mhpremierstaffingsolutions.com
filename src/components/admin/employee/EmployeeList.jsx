@@ -37,6 +37,10 @@ const columns = [
     dataIndex: "userIdNumber",
   },
   {
+    title: "Country Name",
+    dataIndex: "countryName",
+  },
+  {
     title: "Profile Completed",
     dataIndex: "profileCompleted",
   },
@@ -113,12 +117,23 @@ function EmployeeList() {
     if (_.size(item?.languages)) profileCompletedPercentage += 5;
     if (item?.employeeExperience) profileCompletedPercentage += 5;
 
+    let countryName = "";
+
+    if (item?.countryName === "United Kingdom") {
+      countryName = "United Kingdom";
+    } else if (item?.countryName === "United Arab Emirates") {
+      countryName = "United Kingdom";
+    } else {
+      countryName = "Others";
+    }
+
     data1.push({
       key: index + 1,
       name: item?.firstName + " " + item?.lastName,
       email: item?.email,
       phoneNumber: item?.phoneNumber,
       userIdNumber: item?.userIdNumber,
+      countryName: countryName,
       profileCompleted: (
         <>
           <div className="text-center">{profileCompletedPercentage}%</div>

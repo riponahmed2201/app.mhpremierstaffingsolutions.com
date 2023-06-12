@@ -15,7 +15,7 @@ export const loginHandler = async (receivedLoginFields) => {
 //update api call
 export const updatePasswordHandler = async (receivedMhEmployeeFields) => {
   let res = await fetch(
-    `${process.env.REACT_APP_API_BASE_URL}/users/mh-employee-update`,
+    `${process.env.REACT_APP_API_BASE_URL}/users/update-password`,
     {
       method: "PUT",
       headers: {

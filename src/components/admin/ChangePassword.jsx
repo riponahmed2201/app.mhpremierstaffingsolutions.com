@@ -4,8 +4,11 @@ import { Form, Input } from "antd";
 import { jwtTokenDecode } from "../../utils/jwtDecode";
 import { responseNotification } from "../../utils/notifcation";
 import { updatePasswordHandler } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function ChangePassword() {
+  const navigate = useNavigate();
+
   const jwtdecode = jwtTokenDecode();
 
   const [loading, setLoading] = useState(false);
@@ -19,7 +22,7 @@ function ChangePassword() {
 
     if (id) {
       const updatePasswordReceivedFields = {
-        id: values?.id,
+        id: id,
         newPassword: values?.newPassword,
         currentPassword: values?.currentPassword,
       };
@@ -29,11 +32,13 @@ function ChangePassword() {
         updatePasswordHandler(updatePasswordReceivedFields)
           .then((res) => res.json())
           .then((res) => {
-            if (res?.statusCode === 201) {
+            if (res?.statusCode === 200) {
               setError(undefined);
               setLoading(false);
               responseNotification("Password updated successfully!", "success");
               form.resetFields();
+
+              navigate("/login");
             } else if (res?.statusCode === 400) {
               setError(res?.errors?.[0].msg);
               setLoading(false);

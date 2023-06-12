@@ -58,7 +58,7 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <hr class="dropdown-divider" />
+              <hr className="dropdown-divider" />
             </li>
             <li>
               <button onClick={handleLogout} className="dropdown-item">
