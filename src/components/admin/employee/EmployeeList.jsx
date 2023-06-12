@@ -122,7 +122,7 @@ function EmployeeList() {
     if (item?.countryName === "United Kingdom") {
       countryName = "United Kingdom";
     } else if (item?.countryName === "United Arab Emirates") {
-      countryName = "United Kingdom";
+      countryName = "United Arab Emirates";
     } else {
       countryName = "Others";
     }
