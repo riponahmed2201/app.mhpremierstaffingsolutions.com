@@ -62,43 +62,51 @@ function Sidebar() {
             </NavLink>
           )}
 
-          {jwt_decode?.menuPermission?.addMhEmployee && (
-            <NavLink className="nav-link" to="/admin/add-mh-employee">
+          {jwt_decode?.menuPermission?.addMhEmployee &&
+            jwt_decode?.superAdmin && (
+              <NavLink className="nav-link" to="/admin/add-mh-employee">
+                <div className="sb-nav-link-icon">
+                  <i className="fas fa-table" />
+                </div>
+                Add MH Employee
+              </NavLink>
+            )}
+          {jwt_decode?.menuPermission?.mhEmployeeList &&
+            jwt_decode?.superAdmin && (
+              <NavLink className="nav-link" to="/admin/mh-employee-list">
+                <div className="sb-nav-link-icon">
+                  <i className="fas fa-table" />
+                </div>
+                MH Employee List
+              </NavLink>
+            )}
+
+          {jwt_decode?.menuPermission?.invoiceList && (
+            <NavLink className="nav-link" to="/admin/invoice-list">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-table" />
               </div>
-              Add MH Employee
+              Invoice List
             </NavLink>
           )}
-          {jwt_decode?.menuPermission?.mhEmployeeList && (
-            <NavLink className="nav-link" to="/admin/mh-employee-list">
+
+          {jwt_decode?.menuPermission?.notificationList && (
+            <NavLink className="nav-link" to="/admin/notification-list">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-table" />
               </div>
-              MH Employee List
+              Notification List
             </NavLink>
           )}
 
-          <NavLink className="nav-link" to="/admin/invoice-list">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-table" />
-            </div>
-            Invoice List
-          </NavLink>
-
-          <NavLink className="nav-link" to="/admin/notification-list">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-table" />
-            </div>
-            Notification List
-          </NavLink>
-
-          <NavLink className="nav-link" to="/admin/contact-list">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-table" />
-            </div>
-            Contact List
-          </NavLink>
+          {jwt_decode?.menuPermission?.contactList && (
+            <NavLink className="nav-link" to="/admin/contact-list">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-table" />
+              </div>
+              Contact List
+            </NavLink>
+          )}
         </div>
       </div>
       <div className="sb-sidenav-footer">

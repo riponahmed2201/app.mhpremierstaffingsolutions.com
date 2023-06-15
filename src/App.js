@@ -56,6 +56,7 @@ import CheckInCheckOut from './components/frontend/client/CheckInCheckOut';
 import ChangePassword from './components/admin/ChangePassword';
 import InvoiceList from './components/admin/invoice/InvoiceList';
 import AddInvoice from './components/admin/invoice/AddInvoice';
+import NotificationList from './components/admin/notification/NotificationList';
 
 function App() {
   return (
@@ -127,6 +128,7 @@ function App() {
             <Route path='contact-list' element={<PrivateRoute><ContactList /></PrivateRoute>} />
             <Route path='invoice-list' element={<PrivateRoute><InvoiceList /></PrivateRoute>} />
             <Route path='add-invoice' element={<PrivateRoute><AddInvoice /></PrivateRoute>} />
+            <Route path='notification-list' element={<PrivateRoute><NotificationList /></PrivateRoute>} />
             <Route path='change-password' element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
 
           </Route>

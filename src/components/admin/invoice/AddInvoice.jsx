@@ -11,8 +11,6 @@ import { responseNotification } from "../../../utils/notifcation";
 const { Option } = Select;
 
 function AddInvoice() {
-  const { id } = useParams();
-
   const [getClientList, setClientList] = useState([]);
 
   const [getFromWeekDate, setFromWeekDate] = useState(undefined);
@@ -41,23 +39,22 @@ function AddInvoice() {
 
   useEffect(() => {
     fetchClientData();
-  }, [id]);
+  }, []);
 
   const onFinish = async (values) => {
-    console.log("values: ", values);
     const receivedClientFields = {
-      id: id,
-      clientDiscount: values?.clientDiscount,
-      vatNumber: values?.vatNumber,
-      companyRegisterNumber: values?.companyRegisterNumber,
-      countryName: values?.countryName,
+      clientId: values?.clientName,
+      amount: values?.amount,
+      totalEmployee: values?.totalEmployee,
+      fromWeekDate: getFromWeekDate,
+      toWeekDate: getToWeekDate,
     };
 
     try {
       setLoading(true);
 
       const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/invoices/createe`,
+        `${process.env.REACT_APP_API_BASE_URL}/invoices/create`,
         receivedClientFields,
         {
           headers: {
@@ -66,7 +63,7 @@ function AddInvoice() {
         }
       );
 
-      if (res?.data?.statusCode === 200) {
+      if (res?.data?.statusCode === 201) {
         setError(undefined);
         setLoading(false);
         responseNotification(
@@ -143,13 +140,17 @@ function AddInvoice() {
                         },
                       ]}
                     >
-                      <Input
+                      <InputNumber
+                        style={{
+                          width: "100%",
+                        }}
+                        min={1}
                         placeholder="Enter amount"
                         className="ant-input ant-input-lg"
                       />
                     </Form.Item>
                   </div>
-                  
+
                   <div className="col-md-6">
                     <Form.Item
                       label="From Week"
@@ -180,7 +181,7 @@ function AddInvoice() {
 
                   <div className="col-md-6">
                     <Form.Item
-                      label="From Week"
+                      label="To Week"
                       name="toWeekDate"
                       hasFeedback
                       rules={[
@@ -205,7 +206,7 @@ function AddInvoice() {
                       />
                     </Form.Item>
                   </div>
-                
+
                   <div className="col-md-6">
                     <Form.Item
                       label="Total Employee"
