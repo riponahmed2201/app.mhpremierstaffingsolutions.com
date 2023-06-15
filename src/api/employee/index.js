@@ -80,7 +80,7 @@ export const fetchClientListHandler = async (limit, getName, getStatus, getCount
 
     const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
-    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES&limit=${limit || 20}` + (getName ? `&searchKeyword=${getName}` : ``) +
+    const res = await axios.get(`${unicodeUri}/users?page=${getPage(locationsearch) || 1}&skipLimit=YES` + (getName ? `&searchKeyword=${getName}` : ``) +
         (getStatus ? `&active=${getStatus}` : ``) + (getCountryName ? `&countryName=${getCountryName}` : ``) + (`&requestType=CLIENT`),
         {
             headers: {
@@ -122,6 +122,18 @@ export const employeeUpdateHandler = async (receivedBlogFields) => {
         {
             method: "PUT",
             body: receivedBlogFields,
+        }
+    );
+    return res;
+};
+
+//fetch api call
+export const fetchClientListForDropdownHandler = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users?requestType=CLIENT&skipLimit=YES`,
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
         }
     );
     return res;

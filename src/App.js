@@ -54,6 +54,8 @@ import EmployeePdf from './components/frontend/employee/pdf/EmployeePdf';
 import ViewEmployeeDetails from './components/admin/employee/ViewEmployeeDetails';
 import CheckInCheckOut from './components/frontend/client/CheckInCheckOut';
 import ChangePassword from './components/admin/ChangePassword';
+import InvoiceList from './components/admin/invoice/InvoiceList';
+import AddInvoice from './components/admin/invoice/AddInvoice';
 
 function App() {
   return (
@@ -123,6 +125,8 @@ function App() {
             <Route path='edit-mh-employee/:id' element={<PrivateRoute><EditMHEmployee /></PrivateRoute>} />
 
             <Route path='contact-list' element={<PrivateRoute><ContactList /></PrivateRoute>} />
+            <Route path='invoice-list' element={<PrivateRoute><InvoiceList /></PrivateRoute>} />
+            <Route path='add-invoice' element={<PrivateRoute><AddInvoice /></PrivateRoute>} />
             <Route path='change-password' element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
 
           </Route>

@@ -79,6 +79,20 @@ function Sidebar() {
             </NavLink>
           )}
 
+          <NavLink className="nav-link" to="/admin/invoice-list">
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-table" />
+            </div>
+            Invoice List
+          </NavLink>
+
+          <NavLink className="nav-link" to="/admin/notification-list">
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-table" />
+            </div>
+            Notification List
+          </NavLink>
+
           <NavLink className="nav-link" to="/admin/contact-list">
             <div className="sb-nav-link-icon">
               <i className="fas fa-table" />
