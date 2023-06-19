@@ -84,6 +84,14 @@ function Navbar() {
                     </NavLink>
                   </li>
                   <li className="nav-item">
+                    <NavLink
+                      className="nav-link navbar_custom_hover"
+                      to="/blog"
+                    >
+                      {t("home_navbar_blog")}
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
                     <select
                       onChange={(e) => changeLanguage(e)}
                       className="nav-item dropdown border-0 mx-1 navbar_custom_hover nav-link selectItem"

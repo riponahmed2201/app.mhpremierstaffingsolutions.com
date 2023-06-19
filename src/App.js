@@ -57,6 +57,7 @@ import ChangePassword from './components/admin/ChangePassword';
 import InvoiceList from './components/admin/invoice/InvoiceList';
 import AddInvoice from './components/admin/invoice/AddInvoice';
 import NotificationList from './components/admin/notification/NotificationList';
+import Blog from './components/frontend/blog/Blog';
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
           <Route path="/" element={<ClientMasterLayout />} >
             <Route index path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/blog' element={<Blog />} />
             <Route path='/customer' element={<Customer />} />
             <Route path='/career' element={<Career />} />
             <Route path='/our-services' element={<Services />} />
