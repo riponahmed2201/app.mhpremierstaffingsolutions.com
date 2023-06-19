@@ -51,6 +51,9 @@ function Services() {
           <p className="about_us_section_paragraph">
             {t("pay_roll_rent_staff_description")}
           </p>
+          <p className="about_us_section_paragraph">
+            {t("pay_roll_rent_staff_description1")}
+          </p>
         </div>
       </div>
       <div className="container">

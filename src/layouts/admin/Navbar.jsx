@@ -1,7 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtTokenDecode } from "../../utils/jwtDecode";
 
 function Navbar() {
+  const jwt_decode = jwtTokenDecode();
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,7 +19,7 @@ function Navbar() {
   return (
     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       {/* <!-- Navbar Brand--> */}
-      <Link className="navbar-brand ps-3" to="/admin">
+      <Link className="navbar-brand ps-3" to="/admin/dashboard">
         MH ADMIN
         {/* <img src="assets/frontend/images/login_page_images/Logo.png" alt="logo" /> */}
       </Link>
@@ -52,14 +55,19 @@ function Navbar() {
             className="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdown"
           >
-            <li>
-              <Link to="/admin/change-password" className="dropdown-item">
-                Change Password
-              </Link>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
+            {jwt_decode?.superAdmin && (
+              <li>
+                <Link to="/admin/change-password" className="dropdown-item">
+                  Change Password
+                </Link>
+              </li>
+            )}
+
+            {jwt_decode?.superAdmin && (
+              <li>
+                <hr className="dropdown-divider" />
+              </li>
+            )}
             <li>
               <button onClick={handleLogout} className="dropdown-item">
                 Logout

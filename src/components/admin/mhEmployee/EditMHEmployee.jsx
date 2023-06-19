@@ -186,6 +186,7 @@ function EditMHEmployee() {
                         placeholder="Please select role name"
                         optionFilterProp="children"
                       >
+                        <Option value="SUPER_ADMIN">SUPER ADMIN</Option>
                         <Option value="ADMIN">ADMIN</Option>
                         <Option value="HR">HR</Option>
                         <Option value="MARKETING">MARKETING</Option>

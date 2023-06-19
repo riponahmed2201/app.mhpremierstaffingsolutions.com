@@ -99,7 +99,7 @@ function MHEmployeeList() {
       active: item?.active ? "YES" : "NO",
       status: (
         <>
-          {item?.role !== "ADMIN" ? (
+          {item?.role !== "ADMIN" && item?.role !== "SUPER_ADMIN" ? (
             <Switch
               size="small"
               defaultChecked={item?.active === true}
