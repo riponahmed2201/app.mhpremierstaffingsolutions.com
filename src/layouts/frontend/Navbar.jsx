@@ -83,14 +83,14 @@ function Navbar() {
                       {t("home_navbar_career")}
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <NavLink
                       className="nav-link navbar_custom_hover"
                       to="/blog"
                     >
                       {t("home_navbar_blog")}
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <select
                       onChange={(e) => changeLanguage(e)}
