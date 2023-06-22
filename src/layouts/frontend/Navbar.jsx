@@ -12,13 +12,21 @@ const changeLanguage = (e) => {
 function Navbar() {
   const { t } = useTranslation();
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="header sticky-top">
       <div className="container Index_header_container">
         <div className="row">
           <div className="col-lg-12">
             <nav className="navbar navbar-expand-lg navbar-light">
-              <Link className="navbar-brand customNav320" to="/">
+              <Link
+                onClick={scrollToTop}
+                className="navbar-brand customNav320"
+                to="/"
+              >
                 <img
                   className="img-fluid nav_logo"
                   src="assets/frontend/images/indexImages/logo.png"
@@ -41,7 +49,7 @@ function Navbar() {
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li className="nav-item">
+                  <li onClick={scrollToTop} className="nav-item">
                     <NavLink
                       className="navbar_custom_hover nav-link"
                       aria-current="page"
@@ -50,7 +58,7 @@ function Navbar() {
                       {t("home_navbar_home")}
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li onClick={scrollToTop} className="nav-item">
                     <NavLink
                       className="navbar_custom_hover nav-link"
                       to="/about"
@@ -59,7 +67,7 @@ function Navbar() {
                     </NavLink>
                   </li>
 
-                  <li className="nav-item dropdown">
+                  <li onClick={scrollToTop} className="nav-item dropdown">
                     <NavLink
                       className="nav-link navbar_custom_hover"
                       to="/our-services"
@@ -67,7 +75,7 @@ function Navbar() {
                       {t("home_navbar_our_services")}
                     </NavLink>
                   </li>
-                  <li className="nav-item dropdown">
+                  <li onClick={scrollToTop} className="nav-item dropdown">
                     <NavLink
                       className="nav-link navbar_custom_hover"
                       to="/our-mission"
@@ -75,7 +83,7 @@ function Navbar() {
                       {t("home_navbar_our_mission_vision")}
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li onClick={scrollToTop} className="nav-item">
                     <NavLink
                       className="nav-link navbar_custom_hover"
                       to="/career"

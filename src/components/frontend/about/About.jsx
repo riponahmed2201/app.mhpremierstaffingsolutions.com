@@ -62,6 +62,15 @@ function About() {
           <p className="about_us_section_paragraph">
             {t("about_us_description6")}
           </p>
+          <div className="text-center">
+            <a
+              className="btn"
+              style={{ backgroundColor: "#c6a34f", color: "white" }}
+              href="/meet-the-team"
+            >
+              MEET THE TEAM
+            </a>
+          </div>
         </div>
       </div>
     </div>
