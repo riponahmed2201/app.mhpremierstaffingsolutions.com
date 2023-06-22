@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next";
 function Footer() {
   const { t } = useTranslation();
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="footer">
       <div className="container">
@@ -12,7 +16,7 @@ function Footer() {
           <div className="col-lg-3 col-md-2">
             <div className="leftPartLinks">
               <ul>
-                <li>
+                <li onClick={scrollToTop}>
                   <Link to="/"> {t("home_footer_home")} </Link>
                   <Link to="/contact-us">{t("home_footer_contact")}</Link>
                   <Link to="/career">{t("home_footer_career")}</Link>
@@ -87,7 +91,7 @@ function Footer() {
           <div className="col-lg-3 col-md-2">
             <div className="rightPartLinks">
               <ul>
-                <li>
+                <li onClick={scrollToTop}>
                   <Link to="/corporate-information">
                     {t("home_footer_corporate_information")}
                   </Link>

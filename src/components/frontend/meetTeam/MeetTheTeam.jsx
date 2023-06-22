@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { FiPhoneOutgoing } from "react-icons/fi";
 import { TfiEmail } from "react-icons/tfi";
+import { AiFillLinkedin } from "react-icons/ai";
 
 const MeetTheTeam = () => {
   const { t } = useTranslation();
@@ -52,7 +53,25 @@ const MeetTheTeam = () => {
             >
               <h5 className="mt-5 mx-4">{t("meet_the_team_mirko_picicco")}</h5>
               <h1 className="mx-4">{t("meet_the_team_md_designation")}</h1>
-
+              <p className=" mx-4">
+                <a
+                  style={{
+                    fontSize: "16px",
+                    textDecoration: "none",
+                    color: "#212529",
+                  }}
+                  target="_blank"
+                  href="https://www.linkedin.com/in/mirko-picicco-25b6b266"
+                >
+                  <AiFillLinkedin
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Linkedin
+                </a>
+              </p>
               <p className="mx-4 about_us_section_paragraph">
                 {t("meet_the_team_md_description")}
               </p>
@@ -89,6 +108,24 @@ const MeetTheTeam = () => {
                   />
                 </a>
                 +971 52 416 0552
+                <br />
+                <a
+                  style={{
+                    fontSize: "16px",
+                    textDecoration: "none",
+                    color: "#212529",
+                  }}
+                  target="_blank"
+                  href="https://www.linkedin.com/in/rose-picicco-059b1026a"
+                >
+                  <AiFillLinkedin
+                    style={{
+                      color: "#8e6d45",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Linkedin
+                </a>
               </p>
               <p className="mx-4 about_us_section_paragraph">
                 {t("meet_the_team_md_for_dubai_desc")}
