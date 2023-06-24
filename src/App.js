@@ -60,6 +60,7 @@ import ShortList from './components/frontend/shortList/ShortList';
 import ClientMasterLayout from './layouts/frontend/ClientMasterLayout';
 import DashboardLayout from './layouts/frontend/dashboard/DashboardLayout';
 import AddMeet from './components/admin/meet/AddMeet';
+import ViewMeet from './components/admin/meet/ViewMeet';
 
 
 function App() {
@@ -125,6 +126,7 @@ function App() {
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
             <Route path='create-meet' element={<PrivateRoute><AddMeet /></PrivateRoute>} />
+            <Route path='get-meets' element={<PrivateRoute><ViewMeet /></PrivateRoute>} />
             {/* mh employee register from admin route here */}
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
             <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />

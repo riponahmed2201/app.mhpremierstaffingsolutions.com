@@ -71,6 +71,15 @@ function Sidebar() {
             </NavLink>
           )}
 
+          {jwt_decode?.menuPermission?.clientList && (
+            <NavLink className="nav-link" to="/admin/get-meets">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-table" />
+              </div>
+              Get Meets
+            </NavLink>
+          )}
+
           {jwt_decode?.menuPermission?.addMhEmployee &&
             jwt_decode?.superAdmin && (
               <NavLink className="nav-link" to="/admin/add-mh-employee">
