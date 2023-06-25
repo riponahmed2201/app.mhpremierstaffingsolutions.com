@@ -480,7 +480,7 @@ function ClientDashboard() {
                                   />
                                   <span className="Dashboard2Rate">Rate:</span>
                                   <span className="Dashboard2Perhour">
-                                    {item?.hourlyRate}$/hour
+                                    {item?.hourlyRate}£/hour
                                   </span>
                                 </div>
                               </div>

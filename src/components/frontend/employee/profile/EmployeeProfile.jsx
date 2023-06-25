@@ -10,7 +10,7 @@ import { jwtTokenDecode } from "../../../../utils/jwtDecode";
 
 const EmployeeProfile = () => {
   const jwt_decode = jwtTokenDecode();
-  console.log("jwt_decode: ", jwt_decode);
+
   const id = jwt_decode?._id;
 
   const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);

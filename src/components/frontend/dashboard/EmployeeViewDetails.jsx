@@ -1,8 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { token } from "../../../utils/authentication";
 
 function EmployeeViewDetails() {
   const { id } = useParams();
+
+  const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [getError, setError] = useState();
+
+  //Fetch refer person list for dropdown
+  const fetchSingleEmployeeData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token()}`,
+          },
+        }
+      );
+
+      setSingleEmployeeDetails(res?.data?.details);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSingleEmployeeData();
+  }, [id]);
 
   return (
     <section className="SelectedEmployee">
@@ -88,7 +119,7 @@ function EmployeeViewDetails() {
                         />
                         Rate:
                       </span>
-                      <span className="slctprofilePerHourPrice">500$/Hour</span>
+                      <span className="slctprofilePerHourPrice">500£/Hour</span>
                     </div>
                     <div className="col-xl-5 col-md-6">
                       <span className="slctProfileExpName">
