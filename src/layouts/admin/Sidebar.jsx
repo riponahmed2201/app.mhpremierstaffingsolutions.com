@@ -76,7 +76,7 @@ function Sidebar() {
               <div className="sb-nav-link-icon">
                 <i className="fas fa-table" />
               </div>
-              Get Meets
+              View Meets
             </NavLink>
           )}
 
