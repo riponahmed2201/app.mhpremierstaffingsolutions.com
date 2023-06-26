@@ -54,15 +54,16 @@ function EmployeeMeeting() {
     const date = new Date(isoDateTime);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    
+
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = (hours % 12 || 12).toString().padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+
     const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
     return timeString;
   }
-  
+
+  // if not loggedIn, return demo meet set
 
   return (
     <div className="pb-5">
@@ -119,7 +120,11 @@ function EmployeeMeeting() {
                   />
                 </div>
                 <div className="ms-3 my-5">
-                  <h5 style={{ fontSize: "17px" }}> {meetData?.userDetails?.user[0]?.name} and MH Company Meeting</h5>
+                  <h5 style={{ fontSize: "17px" }}>
+                    {" "}
+                    {meetData?.userDetails?.user[0]?.name} and MH Company
+                    Meeting
+                  </h5>
                   <p
                     style={{
                       color: "#C6A34F",
@@ -134,7 +139,8 @@ function EmployeeMeeting() {
                       when
                     </p>
                     <p style={{ fontSize: "15px", fontWeight: "500" }}>
-                      {convertIsoToTime(meetData?.startTime)} – {convertIsoToTime(meetData?.endTime)}
+                      {convertIsoToTime(meetData?.startTime)} –{" "}
+                      {convertIsoToTime(meetData?.endTime)}
                     </p>
                   </div>
                   <div className="d-flex">
@@ -142,7 +148,7 @@ function EmployeeMeeting() {
                       who
                     </p>
                     <p style={{ fontSize: "15px", fontWeight: "500" }}>
-                      alquraish@mhcompany.com
+                      info@mhpremiumstuffingsolutions.com
                     </p>
                   </div>
                 </div>
@@ -206,11 +212,10 @@ function EmployeeMeeting() {
           <p style={{ color: "gray" }} className="text-center">
             Meet Link
           </p>
-          <p
-            className="text-decoration-underline text-center"
-            
-          >
-            <a style={{ color: "#C6A34F" }} href={meet}>{meet}</a>
+          <p className="text-decoration-underline text-center">
+            <a style={{ color: "#C6A34F" }} href={meet}>
+              {meet}
+            </a>
           </p>
         </>
       </div>

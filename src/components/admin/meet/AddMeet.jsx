@@ -1,15 +1,19 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { token } from "../../../utils/authentication";
 import { toast } from "react-hot-toast";
-
+import { token } from "../../../utils/authentication";
+import { BsFillEyeFill , BsFillEyeSlashFill } from "react-icons/bs";  
 const AddMeet = () => {
   const initialValues = {
     meetLink: "",
     startTime: "",
     endTime: "",
+    email: "",
+    password: "",
   };
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (values) => {
     const response = await fetch(
@@ -20,21 +24,33 @@ const AddMeet = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token()}`,
         },
-        body: JSON.stringify(values), // Pass the values in the request body
+        body: JSON.stringify({
+          ...values,
+          userEmail: values.email,
+          password: values.password,
+        }),
       }
     );
     if (response.status === 200) {
-      toast.success('Meet added successfully')
+      toast.success("Meet added successfully");
       // reset the form
       values.meetLink = "";
       values.startTime = "";
       values.endTime = "";
+      values.email = "";
+      values.password = "";
     }
+
+    console.log(values);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">Add Meet</h1>
+    <div className="w-50 mx-auto">
+      <h1 className="mb-4">Set Meet</h1>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <div className="mb-3">
@@ -47,6 +63,12 @@ const AddMeet = () => {
               className="form-control"
               placeholder="Enter meet link"
             />
+            <a style={{
+              textDecoration: "none",
+              fontSize: "0.8rem",
+            }} href="https://meet.new" target="_blank" without rel="noreferrer">
+              Click here to generate a new meet link
+            </a>
           </div>
           <div className="mb-3">
             <label htmlFor="startTime" className="form-label">
@@ -68,8 +90,39 @@ const AddMeet = () => {
               className="form-control"
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <Field
+              type="email"
+              name="email"
+              className="form-control"
+              placeholder="Enter email"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <div className="input-group">
+              <Field
+                type={showPassword ? "text" : "password"}
+                name="password"
+                className="form-control"
+                placeholder="Enter password"
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <BsFillEyeSlashFill/> : <BsFillEyeFill />}
+              </button>
+            </div>
+          </div>
           <Button type="submit" variant="primary">
-            Add Meet
+            Set Meet
           </Button>
         </Form>
       </Formik>
