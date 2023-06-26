@@ -1,38 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { token } from "../../../../utils/authentication";
 
 function EmployeeMeeting() {
   const [meet, setMeet] = useState(null);
-  const [meetData, setMeetData] = useState([]);
-  const tokenData = token();
-  // console.log(tokenData);
-  const handleMeetSet = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_BASE_URL}/meet/set-user-details`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token()}`,
-        },
-      }
-    );
-    const data = await response.json();
-
-    if (response.status === 200) {
-      toast.success("Meet generated successfully");
-      // console.log(data._doc.meetLink);
-      setMeet(data._doc.meetLink);
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      toast.error("Something went wrong");
-      setMeet(null);
-    }
-  };
+  const [meetData, setMeetData] = useState({});
 
   useEffect(() => {
     axios
@@ -43,18 +15,32 @@ function EmployeeMeeting() {
         },
       })
       .then((res) => {
-        // console.log(res.data[0]);
+        console.log(res.data);
         setMeet(res.data[0].meetLink);
         setMeetData(res.data[0]);
       });
   }, []);
 
   console.log(meetData);
+
+  if (meet === null) {
+    return <h1> Loading ...</h1>;
+  }
+  let expireTime = new Date(meetData.expiredTime).getTime();
+  let currentTime = new Date().getTime();
+
+  if (expireTime < currentTime) {
+    return (
+      <>
+        <h3>You have expired the meeting</h3>
+      </>
+    );
+  }
+
   function convertIsoToTime(isoDateTime) {
     const date = new Date(isoDateTime);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-
     const ampm = hours >= 12 ? "PM" : "AM";
     const formattedHours = (hours % 12 || 12).toString().padStart(2, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");
@@ -62,8 +48,6 @@ function EmployeeMeeting() {
     const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
     return timeString;
   }
-
-  // if not loggedIn, return demo meet set
 
   return (
     <div className="pb-5">
@@ -122,8 +106,7 @@ function EmployeeMeeting() {
                 <div className="ms-3 my-5">
                   <h5 style={{ fontSize: "17px" }}>
                     {" "}
-                    {meetData?.userDetails?.user[0]?.name} and MH Company
-                    Meeting
+                    You and MH Company Meeting
                   </h5>
                   <p
                     style={{
@@ -168,7 +151,7 @@ function EmployeeMeeting() {
               <div className="ms-3 my-4">
                 <h5>Gest</h5>
                 <p style={{ fontSize: "12px" }}>
-                  {meetData?.userDetails?.user[0]?.email} -{" "}
+                  {meetData?.userDetails[0].email} -{" "}
                   <strong style={{ fontSize: "12px" }}>You</strong>{" "}
                 </p>
               </div>
@@ -185,35 +168,37 @@ function EmployeeMeeting() {
             }}
             className="mt-5"
           >
-            {meet == null ? (
-              <>
-                {" "}
-                <p
-                  style={{
-                    background: "#C6A34F",
-                    borderTopLeftRadius: "10px",
-                    borderBottomRightRadius: "10px",
-                    color: "white",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handleMeetSet()}
-                  className="px-5 py-2"
-                >
-                  Join With Google Meet
-                </p>
-              </>
-            ) : (
-              <>
-                <span></span>
-              </>
-            )}
+            <p
+              style={{
+                background: "#C6A34F",
+                borderTopLeftRadius: "10px",
+                borderBottomRightRadius: "10px",
+                color: "white",
+                cursor: "pointer",
+              }}
+              className="px-5 py-2"
+            >
+              <a
+                className="text-decoration-none text-white"
+                href={meet}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Join With Google Meet
+              </a>
+            </p>
           </div>
 
           <p style={{ color: "gray" }} className="text-center">
             Meet Link
           </p>
           <p className="text-decoration-underline text-center">
-            <a style={{ color: "#C6A34F" }} href={meet}>
+            <a
+              style={{ color: "#C6A34F" }}
+              href={meet}
+              target="_blank"
+              rel="noreferrer"
+            >
               {meet}
             </a>
           </p>

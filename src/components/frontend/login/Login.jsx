@@ -1,10 +1,10 @@
+import jwt_decode from "jwt-decode";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
 import { Form } from "antd";
-import { responseNotification } from "../../../utils/notifcation";
 import { loginHandler } from "../../../api/auth";
+import { responseNotification } from "../../../utils/notifcation";
 
 function Login() {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ function Login() {
             localStorage.setItem("accessToken", res?.token);
 
             const jwtDecode = jwt_decode(res?.token);
-
+            console.log(jwtDecode.role);
             if (
               jwtDecode &&
               (jwtDecode.admin || jwtDecode.hr || jwtDecode.isMhEmployee)
@@ -54,6 +54,9 @@ function Login() {
               navigate("/client-dashboard");
               setLoading(false);
             } else if (jwtDecode && jwtDecode.employee) {
+              navigate("/employee-profile");
+              setLoading(false);
+            } else if (jwtDecode && jwtDecode.role === "TEMPUSER") {
               navigate("/employee-profile");
               setLoading(false);
             } else {
