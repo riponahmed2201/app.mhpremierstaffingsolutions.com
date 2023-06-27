@@ -5,7 +5,7 @@ import { token } from "../../../../utils/authentication";
 function EmployeeMeeting() {
   const [meet, setMeet] = useState(null);
   const [meetData, setMeetData] = useState({});
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_BASE_URL}/meet/get-my-meets`, {
@@ -18,21 +18,37 @@ function EmployeeMeeting() {
         console.log(res.data);
         setMeet(res.data[0].meetLink);
         setMeetData(res.data[0]);
+        setLoading(false)
       });
   }, []);
 
-  console.log(meetData);
 
-  if (meet === null) {
+  if (loading) {
     return <h1> Loading ...</h1>;
   }
-  let expireTime = new Date(meetData.expiredTime).getTime();
-  let currentTime = new Date().getTime();
 
-  if (expireTime < currentTime) {
+
+  let expireTime = new Date(meetData?.expiredTime).getTime();
+  let currentTime = new Date().getTime();
+  const hrEmail = "hr@mhpremierstaffingsolutions.com";
+  if (expireTime < currentTime || meetData.isActive === false) {
     return (
       <>
-        <h3>You have expired the meeting</h3>
+        <div
+          className="text-center"
+          style={{ margin: "20% auto", padding: "20px" }}
+        >
+          <h4 style={{ color: "red", marginBottom: "10px" }}>
+            Your meet time has expired
+          </h4>
+          <p>
+            Please contact HR at{" "}
+            <a href={`mailto:${hrEmail}`} style={{ textDecoration: "none" }}>
+              {hrEmail}
+            </a>{" "}
+            for more details.
+          </p>
+        </div>
       </>
     );
   }
