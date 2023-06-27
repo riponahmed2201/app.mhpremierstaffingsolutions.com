@@ -15,6 +15,7 @@ const EmployeeProfile = () => {
 
   const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const [getError, setError] = useState();
   const [meetData, setMeetData] = useState({});
 
@@ -29,12 +30,10 @@ const EmployeeProfile = () => {
       .then((res) => {
         console.log(res.data[0]);
         setMeetData(res.data[0]);
+        setLoading(false);
       });
   }, []);
-  const expireTime = new Date(meetData.expiredTime).getTime();
-  const currentTime = new Date().getTime();
-  const isExpired = currentTime > expireTime;
-  console.log("isExpired: ", isExpired);
+
   //Fetch refer person list for dropdown
   const fetchSingleEmployeeData = useCallback(async () => {
     try {
@@ -83,6 +82,14 @@ const EmployeeProfile = () => {
   if (getSingleEmployeeDetails?.employeeExperience)
     profileCompletedPercentage += 5;
 
+    
+  const expireTime = new Date(meetData?.expiredTime).getTime();
+  const currentTime = new Date().getTime();
+  const isExpired = currentTime > expireTime;
+  console.log("isExpired: ", isExpired);
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div className="container px-4">
       <section className="SelectedEmployee">
@@ -260,7 +267,7 @@ const EmployeeProfile = () => {
                   </div>
                 </div>
               </div>
-              {isExpired === false && (
+              {meetData?.isActive === true && (
                 <>
                   <div className="row ">
                     <div

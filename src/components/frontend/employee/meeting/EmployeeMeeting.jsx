@@ -22,15 +22,29 @@ function EmployeeMeeting() {
       });
   }, []);
 
+  const hrEmail = "hr@mhpremierstaffingsolutions.com";
 
   if (loading) {
-    return <h1> Loading ...</h1>;
+    return <div
+    className="text-center"
+    style={{ margin: "20% auto", padding: "20px" }}
+  >
+    <h4 style={{ color: "red", marginBottom: "10px" }}>
+     No Active meet found
+    </h4>
+    <p>
+      Please contact HR at{" "}
+      <a href={`mailto:${hrEmail}`} style={{ textDecoration: "none" }}>
+        {hrEmail}
+      </a>{" "}
+      for more details.
+    </p>
+  </div>
   }
 
 
   let expireTime = new Date(meetData?.expiredTime).getTime();
   let currentTime = new Date().getTime();
-  const hrEmail = "hr@mhpremierstaffingsolutions.com";
   if (expireTime < currentTime || meetData.isActive === false) {
     return (
       <>
