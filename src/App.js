@@ -1,63 +1,68 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import  { Toaster } from 'react-hot-toast';
 
 import PrivateRoute from './routes/PrivateRoute';
 
-import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
-import AdminLogin from './components/frontend/auth/AdminLogin';
-import EmployeeRegister from './components/frontend/register/EmployeeRegister';
+import ClientDetails from './components/admin/client/ClientDetails';
+import ClientList from './components/admin/client/ClientList';
+import EmployeeDetails from './components/admin/employee/EmployeeDetails';
+import EmployeeList from './components/admin/employee/EmployeeList';
+import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
+import EditMHEmployee from './components/admin/mhEmployee/EditMHEmployee';
 import Position from './components/admin/position/Position';
 import Skill from './components/admin/skill/Skill';
 import Source from './components/admin/source/Source';
+import AdminLogin from './components/frontend/auth/AdminLogin';
 import RegisterWelcome from './components/frontend/profile/RegisterWelcome';
-import EmployeeList from './components/admin/employee/EmployeeList';
-import ClientList from './components/admin/client/ClientList';
-import EmployeeDetails from './components/admin/employee/EmployeeDetails';
-import ClientDetails from './components/admin/client/ClientDetails';
-import AddMHEmployee from './components/admin/mhEmployee/AddMHEmployee';
-import EditMHEmployee from './components/admin/mhEmployee/EditMHEmployee';
+import EmployeeRegister from './components/frontend/register/EmployeeRegister';
+import MasterLayout from './layouts/admin/MasterLayout';
 
 //For client
-import ClientEmployeeList from './components/client/employee/EmployeeList';
-import ClientDashboard from './components/frontend/dashboard/ClientDashboard';
-import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
-import Places from './components/frontend/map/Places';
-import ViewCertificate from './components/admin/employee/ViewCertificate';
-import Login from './components/frontend/login/Login';
-import Home from './components/frontend/Home/Home';
-import ClientMasterLayout from './layouts/frontend/ClientMasterLayout';
-import About from './components/frontend/about/About';
-import Customer from './components/frontend/customer/Customer';
-import Career from './components/frontend/career/Career';
-import DashboardLayout from './layouts/frontend/dashboard/DashboardLayout';
-import MyEmployee from './components/frontend/client/MyEmployee';
-import EmployeeViewDetails from './components/frontend/dashboard/EmployeeViewDetails';
-import Payroll from './components/frontend/services/Payroll';
-import Recruiting from './components/frontend/services/Recruiting';
-import StrategyConsultancy from './components/frontend/services/StrategyConsultancy';
-import Services from './components/frontend/services/Services';
-import Mission from './components/frontend/mission/Mission';
-import Contact from './components/frontend/contact/Contact';
-import MeetTheTeam from './components/frontend/meetTeam/MeetTheTeam';
-import Faq from './components/frontend/faq/Faq';
-import CorporateInformation from './components/frontend/legal/CorporateInformation';
-import TermsOfUse from './components/frontend/legal/TermsOfUse';
-import Privacy from './components/frontend/legal/Privacy';
-import ClientRegister from './components/frontend/register/ClientRegister';
+import ChangePassword from './components/admin/ChangePassword';
 import ContactList from './components/admin/contact/ContactList';
-import ShortList from './components/frontend/shortList/ShortList';
-import PaymentInvoice from './components/frontend/invoicePayment/PaymentInvoice';
-import EmployeeProfile from './components/frontend/employee/profile/EmployeeProfile';
+import ViewCertificate from './components/admin/employee/ViewCertificate';
+import ViewEmployeeDetails from './components/admin/employee/ViewEmployeeDetails';
+import AddInvoice from './components/admin/invoice/AddInvoice';
+import InvoiceList from './components/admin/invoice/InvoiceList';
+import MHEmployeeList from './components/admin/mhEmployee/MHEmployeeList';
+import NotificationList from './components/admin/notification/NotificationList';
+import ClientEmployeeList from './components/client/employee/EmployeeList';
+import Home from './components/frontend/Home/Home';
+import About from './components/frontend/about/About';
+import Blog from './components/frontend/blog/Blog';
+import Career from './components/frontend/career/Career';
+import CheckInCheckOut from './components/frontend/client/CheckInCheckOut';
+import MyEmployee from './components/frontend/client/MyEmployee';
+import Contact from './components/frontend/contact/Contact';
+import Customer from './components/frontend/customer/Customer';
+import ClientDashboard from './components/frontend/dashboard/ClientDashboard';
+import EmployeeViewDetails from './components/frontend/dashboard/EmployeeViewDetails';
 import EmployeeMeeting from './components/frontend/employee/meeting/EmployeeMeeting';
 import EmployeePdf from './components/frontend/employee/pdf/EmployeePdf';
-import ViewEmployeeDetails from './components/admin/employee/ViewEmployeeDetails';
-import CheckInCheckOut from './components/frontend/client/CheckInCheckOut';
-import ChangePassword from './components/admin/ChangePassword';
-import InvoiceList from './components/admin/invoice/InvoiceList';
-import AddInvoice from './components/admin/invoice/AddInvoice';
-import NotificationList from './components/admin/notification/NotificationList';
-import Blog from './components/frontend/blog/Blog';
+import EmployeeProfile from './components/frontend/employee/profile/EmployeeProfile';
+import Faq from './components/frontend/faq/Faq';
+import PaymentInvoice from './components/frontend/invoicePayment/PaymentInvoice';
+import CorporateInformation from './components/frontend/legal/CorporateInformation';
+import Privacy from './components/frontend/legal/Privacy';
+import TermsOfUse from './components/frontend/legal/TermsOfUse';
+import Login from './components/frontend/login/Login';
+import Places from './components/frontend/map/Places';
+import MeetTheTeam from './components/frontend/meetTeam/MeetTheTeam';
+import Mission from './components/frontend/mission/Mission';
+import ClientRegister from './components/frontend/register/ClientRegister';
+import Payroll from './components/frontend/services/Payroll';
+import Recruiting from './components/frontend/services/Recruiting';
+import Services from './components/frontend/services/Services';
+import StrategyConsultancy from './components/frontend/services/StrategyConsultancy';
+import ShortList from './components/frontend/shortList/ShortList';
+import ClientMasterLayout from './layouts/frontend/ClientMasterLayout';
+import DashboardLayout from './layouts/frontend/dashboard/DashboardLayout';
+import AddMeet from './components/admin/meet/AddMeet';
+import ViewMeet from './components/admin/meet/ViewMeet';
+import SingleMeet from './components/admin/meet/SingleMeet';
+
 
 function App() {
   return (
@@ -121,7 +126,9 @@ function App() {
             <Route path='view-certificate/:id' element={<PrivateRoute><ViewCertificate /></PrivateRoute>} />
             <Route path='client-list' element={<PrivateRoute><ClientList /></PrivateRoute>} />
             <Route path='client-details/:id' element={<PrivateRoute><ClientDetails /></PrivateRoute>} />
-
+            <Route path='create-meet' element={<PrivateRoute><AddMeet /></PrivateRoute>} />
+            <Route path='get-meets' element={<PrivateRoute><ViewMeet /></PrivateRoute>} />
+            <Route path='view-meet/:id' element={<PrivateRoute><SingleMeet /></PrivateRoute>} />
             {/* mh employee register from admin route here */}
             <Route path='add-mh-employee' element={<PrivateRoute><AddMHEmployee /></PrivateRoute>} />
             <Route path='mh-employee-list' element={<PrivateRoute><MHEmployeeList /></PrivateRoute>} />
@@ -142,6 +149,7 @@ function App() {
 
         </Routes>
       </Router>
+      <Toaster />
     </div>
   );
 }
