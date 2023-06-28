@@ -1,6 +1,70 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { token } from "../../../../utils/authentication";
 
 function EmployeeMeeting() {
+  const [meet, setMeet] = useState(null);
+  const [meetData, setMeetData] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/meet/get-my-meets`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token()}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setMeet(res.data[0].meetLink);
+        setMeetData(res.data[0]);
+        setLoading(false)
+      });
+  }, []);
+
+
+  if (loading) {
+    return <h1> Loading ...</h1>;
+  }
+
+
+  let expireTime = new Date(meetData?.expiredTime).getTime();
+  let currentTime = new Date().getTime();
+  const hrEmail = "hr@mhpremierstaffingsolutions.com";
+  if (expireTime < currentTime || meetData.isActive === false) {
+    return (
+      <>
+        <div
+          className="text-center"
+          style={{ margin: "20% auto", padding: "20px" }}
+        >
+          <h4 style={{ color: "red", marginBottom: "10px" }}>
+            Your meet time has expired
+          </h4>
+          <p>
+            Please contact HR at{" "}
+            <a href={`mailto:${hrEmail}`} style={{ textDecoration: "none" }}>
+              {hrEmail}
+            </a>{" "}
+            for more details.
+          </p>
+        </div>
+      </>
+    );
+  }
+
+  function convertIsoToTime(isoDateTime) {
+    const date = new Date(isoDateTime);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = (hours % 12 || 12).toString().padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+
+    const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
+    return timeString;
+  }
+
   return (
     <div className="pb-5">
       <div
@@ -57,7 +121,8 @@ function EmployeeMeeting() {
                 </div>
                 <div className="ms-3 my-5">
                   <h5 style={{ fontSize: "17px" }}>
-                    Razinul Karim and MH Company Meeting
+                    {" "}
+                    You and MH Company Meeting
                   </h5>
                   <p
                     style={{
@@ -73,7 +138,8 @@ function EmployeeMeeting() {
                       when
                     </p>
                     <p style={{ fontSize: "15px", fontWeight: "500" }}>
-                      Tue Apr 18, 2023 3:30pm – 4pm (BDT)
+                      {convertIsoToTime(meetData?.startTime)} –{" "}
+                      {convertIsoToTime(meetData?.endTime)}
                     </p>
                   </div>
                   <div className="d-flex">
@@ -81,7 +147,7 @@ function EmployeeMeeting() {
                       who
                     </p>
                     <p style={{ fontSize: "15px", fontWeight: "500" }}>
-                      alquraish@mhcompany.com
+                      info@mhpremiumstuffingsolutions.com
                     </p>
                   </div>
                 </div>
@@ -101,19 +167,7 @@ function EmployeeMeeting() {
               <div className="ms-3 my-4">
                 <h5>Gest</h5>
                 <p style={{ fontSize: "12px" }}>
-                  alquraish@mhcompany.com -{" "}
-                  <strong style={{ fontSize: "12px" }}>Organizer</strong>{" "}
-                </p>
-                <p style={{ fontSize: "12px" }}>
-                  mirjaabbas@mhcompany.com -{" "}
-                  <strong style={{ fontSize: "12px" }}>participant</strong>{" "}
-                </p>
-                <p style={{ fontSize: "12px" }}>
-                  sarwar@mhcompany.com -{" "}
-                  <strong style={{ fontSize: "12px" }}>Participant</strong>{" "}
-                </p>
-                <p style={{ fontSize: "12px" }}>
-                  raz.cse.bu@gmail.com -{" "}
+                  {meetData?.userDetails[0].email} -{" "}
                   <strong style={{ fontSize: "12px" }}>You</strong>{" "}
                 </p>
               </div>
@@ -121,41 +175,50 @@ function EmployeeMeeting() {
           </div>
         </div>
 
-        <div
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-          }}
-          className="mt-5"
-        >
-          <p
+        <>
+          <div
             style={{
-              background: "#C6A34F",
-              borderTopLeftRadius: "10px",
-              borderBottomRightRadius: "10px",
-              color: "white",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
             }}
-            className="px-5 py-2"
+            className="mt-5"
           >
-            Join With Google Meet
+            <p
+              style={{
+                background: "#C6A34F",
+                borderTopLeftRadius: "10px",
+                borderBottomRightRadius: "10px",
+                color: "white",
+                cursor: "pointer",
+              }}
+              className="px-5 py-2"
+            >
+              <a
+                className="text-decoration-none text-white"
+                href={meet}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Join With Google Meet
+              </a>
+            </p>
+          </div>
+
+          <p style={{ color: "gray" }} className="text-center">
+            Meet Link
           </p>
-        </div>
-        <p style={{ color: "gray" }} className="text-center">
-          Meet Link
-        </p>
-        <p
-          className="text-decoration-underline text-center"
-          style={{ color: "#C6A34F" }}
-        >
-          meet.google.com/xir-gyan-bqq
-        </p>
-        <p className="text-center" style={{ color: "gray" }}>
-          Join by phone
-        </p>
-        <p className="text-center" style={{ fontWeight: "600" }}>
-          (EE) +372 647 2814PIN: 104517423
-        </p>
+          <p className="text-decoration-underline text-center">
+            <a
+              style={{ color: "#C6A34F" }}
+              href={meet}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {meet}
+            </a>
+          </p>
+        </>
       </div>
     </div>
   );

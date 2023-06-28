@@ -1,22 +1,41 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
 import _ from "lodash";
-import Loader from "../../../loadar/Loader";
-import { token } from "../../../../utils/authentication";
+import moment from "moment";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import defaultImage from "../../../../assets/images/default.png";
+import { token } from "../../../../utils/authentication";
 import { jwtTokenDecode } from "../../../../utils/jwtDecode";
+import Loader from "../../../loadar/Loader";
 
 const EmployeeProfile = () => {
   const jwt_decode = jwtTokenDecode();
 
+  // console.log("jwt_decode: ", jwt_decode);
   const id = jwt_decode?._id;
 
   const [getSingleEmployeeDetails, setSingleEmployeeDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [getError, setError] = useState();
+  const [meetData, setMeetData] = useState({});
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/meet/get-my-meets`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token()}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data[0]);
+        setMeetData(res.data[0]);
+      });
+  }, []);
+  const expireTime = new Date(meetData.expiredTime).getTime();
+  const currentTime = new Date().getTime();
+  const isExpired = currentTime > expireTime;
+  console.log("isExpired: ", isExpired);
   //Fetch refer person list for dropdown
   const fetchSingleEmployeeData = useCallback(async () => {
     try {
@@ -242,6 +261,30 @@ const EmployeeProfile = () => {
                   </div>
                 </div>
               </div>
+              {isExpired === false && (
+                <>
+                  <div className="row ">
+                    <div
+                      className="selectProfileRowForMargin"
+                      style={{ borderRadius: 14 }}
+                    >
+                      <div className="card selectEmpCardCard_body card-body">
+                        <p>You've one meeting in pending</p>
+
+                        <div className="btn-group w-50">
+                          <Link
+                            to={`/employee-meeting`}
+                            className="btn btn-sm"
+                            style={{ background: "#C6A34F", color: "white" }}
+                          >
+                            View Details
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
             <div className="col-xl-8 col-md-7">
               <div className="selectEmpLocationBar">

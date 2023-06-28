@@ -472,7 +472,7 @@ function EmployeeDetails() {
                       >
                         <Option value="MALE">MALE</Option>
                         <Option value="FEMALE">FEMALE</Option>
-                        <Option value="NOT SPECIFIED">NOT SPECIFIED</Option>
+                        <Option value="NOTSPECIFIED">NOT SPECIFIED</Option>
                       </Select>
                     </Form.Item>
                   </div>
