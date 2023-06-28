@@ -10,6 +10,7 @@ import Loader from "../../../loadar/Loader";
 
 const EmployeeProfile = () => {
   const jwt_decode = jwtTokenDecode();
+
   // console.log("jwt_decode: ", jwt_decode);
   const id = jwt_decode?._id;
 

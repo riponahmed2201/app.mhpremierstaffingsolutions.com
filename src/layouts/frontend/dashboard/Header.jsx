@@ -85,7 +85,7 @@ function Header() {
                       </div>
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a
                       className="Dashboard_navbar_custom_hover nav-link"
                       href="#"
@@ -98,7 +98,7 @@ function Header() {
                         <span className="DashboardNotificationNavSpan">3</span>
                       </div>
                     </a>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     {!jwtDecode ? (
                       <a

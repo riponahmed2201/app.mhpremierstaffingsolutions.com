@@ -3,7 +3,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import _ from "lodash";
 import moment from "moment";
 
-import { Button, Form, Modal, DatePicker, Space } from "antd";
+import { Button, Form, Modal, DatePicker, Space, TimePicker } from "antd";
 
 import defaultImage from "../../../assets/images/default.png";
 import Loader from "../../loadar/Loader";
@@ -14,6 +14,7 @@ import {
   updateShortHandler,
 } from "../../../api/shortList";
 import { Link } from "react-router-dom";
+import { FcClock } from "react-icons/fc";
 
 const ShortList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +26,8 @@ const ShortList = () => {
   const [getError, setError] = useState();
   const [getFromDate, setFromDate] = useState(undefined);
   const [getToDate, setToDate] = useState(undefined);
+  const [getFromTime, setFromTime] = useState(undefined);
+  const [getToTime, setToTime] = useState(undefined);
   const [shortListId, setShortListId] = useState();
 
   const [form] = Form.useForm();
@@ -47,6 +50,7 @@ const ShortList = () => {
     await fetchShortListHandler().then((res) => {
       if (res?.status === 201) {
         setShortList(res?.data?.shortList);
+        setSelectedShortlist(res?.data?.shortListIds);
       } else {
         setLoading(false);
       }
@@ -92,15 +96,20 @@ const ShortList = () => {
 
   // Edit short list Data
   const updateShortInfo = () => {
+    if (!getFromDate || !getToDate || !getFromTime || !getToTime) {
+      responseNotification(
+        "Please enter from date, time and to date, time!!",
+        "error"
+      );
+    }
+
     const receivedShortListFields = {
       id: shortListId,
       fromDate: getFromDate,
       toDate: getToDate,
+      fromTime: getFromTime,
+      toTime: getToTime,
     };
-
-    if (!getFromDate || !getToDate) {
-      responseNotification("Please enter from date and to date!!", "error");
-    }
 
     if (shortListId && getFromDate && getToDate) {
       setUpdateShortListLoading(true);
@@ -130,54 +139,38 @@ const ShortList = () => {
   };
 
   //delete short list info here
-  const bookAllShortListInfo = useCallback(
-    async (shortListId) => {
-      const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
+  const bookAllShortListInfo = useCallback(async () => {
+    const unicodeUri = `${process.env.REACT_APP_API_BASE_URL}`;
 
-      let shortList = [];
+    const receivedData = { selectedShortlist: getSelectedShortlist };
 
-      const newHobbies = [];
-
-      _.map(getShortList, async (data) => {
-        _.map(data.employeeDetails, async (hobby) => {
-          console.log("hobby._id: ", hobby._id);
-          newHobbies.push(hobby._id);
+    if (_.size(getSelectedShortlist)) {
+      await fetch(`${unicodeUri}/hired-histories/createe`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(receivedData),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.statusCode === 201) {
+            responseNotification(
+              "Hired history created successfully",
+              "success"
+            );
+            // fetchShortListData();
+            window.location.reload();
+          } else if (res?.statusCode === 400) {
+            setError(res?.message);
+            responseNotification(res?.message, "error");
+          }
         });
-
-        shortList.push(newHobbies);
-      });
-
-      console.log("shortList: ", newHobbies);
-
-      const receivedData = { selectedShortlist: newHobbies };
-
-      if (true) {
-        await fetch(`${unicodeUri}/hired-histories/create`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token()}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(receivedData),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res?.statusCode === 201) {
-              responseNotification(
-                "Hired history created successfully",
-                "success"
-              );
-              // fetchShortListData();
-              window.location.reload();
-            } else if (res?.statusCode === 400) {
-              setError(res?.message);
-              responseNotification(res?.message, "error");
-            }
-          });
-      }
-    },
-    [fetchShortListData]
-  );
+    } else {
+      responseNotification("Please shortlist added then hired", "error");
+    }
+  }, [fetchShortListData]);
 
   return (
     <div>
@@ -270,9 +263,32 @@ const ShortList = () => {
                               className="ms-2 pointer"
                               style={{ fontSize: "14px" }}
                             >
-                              {moment(item?.employeeDetails?.fromDate).format(
-                                "DD MMM"
-                              )}
+                              {item?.fromDate
+                                ? moment(item?.fromDate).format("D MMM YY")
+                                : ""}{" "}
+                              -{" "}
+                              {item?.toDate
+                                ? moment(item?.toDate).format("D MMM YY")
+                                : ""}
+                            </span>
+                          </div>
+                          <div className="mb-2">
+                            <FcClock />
+                            <span
+                              onClick={() => showModal(item?._id)}
+                              className="ms-2 pointer"
+                              style={{ fontSize: "14px" }}
+                            >
+                              From {item?.fromTime ? item?.fromTime : ""} To{" "}
+                              {item?.toTime ? item?.toTime : ""}
+                            </span>
+                          </div>
+                          <div className="mb-2">
+                            <span
+                              className="ms-2 pointer p-1 rounded"
+                              style={{ fontSize: "14px",backgroundColor:"#c6a34f", color:"white" }}
+                            >
+                              Total Rate: £ {item?.employeeDetails.hourlyRate ? item?.hourlyRate : "0.0"}
                             </span>
                           </div>
                           <div className="d-flex align-items-center justify-content-between">
@@ -343,6 +359,43 @@ const ShortList = () => {
                     placeholder="Enter to Date"
                     onChange={(value) => {
                       setToDate(moment(value).format("YYYY-MM-DD").valueOf());
+                    }}
+                  />
+                </Space>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-lg-6">
+                <label htmlFor="" className="mb-2">
+                  From Time:
+                </label>
+                <Space direction="vertical">
+                  <TimePicker
+                    style={{ width: 226 }}
+                    size="large"
+                    placeholder="Enter from time"
+                    // defaultValue={dayjs("12:08", format)}
+                    format={"HH:mm"}
+                    onChange={(value, dateString) => {
+                      setFromTime(dateString);
+                    }}
+                  />
+                </Space>
+              </div>
+              <div className="col-lg-6">
+                <label htmlFor="" className="mb-2">
+                  To Date:
+                </label>
+                <Space direction="vertical">
+                  <TimePicker
+                    style={{ width: 226 }}
+                    size="large"
+                    placeholder="Enter to time"
+                    // defaultValue={dayjs("12:08", format)}
+                    format={"HH:mm"}
+                    onChange={(value, dateString) => {
+                      setToTime(dateString);
                     }}
                   />
                 </Space>
