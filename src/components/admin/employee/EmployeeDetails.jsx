@@ -86,6 +86,7 @@ function EmployeeDetails() {
         presentAddress: res?.data?.details.presentAddress,
         permanentAddress: res?.data?.details.permanentAddress,
         countryName: res?.data?.details.countryName,
+        nationality: res?.data?.details.nationality,
         higherEducation: res?.data?.details.higherEducation,
         licensesNo: res?.data?.details.licensesNo,
         emmergencyContact: res?.data?.details.emmergencyContact,
@@ -112,7 +113,7 @@ function EmployeeDetails() {
     } catch (error) {
       setLoading(false);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchSingleEmployeeData();
@@ -224,6 +225,7 @@ function EmployeeDetails() {
       formData.append("hourlyRate", values?.hourlyRate);
       formData.append("employeeExperience", values?.employeeExperience);
       formData.append("licensesNo", values?.licensesNo);
+      formData.append("nationality", values?.nationality);
 
       if (getDateOfBirth) {
         formData.append("dateOfBirth", getDateOfBirth);
@@ -472,7 +474,7 @@ function EmployeeDetails() {
                       >
                         <Option value="MALE">MALE</Option>
                         <Option value="FEMALE">FEMALE</Option>
-                        <Option value="NOTSPECIFIED">NOT SPECIFIED</Option>
+                        <Option value="OTHERS">OTHERS</Option>
                       </Select>
                     </Form.Item>
                   </div>
@@ -583,6 +585,32 @@ function EmployeeDetails() {
 
                   <div className="col-md-4">
                     <Form.Item
+                      label="Nationality"
+                      name="nationality"
+                      hasFeedback
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter nationality",
+                        },
+                      ]}
+                    >
+                      <Select
+                        showSearch={true}
+                        placeholder="Please Select nationality"
+                        optionFilterProp="children"
+                      >
+                        {CountryWiseValidationRules?.map((item, index) => (
+                          <Option key={index} value={item?.name}>
+                            {item?.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </div>
+
+                  <div className="col-md-4">
+                    <Form.Item
                       label="Higher Education"
                       name="higherEducation"
                       hasFeedback
@@ -659,18 +687,18 @@ function EmployeeDetails() {
 
                   <div className="col-md-4">
                     <Form.Item
-                      label="Per hour rate(£)"
+                      label="Restaurant Per hour rate(£)"
                       name="hourlyRate"
                       hasFeedback
                       rules={[
                         {
                           required: true,
-                          message: "Please enter per hour rate",
+                          message: "Please enter restaurant per hour rate",
                         },
                       ]}
                     >
                       <Input
-                        placeholder="Enter per hour rate"
+                        placeholder="Enter restaurant per hour rate"
                         className="ant-input ant-input-lg"
                       />
                     </Form.Item>
