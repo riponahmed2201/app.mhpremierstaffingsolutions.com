@@ -213,7 +213,7 @@ function EmployeeList() {
                 "Employee status updated successfully",
                 "success"
               );
-              fetchEmployee();
+              // fetchEmployee();
             } else if (res?.statusCode === 400) {
               responseNotification("Bad request", "danger");
             }
