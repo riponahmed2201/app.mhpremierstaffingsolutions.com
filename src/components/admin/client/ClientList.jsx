@@ -185,7 +185,7 @@ function ClientList() {
                 "Employee status updated successfully",
                 "success"
               );
-              fetchClient();
+              // fetchClient();
             } else if (res?.statusCode === 400) {
               responseNotification("Bad request", "danger");
             }

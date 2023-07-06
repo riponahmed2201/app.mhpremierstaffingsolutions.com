@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Upload, Button } from "antd";
 import axios from "axios";
+import _ from "lodash";
 import ImgCrop from "antd-img-crop";
 import { UploadOutlined } from "@ant-design/icons";
 
@@ -91,6 +92,7 @@ function EmployeeRegister() {
       setLoading(true);
 
       const file = new FormData();
+
       file.append("firstName", values?.firstName);
       file.append("lastName", values?.lastName);
       file.append("email", values?.email);
@@ -98,10 +100,13 @@ function EmployeeRegister() {
       file.append("countryName", values?.countryName);
       file.append("positionId", values?.positionId);
 
-      if (summaryPdf?.[0].originFileObj)
+      if (_.size(summaryPdf)) {
         file.append("cv", summaryPdf?.[0].originFileObj);
-      if (profilePicture?.[0].originFileObj)
+      }
+
+      if (_.size(profilePicture)) {
         file.append("profilePicture", profilePicture?.[0].originFileObj);
+      }
 
       await employeeRegisterHandler(file)
         .then((res) => res.json())
@@ -232,7 +237,7 @@ function EmployeeRegister() {
                               hasFeedback
                               rules={[
                                 {
-                                  required: true,
+                                  // required: true,
                                   message: "Please enter your profile picture",
                                 },
                               ]}
@@ -241,7 +246,7 @@ function EmployeeRegister() {
                                 {/* <ImgCrop rotate aspect={2 / 1}> */}
                                 <Upload
                                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                  fileList={profilePicture}
+                                  // fileList={profilePicture}
                                   onChange={onProfileChange}
                                   onPreview={onPreview}
                                 >
